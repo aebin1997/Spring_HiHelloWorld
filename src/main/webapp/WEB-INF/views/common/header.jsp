@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -132,7 +133,7 @@
 						<section>
 							<nav class="navbar navbar-expand-lg justify-content-left">
 								<ul class="navbar-nav">
-									<li><a class="nav-link" href="#">로그인</a></li>
+									<li><a class="nav-link" href="login.move">로그인</a></li>
 									<li><a class="nav-link" href="#">회원가입</a></li>
 								</ul>
 							</nav>
