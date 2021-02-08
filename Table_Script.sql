@@ -22,7 +22,6 @@ DROP TABLE PAY CASCADE CONSTRAINTS;
 DROP TABLE POINT CASCADE CONSTRAINTS;
 
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
-DROP SEQUENCE SEQ_MID;
 DROP SEQUENCE SEQ_NID;
 DROP SEQUENCE SEQ_BID;
 DROP SEQUENCE SEQ_NRID;
@@ -36,7 +35,6 @@ DROP SEQUENCE SEQ_POINTID;
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 CREATE TABLE MEMBER (
-  MID                  NUMBER NOT NULL,
   ID		 VARCHAR2(30) NOT NULL,
   PWD 		 VARCHAR2(100) NOT NULL,
   NAME		 VARCHAR2(15) NOT NULL,
@@ -54,7 +52,6 @@ CREATE TABLE MEMBER (
 ------------------------------------------------------------------------------------------게시판 작성자 이름으로? 닉네임으로?? <우선 닉네임으로 넣어둠>
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 컬러명 지정
-COMMENT ON COLUMN MEMBER.MID IS '회원번호';
 COMMENT ON COLUMN MEMBER.ID IS '회원아이디';
 COMMENT ON COLUMN MEMBER.PWD IS '회원비밀번호';
 COMMENT ON COLUMN MEMBER.NAME IS '회원이름';
@@ -68,18 +65,13 @@ COMMENT ON COLUMN MEMBER.ENROLL_DATE IS '회원가입날짜';
 COMMENT ON COLUMN MEMBER.UPDATE_DATE IS '회원수정날짜';
 COMMENT ON COLUMN MEMBER.M_STATUS IS '회원상태값';
 
-------------------------------------------------------------------------------------------------------------------- MEMBER 시퀀스
-CREATE SEQUENCE SEQ_MID 
-START WITH 1
-INCREMENT BY 1;
-
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(MEMBER)
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'F', '30', '010-1111-2222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'user01', 'pass01', '김우린', '일반회원1', 'user01@ict.or.kr', 'F', '25', '010-3333-4444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'user02', 'pass02', '박예빈', '일반회원2',  'user02@ict.or.kr', 'F', '25', '010-5555-6666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'user03', 'pass04', '이강선', '일반회원3',  'user03@ict.or.kr', 'M', '25', '010-7777-8888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'user05', 'pass05', '최은영', '일반회원4',  'user04@ict.or.kr', 'F', '23', '010-9999-6666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES (SEQ_MID.NEXTVAL, 'user06', 'pass06', '황경필', '일반회원5',  'user05@ict.or.kr', 'M', '30', '010-1111-1234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'F', '30', '010-1111-2222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '일반회원1', 'user01@ict.or.kr', 'F', '25', '010-3333-4444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '일반회원2',  'user02@ict.or.kr', 'F', '25', '010-5555-6666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '일반회원3',  'user03@ict.or.kr', 'M', '25', '010-7777-8888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '일반회원4',  'user04@ict.or.kr', 'F', '23', '010-9999-6666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '일반회원5',  'user05@ict.or.kr', 'M', '30', '010-1111-1234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT);
 
 ------------------------------------------------------------------------------------------------------------------- N_TYPE 생성
 CREATE TABLE N_TYPE(
