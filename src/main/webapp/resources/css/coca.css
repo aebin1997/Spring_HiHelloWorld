@@ -1,0 +1,254 @@
+@charset "UTF-8";
+
+
+/* top area */
+.main-header .top-area {
+	background: #242438;
+	border-bottom: 1px solid #ddd;
+}
+
+.main-header .top-area .info-menu {
+	float: left;
+}
+
+.main-header .top-area .info-menu li {
+	display: inline-block;
+}
+
+.main-header .top-area .info-menu li a {
+	display: block;
+	color: #fff;
+	margin-right: 24px;
+	line-height: 42px;
+}
+
+.main-header .top-area .info-menu li a i {
+	color: #f7921a;
+}
+
+/* logo area */
+.logo-area {
+	padding: 30px 0;
+}
+
+.logo-area .header-info-box {
+	position: relative;
+	float: left;
+	margin-left: 35px;
+	padding: 0 0 0 55px;
+}
+
+.logo-area .header-info-box .header-info-icon {
+	position: absolute;
+	left: 0;
+	top: 5px;
+	color: #f7921a;
+	font-size: 35px;
+	text-align: left;
+	-moz-transition: all 300ms ease;
+	-webkit-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+
+.logo-area .header-info-box h6 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 600;
+}
+
+.logo-area .header-info-box p {
+	color: #333;
+	font-weight: 700;
+	font-family: 'PT Serif', serif;
+}
+
+.logo-area .header-info-box:last-child {
+	padding-left: 20px;
+	border: none;
+}
+
+.logo-area .navbar-form {
+	border: 0 none;
+	box-shadow: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+.logo-area .navbar-form .form-group {
+	display: inline-block;
+	margin-bottom: 0;
+	vertical-align: middle;
+}
+
+.logo-area .navbar-form .form-control {
+	height: 45px;
+	width: 225px;
+	background: #fff;
+	border-radius: 0;
+}
+
+.logo-area form .btn {
+	color: #fff;
+	background-color: #333;
+	height: 45px;
+	width: 50px;
+	cursor: pointer;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	border-radius: 0;
+}
+
+.logo-area form .form-group i {
+	position: absolute;
+	right: 15px;
+	top: 33%;
+}
+
+/* page banner style */
+.single-page-title-area {
+	padding: 100px 0;
+	position: relative;
+	z-index: 1;
+	background-size: cover;
+	background-position: center;
+	float: left;
+	width: 100%;
+	margin-top: 35px;
+}
+
+.single-page-title h2 {
+	font-weight: 700;
+	font-size: 36px;
+	color: #fff;
+	display: inline-block;
+	text-transform: uppercase;
+	margin: 0;
+	position: relative;
+}
+
+.single-page-title h2:before {
+	position: absolute;
+	content: "";
+	background: #fff;
+	height: 2px;
+	width: 35px;
+	top: 21px;
+	left: -60px;
+}
+
+.single-page-title h2:after {
+	position: absolute;
+	content: "";
+	background: #fff;
+	height: 2px;
+	width: 35px;
+	top: 21px;
+	right: -60px;
+}
+
+.single-page-title p {
+	color: #fff;
+	font-style: italic;
+	font-family: 'PT Serif', serif;
+}
+
+.single-page-title-area-bottom {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #ddd;
+	background: #fff;
+}
+
+.single-page-title-area-bottom .breadcrumb {
+	background: #fff;
+	border-radius: 0;
+	margin-bottom: 0;
+	padding: 18px 0;
+}
+
+.single-page-title-area-bottom .breadcrumb-item a {
+	color: #f7921a;
+	font-weight: 600;
+}
+
+.single-page-title-area-bottom .breadcrumb-item {
+	float: none;
+	display: inline-block;
+}
+
+.single-page-title-area-bottom .breadcrumb-item+.breadcrumb-item::before
+	{
+	color: #333;
+	content: "\eb8b";
+	font-family: "icofont" !important;
+	font-size: 16px;
+}
+
+.single-page-title-area-bottom .breadcrumb-item.active {
+	color: #333;
+}
+
+
+
+
+
+
+
+
+
+
+
+#page-preloader {
+	background: #ffffff;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 999999;
+}
+
+.theme-loader {
+	text-transform: uppercase;
+	font-weight: 700;
+	font-size: 18px;
+	color: rgba(247, 146, 26, 0.98);
+	letter-spacing: 0.2em;
+	text-align: center;
+	width: 244px;
+	height: 49px;
+	line-height: 49px;
+	position: absolute;
+	left: 50%;
+	top: 45%;
+	transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+}
+
+.theme-loader::before, .theme-loader::after {
+	content: "";
+	display: block;
+	width: 15px;
+	height: 15px;
+	background: rgba(247, 146, 26, 0.97);
+	position: absolute;
+	animation: cssload-load 0.91s infinite alternate ease-in-out;
+	-o-animation: cssload-load 0.91s infinite alternate ease-in-out;
+	-ms-animation: cssload-load 0.91s infinite alternate ease-in-out;
+	-webkit-animation: cssload-load 0.91s infinite alternate ease-in-out;
+	-moz-animation: cssload-load 0.91s infinite alternate ease-in-out;
+}
+
+.theme-loader::before {
+	top: 0;
+}
+
+.theme-loader::after {
+	bottom: 0;
+}
