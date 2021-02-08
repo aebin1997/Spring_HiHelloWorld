@@ -6,8 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MemberController {
 
-	@RequestMapping("login.move")
-	public String loginMove() {
+	//로그인 페이지로 이동
+	@RequestMapping("loginView.do")
+	public String loginView() {
 		return "member/login";
 	}
+	
+	//회원가입 페이지로 이동
+	@RequestMapping("enrollView.do")
+	public String enrollView() {
+		return "member/memberInsertForm";
+	}
+	
 }

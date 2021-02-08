@@ -133,8 +133,8 @@
 						<section>
 							<nav class="navbar navbar-expand-lg justify-content-left">
 								<ul class="navbar-nav">
-									<li><a class="nav-link" href="login.move">로그인</a></li>
-									<li><a class="nav-link" href="#">회원가입</a></li>
+									<li><a class="nav-link" href="loginView.do">로그인</a></li>
+									<li><a class="nav-link" href="enrollView.do">회원가입</a></li>
 								</ul>
 							</nav>
 						</section>

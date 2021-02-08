@@ -29,8 +29,7 @@
 						<td><input type="password" name="pwd"></td>
 					</tr>
 					<tr>
-						<td colspan="3"><a href="enrollView.do">회원가입</a> <a href="#">아이디/비밀번호
-								찾기</a></td>
+						<a href="#">아이디/비밀번호 찾기</a></td>
 					</tr>
 				</table>
 			</form>
