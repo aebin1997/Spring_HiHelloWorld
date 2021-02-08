@@ -1,6 +1,6 @@
 ------------------------------------------------------------------------------------------------------------------- 계정 생성
---CREATE USER coca IDENTIFIED BY coca;
---GRANT CONNECT, RESOURCE TO coca;
+CREATE USER coca IDENTIFIED BY coca;
+GRANT CONNECT, RESOURCE TO coca;
 
 ------------------------------------------------------------------------------------------------------------------- 날짜 및 시간 설정
 ALTER SESSION SET NLS_DATE_FORMAT = 'RR/MM/DD';
