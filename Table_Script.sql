@@ -3,8 +3,8 @@
 --GRANT CONNECT, RESOURCE TO coca;
 
 ------------------------------------------------------------------------------------------------------------------- 날짜 및 시간 설정
-ALTER SESSION SET NLS_DATE_FORMAT = 'RR/MM/DD';
-ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'HH24:MI';
+--ALTER SESSION SET NLS_DATE_FORMAT = 'RR/MM/DD';
+--ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'HH24:MI';
 
 ------------------------------------------------------------------------------------------------------------------- 모든 테이블 리셋
 DROP TABLE MEMBER CASCADE CONSTRAINTS; 
@@ -44,9 +44,9 @@ CREATE TABLE MEMBER (
   AGE 		 NUMBER,
   PHONE 		 VARCHAR2(13),
   ADDRESS 	 VARCHAR2(100),
-  ENROLL_DATE 	 DATE DEFAULT SYSDATE,
-  UPDATE_DATE 	 DATE DEFAULT SYSDATE,
-  M_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK(M_STATUS IN('Y', 'N')),
+  ENROLLDATE 	 DATE DEFAULT SYSDATE,
+  UPDATEDATE 	 DATE DEFAULT SYSDATE,
+  MSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK(MSTATUS IN('Y', 'N')),
   CONSTRAINT PK_NICKNAME PRIMARY KEY(NICKNAME)
 );
 ------------------------------------------------------------------------------------------게시판 작성자 이름으로? 닉네임으로?? <우선 닉네임으로 넣어둠>
@@ -61,9 +61,9 @@ COMMENT ON COLUMN MEMBER.GENDER IS '회원성별';
 COMMENT ON COLUMN MEMBER.AGE IS '회원나이';
 COMMENT ON COLUMN MEMBER.PHONE IS '회원전화번호';
 COMMENT ON COLUMN MEMBER.ADDRESS IS '회원주소';
-COMMENT ON COLUMN MEMBER.ENROLL_DATE IS '회원가입날짜';
-COMMENT ON COLUMN MEMBER.UPDATE_DATE IS '회원수정날짜';
-COMMENT ON COLUMN MEMBER.M_STATUS IS '회원상태값';
+COMMENT ON COLUMN MEMBER.ENROLLDATE IS '회원가입날짜';
+COMMENT ON COLUMN MEMBER.UPDATEDATE IS '회원수정날짜';
+COMMENT ON COLUMN MEMBER.MSTATUS IS '회원상태값';
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(MEMBER)
 INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'F', '30', '010-1111-2222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT);
