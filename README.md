@@ -1,5 +1,4 @@
 # Hi Hello World
-[프로젝트 진행보고](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJsGmkdJkr18-X04BAnFWvmlxA8sc_rzfONBxhz6mLqSntMEpw4M0YbOQr1nc9Ycg7gmeYWTlvEAD/pubhtml)
 
 ## 프로젝트 실행
 
