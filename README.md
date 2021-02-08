@@ -1,4 +1,5 @@
 # Hi Hello World
+'Hi Hello World' is a question and answer site for professional and enthusiast programmers. 
 
 ## 프로젝트 실행
 
