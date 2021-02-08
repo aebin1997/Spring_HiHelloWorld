@@ -1,5 +1,7 @@
-# Hi Hello World
-
+# Hi Hello World 
+'Hi Hello World' is a question and answer site for professional and enthusiast programmers.  
+It features questions and answers on a wide range of topics in computer programming.
+  
 ## 프로젝트 실행
 
 ``` 
