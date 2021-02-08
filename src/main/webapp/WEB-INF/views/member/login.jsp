@@ -12,6 +12,7 @@
 
 	<jsp:include page="../common/header.jsp" />
 
+
 	<div class="loginArea" align="right">
 		<c:if test="${ empty sessionScope.loginUser }">
 			<form action="login.do" method="post">
