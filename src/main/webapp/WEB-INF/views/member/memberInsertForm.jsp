@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sign up</title>
 </head>
 <body>
 
-	<jsp:include page="../common/header.jsp" />
+	<!-- <jsp:include page="../common/header.jsp" /> -->
 	
 	
 	<h1 align="center">회원가입</h1>
@@ -37,6 +37,10 @@
 				<tr>
 					<td>* 비밀번호확인</td>
 					<td><input type="password" name="pwd2" required></td>
+				</tr>
+				<tr>
+					<td>* 별명</td>
+					<td><input type="text" name="nickname" required></input></td>
 				</tr>
 				<tr>
 					<td>성별</td>

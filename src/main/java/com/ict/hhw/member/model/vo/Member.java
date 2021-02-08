@@ -12,14 +12,14 @@ public class Member {
 	private int age;
 	private String phone;
 	private String address;
-	private Date enrolldate;
-	private Date updatedate;
+	private Date enrollDate;
+	private Date updateDate;
 	private String mStatus;
 	
 	public Member() {}
 
 	public Member(String id, String pwd, String name, String nickname, String email, String gender, int age,
-			String phone, String address, Date enrolldate, Date updatedate, String mStatus) {
+			String phone, String address, Date enrollDate, Date updateDate, String mStatus) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -30,8 +30,8 @@ public class Member {
 		this.age = age;
 		this.phone = phone;
 		this.address = address;
-		this.enrolldate = enrolldate;
-		this.updatedate = updatedate;
+		this.enrollDate = enrollDate;
+		this.updateDate = updateDate;
 		this.mStatus = mStatus;
 	}
 
@@ -107,20 +107,20 @@ public class Member {
 		this.address = address;
 	}
 
-	public Date getEnrolldate() {
-		return enrolldate;
+	public Date getEnrollDate() {
+		return enrollDate;
 	}
 
-	public void setEnrolldate(Date enrolldate) {
-		this.enrolldate = enrolldate;
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
 	}
 
-	public Date getUpdatedate() {
-		return updatedate;
+	public Date getUpdateDate() {
+		return updateDate;
 	}
 
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public String getmStatus() {
@@ -134,8 +134,8 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", nickname=" + nickname + ", email=" + email
-				+ ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address + ", enrolldate="
-				+ enrolldate + ", updatedate=" + updatedate + ", mStatus=" + mStatus + "]";
+				+ ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address + ", enrollDate="
+				+ enrollDate + ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
 	}
-	
+
 }

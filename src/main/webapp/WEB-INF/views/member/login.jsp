@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sign in</title>
 </head>
 <body>
 
 
-	<jsp:include page="../common/header.jsp" />
+	<%-- <jsp:include page="../common/header.jsp" /> --%>
 
 
 	<div class="loginArea" align="right">
@@ -45,9 +45,7 @@
 		</c:if>
 	</div> 
 
-
-	<jsp:include page="../common/footer.jsp" />
-
+	<%-- <jsp:include page="../common/footer.jsp" /> --%>
 
 
 </body>

@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Hi Hello World</title>
 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
+
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <link rel="stylesheet" href="/hhw/resources/css/bootstrap.min.css" />
 <!-- Google Font  -->
