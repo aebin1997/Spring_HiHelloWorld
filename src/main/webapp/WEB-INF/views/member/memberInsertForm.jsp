@@ -10,9 +10,9 @@
 
 	<!-- <jsp:include page="../common/header.jsp" /> -->
 	
-	
+	<br>
 	<h1 align="center">회원가입</h1>
-
+	<hr>
 	<div class="outer" align="center">
 		<form action="minsert.do" method="post" id="joinForm">
 			<table width="500" cellspacing="5">
@@ -95,6 +95,7 @@
 		</form>
 		<br> <br> <a href="index.jsp">시작 페이지로 이동</a>
 	</div>
+	<br>
 
 	<script type="text/javascript">
 		function validate(){
@@ -109,6 +110,8 @@
 		}
 		
 		$(function(){
+			$(".guide").hide();
+			
 			$("#userId").on("keyup",function(){
 				var userId = $(this).val();
 				

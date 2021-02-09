@@ -79,6 +79,8 @@ public class MemberController {
 		return "member/myPage"; 
 	}
 	
+	
+	
 	@ResponseBody
 	@RequestMapping("idCheck.do")
 	public String idCheck(String id) {
