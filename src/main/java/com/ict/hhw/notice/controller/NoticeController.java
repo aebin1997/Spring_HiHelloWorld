@@ -55,8 +55,7 @@ public class NoticeController {
 
 			job.put("nid", notice.getNid());
 			job.put("ntitle", URLEncoder.encode(notice.getNtitle(), "utf-8"));
-			job.put("n_create_date", notice.getN_create_date().toString()); // 날짜형은 반! 드! 시! String으로 변환해줘야함
-
+			job.put("n_create_date", notice.getN_date().toString()); // 날짜형은 반! 드! 시! String으로 변환해줘야함
 			// job를 jarr에 저장
 			jarr.add(job);
 		}
@@ -145,7 +144,7 @@ public class NoticeController {
 					model.addAttribute("msg", "전송 파일 저장 실패");
 					return "common/errorPage";
 				}
-				notice.setFile_path(mfile.getOriginalFilename());
+				notice.setN_file_name(mfile.getOriginalFilename());
 				logger.info("ninsert.do : " + notice);
 			}
 		}
@@ -208,16 +207,16 @@ public class NoticeController {
 		String savePath = request.getSession().getServletContext().getRealPath("resources/notice_files");
 
 		// 원래 첨부파일이 있었는데 삭제를 선택한 경우
-		if (notice.getFile_path() != null && delFlag != null && delFlag.contentEquals("yes")) {
+		if (notice.getN_file_name() != null && delFlag != null && delFlag.contentEquals("yes")) {
 			// 저장 폴더에서 파일을 삭제함
-			new File(savePath + "\\" + notice.getFile_path()).delete();
-			notice.setFile_path(null);
+			new File(savePath + "\\" + notice.getN_file_name()).delete();
+			notice.setN_file_name(null);
 		}
 
 		// 원래 첨부파일이 없었는데 새로 추가한 경우
 		if (mfile != null) {
 			String fileName = mfile.getOriginalFilename();
-			if (notice.getFile_path() == null && fileName.length() > 0) {
+			if (notice.getN_file_name() == null && fileName.length() > 0) {
 				// 업로드된 파일을 지정 폴더로 옮기기
 				try {
 					mfile.transferTo(new File(savePath + "\\" + mfile.getOriginalFilename()));
@@ -226,7 +225,7 @@ public class NoticeController {
 					model.addAttribute("msg", "전송파일 저장 실패");
 					return "common/errorPage";
 				}
-				notice.setFile_path(mfile.getOriginalFilename());
+				notice.setN_file_name(mfile.getOriginalFilename());
 			}
 		}
 
