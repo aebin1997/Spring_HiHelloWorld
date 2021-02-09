@@ -127,7 +127,7 @@
 									<li><a class="active nav-link" href="index.jsp">Home</a></li>
 									<li><a class="nav-link" href="#">공지사항</a></li>
 									<li><a class="nav-link" href="#">코딩의뢰</a></li>
-									<li><a class="nav-link" href="#">자유게시판</a></li>
+									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="#">CONTACT</a></li>
 								</ul>
 							</nav>
