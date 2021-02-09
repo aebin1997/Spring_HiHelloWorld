@@ -33,19 +33,4 @@
 	<context:component-scan
 		base-package="com.ict.hhw" />
 
-	<!-- interceptor 등록 -->
-	<interceptors>
-		<interceptor>
-			<mapping path="/blist.do" />
-			<beans:bean id="BlistInterceptor"
-				class="com.ict.spring.common.interceptor.BlistInterceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/login.do" />
-			<beans:bean id="LoginInterceptor"
-				class="com.ict.spring.common.interceptor.LoginInterceptor" />
-		</interceptor>
-	</interceptors>
-	<!-- interceptor 등록 경필 -->
-
 </beans:beans>
