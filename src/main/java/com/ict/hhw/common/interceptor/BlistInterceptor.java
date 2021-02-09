@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.ict.spring.member.model.vo.Member;
+import com.ict.hhw.member.model.vo.Member;
 
 public class BlistInterceptor extends HandlerInterceptorAdapter {
 	/*
