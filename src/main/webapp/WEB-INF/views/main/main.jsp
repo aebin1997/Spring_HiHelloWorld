@@ -56,13 +56,12 @@
 						<div class="row">
 							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 								<div class="home-single-slide-dec">
-									<h2>bitcoin transper you can trust</h2>
-									<p class="text-capitalize">Lorem ipsum dolor sit amet,
-										consectetur adipiscing elit, sed do eiusmod tempor incididunt
-										ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
+									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
+										있습니다.</p>
 									<div class="home-single-slide-button">
-										<a href="#" class="btn-style btn-border">Get quote</a> <a
-											href="#" class="btn-style btn-filled">Read More</a>
+										<a href="#" class="btn-style btn-filled">코딩의뢰 하기</a> <a
+											href="#" class="btn-style btn-border">포인트 충전하기</a>
 									</div>
 								</div>
 							</div>
@@ -79,13 +78,12 @@
 						<div class="row">
 							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 								<div class="home-single-slide-dec">
-									<h2>Invest & double your desire bitcoin</h2>
-									<p class="text-capitalize">Lorem ipsum dolor sit amet,
-										consectetur adipiscing elit, sed do eiusmod tempor incididunt
-										ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
+									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
+										있습니다.</p>
 									<div class="home-single-slide-button">
-										<a href="#" class="btn-style btn-filled">Contact Us</a> <a
-											href="#" class="btn-style btn-border">View More</a>
+										<a href="#" class="btn-style btn-filled">코딩의뢰 하기</a> <a
+											href="#" class="btn-style btn-border">포인트 충전하기</a>
 									</div>
 								</div>
 							</div>
