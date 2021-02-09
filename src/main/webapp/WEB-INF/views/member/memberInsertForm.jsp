@@ -8,11 +8,13 @@
 </head>
 <body>
 
-	<!-- <jsp:include page="../common/header.jsp" /> -->
+	<jsp:include page="../common/header.jsp" />
 	
+	<section style="padding: 100px 0 60px 0;">
 	<br>
 	<h1 align="center">회원가입</h1>
 	<hr>
+	<br>
 	<div class="outer" align="center">
 		<form action="minsert.do" method="post" id="joinForm">
 			<table width="500" cellspacing="5">
@@ -95,7 +97,8 @@
 		</form>
 		<br> <br> <a href="index.jsp">시작 페이지로 이동</a>
 	</div>
-	<br>
+	<hr>
+	</section>
 
 	<script type="text/javascript">
 		function validate(){
