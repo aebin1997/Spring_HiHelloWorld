@@ -3,13 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<welcome-files>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-files>
+	<!-- 경필 추가 -->
+
 	<!-- The definition of the Root Spring Container shared by all Servlets 
 		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	 		/WEB-INF/spring/root-context.xml
-	 	</param-value> 
+			/WEB-INF/spring/root-context.xml
+		</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -52,5 +57,13 @@
 		<exception-type>java.lang.Exception</exception-type>
 		<location>/WEB-INF/views/common/errorPage.jsp</location>
 	</error-page>
+
+    
+    <!-- url로 어떤 요청이 오느냐에 따라서 해당 필터를 거쳐가게끔 할지 url-pattern을 작성 -->
+    <filter-mapping>
+    	<filter-name>encodingFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- 경필 추가 -->
 
 </web-app>
