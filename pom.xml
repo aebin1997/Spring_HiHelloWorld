@@ -11,12 +11,26 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	
 	<!-- * properties -->
+	<!-- 자바 버전 1.8 / 스프링 버전-->
+	<!-- properties 태그를 이용하여 변수를 선언해서 다른 소스에 참조하도록한다. -->
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
+		<java-version>1.8</java-version>
+		<org.springframework-version>5.2.12.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
+	<!-- * repositories -->
+	<!-- 기본 저장소에서 다운 받지 못하는 경우 직접 다운 받고자 하는 사설 저장소 경로를 등록 -->
+	<repositories>
+      <repository>
+         <id>Spring Plugins</id>
+         <url>https://repo.spring.io/plugins-release/</url>
+      </repository>
+   </repositories>
+	
+	<!-- * dependencies -->
+	<!--   다운 받고자 하는 라이브러리들  -->
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -155,7 +169,30 @@
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
-		</dependency>      
+		</dependency>   
+		
+		<!-- 2. 스프링 시큐리티 모듈 추가  -->
+		<!-- core, web, config 이렇게 3개의 라이브러리가 필요 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>5.2.1.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>5.2.1.RELEASE</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>5.2.1.RELEASE</version>
+		</dependency>   
 	</dependencies>
 	
 	
