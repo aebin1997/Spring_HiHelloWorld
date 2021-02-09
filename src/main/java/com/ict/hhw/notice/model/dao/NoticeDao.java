@@ -1,4 +1,4 @@
-package com.ict.spring.notice.model.dao;
+package com.ict.hhw.notice.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ict.spring.notice.model.vo.Notice;
-import com.ict.spring.common.SearchDate;
+import com.ict.hhw.notice.model.vo.Notice;
+import com.ict.hhw.common.SearchDate;
 
 @Repository("noticeDao")
 public class NoticeDao {

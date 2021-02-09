@@ -1,4 +1,4 @@
-package com.ict.spring.notice.controller;
+package com.ict.hhw.notice.controller;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ict.spring.member.model.vo.Member;
-import com.ict.spring.notice.model.service.NoticeService;
-import com.ict.spring.notice.model.vo.Notice;
-import com.ict.spring.common.SearchDate;
+import com.ict.hhw.member.model.vo.Member;
+import com.ict.hhw.notice.model.service.NoticeService;
+import com.ict.hhw.notice.model.vo.Notice;
+import com.ict.hhw.common.SearchDate;
 
 @Controller
 public class NoticeController {

@@ -1,9 +1,9 @@
-package com.ict.spring.notice.model.service;
+package com.ict.hhw.notice.model.service;
 
 import java.util.ArrayList;
 
-import com.ict.spring.notice.model.vo.Notice;
-import com.ict.spring.common.SearchDate;
+import com.ict.hhw.notice.model.vo.Notice;
+import com.ict.hhw.common.SearchDate;
 
 public interface NoticeService {
 	ArrayList<Notice> selectAll();

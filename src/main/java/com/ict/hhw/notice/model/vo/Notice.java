@@ -1,4 +1,4 @@
-package com.ict.spring.notice.model.vo;
+package com.ict.hhw.notice.model.vo;
 
 import java.sql.Date;
 
@@ -6,25 +6,33 @@ public class Notice implements java.io.Serializable {
 	private static final long serialVersionUID = 2222L;
 	
 	private int nid;
-	private String ntitle;
+	private String ntype;
 	private String nwriter;
+	private String ntitle;
 	private String ncontent;
-	private Date n_create_date;
+	private String n_file_name;
+	private String n_rfile_name;
+	private Date n_date;
 	private Date n_modify_date;
-	private String file_path;
+	private int ncount;
+	private String nstatus;
 	
 	public Notice() {}
 
-	public Notice(int nid, String ntitle, String nwriter, String ncontent, Date n_create_date, Date n_modify_date,
-			String file_path) {
+	public Notice(int nid, String ntype, String nwriter, String ntitle, String ncontent, String n_file_name,
+			String n_rfile_name, Date n_date, Date n_modify_date, int ncount, String nstatus) {
 		super();
 		this.nid = nid;
-		this.ntitle = ntitle;
+		this.ntype = ntype;
 		this.nwriter = nwriter;
+		this.ntitle = ntitle;
 		this.ncontent = ncontent;
-		this.n_create_date = n_create_date;
+		this.n_file_name = n_file_name;
+		this.n_rfile_name = n_rfile_name;
+		this.n_date = n_date;
 		this.n_modify_date = n_modify_date;
-		this.file_path = file_path;
+		this.ncount = ncount;
+		this.nstatus = nstatus;
 	}
 
 	public int getNid() {
@@ -35,12 +43,12 @@ public class Notice implements java.io.Serializable {
 		this.nid = nid;
 	}
 
-	public String getNtitle() {
-		return ntitle;
+	public String getNtype() {
+		return ntype;
 	}
 
-	public void setNtitle(String ntitle) {
-		this.ntitle = ntitle;
+	public void setNtype(String ntype) {
+		this.ntype = ntype;
 	}
 
 	public String getNwriter() {
@@ -51,6 +59,14 @@ public class Notice implements java.io.Serializable {
 		this.nwriter = nwriter;
 	}
 
+	public String getNtitle() {
+		return ntitle;
+	}
+
+	public void setNtitle(String ntitle) {
+		this.ntitle = ntitle;
+	}
+
 	public String getNcontent() {
 		return ncontent;
 	}
@@ -59,12 +75,28 @@ public class Notice implements java.io.Serializable {
 		this.ncontent = ncontent;
 	}
 
-	public Date getN_create_date() {
-		return n_create_date;
+	public String getN_file_name() {
+		return n_file_name;
 	}
 
-	public void setN_create_date(Date n_create_date) {
-		this.n_create_date = n_create_date;
+	public void setN_file_name(String n_file_name) {
+		this.n_file_name = n_file_name;
+	}
+
+	public String getN_rfile_name() {
+		return n_rfile_name;
+	}
+
+	public void setN_rfile_name(String n_rfile_name) {
+		this.n_rfile_name = n_rfile_name;
+	}
+
+	public Date getN_date() {
+		return n_date;
+	}
+
+	public void setN_date(Date n_date) {
+		this.n_date = n_date;
 	}
 
 	public Date getN_modify_date() {
@@ -75,12 +107,20 @@ public class Notice implements java.io.Serializable {
 		this.n_modify_date = n_modify_date;
 	}
 
-	public String getFile_path() {
-		return file_path;
+	public int getNcount() {
+		return ncount;
 	}
 
-	public void setFile_path(String file_path) {
-		this.file_path = file_path;
+	public void setNcount(int ncount) {
+		this.ncount = ncount;
+	}
+
+	public String getNstatus() {
+		return nstatus;
+	}
+
+	public void setNstatus(String nstatus) {
+		this.nstatus = nstatus;
 	}
 
 	public static long getSerialversionuid() {
@@ -89,9 +129,9 @@ public class Notice implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "Notice [nid=" + nid + ", ntitle=" + ntitle + ", nwriter=" + nwriter + ", ncontent=" + ncontent
-				+ ", n_create_date=" + n_create_date + ", n_modify_date=" + n_modify_date + ", file_path=" + file_path
-				+ "]";
+		return "Notice [nid=" + nid + ", ntype=" + ntype + ", nwriter=" + nwriter + ", ntitle=" + ntitle + ", ncontent="
+				+ ncontent + ", n_file_name=" + n_file_name + ", n_rfile_name=" + n_rfile_name + ", n_date=" + n_date
+				+ ", n_modify_date=" + n_modify_date + ", ncount=" + ncount + ", nstatus=" + nstatus + "]";
 	}
 
 }
