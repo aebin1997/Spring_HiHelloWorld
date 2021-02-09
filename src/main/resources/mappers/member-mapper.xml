@@ -63,13 +63,16 @@
 		UPDATE 
 		       MEMBER
 		   SET 
-		       PWD = #{ pwd }
-		     , NAME = #{ name }
-		     , EMAIL = #{ email }
-		     , AGE = #{ age }
-		     , PHONE = #{ phone }
-		     , ADDRESS = #{ address }
-		     , UPDATEDATE = SYSDATE
+		   	<if test="pwd == null">
+		       PWD = #{ pwd },
+		    </if>
+		       NAME = #{ name },
+		       NICKNAME = #{ nickname },
+		       EMAIL = #{ email },
+		       AGE = #{ age },
+		       PHONE = #{ phone },
+		       ADDRESS = #{ address },
+		       UPDATEDATE = SYSDATE
 		 WHERE ID = #{ id }  
 	</update>
 	

@@ -9,6 +9,7 @@
 <body>
 	<%-- <jsp:include page="../common/header.jsp" /> --%>
 	
+	<h1>에러 페이지</h1>
 	<h1 align="center">${ msg }</h1>
 	
 	<%-- <jsp:include page="../common/footer.jsp" /> --%>
