@@ -96,19 +96,23 @@
 					</div>
 					<div class="col-lg-7 col-md-12 col-sm-12 col-12"
 						style="float: left;">
-						<div class="header-info-box">
+						<!-- <div class="header-info-box"> -->
 							<!-- <div class="header-info-icon">
 														<i class="fa fa-envelope-open"></i>
 													</div>
 													<p>Email Us</p>
 													<h6>info@yoursite.com</h6> -->
-						</div>
-						<div class="header-info-box">
+						<!-- </div> -->
+						<div class="header-info-box" style="position: absolute; right:10px;">
 							<!-- <div class="header-info-icon">
 														<i class="fa fa-phone"></i>
 													</div>
 													<p>Call Us</p>
 													<h6>123-456-0975</h6> -->
+							
+							<c:if test="${ !empty sessionScope.loginUser }">
+								<c:out value="${ loginUser.name }님 환영합니다!!" />
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -135,8 +139,14 @@
 						<section>
 							<nav class="navbar navbar-expand-lg justify-content-left">
 								<ul class="navbar-nav">
-									<li><a class="nav-link" href="loginView.do">로그인</a></li>
-									<li><a class="nav-link" href="enrollView.do">회원가입</a></li>
+									<c:if test="${ empty sessionScope.loginUser }">
+										<li><a class="nav-link" href="loginView.do">로그인</a></li>
+										<li><a class="nav-link" href="enrollView.do">회원가입</a></li>
+									</c:if>
+									<c:if test="${ !empty sessionScope.loginUser }">
+										<li><a class="nav-link" href="logout.do">로그아웃</a></li>
+										<li><a class="nav-link" href="myInfo.do">마이페이지</a></li>
+									</c:if>
 								</ul>
 							</nav>
 						</section>

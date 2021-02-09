@@ -33,15 +33,6 @@
 				</table>
 			</form>
 		</c:if>
-		<%-- <c:if test="${ !empty sessionScope.loginUser }">
-			<h3 align="center">
-				<c:out value="${ loginUser.name }님 환영합니다!!" />
-				<c:url var="myInfo" value="myInfo.do" />
-				<c:url var="logout" value="logout.do" />
-				<button onclick="location.href='${myInfo}'">정보수정</button>
-				<button onclick="location.href='${logout}'">로그아웃</button>
-			</h3>
-		</c:if> --%>
 	</section>
 
 

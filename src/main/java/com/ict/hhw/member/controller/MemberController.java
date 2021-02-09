@@ -73,6 +73,12 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
+	// 마이페이지로 이동
+	@RequestMapping("myInfo.do")
+	public String myInfoView() {
+		return "member/myPage"; 
+	}
+	
 	@ResponseBody
 	@RequestMapping("idCheck.do")
 	public String idCheck(String id) {
