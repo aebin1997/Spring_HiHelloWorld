@@ -10,18 +10,17 @@
 <body>
 
 
-	<%-- <jsp:include page="../common/header.jsp" /> --%>
+	<jsp:include page="../common/header.jsp" />
 
-
-	<div class="loginArea" align="right">
+	<section style="padding: 100px 0 60px 0;">
 		<c:if test="${ empty sessionScope.loginUser }">
-			<form action="login.do" method="post">
-				<table id="loginTable" style="text-align: center">
+			<form action="login.do" method="post" style="margin-left:500px;">
+				<table>
 					<tr>
 						<td>아이디</td>
 						<td><input type="text" name="id"></td>
 						<td rowspan="2">
-							<button id="loginBtn">로그인</button>
+							<button>로그인</button>
 						</td>
 					</tr>
 					<tr>
@@ -29,12 +28,12 @@
 						<td><input type="password" name="pwd"></td>
 					</tr>
 					<tr>
-						<a href="#">아이디/비밀번호 찾기</a></td>
+						<a href="#">아이디/비밀번호 찾기</a>
 					</tr>
 				</table>
 			</form>
 		</c:if>
-		<c:if test="${ !empty sessionScope.loginUser }">
+		<%-- <c:if test="${ !empty sessionScope.loginUser }">
 			<h3 align="center">
 				<c:out value="${ loginUser.name }님 환영합니다!!" />
 				<c:url var="myInfo" value="myInfo.do" />
@@ -42,10 +41,11 @@
 				<button onclick="location.href='${myInfo}'">정보수정</button>
 				<button onclick="location.href='${logout}'">로그아웃</button>
 			</h3>
-		</c:if>
-	</div> 
+		</c:if> --%>
+	</section>
 
-	<%-- <jsp:include page="../common/footer.jsp" /> --%>
+
+	<jsp:include page="../common/footer.jsp" />
 
 
 </body>
