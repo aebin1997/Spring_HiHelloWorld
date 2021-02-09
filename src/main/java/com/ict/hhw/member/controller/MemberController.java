@@ -47,8 +47,6 @@ public class MemberController {
 	// (암호화전)로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model, HttpSession session) {
-		System.out.println("ID : " + m.getId());
-		System.out.println("PWD: " + m.getPwd());
 
 		Member loginUser = mService.loginMember(m);
 		
