@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -79,6 +80,36 @@ public class MemberController {
 		return "member/myPage"; 
 	}
 	
+	// 회원가입
+	@RequestMapping("minsert.do")
+	public String insertMember(@ModelAttribute Member m, Model model, 
+							   @RequestParam("post") String post,
+							   @RequestParam("address1") String address1,
+							   @RequestParam("address2") String address2) {
+		
+		// 회원가입전에 회원정보를 출력
+		//System.out.println("Member 정보 : " + m);
+		//System.out.println("Address 정보 : " + post + ", " + address1 + ", " + address2);
+			
+		
+		// 주소데이터를 ", "를 구분자로 저장
+		if(!post.equals("")) {
+			m.setAddress(post + ", " + address1 + ", " + address2);
+		}
+		
+		//System.out.println("수정된 Member객체 : " + m);
+		
+		// 회원가입 서비스를 호출
+		int result = mService.insertMember(m);
+		
+		if(result > 0) {
+			return "redirect:home.do";
+		}else {
+			model.addAttribute("msg","회원가입실패!");
+			return "common/errorPage";
+		}
+		
+	}
 	
 	
 	@ResponseBody
