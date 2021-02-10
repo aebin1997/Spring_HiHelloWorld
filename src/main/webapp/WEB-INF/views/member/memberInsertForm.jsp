@@ -39,11 +39,11 @@
 				</tr>
 				<tr>
 					<td>* 비밀번호</td>
-					<td><input type="password" name="pwd" required></td>
+					<td><input type="password" id="pwd" name="pwd" required></td>
 				</tr>
 				<tr>
 					<td>* 비밀번호확인</td>
-					<td><input type="password" name="pwd2" required></td>
+					<td><input type="password" id="pwd2" name="pwd2" required></td>
 				</tr>
 				<tr>
 					<td>* 별명</td>
@@ -154,6 +154,17 @@
 					}
 				});
 			});
+			
+			//비밀번호 확인
+			$('#pwd2').blur(function(){
+			   if($('#pwd').val() != $('#pwd2').val()){
+			    	if($('#pwd2').val()!=''){
+				    alert("비밀번호가 일치하지 않습니다.");
+			    	    $('#pwd2').val('');
+			          $('#pwd2').focus();
+			      }
+			  }
+			})
 		});
 	</script>
 	

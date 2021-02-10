@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 	<jsp:include page="../common/header.jsp" />
 
 	<section style="padding: 100px 0 60px 0;">
-		<h1 align="center">${ loginUser.name }님의정보 보기</h1>
+		<h1 align="center">${ loginUser.name }님의정보보기</h1>
 
 		<div class="outer" align="center">
 			<form action="mupdate.do" method="post" id="joinForm">
@@ -28,11 +28,11 @@
 					</tr>
 					<tr>
 						<td>* 비밀번호</td>
-						<td><input type="password" name="pwd"></td>
+						<td><input type="password" id="pwd" name="pwd"></td>
 					</tr>
 					<tr>
 						<td>* 비밀번호확인</td>
-						<td><input type="password" name="pwd2"></td>
+						<td><input type="password" id="pwd2" name="pwd2"></td>
 					</tr>
 					<tr>
 						<td>* 별명</td>
@@ -126,6 +126,19 @@
 						// 검색 단추를 누르면 팝업 레이어가 열리도록 설정한다.
 						$(function() {
 							$("#postcodify_search_button").postcodifyPopUp();
+						});
+						
+						$(function(){
+							//비밀번호 확인
+								$('#pwd2').blur(function(){
+								   if($('#pwd').val() != $('#pwd2').val()){
+								    	if($('#pwd2').val()!=''){
+									    alert("비밀번호가 일치하지 않습니다.");
+								    	    $('#pwd2').val('');
+								          $('#pwd2').focus();
+								      }
+								  }
+							})  	   
 						});
 					</script>
 
