@@ -21,6 +21,7 @@ $light: #D3DEEA;
 $big: 'Abril Fatface', serif;
 $body: 'Lato', sans-serif;
 
+
 body {
   background: $light;
 }
@@ -163,7 +164,7 @@ body {
 }
 
 /*text styling*/
-h1 {
+#h1 {
   font-family: $big;
   color: $white;
   text-align: center;
@@ -404,7 +405,7 @@ footer {
 	
   <div id="background"></div>
 <div class="top">
-  <h1>error</h1>
+  <h1 id="h1">error</h1>
   <h3>page not found</h3>
 </div>
  <div>
