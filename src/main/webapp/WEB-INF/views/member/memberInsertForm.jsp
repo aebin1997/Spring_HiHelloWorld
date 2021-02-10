@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Sign up</title>
+<style>
+	span.guide {display:none; font-size:12px; top:12px, right:10px;}
+	span.ok{color:green;}
+	span.error{color:red;}
+</style>
 </head>
 <body>
 
@@ -113,8 +118,6 @@
 		}
 		
 		$(function(){
-			$(".guide").hide();
-			
 			$("#userId").on("keyup",function(){
 				var userId = $(this).val();
 				
