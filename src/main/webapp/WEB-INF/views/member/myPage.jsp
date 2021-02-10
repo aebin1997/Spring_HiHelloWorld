@@ -144,7 +144,8 @@
 
 					<tr>
 						<td colspan="2" align="center">
-							<button>수정하기</button> <c:url var="mdelete" value="mdelete.do">
+							<button>수정하기</button> 
+							<c:url var="mdelete" value="mdelete.do">
 								<c:param name="id" value="${ loginUser.id }" />
 							</c:url>
 							<button type="button" onclick="location.href='${ mdelete }';">탈퇴하기</button>
