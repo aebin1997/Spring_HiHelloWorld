@@ -19,18 +19,18 @@
 	
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		<!-- 암호화 전 -->
-		SELECT
+		<!-- SELECT
 		       *
 		  FROM MEMBER
 		 WHERE ID = #{ id }
-		   AND PWD = #{pwd}
-		   AND MSTATUS='Y'
+		   AND PWD = #{ pwd }
+		   AND MSTATUS='Y'  -->
 		<!-- 암호화 후 -->
-		<!-- SELECT
+		SELECT
 			   *
 	      FROM MEMBER
 	     WHERE ID = #{ id }
-	       AND MSTATUS= 'Y' -->
+	       AND MSTATUS= 'Y'
 	</select>
 
 	<insert id="insertMember" parameterType="Member">

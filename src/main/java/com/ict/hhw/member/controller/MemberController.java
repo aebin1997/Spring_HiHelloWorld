@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,8 +28,8 @@ public class MemberController {
 	private MemberService mService;
 
 	// 암호화 처리(spring-security에 bean등록 후) 후 작성
-	// @Autowired
-	// private BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	// 로깅시 추가
 	// private Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -45,7 +46,7 @@ public class MemberController {
 		return "member/memberInsertForm";
 	}
 
-	// (암호화전)로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
+	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String memberLogin(@ModelAttribute Member m, Model model, HttpSession session) {
 
@@ -53,8 +54,8 @@ public class MemberController {
 		
 		System.out.println(loginUser);
 		
-		if (loginUser != null && m.getPwd().equals(loginUser.getPwd())) {
-			// 로그인 성공
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
+				// 로그인 성공
 			session.setAttribute("loginUser", loginUser);
 			return "redirect:home.do";
 		} else {
@@ -88,8 +89,8 @@ public class MemberController {
 							   @RequestParam("address2") String address2) {
 		
 		// 회원가입전에 회원정보를 출력
-		System.out.println("Member 정보 : " + m);
-		System.out.println("Address 정보 : " + post + ", " + address1 + ", " + address2);
+		//System.out.println("Member 정보 : " + m);
+		//System.out.println("Address 정보 : " + post + ", " + address1 + ", " + address2);
 		
 		//System.out.println("암호화 처리 후 값 : " + bcryptPasswordEncoder.encode(m.getPwd()));
 		
@@ -110,17 +111,17 @@ public class MemberController {
 		 */
 		
 		// 기존의 평문을 암호문으로 바꾸서 m객체에 다시 담자.
-		//String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
+		String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
 		
 		// setter를 통해서 Member객체의 pwd를 변경
-		//m.setPwd(encPwd);
+		m.setPwd(encPwd);
 		
 		// 주소데이터를 ", "를 구분자로 저장
 		if(!post.equals("")) {
 			m.setAddress(post + ", " + address1 + ", " + address2);
 		}
 		
-		System.out.println("수정된 Member객체 : " + m);
+		//System.out.println("수정된 Member객체 : " + m);
 		
 		// 회원가입 서비스를 호출
 		int result = mService.insertMember(m);
@@ -142,10 +143,10 @@ public class MemberController {
 			                   @RequestParam("address2") String addr2) {
 		System.out.println("Member : " + m);
 		
-		//String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
+		String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
 		
 		// setter를 통해서 Member객체의 pwd를 변경
-		//m.setPwd(encPwd);
+		m.setPwd(encPwd);
 		
 		// 주소 데이터를 ","를 구분자로 두고 저장
 		if(!post.equals("")) {
