@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qaMapper">
+
+<resultMap type="Qa" id="resultTop3">
+	<id column="qa_id" property="qa_id"/>
+	<result column="qa_title" property="qa_title"/>
+	<result column="qa_readcount" property="qa_readcount"/>
+</resultMap>
+
+<select id="selectTop3" resultMap="resultTop3">
+	<![CDATA[
+	select *
+	from(select rownum rnum, qa_id, qa_title, qa_readcount
+        	from(select * from qa order by QA_READCOUNT desc))
+	where rnum >= 1 and rnum <=3
+	]]>
+</select>
+	
+	
+</mapper>

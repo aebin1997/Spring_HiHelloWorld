@@ -7,6 +7,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.ict.hhw.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.ict.hhw.qa.model.vo.Qa" alias="Qa"/>
 		<!-- <typeAlias type="com.ict.hhw.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.ict.hhw.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.ict.hhw.board.model.vo.Reply" alias="Reply"/> -->
@@ -14,6 +15,7 @@
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/qa-mapper.xml"/>
 		<!-- <mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/reply-mapper.xml"/> -->
