@@ -26,16 +26,16 @@
 							<form method="post" id="form" name="fm"
 								action="https://www.kurly.com/shop/member/find_pwd.php"
 								onsubmit="return chkForm( this );">
-								<input type="hidden" name="act" value="Y"> <input
-									type="hidden" name="rncheck" value="none"> <input
-									type="hidden" name="dupeinfo" value=""> <strong
-									class="tit_label">이름</strong> <input name="srch_name"
+								<strong class="tit_label">이름</strong>
+								<input name="name"
 									type="text" size="29" required="" label="이름" tabindex="2">
-								<strong class="tit_label">아이디</strong> <input name="srch_id"
+								<strong class="tit_label">아이디</strong>
+								<input name="id"
 									value="" type="text" size="29" required="" label="아이디"
 									tabindex="2">
 								<p></p>
-								<strong class="tit_label">이메일</strong> <input name="srch_mail"
+								<strong class="tit_label">이메일</strong>
+								<input name="email"
 									type="text" size="29" required="" label="메일주소" tabindex="5">
 								<p></p>
 								<button type="submit" class="btn_type1">

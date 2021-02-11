@@ -26,14 +26,12 @@
 							<form id="form" name="fm" method="post"
 								action="https://www.kurly.com/shop/member/find_id.php"
 								onsubmit="return chkForm( this );">
-								<input type="hidden" name="act" value="Y"> <input
-									type="hidden" name="rncheck" value="none"> <input
-									type="hidden" name="dupeinfo" value=""> <strong
-									class="tit_label">이름</strong> <input type="text"
-									name="srch_name" tabindex="2" size="29" required="required"
-									placeholder="고객님의 이름을 입력해주세요"> <strong
-									class="tit_label">이메일</strong> <input type="text"
-									name="srch_mail" size="29" tabindex="5" required="required"
+									<strong class="tit_label">이름</strong>
+									<input type="text"
+									name="name" tabindex="2" size="29" required="required"
+									placeholder="고객님의 이름을 입력해주세요">
+									<strong class="tit_label">이메일</strong>
+									<input type="text" name="email" size="29" tabindex="5" required="required"
 									placeholder="가입 시 등록하신 이메일 주소를 입력해주세요">
 								<button type="submit" class="btn_type1">
 									<span class="txt_type">확인</span>

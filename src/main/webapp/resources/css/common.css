@@ -7336,12 +7336,12 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 }
 
 .btn_type2 {
-	border: 1px solid #5f0081;
+	border: 1px solid #f7921a;
 	background-color: #fff
 }
 
 .btn_type2 .txt_type {
-	color: #5f0080
+	color: #f7921a
 }
 
 .btn_type2.btn_disabled {
@@ -7420,7 +7420,7 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 
 .section_login .label_checkbox.checked:before {
 	background:
-		url(https://res.kurly.com/pc/service/order/1908/ico_checkbox_on.png)
+		url("../images/icon/ico_checkbox.png")
 		no-repeat 50% 50%
 }
 
