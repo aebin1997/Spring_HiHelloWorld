@@ -45,6 +45,18 @@ public class MemberController {
 	public String enrollView() {
 		return "member/memberInsertForm";
 	}
+	
+	// 아이디 찾기 페이지로 이동
+		@RequestMapping("findIdView.do")
+		public String findIdView() {
+			return "member/findId";
+		}
+		
+	// 비밀번호 찾기 페이지로 이동
+	@RequestMapping("findPwView.do")
+	public String findPwView() {
+		return "member/findPw";
+	}
 
 	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)

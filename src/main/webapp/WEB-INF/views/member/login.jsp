@@ -28,7 +28,7 @@
 						<td><input type="password" name="pwd"></td>
 					</tr>
 					<tr>
-						<a href="#">아이디/비밀번호 찾기</a>
+						<a href="findIdView.do">아이디 찾기</a> | <a href="findPwView.do">비밀번호 찾기</a>
 					</tr>
 				</table>
 			</form>
