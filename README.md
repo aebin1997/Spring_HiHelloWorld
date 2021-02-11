@@ -1,4 +1,6 @@
 # Hi Hello World 
+ 프로그래밍에 대한 질문을 하고 답변을 받는 사이트
+
 'Hi Hello World' is a question and answer site for professional and enthusiast programmers.  
 It features questions and answers on a wide range of topics in computer programming.
   
