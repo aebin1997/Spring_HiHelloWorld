@@ -24,8 +24,7 @@
 						<h3 class="tit_login">아이디 찾기</h3>
 						<div class="write_form find_view">
 							<form id="form" name="fm" method="post"
-								action="https://www.kurly.com/shop/member/find_id.php"
-								onsubmit="return chkForm( this );">
+								action="./findId.do">
 									<strong class="tit_label">이름</strong>
 									<input type="text"
 									name="name" tabindex="2" size="29" required="required"

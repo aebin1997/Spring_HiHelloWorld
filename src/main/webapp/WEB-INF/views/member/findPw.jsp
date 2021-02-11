@@ -24,7 +24,7 @@
 						<h3 class="tit_login">비밀번호 찾기</h3>
 						<div class="write_form find_view">
 							<form method="post" id="form" name="fm"
-								action="https://www.kurly.com/shop/member/find_pwd.php"
+								action="findPw.do"
 								onsubmit="return chkForm( this );">
 								<strong class="tit_label">이름</strong>
 								<input name="name"

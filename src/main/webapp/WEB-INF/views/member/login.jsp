@@ -39,10 +39,9 @@
 											보안접속
 										</label>
 										<div class="login_search">
-											<a href="findIdView.do"
-												class="link">아이디 찾기</a> <span class="bar"></span> <a
-												href="findPwView.do"
-												class="link">비밀번호 찾기</a>
+											<a href="findIdView.do" class="link">아이디 찾기</a>
+											<span class="bar"></span>
+											<a href="findPwView.do" class="link">비밀번호 찾기</a>
 										</div>
 									</div>
 									<button type="submit" class="btn_type1">
