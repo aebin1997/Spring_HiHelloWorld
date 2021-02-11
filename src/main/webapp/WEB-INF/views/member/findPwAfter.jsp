@@ -7,6 +7,19 @@
 <meta name="Author" content="kimwoolina">
 <link rel="styleSheet" href="/hhw/resources/css/normalize.css">
 <link rel="styleSheet" href="/hhw/resources/css/common.css">
+
+<script type="text/javascript">
+//이메일 추출
+function pwEmail(){
+	var userEmail =  '${ email }';
+	
+	var  len = userEmail.split('@')[0].length-4; // AB***@gamil.com
+	
+	var result = userEmail.replace(new RegExp('.(?=.{0,' + len + '}@)', 'g'), '*');
+	
+	document.write(result);
+}
+</script>
 </head>
 <body class="member-find_pwd" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
@@ -31,7 +44,7 @@
 										이메일로 인증 완료후 <br> 비밀번호를 재발급 받으세요!
 									</p>
 									<p class="info">
-										입력하신 rlad*****@naver.com 으로 인증번호가 발송되며,<br>인증 후 비밀번호가
+										입력하신 <script>pwEmail();</script> 으로 인증번호가 발송되며,<br>인증 후 비밀번호가
 										재발급됩니다.<br>전송량이 많은 경우 이메일 전송이 지연될 수 있습니다.
 									</p>
 									<a href="#" class="btn_type1">

@@ -25,19 +25,14 @@
 						<h3 class="tit_login">비밀번호 찾기</h3>
 						<div class="write_form find_view">
 							<form method="post" id="form" name="fm"
-								action="findPw.do"
-								onsubmit="return chkForm( this );">
-								<strong class="tit_label">이름</strong>
-								<input name="name"
-									type="text" size="29" required="" label="이름" tabindex="2">
+								action="findPw.do">
 								<strong class="tit_label">아이디</strong>
-								<input name="id"
-									value="" type="text" size="29" required="" label="아이디"
-									tabindex="2">
-								<p></p>
-								<strong class="tit_label">이메일</strong>
-								<input name="email"
-									type="text" size="29" required="" label="메일주소" tabindex="5">
+									<input type="text"
+									name="id" tabindex="2" size="29" required="required"
+									placeholder="고객님의 아이디를 입력해주세요">
+									<strong class="tit_label">이메일</strong>
+									<input type="text" name="email" size="29" tabindex="5" required="required"
+									placeholder="가입 시 등록하신 이메일 주소를 입력해주세요">
 								<p></p>
 								<button type="submit" class="btn_type1">
 									<span class="txt_type">찾기</span>

@@ -35,8 +35,8 @@ public class MemberDao {
 		return (Member)sqlSession.selectOne("memberMapper.findId", m);
 	}
 
-	public Member findPw(Member m) {
-		return (Member) sqlSession.selectOne("memberMapper.findPw", m);
+	public int findPw(Member m) {
+		return sqlSession.update("memberMapper.findPw", m);
 	}
 	
 	public int idCheck(String id) {

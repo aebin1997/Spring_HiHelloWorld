@@ -12,7 +12,6 @@
 //아이디 추출 함수
 function pwId(){
 	var user =  '${ memberId }';
-	console.log(user);
 	var result = user.substring(0, 3);
 	
 	for(var i=0; i<user.length-3; i++) {

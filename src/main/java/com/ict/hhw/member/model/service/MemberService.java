@@ -1,5 +1,7 @@
 package com.ict.hhw.member.model.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.ict.hhw.member.model.vo.Member;
 
 public interface MemberService {
@@ -19,9 +21,10 @@ public interface MemberService {
 	// 아이디 찾기 위한 메소드
 	Member findId(Member m);
 
-	// 비밀번호 찾기 위한 메소드
-	Member findPw(Member m);
+	// 비밀번호 재설정 위한 메소드
+	int findPw(Member m);
 
 	// 아이디 중복 체크를 위한 메소드
 	int idCheck(String id);
+
 }

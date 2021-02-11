@@ -206,7 +206,10 @@ public class MemberController {
 
 	// 비밀번호 찾기
 	@RequestMapping("findPw.do")
-	public String findPw() {
+	public String findPw(@RequestParam("id") String id, @RequestParam("email") String email, Model model) {
+		model.addAttribute("id", id);
+		model.addAttribute("email", email);
+		
 		return "member/findPwAfter";
 	}
 

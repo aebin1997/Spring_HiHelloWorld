@@ -16,11 +16,7 @@
 		<result property="updateDate" column="UPDATEDATE"/>
 		<result property="mStatus" column="MSTATUS"/>
 	</resultMap>
-	
-	<resultMap id="memberFindIdResultSet" type="Member">
-		<id property="id" column="ID"/>
-	</resultMap>
-	
+
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		<!-- 암호화 전 -->
 		<!-- SELECT
@@ -80,13 +76,19 @@
 		 WHERE ID = #{ id }  
 	</update>
 	
-	<select id="findId" parameterType="Member" resultMap="memberFindIdResultSet">
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="Member" resultMap="memberResultSet">
 		SELECT
 		       *
 		  FROM MEMBER
 		 WHERE NAME = #{ name }
 		   AND EMAIL = #{ email }
 	</select>
+	
+	<!-- 비밀번호 찾기(비밀번호 재설정) -->
+	<update id="findPw" parameterType="Member">
+		update member set pwd = #{ pwd } where id = #{ id }
+	</update>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT

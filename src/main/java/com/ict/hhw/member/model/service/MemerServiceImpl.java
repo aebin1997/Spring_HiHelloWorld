@@ -26,7 +26,6 @@ public class MemerServiceImpl implements MemberService {
 
 	@Override
 	public int insertMember(Member m) {
-
 		int result = mDao.insertMember(m);
 
 		return result;
@@ -34,13 +33,11 @@ public class MemerServiceImpl implements MemberService {
 
 	@Override
 	public int updateMember(Member m) {
-
 		return mDao.updateMember(m);
 	}
 
 	@Override
 	public int deleteMember(String id) {
-
 		return mDao.deleteMember(id);
 	}
 
@@ -51,9 +48,8 @@ public class MemerServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member findPw(Member m) {
-		Member loginUser = mDao.findPw(m);
-		return loginUser;
+	public int findPw(Member m) {
+		return mDao.findPw(m);
 	}
 	
 	@Override
