@@ -3,8 +3,8 @@
 
 'Hi Hello World' is a question and answer site for professional and enthusiast programmers.  
 It features questions and answers on a wide range of topics in computer programming.
-  
-## 프로젝트 실행
+  <br>
+## 프로젝트 실행 | Getting Started
 
 ``` 
 \hhwProject\src\main\webapp\lib
@@ -16,7 +16,7 @@ It features questions and answers on a wide range of topics in computer programm
 ![readme](https://user-images.githubusercontent.com/48824321/107194208-169a0100-6a33-11eb-8103-adda81286a82.png)
 
 
-## 개발 환경
+## 개발 환경 | Development Environment
 - Operating System : Microsoft Window 10
 - IDE : Spring Tool Suite 3 (Version: 3.9.13.RELEASE)
 - Web Application Server : Apache Tomcat 8.5
