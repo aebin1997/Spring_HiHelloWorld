@@ -284,15 +284,14 @@ public class MemberController {
 			String msg = "<table width='640px' style='BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid' cellspacing='0' cellpadding='10' border='0'>";		
 			// 메일 상단
 			msg += "<tbody><tr><td><table align='center' cellspacing='0' cellpadding='0' border='0'><tbody><tr>";
-			msg += "<td align='middle' width='640px' height='71' style='padding-top: 10px;'> " 
-					+ "<img src='/hhw/resources/images/testlogo(200.80).jpg' style='display: block' width='100' height='59' alt='Hi Hello World' loading='lazy'></td></tr></tbody></table>";
+			msg += "<td align='middle' height='30' style='padding-top: 10px;'></td></tr></tbody></table>";
 			// 본문 부분
 			msg += "<table align='left' cellspacing='0' cellpadding='0' border='0' width='640px'><tbody><tr><td width='139px'></td><td align='middle'style='padding-right: 0px; padding-left: 0px; padding-bottom: 20px;' width='362px'>";
 			msg += "<div><br><b>" + member.getName() + "</b>님 안녕하세요. <b>Hi Hello World</b>입니다. <br> 요청하신 비밀번호찾기를 안내 드립니다.<br>";
 			msg += "<b>" + member.getName() + "</b>님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</div><div style='MARGIN: 10px; PADDING: 10px; TEXT-ALIGN: CENTER; BACKGROUND-COLOR: #FDEADA; COLOR: #FF0000; FONT-WEIGHT: BOLD;'>";
 			msg += "임시 비밀번호  : " + pwd + "</div></td><td width='139px'></td></tr></tbody></table>";
 			// 메일 하단
-			msg += "<table align='center' cellspacing='0' cellpadding='0' width='100%' border='0'><tbody><tr><td height='14'></td></tr><tr><td align='middle' style='padding-right: 4px; padding-left: 4px; padding-bottom: 4px; font: 8pt tahoma; padding-top: 4px' bgcolor='#f6f6f6'><font color='#545454'>Copyright(C)<strong>hhw.com</strong> All right reserved.</font></td></tr><tr><td height='6'></td></tr></tbody></table>";
+			msg += "<table align='center' cellspacing='0' cellpadding='0' width='100%' border='0'><tbody><tr><td height='14'></td></tr><tr><td align='middle' style='padding-right: 4px; padding-left: 4px; padding-bottom: 4px; font: 8pt tahoma; padding-top: 4px' bgcolor='#f6f6f6'><font color='#545454'>Copyright(C) <strong>hhw.com</strong> All right reserved.</font></td></tr><tr><td height='6'></td></tr></tbody></table>";
 			msg += "</td></tr></tbody></table>";
 			
 			try {
@@ -302,7 +301,7 @@ public class MemberController {
 			}
 			//alert창
 			return "<script type='text/javascript'>"
-			         + "alert(\"임시 비밀번호로 정상적으로 변경되었습니다.\\n 로그인 페이지로 이동합니다.\");"
+			         + "alert(\"임시 비밀번호로 정상적으로 변경되었습니다.\\n로그인 페이지로 이동합니다.\");"
 			         + "location.href=\"/hhw/loginView.do\";"
 			         + "</script>";
 		} else {
