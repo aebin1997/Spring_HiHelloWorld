@@ -17,6 +17,10 @@
 		<result property="mStatus" column="MSTATUS"/>
 	</resultMap>
 	
+	<resultMap id="memberFindIdResultSet" type="Member">
+		<id property="id" column="ID"/>
+	</resultMap>
+	
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		<!-- 암호화 전 -->
 		<!-- SELECT
@@ -52,7 +56,7 @@
       	       )
 	</insert>
 	
-	<update id="deleteMember" parameterType="string">
+	<update id="deleteMember" parameterType="Member">
 		UPDATE
 		       MEMBER
 		   SET MSTATUS='N'
@@ -75,6 +79,14 @@
 		       UPDATEDATE = SYSDATE
 		 WHERE ID = #{ id }  
 	</update>
+	
+	<select id="findId" parameterType="Member" resultMap="memberFindIdResultSet">
+		SELECT
+		       *
+		  FROM MEMBER
+		 WHERE NAME = #{ name }
+		   AND EMAIL = #{ email }
+	</select>
 	
 	<select id="idCheck" parameterType="string" resultType="_int">
 		SELECT

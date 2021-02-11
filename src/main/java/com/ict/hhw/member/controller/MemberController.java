@@ -187,9 +187,21 @@ public class MemberController {
 	}
 
 	// 아이디 찾기
-	@RequestMapping("findId.do")
-	public String findId() {
-		return "member/findIdAfter";
+	@RequestMapping(value = "findId.do", method = RequestMethod.POST)
+	public String findId(@ModelAttribute Member m, Model model) {
+		
+		String memberId = mService.findId(m).getId();
+		System.out.println(memberId);
+
+		if (memberId != null) {
+			//아이디 찾기 성공
+			model.addAttribute("id", memberId);
+			
+			return "member/findIdAfter";
+		} else {
+			model.addAttribute("msg", "아이디 찾기 실패!");
+			return "common/errorPage";
+		}
 	}
 
 	// 비밀번호 찾기

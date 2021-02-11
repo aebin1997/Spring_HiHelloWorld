@@ -15,16 +15,11 @@
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 50px 0 50px 0;">
 
+		<!-- 본문 -->
 		<div id="wrap" class="">
-
 			<div id="container">
-
 				<div id="main">
 					<div id="content">
-
-
-
-
 						<div class="section_login">
 							<h3 class="tit_login">아이디 찾기</h3>
 							<div class="write_form find_view">
@@ -34,7 +29,7 @@
 								<p class="desc">
 									고객님의 <br> 아이디 찾기가 완료되었습니다!
 								</p>
-								<p class="info">아이디 : lynp***</p>
+								<p class="info">아이디 : ${ id }</p>
 								<a href="loginView.do"
 									class="btn_type1"><span class="txt_type">로그인 하기</span></a>
 							</div>

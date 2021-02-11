@@ -15,25 +15,30 @@ public class MemberDao {
 	SqlSessionTemplate sqlSession;
 
 	public Member loginMember(Member m) {
-
 		return (Member) sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 
 	public int insertMember(Member m) {
-
 		return sqlSession.insert("memberMapper.insertMember", m);
 	}
 
 	public int deleteMember(String id) {
-
 		return sqlSession.update("memberMapper.deleteMember", id);
 	}
 
 	public int updateMember(Member m) {
-
 		return sqlSession.update("memberMapper.updateMember", m);
 	}
 
+	public Member findId(Member m) {
+		System.out.println("Dao");
+		return (Member)sqlSession.selectOne("memberMapper.findId", m);
+	}
+
+	public Member findPw(Member m) {
+		return (Member) sqlSession.selectOne("memberMapper.findPw", m);
+	}
+	
 	public int idCheck(String id) {
 		return sqlSession.selectOne("memberMapper.idCheck", id);
 	}
