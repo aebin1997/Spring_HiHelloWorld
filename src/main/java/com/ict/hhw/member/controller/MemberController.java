@@ -195,7 +195,7 @@ public class MemberController {
 
 		if (memberId != null) {
 			//아이디 찾기 성공
-			model.addAttribute("id", memberId);
+			model.addAttribute("memberId", memberId);
 			
 			return "member/findIdAfter";
 		} else {

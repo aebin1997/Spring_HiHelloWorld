@@ -1,11 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	String memberId = (String)request.getAttribute("memberId"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="styleSheet" href="/hhw/resources/css/normalize.css">
 <link rel="styleSheet" href="/hhw/resources/css/common.css">
+
+<script type="text/javascript">
+//아이디 추출 함수
+function pwId(){
+	var user =  "<%= memberId %>";
+	console.log(user);
+	var result = user.substring(0, 3);
+	
+	for(var i=0; i<user.length-3; i++) {
+	    result += "*";
+	}
+	document.write(result);
+}
+</script>
+
 </head>
 <body class="member-find_id" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
@@ -29,7 +47,7 @@
 								<p class="desc">
 									고객님의 <br> 아이디 찾기가 완료되었습니다!
 								</p>
-								<p class="info">아이디 : ${ id }</p>
+								<p class="info">아이디 : <script>pwId();</script></p>
 								<a href="loginView.do"
 									class="btn_type1"><span class="txt_type">로그인 하기</span></a>
 							</div>
