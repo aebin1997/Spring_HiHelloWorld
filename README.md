@@ -7,13 +7,25 @@ It features questions and answers on a wide range of topics in computer programm
 ## 프로젝트 실행 | Getting Started
 
 ``` 
-\hhwProject\src\main\webapp\lib
+/hhwProject/src/main/webapp/lib
 
 폴더 추가 후 jstl, jdbc jar파일 추가
 ``` 
 
 
 ![readme](https://user-images.githubusercontent.com/48824321/107194208-169a0100-6a33-11eb-8103-adda81286a82.png)
+
+<br>  
+
+``` 
+/hhwProject/src/main/java/com/ict/hhw/member/controller/MemberController.java 
+
+public void send_mail(Member member, String subject, String message)
+your actual email address, email password 입력
+```
+
+![image](https://user-images.githubusercontent.com/48824321/107697432-8ee41900-6cf6-11eb-8fe4-b56801de9175.png)
+
 
 <br>  
 
