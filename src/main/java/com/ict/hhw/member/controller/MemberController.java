@@ -2,6 +2,7 @@ package com.ict.hhw.member.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,43 @@ public class MemberController {
 	@RequestMapping("findPwView.do")
 	public String findPwView() {
 		return "member/findPw";
+	}
+
+	// 이메일 발송 메소드
+	public void send_mail(Member member, String subject, String message) throws Exception {
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com";
+		String hostSMTPid = "joker@naver.com"; // *본인의 아이디 입력 (ex.joker@naver.com)
+		String hostSMTPpwd = "joker"; // *비밀번호 입력(네이버 로그인 비밀번호)
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "joker@naver.com"; // *보내는 사람 email
+		String fromName = "Hi Hello World"; // 보내는 사람 이름
+		String sub = subject; // 메일 제목
+		String msg = message; // 메일 내용
+
+		// 받는 사람 E-Mail 주소
+		String mail = member.getEmail(); // 받는 사람 email
+
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(587); // SMTP 포트 번호 입력
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(sub);
+			email.setHtmlMsg(msg); // 본문 내용
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
 	}
 
 	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
@@ -189,14 +227,13 @@ public class MemberController {
 	// 아이디 찾기
 	@RequestMapping(value = "findId.do", method = RequestMethod.POST)
 	public String findId(@ModelAttribute Member m, Model model) {
-		
+
 		String memberId = mService.findId(m).getId();
-		System.out.println(memberId);
 
 		if (memberId != null) {
-			//아이디 찾기 성공
+			// 아이디 찾기 성공
 			model.addAttribute("memberId", memberId);
-			
+
 			return "member/findIdAfter";
 		} else {
 			model.addAttribute("msg", "아이디 찾기 실패!");
@@ -205,12 +242,73 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기
-	@RequestMapping("findPw.do")
-	public String findPw(@RequestParam("id") String id, @RequestParam("email") String email, Model model) {
-		model.addAttribute("id", id);
-		model.addAttribute("email", email);
+	@RequestMapping(value = "findPw.move", method = RequestMethod.POST)
+	public String findPw(@ModelAttribute Member m, Model model) {
+
+		Member findUser = mService.findPw(m);
+
+		if (findUser != null) {
+			// 회원 정보 찾기 성공
+			model.addAttribute("findUser", findUser);
+
+			return "member/findPwAfter";
+		} else {
+			model.addAttribute("msg", "회원 정보 찾기 실패!");
+			return "common/errorPage";
+		}
+	}
+
+	// 임시 비밀번호 생성 및 메일 발송
+	@RequestMapping(value = "findPw.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	public @ResponseBody String findPwAfter(@ModelAttribute Member m, Model model) {
 		
-		return "member/findPwAfter";
+		// 회원 찾기
+		Member member = mService.findPw(m);		
+		
+		// 임시 비밀번호 생성
+		String pwd ="";
+		for (int i = 0; i < 12; i++) {
+			pwd += (char) ((Math.random() * 26) + 97);
+		}
+		
+		// 임시 비밀번호로  설정
+		String encPwd = bcryptPasswordEncoder.encode(pwd); //암호화
+		member.setPwd(pwd);
+		int result = mService.setTempPw(member);
+
+		if (result > 0) {
+			// 메일 제목
+			String subject ="[HHW]임시 비밀번호 생성 알림 메일 입니다.";
+			
+			// 메일 내용
+			String msg = "<table width='640px' style='BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid' cellspacing='0' cellpadding='10' border='0'>";		
+			// 메일 상단
+			msg += "<tbody><tr><td><table align='center' cellspacing='0' cellpadding='0' border='0'><tbody><tr>";
+			msg += "<td align='middle' width='640px' height='71' style='padding-top: 10px;'> " 
+					+ "<img src='/hhw/resources/images/testlogo(200.80).jpg' style='display: block' width='100' height='59' alt='Hi Hello World' loading='lazy'></td></tr></tbody></table>";
+			// 본문 부분
+			msg += "<table align='left' cellspacing='0' cellpadding='0' border='0' width='640px'><tbody><tr><td width='139px'></td><td align='middle'style='padding-right: 0px; padding-left: 0px; padding-bottom: 20px;' width='362px'>";
+			msg += "<div><br><b>" + member.getName() + "</b>님 안녕하세요. <b>Hi Hello World</b>입니다. <br> 요청하신 비밀번호찾기를 안내 드립니다.<br>";
+			msg += "<b>" + member.getName() + "</b>님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</div><div style='MARGIN: 10px; PADDING: 10px; TEXT-ALIGN: CENTER; BACKGROUND-COLOR: #FDEADA; COLOR: #FF0000; FONT-WEIGHT: BOLD;'>";
+			msg += "임시 비밀번호  : " + pwd + "</div></td><td width='139px'></td></tr></tbody></table>";
+			// 메일 하단
+			msg += "<table align='center' cellspacing='0' cellpadding='0' width='100%' border='0'><tbody><tr><td height='14'></td></tr><tr><td align='middle' style='padding-right: 4px; padding-left: 4px; padding-bottom: 4px; font: 8pt tahoma; padding-top: 4px' bgcolor='#f6f6f6'><font color='#545454'>Copyright(C)<strong>hhw.com</strong> All right reserved.</font></td></tr><tr><td height='6'></td></tr></tbody></table>";
+			msg += "</td></tr></tbody></table>";
+			
+			try {
+				send_mail(member, subject, msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			//alert창
+			return "<script type='text/javascript'>"
+			         + "alert(\"임시 비밀번호로 정상적으로 변경되었습니다.\\n 로그인 페이지로 이동합니다.\");"
+			         + "location.href=\"/hhw/loginView.do\";"
+			         + "</script>";
+		} else {
+			model.addAttribute("msg", "회원 정보 수정 실패!");
+			return "common/errorPage";
+		}
 	}
 
 	@ResponseBody

@@ -21,10 +21,15 @@ public interface MemberService {
 	// 아이디 찾기 위한 메소드
 	Member findId(Member m);
 
-	// 비밀번호 재설정 위한 메소드
-	int findPw(Member m);
-
+	// 비밀번호 찾기 위한 메소드
+	Member findPw(Member m);
+	
+	// 임시 비밀번호 설정 위한 메소드
+	int setTempPw(Member m);
+	
 	// 아이디 중복 체크를 위한 메소드
 	int idCheck(String id);
+
+	
 
 }

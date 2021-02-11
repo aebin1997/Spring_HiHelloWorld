@@ -25,7 +25,7 @@
 						<h3 class="tit_login">비밀번호 찾기</h3>
 						<div class="write_form find_view">
 							<form method="post" id="form" name="fm"
-								action="findPw.do">
+								action="findPw.move">
 								<strong class="tit_label">아이디</strong>
 									<input type="text"
 									name="id" tabindex="2" size="29" required="required"

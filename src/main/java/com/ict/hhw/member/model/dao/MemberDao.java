@@ -31,12 +31,15 @@ public class MemberDao {
 	}
 
 	public Member findId(Member m) {
-		System.out.println("Dao");
 		return (Member)sqlSession.selectOne("memberMapper.findId", m);
 	}
 
-	public int findPw(Member m) {
-		return sqlSession.update("memberMapper.findPw", m);
+	public Member findPw(Member m) {
+		return (Member)sqlSession.selectOne("memberMapper.findPw", m);
+	}
+	
+	public int setTempPw(Member m) {
+		return sqlSession.update("memberMapper.setTempPw", m);
 	}
 	
 	public int idCheck(String id) {

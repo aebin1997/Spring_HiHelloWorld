@@ -48,8 +48,14 @@ public class MemerServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int findPw(Member m) {
-		return mDao.findPw(m);
+	public Member findPw(Member m) {
+		Member loginUser = mDao.findPw(m);
+		return loginUser;
+	}
+	
+	@Override
+	public int setTempPw(Member m) {
+		return mDao.setTempPw(m);
 	}
 	
 	@Override

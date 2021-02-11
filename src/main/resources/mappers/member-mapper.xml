@@ -85,8 +85,17 @@
 		   AND EMAIL = #{ email }
 	</select>
 	
-	<!-- 비밀번호 찾기(비밀번호 재설정) -->
-	<update id="findPw" parameterType="Member">
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="Member" resultMap="memberResultSet">
+		SELECT
+		       *
+		  FROM MEMBER
+		 WHERE ID = #{ id }
+		   AND EMAIL = #{ email }
+	</select>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="setTempPw" parameterType="Member">
 		update member set pwd = #{ pwd } where id = #{ id }
 	</update>
 	
