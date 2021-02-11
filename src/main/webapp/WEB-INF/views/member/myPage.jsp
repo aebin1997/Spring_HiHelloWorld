@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="Author" content="kimwoolina">
 <title>my info</title>
 </head>
 <body>

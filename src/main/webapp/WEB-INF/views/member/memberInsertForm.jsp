@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="Author" content="kimwoolina">
 <title>Sign up</title>
 <style>
 	span.guide {display:none; font-size:12px; top:12px, right:10px;}
