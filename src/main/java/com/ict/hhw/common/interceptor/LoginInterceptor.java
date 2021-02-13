@@ -2,6 +2,7 @@ package com.ict.hhw.common.interceptor;
 
 import java.net.InetAddress;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -42,6 +43,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if(loginUser != null) {
 			InetAddress local = InetAddress.getLocalHost();
 			//logger.info(loginUser.getId() + " " + local.getHostAddress());
+			
+			/*
+			 * //쿠키 생성 Cookie loginCookie = new Cookie("loginCookie", httpSession.getId());
+			 * loginCookie.setPath("/"); loginCookie.setMaxAge(60*60*24*7); //전송
+			 * response.addCookie(loginCookie);
+			 */
 		}
 	}
 

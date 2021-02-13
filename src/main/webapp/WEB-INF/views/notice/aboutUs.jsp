@@ -293,7 +293,7 @@ ul {
 								<h3>
 									<a href="http://www.webcoderskull.com/">LINA</a>
 								</h3>
-								<p>HEAD Manager</p>
+								<p>Lead Developer</p>
 								<ul class="follow-us clearfix">
 									<li><a href="https://www.instagram.com/kimwoolina/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
@@ -313,7 +313,7 @@ ul {
 								<h3>
 									<a href="#">PHILIP</a>
 								</h3>
-								<p>Freelance Web Developer</p>
+								<p>UI/UX Developer</p>
 								<ul class="follow-us clearfix">
 									<li><a href="https://www.instagram.com/hellokovi_koviin/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
@@ -333,7 +333,7 @@ ul {
 								<h3>
 									<a href="#">ELLA</a>
 								</h3>
-								<p>Freelance Web Developer</p>
+								<p>Markup Engineer</p>
 								<ul class="follow-us clearfix">
 									<li><a href="https://www.instagram.com/eun_0_99/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
@@ -354,7 +354,7 @@ ul {
 								<h3>
 									<a href="http://www.webcoderskull.com/">JAMES</a>
 								</h3>
-								<p>Freelance Web Developer</p>
+								<p>Software Engineer</p>
 								<ul class="follow-us clearfix">
 									<li><a href="https://www.instagram.com/rkdtjs4954/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
@@ -374,7 +374,7 @@ ul {
 								<h3>
 									<a href="http://www.webcoderskull.com/">AEBIN</a>
 								</h3>
-								<p>Freelance Web Developer</p>
+								<p>Software Engineer</p>
 								<ul class="follow-us clearfix">
 									<li><a href="https://www.instagram.com/aebin.park/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
