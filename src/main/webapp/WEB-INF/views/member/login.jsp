@@ -34,8 +34,8 @@
 										placeholder="비밀번호를 입력해주세요" style="margin: 10px 0px 0px">
 								<div class="checkbox_save">
 										<label class="label_checkbox checked"> <input
-											type="checkbox" id="chk_security" name="chk_security"
-											value="y" checked="checked"
+											type="checkbox" id="auto_login" name="auto_login"
+											value="on" checked="checked"
 											onchange="if( this.checked){$(this).parent().addClass(&#39;checked&#39;)}else{$(this).parent().removeClass(&#39;checked&#39;)} ">
 											자동 로그인
 										</label>
