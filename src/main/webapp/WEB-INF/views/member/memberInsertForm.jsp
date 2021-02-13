@@ -8,6 +8,18 @@
 <meta name="Author" content="kimwoolina">
 <link rel="styleSheet" href="/hhw/resources/css/normalize.css">
 <link rel="styleSheet" href="/hhw/resources/css/common.css">
+<style type="text/css">
+button {
+border: 1px solid #f7921a;
+    background-color: #fff;
+    color: #f7921a;
+    display: inline-block;
+    width: 120px;
+    margin-left: 5px;
+    vertical-align: top;
+    border-radius: 2px
+}
+</style>
 <script type="text/javascript">
 function validate(){
 	// 아이디 중복체크 여부
@@ -102,9 +114,7 @@ $(function(){
 												<td><input type="text" name="id" id="userId" value=""
 													maxlength="16" required="" fld_esssential="" option="regId"
 													label="아이디" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
-													<input type="hidden" name="chk_id" required=""
-													fld_esssential="" label="아이디중복체크" value=""> <a
-													class="btn default" href="javascript:chkId()">중복확인</a>
+													<a class="btn default" href="javascript:chkId()">중복확인</a>
 													<p class="txt_guide square">
 														<span class="txt txt_case1">6자 이상의 영문 혹은 영문과 숫자를 조합</span>
 														<span class="txt txt_case2">아이디 중복확인</span>
@@ -154,9 +164,8 @@ $(function(){
 												<td><input type="text" name="email" value=""
 													data-email="" size="30" required="" fld_esssential=""
 													option="regEmail" label="이메일"
-													placeholder="예: marketkurly@kurly.com"> <input
-													type="hidden" name="chk_email" required=""
-													fld_esssential="" label="이메일중복체크"> <a
+													placeholder="예: hihelloworld@hhw.com"> 
+													<a
 													href="javascript:void(0)" onclick="chkEmail()"
 													class="btn default">중복확인</a></td>
 											</tr>
@@ -167,12 +176,6 @@ $(function(){
 													<div class="phone_num">
 														<input type="text" value="" pattern="[0-9]*"
 															name="mobileInp" placeholder="숫자만 입력해주세요" class="inp">
-														<input type="hidden" name="mobile[]" id="mobile0" value=""
-															required="" fld_esssential="" option="regNum" label="휴대폰">
-														<input type="hidden" name="mobile[]" id="mobile1" value=""
-															required="" fld_esssential="" option="regNum" label="휴대폰">
-														<input type="hidden" name="mobile[]" id="mobile2" value=""
-															required="" fld_esssential="" option="regNum" label="휴대폰">
 														<button id="btn_cert" class="btn default disabled"
 															type="button">인증번호 받기</button>
 													</div>
@@ -190,36 +193,38 @@ $(function(){
 													</p>
 												</td>
 											</tr>
+											
 											<tr>
 												<th>주소<span class="ico">*<span
 														class="screen_out">필수항목</span></span></th>
-												<td class="field_address"><input type="hidden"
-													name="zonecode" id="zonecode" size="5" value=""> <input
-													type="hidden" name="zipcode[]" id="zipcode0" size="3"
-													value=""> <input type="hidden" name="zipcode[]"
-													id="zipcode1" size="3" value=""> <input
-													type="hidden" name="deliPoli" id="deliPoli" size="1"
-													value=""> <input type="hidden" id="baseAddressType"
-													name="base_address_type" value="">
-													<div id="selectAddress">
-														<input type="text" name="addr" id="addr" value=""
-															readonly="readonly" label="주소"> <input
-															type="hidden" name="address" id="address" value=""
-															required="" readonly="readonly" label="주소"> <input
-															type="hidden" name="road_address" id="road_address"
-															required="" value="" label="주소">
-													</div> <a href="https://www.kurly.com/shop/member/join.php#none"
-													id="addressSearch" class="search"
-													onclick="popup(&#39;../proc/popup_address.php&#39;,530,500)">
-														<span id="addressNo" class="address_no" data-text="재검색">주소
-															검색</span>
-												</a>
-													<div id="selectAddressSub">
-														<input type="text" name="address_sub" id="address_sub"
-															value="" class="byteTotext" placeholder="나머지 주소를 입력해주세요">
-														<p id="delivery"></p>
-													</div></td>
+												<td>
+													<input type="text" name="post"
+														label="우편번호" class="postcodify_postcode5"
+														placeholder="우편번호를 검색해주세요">&nbsp
+														<button type="button" id="postcodify_search_button"><span id="addressNo" class="address_no" data-text="검색">검색</span></button>
+												</td>
+											<tr><th></th><td>
+													<input type="text" name="adress1"
+														label="도로명 주소" class="postcodify_address"
+														placeholder="도로명 주소를 검색해주세요">
+											</td></tr>
+											<tr><th></th><td>
+													<input type="text" name="adress2"
+														label="상세 주소" class="postcodify_extra_info"
+														placeholder="상세 주소를 검색해주세요">
+												</td>
 											</tr>
+											
+											<!-- jQuery와 Postcodify를 로딩한다. -->
+											<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+											<script>
+											/*  검색 단추를 누르면 팝업 레이어가 열리도록 설정한다. */
+											$(function(){
+												$("#postcodify_search_button").postcodifyPopUp();
+											});
+											</script>
+											
+											
 											<tr class="select_sex">
 												<th>성별</th>
 												<td><label class=""> <input type="radio"
@@ -234,8 +239,8 @@ $(function(){
 										</tbody>
 									</table>
 									<div id="formSubmit" class="form_footer">
-										<button type="button" class="btn active btn_join"
-											onclick="formJoinSubmit()">가입하기</button>
+										<button class="btn active btn_join"
+											onclick='return validate();'>가입하기</button>
 									</div>
 								</form>
 							</div>
