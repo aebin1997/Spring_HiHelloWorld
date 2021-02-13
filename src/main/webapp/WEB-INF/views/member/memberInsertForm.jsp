@@ -175,7 +175,7 @@ $(function(){
 												<td>
 													<div class="phone_num">
 														<input type="text" value="" pattern="[0-9]*"
-															name="mobileInp" placeholder="숫자만 입력해주세요" class="inp">
+															name="phone" placeholder="숫자만 입력해주세요" class="inp">
 														<button id="btn_cert" class="btn default disabled"
 															type="button">인증번호 받기</button>
 													</div>
@@ -204,12 +204,12 @@ $(function(){
 														<button type="button" id="postcodify_search_button"><span id="addressNo" class="address_no" data-text="검색">검색</span></button>
 												</td>
 											<tr><th></th><td>
-													<input type="text" name="adress1"
+													<input type="text" name="address1"
 														label="도로명 주소" class="postcodify_address"
 														placeholder="도로명 주소를 검색해주세요">
 											</td></tr>
 											<tr><th></th><td>
-													<input type="text" name="adress2"
+													<input type="text" name="address2"
 														label="상세 주소" class="postcodify_extra_info"
 														placeholder="상세 주소를 검색해주세요">
 												</td>

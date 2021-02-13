@@ -44,16 +44,16 @@
 						<td>성별</td>
 						<c:choose>
 							<c:when test="${ loginUser.sex eq 'm' }">
-								<td><input type="radio" name="gender" value="m" checked>남
-									<input type="radio" name="gender" value="w">여</td>
+								<td><input type="radio" name="sex" value="m" checked>남
+									<input type="radio" name="sex" value="w">여</td>
 							</c:when>
 							<c:when test="${ loginUser.sex eq 'w' }">
-								<td><input type="radio" name="gender" value="m">남 <input
-									type="radio" name="gender" value="w" checked>여</td>
+								<td><input type="radio" name="sex" value="m">남 <input
+									type="radio" name="sex" value="w" checked>여</td>
 							</c:when>
 							<c:otherwise>
-								<td><input type="radio" name="gender" value="m">남 <input
-									type="radio" name="gender" value="w">여</td>
+								<td><input type="radio" name="sex" value="m">남 <input
+									type="radio" name="sex" value="w">여</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
