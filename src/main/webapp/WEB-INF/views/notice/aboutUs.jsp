@@ -177,6 +177,23 @@ ul {
 <body>
 	<jsp:include page="../common/header.jsp" />
 
+	<!-- 중간 메뉴 바 시작-->
+	<section class="breadcrumbs-custom-inset">
+		<div class="breadcrumbs-custom context-dark bg-overlay-46">
+			<div class="container">
+				<h2 class="breadcrumbs-custom-title">About Us</h2>
+				<ul class="breadcrumbs-custom-path">
+					<li><a class="nav-link" href="noticeHome.do">공지사항</a></li>
+					<li><a class="nav-link" href="aboutUs.do">about Us</a></li>
+					<li><a class="nav-link" href="howTo.do">사이트 이용 방법</a></li>
+				</ul>
+			</div>
+			<div class="box-position-1"
+				style="background-image: url(/hhw/resources/images/notice_board.jpg);"></div>
+		</div>
+	</section>
+	<!-- 중간 메뉴 바 끝-->
+
 	<section style="padding: 100px 0 60px 0;">
 		<link
 			href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
