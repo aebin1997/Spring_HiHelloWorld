@@ -7,35 +7,30 @@
 --ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'HH24:MI';
 
 ------------------------------------------------------------------------------------------------------------------- 모든 테이블 리셋
+
 DROP TABLE MEMBER CASCADE CONSTRAINTS; 
 DROP TABLE N_TYPE CASCADE CONSTRAINTS; 
 DROP TABLE NOTICE CASCADE CONSTRAINTS; 
 DROP TABLE B_TYPE CASCADE CONSTRAINTS; 
 DROP TABLE BOARD CASCADE CONSTRAINTS;
-DROP TABLE N_REPLY CASCADE CONSTRAINTS;
-DROP TABLE B_REPLY CASCADE CONSTRAINTS;
+DROP TABLE REPLY CASCADE CONSTRAINTS;
 DROP TABLE BLAME CASCADE CONSTRAINTS;
 DROP TABLE P_BOARD CASCADE CONSTRAINTS;
 DROP TABLE P_REPLY CASCADE CONSTRAINTS;
-
 DROP TABLE QA CASCADE CONSTRAINTS;
 DROP TABLE QA_REPLY CASCADE CONSTRAINTS;
-
 DROP TABLE PAY CASCADE CONSTRAINTS;
 DROP TABLE POINT CASCADE CONSTRAINTS;
 
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
 DROP SEQUENCE SEQ_NID;
 DROP SEQUENCE SEQ_BID;
-DROP SEQUENCE SEQ_NRID;
-DROP SEQUENCE SEQ_BRID;
+DROP SEQUENCE SEQ_RID;
 DROP SEQUENCE SEQ_BLID;
 DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
-
 DROP SEQUENCE SEQ_QA;
 DROP SEQUENCE SEQ_QARID;
-
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
 
@@ -161,9 +156,9 @@ BTYPE                        CHAR(2) DEFAULT 1,
 BWRITER                     VARCHAR2(100) NOT NULL,
 BTITLE                        VARCHAR2(500) NOT NULL,
 BCONTENT                  VARCHAR2(4000),
-B_FILE_NAME               VARCHAR2(50),
-B_RFILE_NAME             VARCHAR2(50),
-B_DATE                       DATE,
+B_ORIGINAL_FILENAME    VARCHAR2(100),
+B_RENAME_FILENAME     VARCHAR2(100),
+B_CREATE_DATE            DATE,
 B_MODFIY_DATE           DATE,
 BCOUNT                     NUMBER DEFAULT 0,
 BSTATUS		       CHAR(2) DEFAULT 'Y',
@@ -178,9 +173,9 @@ COMMENT ON COLUMN BOARD.BTYPE IS '게시판 글 구분(1. 질문이요, 2. 일�
 COMMENT ON COLUMN BOARD.BWRITER IS '게시판 작성자';
 COMMENT ON COLUMN BOARD.BTITLE IS '게시판 제목';
 COMMENT ON COLUMN BOARD.BCONTENT IS '게시판 내용';
-COMMENT ON COLUMN BOARD.B_FILE_NAME IS '게시판 원래 첨부파일 명';
-COMMENT ON COLUMN BOARD.B_RFILE_NAME IS '게시판 바뀐 첨부파일 명';
-COMMENT ON COLUMN BOARD.B_DATE IS '게시판 날짜';
+COMMENT ON COLUMN BOARD.B_ORIGINAL_FILENAME IS '게시판 원래 첨부파일 명';
+COMMENT ON COLUMN BOARD.B_RENAME_FILENAME IS '게시판 바뀐 첨부파일 명';
+COMMENT ON COLUMN BOARD.B_CREATE_DATE IS '게시판 날짜';
 COMMENT ON COLUMN BOARD.B_MODFIY_DATE IS '게시판 수정날짜';
 COMMENT ON COLUMN BOARD.BCOUNT IS '게시판 조회수';
 COMMENT ON COLUMN BOARD.BSTATUS IS '게시판 상태';
@@ -195,65 +190,37 @@ INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, DEFAULT, '일반회원1', '게시판 �
 INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, 4, '일반회원2', 'SQL 에러 확인하는 방법!', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT);
 INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, 3, '일반회원3', '일반회원2 님을 칭찬합니다!!',  '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT);
 
-------------------------------------------------------------------------------------------------------------------- N_REPLY(자유게시판) 생성
-CREATE TABLE N_REPLY(
-  NRID                  NUMBER,
-  NRCONTENT          VARCHAR2(400),
-  NRWRITER             VARCHAR2(100) NOT NULL,
-  NR_DATE               DATE,
-  NR_MODIFY_DATE   DATE,
-  NR_STATUS            CHAR(1) DEFAULT 'Y',
-  CONSTRAINT PK_NRID PRIMARY KEY(NRID),
-  CONSTRAINT FK_NRWRITER FOREIGN KEY (NRWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
+------------------------------------------------------------------------------------------------------------------- REPLY(리플 테이블) 생성
+CREATE TABLE REPLY(
+  RID                   NUMBER,
+  RCONTENT          VARCHAR2(400),
+  REF_BID		 NUMBER,
+  RWRITER             VARCHAR2(100) NOT NULL,
+  R_CREATE_DATE   DATE,
+  R_MODIFY_DATE   DATE,
+  R_STATUS            CHAR(1) DEFAULT 'Y',
+  CONSTRAINT PK_RID PRIMARY KEY(RID),
+  CONSTRAINT FK_RWRITER FOREIGN KEY (RWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
 );
 
-------------------------------------------------------------------------------------------------------------------- N_REPLY 컬러명 지정
-COMMENT ON COLUMN N_REPLY.NRID IS '공지사항 댓글 번호';
-COMMENT ON COLUMN N_REPLY.NRCONTENT IS '공지사항 댓글 내용';
-COMMENT ON COLUMN N_REPLY.NRWRITER IS '공지사항 댓글 작성자';
-COMMENT ON COLUMN N_REPLY.NR_DATE IS '공지사항 댓글 작성 일자';
-COMMENT ON COLUMN N_REPLY.NR_MODIFY_DATE IS '공지사항 댓글 수정 일자';
-COMMENT ON COLUMN N_REPLY.NR_STATUS IS '공지사항 댓글 상태';
+------------------------------------------------------------------------------------------------------------------- REPLY 컬러명 지정
+COMMENT ON COLUMN REPLY.RID IS '공지사항 댓글 번호';
+COMMENT ON COLUMN REPLY.RCONTENT IS '공지사항 댓글 내용';
+COMMENT ON COLUMN REPLY.REF_BID IS '참조 게시글 번호';
+COMMENT ON COLUMN REPLY.RWRITER IS '공지사항 댓글 작성자';
+COMMENT ON COLUMN REPLY.R_CREATE_DATE IS '공지사항 댓글 작성 일자';
+COMMENT ON COLUMN REPLY.R_MODIFY_DATE IS '공지사항 댓글 수정 일자';
+COMMENT ON COLUMN REPLY.R_STATUS IS '공지사항 댓글 상태';
 
-------------------------------------------------------------------------------------------------------------------- N_REPLY 시퀀스
-CREATE SEQUENCE SEQ_NRID 
+------------------------------------------------------------------------------------------------------------------- REPLY 시퀀스
+CREATE SEQUENCE SEQ_RID 
 START WITH 1
 INCREMENT BY 1;
 
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(N_REPLY)
-INSERT INTO N_REPLY VALUES(SEQ_NRID.NEXTVAL, '공지사항 첫번째 댓글입니다.', '일반회원1', '21/01/24', NULL, DEFAULT);
-INSERT INTO N_REPLY VALUES(SEQ_NRID.NEXTVAL, '공지사항 두번째 댓글입니다.', '일반회원2', '21/01/24', NULL, DEFAULT);
-INSERT INTO N_REPLY VALUES(SEQ_NRID.NEXTVAL, '공지사항 세번째 댓글입니다.', '일반회원3', '21/01/24', NULL, DEFAULT);
-
-------------------------------------------------------------------------------------------------------------------- B_REPLY(게시판 리플 테이블) 생성
-CREATE TABLE B_REPLY(
-  BRID                  NUMBER,
-  BRCONTENT          VARCHAR2(400),
-  BRWRITER             VARCHAR2(100) NOT NULL,
-  BR_DATE               DATE,
-  BR_MODIFY_DATE   DATE,
-  BR_STATUS            CHAR(1) DEFAULT 'Y',
-  CONSTRAINT PK_BRID PRIMARY KEY(BRID),
-  CONSTRAINT FK_BRWRITER FOREIGN KEY (BRWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
-);
-
-------------------------------------------------------------------------------------------------------------------- B_REPLY 컬러명 지정
-COMMENT ON COLUMN B_REPLY.BRID IS '공지사항 댓글 번호';
-COMMENT ON COLUMN B_REPLY.BRCONTENT IS '공지사항 댓글 내용';
-COMMENT ON COLUMN B_REPLY.BRWRITER IS '공지사항 댓글 작성자';
-COMMENT ON COLUMN B_REPLY.BR_DATE IS '공지사항 댓글 작성 일자';
-COMMENT ON COLUMN B_REPLY.BR_MODIFY_DATE IS '공지사항 댓글 수정 일자';
-COMMENT ON COLUMN B_REPLY.BR_STATUS IS '공지사항 댓글 상태';
-
-------------------------------------------------------------------------------------------------------------------- B_REPLY 시퀀스
-CREATE SEQUENCE SEQ_BRID 
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(B_REPLY)
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 첫번째 댓글입니다.', '일반회원1', '21/01/24', NULL, DEFAULT);
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 두번째 댓글입니다.', '일반회원2', '21/01/24', NULL, DEFAULT);
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 세번째 댓글입니다.', '일반회원3', '21/01/24', NULL, DEFAULT);
+------------------------------------------------------------------------------------------------------------------- 샘플데이터(REPLY)
+INSERT INTO REPLY VALUES(SEQ_RID.NEXTVAL, '게시판 첫번째 댓글입니다.', '1', '일반회원1', '21/01/24', NULL, DEFAULT);
+INSERT INTO REPLY VALUES(SEQ_RID.NEXTVAL, '게시판 두번째 댓글입니다.', '12',  '일반회원2', '21/01/24', NULL, DEFAULT);
+INSERT INTO REPLY VALUES(SEQ_RID.NEXTVAL, '게시판 세번째 댓글입니다.', '12',  '일반회원3', '21/01/24', NULL, DEFAULT);
 
 
 ------------------------------------------------------------------------------------------------------------------- BLAME (자유게시판 신고한 내역 저장) 테이블 생성
