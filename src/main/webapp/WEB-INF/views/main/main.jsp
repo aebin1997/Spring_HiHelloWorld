@@ -311,7 +311,7 @@
 			<div class="row">
 				<div class="col-xl-6 mx-auto text-center">
 					<div class="section-title mb-100">
-						<p>what i can do</p>
+						<p>who we are</p>
 						<h4>OUR SERVICES</h4>
 					</div>
 				</div>

@@ -270,17 +270,37 @@ ul {
 						<li class="col-12 col-md-6 col-lg-3">
 							<div class="cnt-block equal-hight" style="height: 349px;">
 								<figure>
-									<img src="http://www.webcoderskull.com/img/team4.png"
+									<img src="/hhw/resources/images/profile/kimwoolina.jpg"
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="http://www.webcoderskull.com/">Web coder skull</a>
+									<a href="http://www.webcoderskull.com/">LINA</a>
+								</h3>
+								<p>HEAD Manager</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/kimwoolina/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/kimwoolina"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://www.linkedin.com/in/lina-kim-3ba138198/"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="http://www.webcoderskull.com/img/team1.png"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="#">Kappua </a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-facebook"
+									<li><a href="#"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"
+									<li><a href="#"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -298,29 +318,9 @@ ul {
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-facebook"
+									<li><a href="#"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="http://www.webcoderskull.com/img/team1.png"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="#">Kappua </a>
-								</h3>
-								<p>Freelance Web Developer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-facebook"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"
+									<li><a href="#"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -339,9 +339,9 @@ ul {
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-facebook"
+									<li><a href="#"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"
+									<li><a href="#"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -359,9 +359,9 @@ ul {
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-facebook"
+									<li><a href="#"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"
+									<li><a href="#"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
