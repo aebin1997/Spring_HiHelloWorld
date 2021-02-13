@@ -1,174 +1,254 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="Author" content="kimwoolina">
-<title>Sign up</title>
-<style>
-	span.guide {display:none; font-size:12px; top:12px, right:10px;}
-	span.ok{color:green;}
-	span.error{color:red;}
-</style>
-</head>
-<body>
+<link rel="styleSheet" href="/hhw/resources/css/normalize.css">
+<link rel="styleSheet" href="/hhw/resources/css/common.css">
+<script type="text/javascript">
+function validate(){
+	// 아이디 중복체크 여부
+	if($("#idDuplicateCheck").val() == 0){
+		alert("사용가능한 아이디를 입력해주세요.");
+		$("#userId").focus();
+		return false;
+	}else{
+		return true;
+	}
+}
 
-	<jsp:include page="../common/header.jsp" />
-	
-	<section style="padding: 100px 0 60px 0;">
-	<br>
-	<h1 align="center">회원가입</h1>
-	<hr>
-	<br>
-	<div class="outer" align="center">
-		<form action="minsert.do" method="post" id="joinForm">
-			<table width="500" cellspacing="5">
-				<tr>
-					<td width="150">* 아이디</td>
-					<td><input type="text" name="id" id="userId" required>
-						<!-- ajax를 적용  -->
-						<span class="guide ok">사용가능</span>
-						<span class="guide error">사용불가능</span>
-						<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0">
-						<!-- ajax를 적용  -->
-					</td>
-				</tr>
-				<tr>
-					<td>* 이름</td>
-					<td><input type="text" name="name" required></input></td>
-				</tr>
-				<tr>
-					<td>* 비밀번호</td>
-					<td><input type="password" id="pwd" name="pwd" required></td>
-				</tr>
-				<tr>
-					<td>* 비밀번호확인</td>
-					<td><input type="password" id="pwd2" name="pwd2" required></td>
-				</tr>
-				<tr>
-					<td>* 별명</td>
-					<td><input type="text" name="nickname" required></input></td>
-				</tr>
-				<tr>
-					<td>성별</td>
-					<td><input type="radio" name="gender" value="M">남 <input
-						type="radio" name="gender" value="F">여</td>
-				</tr>
-				<tr>
-					<td>나이</td>
-					<td><input type="number" min="20" max="100" name="age"></td>
-				</tr>
-				<tr>
-					<td>이메일</td>
-					<td><input type="email" name="email"></td>
-				</tr>
-				<tr>
-					<td>전화번호</td>
-					<td><input type="tel" name="phone"></td>
-				</tr>
-				<tr>
-					<td>우편번호</td>
-					<td><input type="text" name="post"
-						class="postcodify_postcode5" size="6">
-						<button type="button" id="postcodify_search_button">검색</button></td>
-				</tr>
-				<tr>
-					<td>도로명 주소</td>
-					<td><input type="text" name="address1"
-						class="postcodify_address"></td>
-				</tr>
-				<tr>
-					<td>상세 주소</td>
-					<td><input type="text" name="address2"
-						class="postcodify_extra_info"></td>
-				</tr>
-
-				<!-- jQuery와 Postcodify를 로딩한다. -->
-				<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-				<script>
-					/*  검색 단추를 누르면 팝업 레이어가 열리도록 설정한다. */
-					$(function(){
-						$("#postcodify_search_button").postcodifyPopUp();
-					});
-				</script>
-
-				<tr>
-					<td colspan="2" align="center">
-						<button onclick='return validate();'>가입하기</button> &nbsp; <input
-						type="reset" value="취소하기">
-					</td>
-				</tr>
-			</table>
-		</form>
-		<br> <br> <a href="index.jsp">시작 페이지로 이동</a>
-	</div>
-	<hr>
-	</section>
-
-	<script type="text/javascript">
-		function validate(){
-			// 아이디 중복체크 여부
-			if($("#idDuplicateCheck").val() == 0){
-				alert("사용가능한 아이디를 입력해주세요.");
-				$("#userId").focus();
-				return false;
-			}else{
-				return true;
-			}
+$(function(){
+	$("#userId").on("keyup",function(){
+		var userId = $(this).val();
+		
+		if(userId.length < 5){
+			$(".guide").hide();
+			$("#idDuplicateCheck").val(0);
+			
+			return;
 		}
 		
-		$(function(){
-			$("#userId").on("keyup",function(){
-				var userId = $(this).val();
+		$.ajax({
+			url:"idCheck.do",
+			data:{id:userId},
+			type:"post",
+			success:function(data){
+				console.log(data);
 				
-				if(userId.length < 5){
-					$(".guide").hide();
+				if(data == "ok"){
+					$(".error").hide();
+					$(".ok").show();
+					$("#idDuplicateCheck").val(1);
+				}else{
+					$(".ok").hide();
+					$(".error").show();
 					$("#idDuplicateCheck").val(0);
-					
-					return;
 				}
 				
-				$.ajax({
-					url:"idCheck.do",
-					data:{id:userId},
-					type:"post",
-					success:function(data){
-						console.log(data);
-						
-						if(data == "ok"){
-							$(".error").hide();
-							$(".ok").show();
-							$("#idDuplicateCheck").val(1);
-						}else{
-							$(".ok").hide();
-							$(".error").show();
-							$("#idDuplicateCheck").val(0);
-						}
-						
-					},error:function(jqxhr,textStatus,errorThrown){
-						console.log("ajax 처리 실패");
-						
-						console.log(jqxhr);
-						console.log(textStatus);
-						console.log(errorThrown);
-					}
-				});
-			});
-			
-			//비밀번호 확인
-			$('#pwd2').blur(function(){
-			   if($('#pwd').val() != $('#pwd2').val()){
-			    	if($('#pwd2').val()!=''){
-				    alert("비밀번호가 일치하지 않습니다.");
-			    	    $('#pwd2').val('');
-			          $('#pwd2').focus();
-			      }
-			  }
-			})
+			},error:function(jqxhr,textStatus,errorThrown){
+				console.log("ajax 처리 실패");
+				
+				console.log(jqxhr);
+				console.log(textStatus);
+				console.log(errorThrown);
+			}
 		});
-	</script>
+	});
 	
+	//비밀번호 확인
+	$('#pwd2').blur(function(){
+	   if($('#pwd').val() != $('#pwd2').val()){
+	    	if($('#pwd2').val()!=''){
+		    alert("비밀번호가 일치하지 않습니다.");
+	    	    $('#pwd2').val('');
+	          $('#pwd2').focus();
+	      }
+	  }
+	})
+});
+</script>
+</head>
+<body class="member-join" oncontextmenu="return false"
+	ondragstart="return false" onselectstart="return !disableSelection"
+	style="">
+
+	<!-- 헤더  -->
+	<jsp:include page="../common/header.jsp" />
+	<section style="padding: 50px 0 50px 0;">
+
+
+		<div id="wrap" class="">
+			<div id="container">
+				<div id="main">
+					<div id="content">
+						<div class="page_aticle">
+							<div class="type_form member_join ">
+								<form id="form" name="frmMember" method="post"
+									action="minsert.do">
+									<div class="field_head">
+										<h3 class="tit">회원가입</h3>
+										<p class="sub">
+											<span class="ico">*</span>필수입력사항
+										</p>
+									</div>
+									<table class="tbl_comm">
+										<tbody>
+											<tr class="fst">
+												<th>아이디<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="text" name="id" id="userId" value=""
+													maxlength="16" required="" fld_esssential="" option="regId"
+													label="아이디" placeholder="6자 이상의 영문 혹은 영문과 숫자를 조합">
+													<input type="hidden" name="chk_id" required=""
+													fld_esssential="" label="아이디중복체크" value=""> <a
+													class="btn default" href="javascript:chkId()">중복확인</a>
+													<p class="txt_guide square">
+														<span class="txt txt_case1">6자 이상의 영문 혹은 영문과 숫자를 조합</span>
+														<span class="txt txt_case2">아이디 중복확인</span>
+													</p></td>
+											</tr>
+											<tr>
+												<th>비밀번호<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="password" name="pwd" required=""
+													fld_esssential="" option="regPass" label="비밀번호"
+													maxlength="16" class="reg_pw" placeholder="비밀번호를 입력해주세요">
+													<p class="txt_guide square">
+														<span class="txt txt_case1">10자 이상 입력</span> <span
+															class="txt txt_case2">영문/숫자/특수문자(공백 제외)만 허용하며, 2개
+															이상 조합</span> <span class="txt txt_case3">동일한 숫자 3개 이상 연속
+															사용 불가</span>
+													</p></td>
+											</tr>
+											<tr class="member_pwd">
+												<th>비밀번호확인<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="password" name="pwd2" required=""
+													fld_esssential="" option="regPass" label="비밀번호"
+													maxlength="16" class="confirm_pw"
+													placeholder="비밀번호를 한번 더 입력해주세요">
+													<p class="txt_guide square">
+														<span class="txt txt_case1">동일한 비밀번호를 입력해주세요.</span>
+													</p></td>
+											</tr>
+											<tr>
+												<th>이름<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="text" name="name" value="" required=""
+													fld_esssential="" label="이름" placeholder="이름을 입력해주세요">
+												</td>
+											</tr>
+											<tr>
+												<th>닉네임<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="text" name="nickname" value=""
+													required="" fld_esssential="" label="닉네임"
+													placeholder="닉네임을 입력해주세요"></td>
+											</tr>
+											<tr>
+												<th>이메일<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td><input type="text" name="email" value=""
+													data-email="" size="30" required="" fld_esssential=""
+													option="regEmail" label="이메일"
+													placeholder="예: marketkurly@kurly.com"> <input
+													type="hidden" name="chk_email" required=""
+													fld_esssential="" label="이메일중복체크"> <a
+													href="javascript:void(0)" onclick="chkEmail()"
+													class="btn default">중복확인</a></td>
+											</tr>
+											<tr class="field_phone">
+												<th>휴대폰<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td>
+													<div class="phone_num">
+														<input type="text" value="" pattern="[0-9]*"
+															name="mobileInp" placeholder="숫자만 입력해주세요" class="inp">
+														<input type="hidden" name="mobile[]" id="mobile0" value=""
+															required="" fld_esssential="" option="regNum" label="휴대폰">
+														<input type="hidden" name="mobile[]" id="mobile1" value=""
+															required="" fld_esssential="" option="regNum" label="휴대폰">
+														<input type="hidden" name="mobile[]" id="mobile2" value=""
+															required="" fld_esssential="" option="regNum" label="휴대폰">
+														<button id="btn_cert" class="btn default disabled"
+															type="button">인증번호 받기</button>
+													</div>
+													<div id="codeNum" class="code_num">
+														<input type="text" name="auth_code" id="auth_code"
+															value="" size="6" maxlength="6" pattern="[0-9]*"
+															label="인증번호 확인" disabled="" class="inp_confirm"
+															oninput="if(value.length&gt;6)value=value.slice(0,6);$(this).val($(this).val().replace(/[^0-9]/g,&#39;&#39;));">
+														<button id="btn_cert_confirm" class="btn default disabled"
+															type="button">인증번호 확인</button>
+														<p id="countdown" class="count_down"></p>
+													</div>
+													<p class="txt_guide">
+														<span class="txt txt_case1"></span>
+													</p>
+												</td>
+											</tr>
+											<tr>
+												<th>주소<span class="ico">*<span
+														class="screen_out">필수항목</span></span></th>
+												<td class="field_address"><input type="hidden"
+													name="zonecode" id="zonecode" size="5" value=""> <input
+													type="hidden" name="zipcode[]" id="zipcode0" size="3"
+													value=""> <input type="hidden" name="zipcode[]"
+													id="zipcode1" size="3" value=""> <input
+													type="hidden" name="deliPoli" id="deliPoli" size="1"
+													value=""> <input type="hidden" id="baseAddressType"
+													name="base_address_type" value="">
+													<div id="selectAddress">
+														<input type="text" name="addr" id="addr" value=""
+															readonly="readonly" label="주소"> <input
+															type="hidden" name="address" id="address" value=""
+															required="" readonly="readonly" label="주소"> <input
+															type="hidden" name="road_address" id="road_address"
+															required="" value="" label="주소">
+													</div> <a href="https://www.kurly.com/shop/member/join.php#none"
+													id="addressSearch" class="search"
+													onclick="popup(&#39;../proc/popup_address.php&#39;,530,500)">
+														<span id="addressNo" class="address_no" data-text="재검색">주소
+															검색</span>
+												</a>
+													<div id="selectAddressSub">
+														<input type="text" name="address_sub" id="address_sub"
+															value="" class="byteTotext" placeholder="나머지 주소를 입력해주세요">
+														<p id="delivery"></p>
+													</div></td>
+											</tr>
+											<tr class="select_sex">
+												<th>성별</th>
+												<td><label class=""> <input type="radio"
+														name="sex" value="m"> <span class="ico"></span>남자
+												</label> <label class=""> <input type="radio" name="sex"
+														value="w"> <span class="ico"></span>여자
+												</label> <label class="checked"> <input type="radio"
+														name="sex" value="n" checked="checked"> <span
+														class="ico"></span>선택안함
+												</label></td>
+											</tr>
+										</tbody>
+									</table>
+									<div id="formSubmit" class="form_footer">
+										<button type="button" class="btn active btn_join"
+											onclick="formJoinSubmit()">가입하기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 푸터 -->
+	</section>
 	<jsp:include page="../common/footer.jsp" />
+
 </body>
 </html>

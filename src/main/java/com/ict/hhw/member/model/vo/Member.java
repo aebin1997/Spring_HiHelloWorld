@@ -8,8 +8,7 @@ public class Member {
 	private String name;
 	private String nickname;
 	private String email;
-	private String gender;
-	private int age;
+	private String sex;
 	private String phone;
 	private String address;
 	private Date enrollDate;
@@ -18,16 +17,15 @@ public class Member {
 	
 	public Member() {}
 
-	public Member(String id, String pwd, String name, String nickname, String email, String gender, int age,
-			String phone, String address, Date enrollDate, Date updateDate, String mStatus) {
+	public Member(String id, String pwd, String name, String nickname, String email, String sex, String phone,
+			String address, Date enrollDate, Date updateDate, String mStatus) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
 		this.name = name;
 		this.nickname = nickname;
 		this.email = email;
-		this.gender = gender;
-		this.age = age;
+		this.sex = sex;
 		this.phone = phone;
 		this.address = address;
 		this.enrollDate = enrollDate;
@@ -75,20 +73,12 @@ public class Member {
 		this.email = email;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getSex() {
+		return sex;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getPhone() {
@@ -134,8 +124,9 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", nickname=" + nickname + ", email=" + email
-				+ ", gender=" + gender + ", age=" + age + ", phone=" + phone + ", address=" + address + ", enrollDate="
-				+ enrollDate + ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
+				+ ", sex=" + sex + ", phone=" + phone + ", address=" + address + ", enrollDate=" + enrollDate
+				+ ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
 	}
+
 
 }

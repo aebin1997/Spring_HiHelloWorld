@@ -43,24 +43,19 @@
 					<tr>
 						<td>성별</td>
 						<c:choose>
-							<c:when test="${ loginUser.gender eq 'M' }">
-								<td><input type="radio" name="gender" value="M" checked>남
-									<input type="radio" name="gender" value="F">여</td>
+							<c:when test="${ loginUser.sex eq 'm' }">
+								<td><input type="radio" name="gender" value="m" checked>남
+									<input type="radio" name="gender" value="w">여</td>
 							</c:when>
-							<c:when test="${ loginUser.gender eq 'F' }">
-								<td><input type="radio" name="gender" value="M">남 <input
-									type="radio" name="gender" value="F" checked>여</td>
+							<c:when test="${ loginUser.sex eq 'w' }">
+								<td><input type="radio" name="gender" value="m">남 <input
+									type="radio" name="gender" value="w" checked>여</td>
 							</c:when>
 							<c:otherwise>
-								<td><input type="radio" name="gender" value="M">남 <input
-									type="radio" name="gender" value="F">여</td>
+								<td><input type="radio" name="gender" value="m">남 <input
+									type="radio" name="gender" value="w">여</td>
 							</c:otherwise>
 						</c:choose>
-					</tr>
-					<tr>
-						<td>나이</td>
-						<td><input type="number" min="20" max="100" name="age"
-							value="${ loginUser.age }"></td>
 					</tr>
 					<tr>
 						<td>이메일</td>
@@ -119,7 +114,6 @@
 							</c:if>
 						</c:forTokens>
 					</c:if>
-
 
 					<!-- jQuery와 Postcodify를 로딩한다. 두개의 script 붙어있어야됨.. 왠지는 모름 -->
 					<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>

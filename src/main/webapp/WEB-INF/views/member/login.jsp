@@ -27,17 +27,17 @@
 							<div class="write_view login_view">
 								<form action="login.do" method="post" name="form" id="form">
 									<input
-										type="text" name="id" size="20" tabindex="1" value=""
+										type="text" name="id" size="20" tabindex="1" value="" required="required"
 										placeholder="아이디를 입력해주세요">
 									<input type="password"
-										name="pwd" size="20" tabindex="2"
+										name="pwd" size="20" tabindex="2" required="required"
 										placeholder="비밀번호를 입력해주세요" style="margin: 10px 0px 0px">
 								<div class="checkbox_save">
 										<label class="label_checkbox checked"> <input
 											type="checkbox" id="chk_security" name="chk_security"
 											value="y" checked="checked"
 											onchange="if( this.checked){$(this).parent().addClass(&#39;checked&#39;)}else{$(this).parent().removeClass(&#39;checked&#39;)} ">
-											보안접속
+											자동 로그인
 										</label>
 										<div class="login_search">
 											<a href="findIdView.do" class="link">아이디 찾기</a>

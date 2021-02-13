@@ -686,8 +686,9 @@ footer {
   </div>
 </div>
 
-</section>
-	
+	</section>
+
 	<jsp:include page="../common/footer.jsp" />
+
  </body>
 </html>

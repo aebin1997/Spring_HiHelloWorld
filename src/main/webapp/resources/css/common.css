@@ -5588,14 +5588,14 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 }
 
 .type_form .btn.default {
-	border: 1px solid #5f0080;
+	border: 1px solid #f7921a;
 	background-color: #fff;
-	color: #5f0080
+	color: #f7921a
 }
 
 .type_form .btn.active {
-	border: 1px solid #5f0081;
-	background-color: #5f0080;
+	border: 1px solid #f7921a;
+	background-color: #f7921a;
 	color: #fff
 }
 
@@ -5646,8 +5646,8 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 }
 
 .type_form input[type=radio]:checked+.ico {
-	border: 1px solid #5f0081;
-	background-color: #5f0080
+	border: 1px solid #f7921a;
+	background-color: #f7921a
 }
 
 .type_form input[type=radio]:checked+.ico:after {
@@ -5889,7 +5889,7 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 	overflow: hidden;
 	width: 332px;
 	height: 44px;
-	border: 1px solid #5f0080;
+	border: 1px solid #f7921a;
 	border-radius: 3px;
 	text-align: center
 }
@@ -5905,10 +5905,10 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 	padding-left: 24px;
 	font-weight: 700;
 	font-size: 14px;
-	color: #5f0080;
+	color: #f7921a;
 	line-height: 40px;
 	background:
-		url(https://res.kurly.com/pc/service/common/2006/ico_search.svg)
+		url(../images/icon/ico_search.jpg)
 		no-repeat 0 50%;
 	background-size: 25px 24px;
 	vertical-align: top

@@ -8,8 +8,7 @@
 		<result property="name" column="NAME"/>
 		<result property="nickname" column="NICKNAME"/>
 		<result property="email" column="EMAIL"/>
-		<result property="gender" column="GENDER"/>
-		<result property="age" column="AGE"/>
+		<result property="sex" column="SEX"/>
 		<result property="phone" column="PHONE"/>
 		<result property="address" column="ADDRESS"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
@@ -42,8 +41,7 @@
 		       , #{ name }
 		       , #{ nickname }
 		       , #{ email }
-		       , #{ gender }
-		       , #{ age }
+		       , #{ sex }
 		       , #{ phone }
 		       , #{ address }
 		       , sysdate
@@ -69,7 +67,6 @@
 		       NAME = #{ name },
 		       NICKNAME = #{ nickname },
 		       EMAIL = #{ email },
-		       AGE = #{ age },
 		       PHONE = #{ phone },
 		       ADDRESS = #{ address },
 		       UPDATEDATE = SYSDATE
