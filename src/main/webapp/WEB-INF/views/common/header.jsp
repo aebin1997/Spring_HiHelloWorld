@@ -126,11 +126,14 @@
 				<div class="auto-container">
 					<div class="row">
 						<div class="col-lg-9">
+						<c:url var="qalist" value="qalist.do">
+							<c:param name="page" value="1"/>
+						</c:url>
 							<nav class="navbar navbar-expand-lg justify-content-left">
 								<ul class="navbar-nav">
 									<li><a class="active nav-link" href="index.jsp">Home</a></li>
 									<li><a class="nav-link" href="noticeHome.do">공지사항</a></li>
-									<li><a class="nav-link" href="#">코딩의뢰</a></li>
+									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="#">CONTACT</a></li>
 								</ul>

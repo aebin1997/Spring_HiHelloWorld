@@ -20,26 +20,22 @@ public class QaServiceImpl implements QaService{
 
 	@Override
 	public int getListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return qaDao.getListCount();
 	}
 
 	@Override
 	public ArrayList<Qa> selectList(int currentPage, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		return qaDao.selectList(currentPage, limit);  
 	}
 
 	@Override
 	public Qa selectQa(int qa_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return qaDao.selectQa(qa_id);
 	}
 
 	@Override
 	public int addReadCount(int qa_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qaDao.addReadCount(qa_id);
 	}
 
 	@Override

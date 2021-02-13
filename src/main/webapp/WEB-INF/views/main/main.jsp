@@ -26,9 +26,11 @@
 
 	               var values = "";
 	               for ( var i in json.list) {
-	                  values += "<tr><td>" + json.list[i].qa_id
+	                  values += "<tr><td>" 
+	                  		+ json.list[i].qa_id
 	                        + "</td><td><a href='${ pageContext.request.contextPath }/qadetail.do?qa_id="
-	                        + json.list[i].qa_id  + "'>"
+	                        + json.list[i].qa_id
+	                        + "'>"
 	                        + decodeURIComponent(json.list[i].qa_title).replace(/\+/gi, " ") /* 디코딩하면 공백이 +로 되기때문에  " " 공백으로 바꿔준다*/
 	                        + "</a></td><td>" + json.list[i].qa_readcount
 	                        + "</td></tr>";
