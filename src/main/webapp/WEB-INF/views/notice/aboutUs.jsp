@@ -290,11 +290,11 @@ ul {
 						<li class="col-12 col-md-6 col-lg-3">
 							<div class="cnt-block equal-hight" style="height: 349px;">
 								<figure>
-									<img src="http://www.webcoderskull.com/img/team1.png"
+									<img src="/hhw/resources/images/profile/hwangkyungpil.jpg"
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="#">경필</a>
+									<a href="#">PHILIP</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
@@ -310,11 +310,11 @@ ul {
 						<li class="col-12 col-md-6 col-lg-3">
 							<div class="cnt-block equal-hight" style="height: 349px;">
 								<figure>
-									<img src="http://www.webcoderskull.com/img/team1.png"
+									<img src="/hhw/resources/images/profile/choieunyoung.jpg"
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="#">은영</a>
+									<a href="#">ELLA</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
@@ -331,7 +331,7 @@ ul {
 						<li class="col-12 col-md-6 col-lg-3">
 							<div class="cnt-block equal-hight" style="height: 349px;">
 								<figure>
-									<img src="http://www.webcoderskull.com/img/team4.png"
+									<img src="/hhw/resources/images/profile/kangseonlee.jpg"
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
@@ -351,7 +351,7 @@ ul {
 						<li class="col-12 col-md-6 col-lg-3">
 							<div class="cnt-block equal-hight" style="height: 349px;">
 								<figure>
-									<img src="http://www.webcoderskull.com/img/team2.png"
+									<img src="/hhw/resources/images/profile/aebinpark.jpg"
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
