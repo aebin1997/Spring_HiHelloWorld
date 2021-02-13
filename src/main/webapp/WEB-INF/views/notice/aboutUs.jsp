@@ -294,13 +294,13 @@ ul {
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="#">Kappua </a>
+									<a href="#">경필</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-instagram"
+									<li><a href="https://www.instagram.com/hellokovi_koviin/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-github"
+									<li><a href="https://github.com/powrober"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -314,13 +314,13 @@ ul {
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="#">Kappua </a>
+									<a href="#">은영</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-instagram"
+									<li><a href="https://www.instagram.com/eun_0_99/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-github"
+									<li><a href="https://github.com/eunyoung2054"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -335,13 +335,13 @@ ul {
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="http://www.webcoderskull.com/">Manish </a>
+									<a href="http://www.webcoderskull.com/">JAMES</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-instagram"
+									<li><a href="https://www.instagram.com/rkdtjs4954/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-github"
+									<li><a href="https://github.com/leekangseon4954"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
@@ -355,13 +355,13 @@ ul {
 										class="img-responsive" alt="">
 								</figure>
 								<h3>
-									<a href="http://www.webcoderskull.com/">Atul </a>
+									<a href="http://www.webcoderskull.com/">AEBIN</a>
 								</h3>
 								<p>Freelance Web Developer</p>
 								<ul class="follow-us clearfix">
-									<li><a href="#"><i class="fa fa-instagram"
+									<li><a href="https://www.instagram.com/aebin.park/"><i class="fa fa-instagram"
 											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-github"
+									<li><a href="https://github.com/aebin"><i class="fa fa-github"
 											aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-linkedin"
 											aria-hidden="true"></i></a></li>
