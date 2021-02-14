@@ -43,12 +43,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		if(loginUser != null) {
 			InetAddress local = InetAddress.getLocalHost();
 			//logger.info(loginUser.getId() + " " + local.getHostAddress());
-			
-			/*
-			 * //쿠키 생성 Cookie loginCookie = new Cookie("loginCookie", httpSession.getId());
-			 * loginCookie.setPath("/"); loginCookie.setMaxAge(60*60*24*7); //전송
-			 * response.addCookie(loginCookie);
-			 */
 		}
 	}
 

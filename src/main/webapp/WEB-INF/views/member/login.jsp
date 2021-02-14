@@ -27,10 +27,10 @@
 							<div class="write_view login_view">
 								<form action="login.do" method="post" name="form" id="form">
 									<input
-										type="text" name="id" size="20" tabindex="1" value="" required="required"
+										type="text" name="id" size="20" tabindex="1" value="${ autoId }" required="required"
 										placeholder="아이디를 입력해주세요">
 									<input type="password"
-										name="pwd" size="20" tabindex="2" required="required"
+										name="pwd" size="20" tabindex="2" value="${ autoPwd }" required="required"
 										placeholder="비밀번호를 입력해주세요" style="margin: 10px 0px 0px">
 								<div class="checkbox_save">
 										<label class="label_checkbox checked"> <input

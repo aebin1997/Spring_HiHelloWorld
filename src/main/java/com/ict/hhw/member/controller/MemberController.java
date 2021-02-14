@@ -1,5 +1,8 @@
 package com.ict.hhw.member.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
@@ -37,7 +40,40 @@ public class MemberController {
 
 	// 로그인 페이지로 이동
 	@RequestMapping("loginView.do")
-	public String loginView() {
+	public String loginView(HttpServletRequest request, Model model) {
+		
+		/* 자동 로그인 (쿠키 불러오기 )*/
+		Cookie[] cookieId = request.getCookies(); //쿠키 받아온다
+		Cookie[] cookiePwd = request.getCookies(); 
+		String autoId = "";
+		String autoPwd = "";
+		if (cookieId != null && cookiePwd != null) { //만약 쿠키가 null이 아니라면
+			
+			for(int i = 0; i < cookieId.length; i++) {
+				System.out.println(i + "번째 쿠키 이름: " + cookieId[i].getName());
+				System.out.println(i + "번째 쿠키 값: " + cookieId[i].getValue());
+	    		}
+			
+			for(int i = 0; i < cookiePwd.length; i++) {
+				System.out.println(i + "번째 쿠키 이름: " + cookiePwd[i].getName());
+				System.out.println(i + "번째 쿠키 값: " + cookiePwd[i].getValue());
+	    	}
+			
+			for (int i = 0; i < cookieId.length; i++) {
+				if (cookieId[i].getName().trim().equals("autoId")) {
+					System.out.println(cookieId[i].getValue());
+					autoId = cookieId[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
+				}
+				if (cookiePwd[i].getName().trim().equals("autoPwd")) {
+					System.out.println(cookiePwd[i].getValue());
+					autoPwd = cookiePwd[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
+				}
+			}
+			model.addAttribute("autoId", autoId);
+			model.addAttribute("autoPwd", autoPwd);
+		}
+		/* 자동 로그인 */
+		
 		return "member/login";
 	}
 
@@ -102,15 +138,45 @@ public class MemberController {
 
 	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String memberLogin(@ModelAttribute Member m, Model model, HttpSession session) {
+	public String memberLogin(@ModelAttribute Member m, @RequestParam("auto_login") String auto_login, HttpServletResponse response, Model model, HttpSession session) {
 
 		Member loginUser = mService.loginMember(m);
 
 		System.out.println(loginUser);
-
+		
 		if (loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			// 로그인 성공
 			session.setAttribute("loginUser", loginUser);
+			
+			/* 자동로그인 */
+			Cookie cookieId = null;
+			Cookie cookiePwd = null;
+			String login_rem = auto_login; // 체크 되어있으면 on 안되어있으면 null이 넘어옴
+		
+			if(login_rem != null && login_rem.trim().equals("on")) { //체크가 되어있으면
+ 				cookieId = new Cookie("autoId", java.net.URLEncoder.encode(m.getId())); //("키",값)
+				cookiePwd = new Cookie("autoPwd", java.net.URLEncoder.encode(m.getPwd()));
+ 				//cookie.setDomain("localhost");
+				
+				//쿠키 유호시간을 세팅 1년
+				cookieId.setMaxAge(60*60*24*365); 
+ 				cookiePwd.setMaxAge(60*60*24*365); 
+ 				
+ 				//쿠키값을 클라이언트에 저장
+ 				response.addCookie(cookieId); 
+ 				response.addCookie(cookiePwd);
+			}else { //체크가 안된 상태에서 로그인이 들어왔을 때
+				cookieId = new Cookie("autoId", null);
+				cookieId.setMaxAge(0); //유효시간을 0으로
+				
+				cookiePwd = new Cookie("autoPwd", null);
+				cookiePwd.setMaxAge(0);
+				
+				response.addCookie(cookieId); //쿠키값을 클라이언트에 저장
+				response.addCookie(cookiePwd);
+			}
+			/* 자동로그인 */
+			
 			return "redirect:home.do";
 		} else {
 			model.addAttribute("msg", "로그인 실패");
