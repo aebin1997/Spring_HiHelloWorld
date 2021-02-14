@@ -138,7 +138,7 @@ public class MemberController {
 
 	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String memberLogin(@ModelAttribute Member m, @RequestParam("auto_login") String auto_login, HttpServletResponse response, Model model, HttpSession session) {
+	public String memberLogin(@ModelAttribute Member m, @RequestParam(value="auto_login", required=false) String auto_login, HttpServletResponse response, Model model, HttpSession session) {
 
 		Member loginUser = mService.loginMember(m);
 
