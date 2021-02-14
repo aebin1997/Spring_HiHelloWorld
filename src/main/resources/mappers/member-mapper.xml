@@ -67,6 +67,7 @@
 		       NAME = #{ name },
 		       NICKNAME = #{ nickname },
 		       EMAIL = #{ email },
+		       SEX = #{ sex },
 		       PHONE = #{ phone },
 		       ADDRESS = #{ address },
 		       UPDATEDATE = SYSDATE
