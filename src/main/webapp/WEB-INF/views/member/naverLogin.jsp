@@ -45,22 +45,15 @@
 						<c:choose>
 							<c:when test="${ loginUser.sex eq 'm' }">
 								<td><input type="radio" name="sex" value="m" checked>남
-									<input type="radio" name="sex" value="w">여
-									<input type="radio" name="sex" value="n">선택안함	
-								</td>
+									<input type="radio" name="sex" value="w">여</td>
 							</c:when>
 							<c:when test="${ loginUser.sex eq 'w' }">
-								<td><input type="radio" name="sex" value="m">남 
-									<input type="radio" name="sex" value="w" checked>여
-									<input type="radio" name="sex" value="n">선택안함
-								</td>
+								<td><input type="radio" name="sex" value="m">남 <input
+									type="radio" name="sex" value="w" checked>여</td>
 							</c:when>
 							<c:otherwise>
-								<td>
-									<input type="radio" name="sex" value="m">남 
-									<input type="radio" name="sex" value="w">여
-									<input type="radio" name="sex" value="n" checked>선택안함
-								</td>
+								<td><input type="radio" name="sex" value="m">남 <input
+									type="radio" name="sex" value="w">여</td>
 							</c:otherwise>
 						</c:choose>
 					</tr>

@@ -1,11 +1,23 @@
 package com.ict.hhw.member.controller;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
+import java.util.StringTokenizer;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +52,16 @@ public class MemberController {
 
 	// 로그인 페이지로 이동
 	@RequestMapping("loginView.do")
-	public String loginView(HttpServletRequest request, Model model) {
-		
-		/* 자동 로그인 (쿠키 불러오기 )*/
-		Cookie[] cookieId = request.getCookies(); //쿠키 받아온다
-		Cookie[] cookiePwd = request.getCookies(); 
+	public String loginView(HttpServletRequest request, Model model, HttpSession session)
+			throws UnsupportedEncodingException {
+
+		/* 자동 로그인 (쿠키 불러오기 ) */
+		Cookie[] cookieId = request.getCookies(); // 쿠키 받아온다
+		Cookie[] cookiePwd = request.getCookies();
 		String autoId = "";
 		String autoPwd = "";
-		if (cookieId != null && cookiePwd != null) { //만약 쿠키가 null이 아니라면
-			
+		if (cookieId != null && cookiePwd != null) { // 만약 쿠키가 null이 아니라면
+
 			/*
 			 * for(int i = 0; i < cookieId.length; i++) { System.out.println(i +
 			 * "번째 쿠키 이름: " + cookieId[i].getName()); System.out.println(i + "번째 쿠키 값: " +
@@ -58,32 +71,46 @@ public class MemberController {
 			 * "번째 쿠키 이름: " + cookiePwd[i].getName()); System.out.println(i + "번째 쿠키 값: " +
 			 * cookiePwd[i].getValue()); }
 			 */
-			
+
 			for (int i = 0; i < cookieId.length; i++) {
 				if (cookieId[i].getName().trim().equals("autoId")) {
-					//System.out.println(cookieId[i].getValue());
-					autoId = cookieId[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
+					// System.out.println(cookieId[i].getValue());
+					autoId = cookieId[i].getValue(); // autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
 				}
 				if (cookiePwd[i].getName().trim().equals("autoPwd")) {
-					//System.out.println(cookiePwd[i].getValue());
-					autoPwd = cookiePwd[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
+					// System.out.println(cookiePwd[i].getValue());
+					autoPwd = cookiePwd[i].getValue(); // autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
 				}
 			}
 			model.addAttribute("autoId", autoId);
 			model.addAttribute("autoPwd", autoPwd);
 		}
 		/* 자동 로그인 */
-		
+
+		/* 네이버 아이디로 로그인 (시작) */
+		String clientId = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 아이디값";
+		String redirectURI = URLEncoder.encode("http://localhost:8888/hhw/naverLogin.do", "UTF-8");
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString();
+		String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+		apiURL += "&client_id=" + clientId;
+		apiURL += "&redirect_uri=" + redirectURI;
+		apiURL += "&state=" + state;
+		session.setAttribute("state", state);
+
+		model.addAttribute("apiURL", apiURL);
+		/* 네이버 아이디로 로그인 (끝) */
+
 		return "member/login";
 	}
 
 	// 회원가입 페이지로 이동
 	@RequestMapping("enrollView.do")
 	public String enrollView() {
-		
-		if(logger.isDebugEnabled()) // 프로젝트 배포시에 성능저하를 막기위해 logger의 레벨이 DEBUG인지 여부를 확인
+
+		if (logger.isDebugEnabled()) // 프로젝트 배포시에 성능저하를 막기위해 logger의 레벨이 DEBUG인지 여부를 확인
 			logger.debug("회원등록페이지");
-		
+
 		return "member/memberInsertForm";
 	}
 
@@ -138,50 +165,180 @@ public class MemberController {
 
 	// 로그인 메소드 - @ModelAttribute를 이용한 값 전달 방법(4)
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String memberLogin(@ModelAttribute Member m, @RequestParam(value="auto_login", required=false) String auto_login, HttpServletResponse response, Model model, HttpSession session) {
+	public String memberLogin(@ModelAttribute Member m,
+			@RequestParam(value = "auto_login", required = false) String auto_login, HttpServletResponse response,
+			Model model, HttpSession session) {
 
 		Member loginUser = mService.loginMember(m);
 
-		//System.out.println(loginUser);
-		
+		// System.out.println(loginUser);
+
 		if (loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			// 로그인 성공
 			session.setAttribute("loginUser", loginUser);
-			
+
 			/* 자동로그인 */
 			Cookie cookieId = null;
 			Cookie cookiePwd = null;
 			String login_rem = auto_login; // 체크 되어있으면 on 안되어있으면 null이 넘어옴
-		
-			if(login_rem != null && login_rem.trim().equals("on")) { //체크가 되어있으면
- 				cookieId = new Cookie("autoId", java.net.URLEncoder.encode(m.getId())); //("키",값)
+
+			if (login_rem != null && login_rem.trim().equals("on")) { // 체크가 되어있으면
+				cookieId = new Cookie("autoId", java.net.URLEncoder.encode(m.getId())); // ("키",값)
 				cookiePwd = new Cookie("autoPwd", java.net.URLEncoder.encode(m.getPwd()));
- 				//cookie.setDomain("localhost");
-				
-				//쿠키 유호시간을 세팅 1년
-				cookieId.setMaxAge(60*60*24*365); 
- 				cookiePwd.setMaxAge(60*60*24*365); 
- 				
- 				//쿠키값을 클라이언트에 저장
- 				response.addCookie(cookieId); 
- 				response.addCookie(cookiePwd);
-			}else { //체크가 안된 상태에서 로그인이 들어왔을 때
+				// cookie.setDomain("localhost");
+
+				// 쿠키 유호시간을 세팅 1년
+				cookieId.setMaxAge(60 * 60 * 24 * 365);
+				cookiePwd.setMaxAge(60 * 60 * 24 * 365);
+
+				// 쿠키값을 클라이언트에 저장
+				response.addCookie(cookieId);
+				response.addCookie(cookiePwd);
+			} else { // 체크가 안된 상태에서 로그인이 들어왔을 때
 				cookieId = new Cookie("autoId", null);
-				cookieId.setMaxAge(0); //유효시간을 0으로
-				
+				cookieId.setMaxAge(0); // 유효시간을 0으로
+
 				cookiePwd = new Cookie("autoPwd", null);
 				cookiePwd.setMaxAge(0);
-				
-				response.addCookie(cookieId); //쿠키값을 클라이언트에 저장
+
+				response.addCookie(cookieId); // 쿠키값을 클라이언트에 저장
 				response.addCookie(cookiePwd);
 			}
 			/* 자동로그인 */
-			
+
 			return "redirect:home.do";
 		} else {
 			model.addAttribute("msg", "로그인 실패");
 			return "common/errorPage";
 		}
+	}
+
+	// 네이버 아이디로 로그인
+	@RequestMapping("naverLogin.do")
+	public void naverLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		String clientId = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 아이디값";
+		String clientSecret = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 시크릿값";
+		String code = request.getParameter("code");
+		String state = request.getParameter("state");
+		String redirectURI = URLEncoder.encode("http://localhost:8888/hhw/naverLogin.do", "UTF-8");
+		String apiURL;
+		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
+		apiURL += "client_id=" + clientId;
+		apiURL += "&client_secret=" + clientSecret;
+		apiURL += "&redirect_uri=" + redirectURI;
+		apiURL += "&code=" + code;
+		apiURL += "&state=" + state;
+		String access_token = "";
+		String refresh_token = "";
+		System.out.println("apiURL=" + apiURL);
+		String tokenStr = null;
+		try {
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+			System.out.print("responseCode=" + responseCode);
+			if (responseCode == 200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else { // 에러 발생
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			String inputLine;
+			StringBuffer res = new StringBuffer();
+			while ((inputLine = br.readLine()) != null) {
+				res.append(inputLine);
+			}
+			br.close();
+
+			// 토큰 값 추출
+			String resStr = res.toString();
+			StringTokenizer stok = new StringTokenizer(resStr, ":");
+			for (int i = 0; i < 2; i++) {
+				if (i == 1) {
+					tokenStr = stok.nextToken();
+				} else {
+					stok.nextToken();
+				}
+			}
+
+			String[] array = tokenStr.split("\"");
+			for (int i = 1; i < 2; i++) {
+				tokenStr = array[i];
+				System.out.println(tokenStr);
+			}
+
+			if (responseCode == 200) {
+				System.out.println(resStr);
+				System.out.println("토큰값 추출 : " + tokenStr);
+				System.out.println("===================NaverLogin.jsp========================");
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		String header = "Bearer " + tokenStr; // Bearer 다음에 공백 추가
+		try {
+			apiURL = "https://openapi.naver.com/v1/nid/me";
+			URL url = new URL(apiURL);
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			con.setRequestMethod("GET");
+			con.setRequestProperty("Authorization", header);
+			int responseCode = con.getResponseCode();
+			BufferedReader br;
+			if (responseCode == 200) { // 정상 호출
+				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			} else { // 에러 발생
+				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+			}
+			String inputLine;
+			StringBuffer res = new StringBuffer();
+			while ((inputLine = br.readLine()) != null) {
+				res.append(inputLine);
+			}
+			br.close();
+			System.out.println(res.toString());
+
+			JSONParser parsing = new JSONParser();
+			Object obj = parsing.parse(res.toString());
+			JSONObject jsonObj = (JSONObject) obj;
+			JSONObject resObj = (JSONObject) jsonObj.get("response");
+
+			// 왼쪽 변수 이름은 원하는 대로 정하면 된다.
+			// 단, 우측의 get()안에 들어가는 값은 와인색 상자 안의 값을 그대로 적어주어야 한다.
+			String naverCode = (String) resObj.get("id");
+			String name = (String) resObj.get("name");
+			String nickname = (String) resObj.get("nickname");
+			String email = (String) resObj.get("email");
+			String sex = (String) resObj.get("gender");
+			String phone = (String) resObj.get("phone");
+			
+
+			// 테스트출력
+			String data = resObj.toString();
+			System.out.println(data);
+
+			Member loginMember = new Member();
+			loginMember.setId(naverCode);
+			loginMember.setName(name);
+			loginMember.setNickname(nickname);
+			loginMember.setEmail(email);
+
+			System.out.println("loginMember : " + loginMember);
+
+			// 네이버 아이디로 임시 로그인
+			HttpSession session = request.getSession(); // getsession() 괄호빈칸이면 있으면 가져오고 없으면 새로 만들라는 뜻
+			System.out.println("session ID : " + session.getId());
+			// 필요한 경우 세션 객체에 객체정보를 저장할 수도 있음. Map 방식임
+			// 세션레퍼런스.setAttribute("이름", 객체); 여러번쓸수 있는 메소드.
+			session.setAttribute("loginMember", loginMember);
+			// 뷰페이지를 선택해서 내보냄
+			response.sendRedirect("home.do");
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
 	}
 
 	// 로그아웃
@@ -331,49 +488,49 @@ public class MemberController {
 	// 임시 비밀번호 생성 및 메일 발송
 	@RequestMapping(value = "findPw.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String findPwAfter(@ModelAttribute Member m, Model model) {
-		
+
 		// 회원 찾기
-		Member member = mService.findPw(m);		
-		
+		Member member = mService.findPw(m);
+
 		// 임시 비밀번호 생성
-		String pwd ="";
+		String pwd = "";
 		for (int i = 0; i < 12; i++) {
 			pwd += (char) ((Math.random() * 26) + 97);
 		}
-		
-		// 임시 비밀번호로  설정
-		String encPwd = bcryptPasswordEncoder.encode(pwd); //암호화
+
+		// 임시 비밀번호로 설정
+		String encPwd = bcryptPasswordEncoder.encode(pwd); // 암호화
 		member.setPwd(pwd);
 		int result = mService.setTempPw(member);
 
 		if (result > 0) {
 			// 메일 제목
-			String subject ="[HHW]임시 비밀번호 생성 알림 메일 입니다.";
-			
+			String subject = "[HHW]임시 비밀번호 생성 알림 메일 입니다.";
+
 			// 메일 내용
-			String msg = "<table width='640px' style='BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid' cellspacing='0' cellpadding='10' border='0'>";		
+			String msg = "<table width='640px' style='BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid' cellspacing='0' cellpadding='10' border='0'>";
 			// 메일 상단
 			msg += "<tbody><tr><td><table align='center' cellspacing='0' cellpadding='0' border='0'><tbody><tr>";
 			msg += "<td align='middle' height='30' style='padding-top: 10px;'></td></tr></tbody></table>";
 			// 본문 부분
 			msg += "<table align='left' cellspacing='0' cellpadding='0' border='0' width='640px'><tbody><tr><td width='139px'></td><td align='middle'style='padding-right: 0px; padding-left: 0px; padding-bottom: 20px;' width='362px'>";
-			msg += "<div><br><b>" + member.getName() + "</b>님 안녕하세요. <b>Hi Hello World</b>입니다. <br> 요청하신 비밀번호찾기를 안내 드립니다.<br>";
-			msg += "<b>" + member.getName() + "</b>님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</div><div style='MARGIN: 10px; PADDING: 10px; TEXT-ALIGN: CENTER; BACKGROUND-COLOR: #FDEADA; COLOR: #FF0000; FONT-WEIGHT: BOLD;'>";
+			msg += "<div><br><b>" + member.getName()
+					+ "</b>님 안녕하세요. <b>Hi Hello World</b>입니다. <br> 요청하신 비밀번호찾기를 안내 드립니다.<br>";
+			msg += "<b>" + member.getName()
+					+ "</b>님의 임시 비밀번호 입니다.<br> 비밀번호를 변경하여 사용하세요.</div><div style='MARGIN: 10px; PADDING: 10px; TEXT-ALIGN: CENTER; BACKGROUND-COLOR: #FDEADA; COLOR: #FF0000; FONT-WEIGHT: BOLD;'>";
 			msg += "임시 비밀번호  : " + pwd + "</div></td><td width='139px'></td></tr></tbody></table>";
 			// 메일 하단
 			msg += "<table align='center' cellspacing='0' cellpadding='0' width='100%' border='0'><tbody><tr><td height='14'></td></tr><tr><td align='middle' style='padding-right: 4px; padding-left: 4px; padding-bottom: 4px; font: 8pt tahoma; padding-top: 4px' bgcolor='#f6f6f6'><font color='#545454'>Copyright(C) <strong>hhw.com</strong> All right reserved.</font></td></tr><tr><td height='6'></td></tr></tbody></table>";
 			msg += "</td></tr></tbody></table>";
-			
+
 			try {
 				send_mail(member, subject, msg);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//alert창
-			return "<script type='text/javascript'>"
-			         + "alert(\"임시 비밀번호로 정상적으로 변경되었습니다.\\n로그인 페이지로 이동합니다.\");"
-			         + "location.href=\"/hhw/loginView.do\";"
-			         + "</script>";
+			// alert창
+			return "<script type='text/javascript'>" + "alert(\"임시 비밀번호로 정상적으로 변경되었습니다.\\n로그인 페이지로 이동합니다.\");"
+					+ "location.href=\"/hhw/loginView.do\";" + "</script>";
 		} else {
 			model.addAttribute("msg", "회원 정보 수정 실패!");
 			return "common/errorPage";

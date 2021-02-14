@@ -32,7 +32,7 @@
 <body class="member-login" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
 	style="">
-	
+ 	
 	<!-- 헤더  -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 50px 0 50px 0;">
@@ -77,7 +77,7 @@
 							<div class="hr-sect">SNS 계정으로 로그인하기</div>
 							<br>
 							<div align="center">
-							<a href="#"><img src="/hhw/resources/images/icon/naverLogin.png" width="165px" height="54px"></a>&nbsp;&nbsp;
+							<a href="${ apiURL }"><img src="/hhw/resources/images/icon/naverLogin.png" width="165px" height="54px"></a>&nbsp;&nbsp;
 							<a href="#"><img src="/hhw/resources/images/icon/kakaoLogin.jpg" width="165px" height="54px" ></a>
 							</div>
 						</div>
