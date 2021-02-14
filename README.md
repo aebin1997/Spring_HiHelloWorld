@@ -21,7 +21,7 @@ It features questions and answers on a wide range of topics in computer programm
 /hhwProject/src/main/java/com/ict/hhw/member/controller/MemberController.java 
 
 public void send_mail(Member member, String subject, String message)
-your actual naver email address, email password 입력
+your actual email address, email password of naver 입력
 ```
 
 ![image](https://user-images.githubusercontent.com/48824321/107697432-8ee41900-6cf6-11eb-8fe4-b56801de9175.png)
