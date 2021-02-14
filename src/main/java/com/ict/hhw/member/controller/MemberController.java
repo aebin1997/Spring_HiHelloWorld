@@ -49,23 +49,23 @@ public class MemberController {
 		String autoPwd = "";
 		if (cookieId != null && cookiePwd != null) { //만약 쿠키가 null이 아니라면
 			
-			for(int i = 0; i < cookieId.length; i++) {
-				System.out.println(i + "번째 쿠키 이름: " + cookieId[i].getName());
-				System.out.println(i + "번째 쿠키 값: " + cookieId[i].getValue());
-	    		}
-			
-			for(int i = 0; i < cookiePwd.length; i++) {
-				System.out.println(i + "번째 쿠키 이름: " + cookiePwd[i].getName());
-				System.out.println(i + "번째 쿠키 값: " + cookiePwd[i].getValue());
-	    	}
+			/*
+			 * for(int i = 0; i < cookieId.length; i++) { System.out.println(i +
+			 * "번째 쿠키 이름: " + cookieId[i].getName()); System.out.println(i + "번째 쿠키 값: " +
+			 * cookieId[i].getValue()); }
+			 * 
+			 * for(int i = 0; i < cookiePwd.length; i++) { System.out.println(i +
+			 * "번째 쿠키 이름: " + cookiePwd[i].getName()); System.out.println(i + "번째 쿠키 값: " +
+			 * cookiePwd[i].getValue()); }
+			 */
 			
 			for (int i = 0; i < cookieId.length; i++) {
 				if (cookieId[i].getName().trim().equals("autoId")) {
-					System.out.println(cookieId[i].getValue());
+					//System.out.println(cookieId[i].getValue());
 					autoId = cookieId[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
 				}
 				if (cookiePwd[i].getName().trim().equals("autoPwd")) {
-					System.out.println(cookiePwd[i].getValue());
+					//System.out.println(cookiePwd[i].getValue());
 					autoPwd = cookiePwd[i].getValue(); //autoId라는 이름의 키가 있을 경우 문자열에 그 쿠키의 값을 넣는다.
 				}
 			}
@@ -142,7 +142,7 @@ public class MemberController {
 
 		Member loginUser = mService.loginMember(m);
 
-		System.out.println(loginUser);
+		//System.out.println(loginUser);
 		
 		if (loginUser != null && bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			// 로그인 성공
