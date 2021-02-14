@@ -316,7 +316,7 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 	display: inline-block;
 	padding: 0 21px 0 6px;
 	background: #fff
-		url(https://res.kurly.com/pc/service/order/1908/ico_checkbox_off.png)
+		url(../images/icon/ico_checkbox.png)
 		no-repeat 0 2px;
 	font-size: 14px;
 	color: #000;
@@ -7662,13 +7662,13 @@ input[type=search]::-webkit-clear-button, input[type=email]::-webkit-clear-butto
 	(min-resolution:1.5dppx) {
 	.section_login .label_checkbox:before {
 		background:
-			url(https://res.kurly.com/pc/service/order/1908/ico_checkbox_off_x2.png)
+			url(../images/icon/ico_checkbox.png)
 			no-repeat 50% 50%;
 		background-size: 16px 17px
 	}
 	.section_login .label_checkbox.checked:before {
 		background:
-			url(https://res.kurly.com/pc/service/order/1908/ico_checkbox_on_x2.png)
+			url(../images/icon/ico_checkbox.png)
 			no-repeat 50% 50%;
 		background-size: 16px 17px
 	}

@@ -8,6 +8,26 @@
 <meta name="Author" content="kimwoolina">
 <link rel="styleSheet" href="/hhw/resources/css/normalize.css">
 <link rel="styleSheet" href="/hhw/resources/css/common.css">
+<style type="text/css">
+.hr-sect {
+        display: flex;
+        flex-basis: 100%;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.35);
+        font-size: 12px;
+        margin: 8px 0px;
+      }
+      .hr-sect::before,
+      .hr-sect::after {
+        content: "";
+        flex-grow: 1;
+        background: rgba(0, 0, 0, 0.35);
+        height: 1px;
+        font-size: 0px;
+        line-height: 0px;
+        margin: 0px 16px;
+      }
+</style>
 </head>
 <body class="member-login" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
@@ -51,6 +71,14 @@
 								</form>
 								<a href="enrollView.do"
 									class="btn_type2 btn_member"><span class="txt_type">회원가입</span></a>
+							</div>
+							<!-- 소셜 계정으로 로그인 -->
+							<br>
+							<div class="hr-sect">SNS 계정으로 로그인하기</div>
+							<br>
+							<div align="center">
+							<a href="#"><img src="/hhw/resources/images/icon/naverLogin.png" width="165px" height="54px"></a>&nbsp;&nbsp;
+							<a href="#"><img src="/hhw/resources/images/icon/kakaoLogin.jpg" width="165px" height="54px" ></a>
 							</div>
 						</div>
 					</div>
