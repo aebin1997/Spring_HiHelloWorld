@@ -92,7 +92,7 @@
 						class="col-lg-5 col-md-3 col-sm-6 col-7 mx-auto pl-0 mb-lg-0 mb-5">
 						<div class="logo">
 							<a href="index.jsp"> <img class="img-fluid"
-								src="/hhw/resources/images/testLogo.jpg" alt=">Hi Hello World!_">
+								src="/hhw/resources/images/testLogo.jpg" alt=">Hi Hello World!_" style="width:180px; height:70px">
 							</a>
 						</div>
 					</div>
