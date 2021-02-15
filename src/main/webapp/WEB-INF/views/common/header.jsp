@@ -35,6 +35,8 @@
 <link rel="stylesheet" href="/hhw/resources/css/coca.css" />
 <!-- Responsive  CSS -->
 <link rel="stylesheet" href="/hhw/resources/css/responsive.css" />
+<!-- about us CSS -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 <!-- 아이콘 불러오는 사이트 -->
 <link rel="stylesheet"
@@ -71,6 +73,11 @@
 <script src="/hhw/resources/js/canvasjs.activeone.js"></script>
 <script type="text/javascript"
 	src="//themera.net/embed/themera.js?id=73733"></script>
+<!-- about us js -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	
 
 
 </head>
