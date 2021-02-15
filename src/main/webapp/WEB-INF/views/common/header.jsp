@@ -147,7 +147,7 @@
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="#">CONTACT</a></li>
 									<li><a class="nav-link" href="#">진행페이지</a></li>
-									<li><a class="nav-link" href="/hhw/">ETC</a></li>
+									<li><a class="nav-link" href="comingsoon.do">ETC</a></li>
 								</ul>
 							</nav>
 						</div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 
 header {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-		rgba(0, 0, 0, 0.5)), url(/css/resources/images/0213/po1.jpg);
+		rgba(0, 0, 0, 0.5)), url(/hhw/resources/images/comingsoon.jpg);
 	height: 100vh;
 	background-position: center;
 	background-size: cover;	
@@ -53,7 +54,7 @@ p
 
 #launch
 {
-	font-size: 40px;
+	font-size: 50px;
 	word-spacing: 20px;
 }
 
@@ -89,7 +90,7 @@ p
 					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 					var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-					document.getElementById("launch").innerHTML = days + "d "	+ hours + "h " + minutes + "m " + seconds + "s";
+					document.getElementById("launch").innerHTML = "D-day : " + days + "D "	+ hours + "H " + minutes + "M " + seconds + "S";
 
 					if (distance < 0) {
 						clearInterval(x);
