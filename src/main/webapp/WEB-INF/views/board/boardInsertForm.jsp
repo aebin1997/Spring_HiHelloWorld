@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="../common/menubar.jsp"/>
+	<c:import url="../common/header.jsp"/>
 	
 	<h1 align="center">게시글 작성하기</h1>
 	<br>
@@ -41,5 +41,6 @@
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

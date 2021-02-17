@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="../common/menubar.jsp"/>
+	<c:import url="../common/header.jsp"/>
 	
 	<h1 align="center">${ b.bId }게시글 수정하기</h1>
 	<br>
@@ -50,5 +50,6 @@
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

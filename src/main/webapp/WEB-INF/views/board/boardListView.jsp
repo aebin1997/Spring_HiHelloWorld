@@ -50,7 +50,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<hr>
+	<hr style="padding-top: 90px;">
 	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
 	<c:if test="${ !empty sessionScope.loginUser }">
 		<div style="align: center; text-align: center;">
@@ -107,6 +107,7 @@
 	<table align="center" border="1" width="700" cellspacing="0">
 		<tr>
 			<th>번호</th>
+			<th>말머리</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>날짜</th>
@@ -116,6 +117,7 @@
 		<c:forEach items="${ requestScope.list }" var="b">
 			<tr>
 				<td align="center">${ b.bid }</td>
+				<td align="center">${ b.btype }</td>
 				<td><c:url var="bdt" value="/bdetail.do">
 						<c:param name="page" value="${ currentPage }" />
 						<c:param name="bid" value="${ b.bid }" />

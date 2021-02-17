@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="../common/menubar.jsp" />
+	<c:import url="../common/header.jsp"/>
 	<hr>
 	<%--request에 board값 담겨져 왔다. 그래서 그냥 ${ board.bid }라고 써도됨  --%>
 	<h1 align="center">${ requestScope.board.bid }번게시글 수정 페이지</h1>
@@ -62,5 +62,6 @@ ${ board.original_filename } &nbsp; &nbsp;
 			</tr>
 		</table>
 	</form>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
