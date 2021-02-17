@@ -139,14 +139,14 @@
 			   , b_original_filename = #{ b_original_filename }
 			   , b_rename_filename = #{ b_rename_filename }
 			</if>
-		 where bid = #{ BID }
+		 where bid = #{ bid }
 	</update>
 	
 	<update id="changeBstatusN" parameterType="_int">
 		update board
 		   set   bstatus = 'N'
 		       , b_modfiy_date = sysdate
-		 where bid = #{ BID }
+		 where bid = #{ bid }
 	</update>
 	
 	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoard">

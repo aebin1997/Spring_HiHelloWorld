@@ -101,7 +101,7 @@
 	<%-- 상대경로만 사용 가능함 --%>
 	<c:import url="../common/header.jsp" />
 	<hr>
-	<h2 align="center">${ requestScope.board.bid }번 게시글 상세보기</h2>
+	<h2 align="center" style="padding-top:100px;">${ requestScope.board.bid }번게시글 상세보기</h2>
 	<br>
 	<table align="center" cellpadding="10" cellspacing="0" border="1"
 		width="500">
@@ -119,55 +119,58 @@
 		</tr>
 		<tr>
 			<th>첨부파일</th>
-			<td><c:if test="${ empty board.b_original_filename }">
-첨부파일 없음
-		</c:if> <c:if test="${ !empty board.b_original_filename }">
-					<c:url var="bfd" value="/bfdown.do">
-						<c:param name="ofile" value="${ board.b_original_filename }" />
-						<c:param name="rfile" value="${ board.b_rename_filename }" />
-					</c:url>
-					<a href="${ bfd }">${ board.b_original_filename }</a>
-				</c:if></td>
+			<td>
+				<c:if test="${ empty board.b_original_filename }">
+						첨부파일 없음
+				</c:if>
+				<c:if test="${ !empty board.b_original_filename }">
+						<c:url var="bfd" value="/bfdown.do">
+							<c:param name="ofile" value="${ board.b_original_filename }" />
+							<c:param name="rfile" value="${ board.b_rename_filename }" />
+						</c:url>
+						<a href="${ bfd }">${ board.b_original_filename }</a>
+				</c:if>
+			</td>
 		</tr>
 		<tr align="center" valign="middle">
 			<th colspan="2">
-				<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> <c:if test="${ !empty loginUser }">
-					<button onclick="showReplyForm();">댓글달기</button>
-   &nbsp; &nbsp;
-</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%> <c:if
-					test="${ !empty loginUser and loginUser.id eq board.bwriter }">
+				<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> 
+				<c:if test="${ !empty loginUser }">
+					<button onclick="showReplyForm();">댓글달기</button>&nbsp; &nbsp;
+				</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%>
+				<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
 					<c:url var="buv" value="/bupview.do">
 						<c:param name="bid" value="${board.bid }" />
 						<c:param name="page" value="${ currentPage }" />
 					</c:url>
 					<a href="${ buv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
-   <c:url var="bdl" value="/bdelete.do">
+  					<c:url var="bdl" value="/bdelete.do">
 						<c:param name="bid" value="${ board.bid }" />
 					</c:url>
 					<a href="${ bdl }">[글삭제]</a> &nbsp; &nbsp; 
-</c:if> <c:url var="bls" value="/blist.do">
+				</c:if> 
+				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
-				</c:url> <a href="${ bls }">[목록]</a>
+				</c:url>
+				<a href="${ bls }">[목록]</a>
 			</th>
 		</tr>
 	</table>
 	<hr>
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="border: 1px dotted gray;">
-		<table id="rlistTbl" align="center" cellspacing="0" cellpadding="5"
-			border="1"></table>
+		<table id="rlistTbl" align="center" cellspacing="0" cellpadding="5" border="1"></table>
 	</div>
 	<hr>
 	<%-- 댓글달기 폼 영역 --%>
 	<div id="replyDiv">
 		<form action="rinsert.do" method="post">
 			<input type="hidden" name="ref_bid" value="${ board.bid }">
-			<table align="center" width="500" border="1" cellspacing="0"
-				cellpadding="5">
+			<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<th>작성자</th>
 					<td><input type="text" name="rwriter" readonly
-						value="${ sessionScope.loginUser.id }"></td>
+						value="${ sessionScope.loginUser.nickname }"></td>
 				</tr>
 				<tr>
 					<th>내 용</th>
@@ -182,7 +185,7 @@
 		</form>
 	</div>
 
-<jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>

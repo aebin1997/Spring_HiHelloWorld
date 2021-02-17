@@ -39,7 +39,7 @@ public class BlistInterceptor extends HandlerInterceptorAdapter {
 			logger.info("비로그인 상태에서 [" + request.getRequestURI() + "] 접근하려고함");
 
 			request.setAttribute("msg", "로그인 후 이용하세요.");
-			request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/main/main.jsp").forward(request, response);
 
 			return false; // false를 반환해야 controller를 실행 안한다.
 		}

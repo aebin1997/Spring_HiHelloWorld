@@ -3,7 +3,7 @@ package com.ict.hhw.board.model.vo;
 import java.sql.Date;
 
 public class Reply implements java.io.Serializable {
-	private final static long serialVersionUID = 4444L;
+	private final static long serialVersionUID = 4554L;
 	
 	private int rid;
 	private String rcontent;
