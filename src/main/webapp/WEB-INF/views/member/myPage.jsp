@@ -9,6 +9,7 @@
 <title>my info</title>
 </head>
 <body>
+  
 	<jsp:include page="../common/header.jsp" />
 
 	<section style="padding: 100px 0 60px 0;">

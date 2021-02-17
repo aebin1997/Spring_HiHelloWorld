@@ -88,8 +88,8 @@ public class MemberController {
 		/* 자동 로그인 */
 
 		/* 네이버 아이디로 로그인 (시작) */
-		String clientId = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 아이디값";
-		String redirectURI = URLEncoder.encode("http://localhost:8888/hhw/naverLogin.do", "UTF-8");
+		String clientId = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 아이디값"; \
+		String redirectURI = URLEncoder.encode("http://localhost:8888/hhw/naverLogin.move", "UTF-8");
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 		String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -99,9 +99,16 @@ public class MemberController {
 		session.setAttribute("state", state);
 
 		model.addAttribute("apiURL", apiURL);
+
 		/* 네이버 아이디로 로그인 (끝) */
 
 		return "member/login";
+	}
+
+	// 네이버 아이디로 로그인 페이지로 이동
+	@RequestMapping("naverLogin.move")
+	public String naverLoginView() {
+		return "member/naverLogin";
 	}
 
 	// 회원가입 페이지로 이동
@@ -212,74 +219,14 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-
+	
 	// 네이버 아이디로 로그인
 	@RequestMapping("naverLogin.do")
-	public void naverLogin(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-		String clientId = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 아이디값";
-		String clientSecret = "BtKnvM1SxZzIcTukJJbO";// 애플리케이션 클라이언트 시크릿값";
-		String code = request.getParameter("code");
-		String state = request.getParameter("state");
-		String redirectURI = URLEncoder.encode("http://localhost:8888/hhw/naverLogin.do", "UTF-8");
-		String apiURL;
-		apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-		apiURL += "client_id=" + clientId;
-		apiURL += "&client_secret=" + clientSecret;
-		apiURL += "&redirect_uri=" + redirectURI;
-		apiURL += "&code=" + code;
-		apiURL += "&state=" + state;
-		String access_token = "";
-		String refresh_token = "";
-		System.out.println("apiURL=" + apiURL);
-		String tokenStr = null;
+	public void naverLogin(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+		String token = request.getParameter("token");
+		String header = "Bearer " + token; // Bearer 다음에 공백 추가
 		try {
-			URL url = new URL(apiURL);
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
-			int responseCode = con.getResponseCode();
-			BufferedReader br;
-			System.out.print("responseCode=" + responseCode);
-			if (responseCode == 200) { // 정상 호출
-				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			} else { // 에러 발생
-				br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-			}
-			String inputLine;
-			StringBuffer res = new StringBuffer();
-			while ((inputLine = br.readLine()) != null) {
-				res.append(inputLine);
-			}
-			br.close();
-
-			// 토큰 값 추출
-			String resStr = res.toString();
-			StringTokenizer stok = new StringTokenizer(resStr, ":");
-			for (int i = 0; i < 2; i++) {
-				if (i == 1) {
-					tokenStr = stok.nextToken();
-				} else {
-					stok.nextToken();
-				}
-			}
-
-			String[] array = tokenStr.split("\"");
-			for (int i = 1; i < 2; i++) {
-				tokenStr = array[i];
-				System.out.println(tokenStr);
-			}
-
-			if (responseCode == 200) {
-				System.out.println(resStr);
-				System.out.println("토큰값 추출 : " + tokenStr);
-				System.out.println("===================NaverLogin.jsp========================");
-			}
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-		String header = "Bearer " + tokenStr; // Bearer 다음에 공백 추가
-		try {
-			apiURL = "https://openapi.naver.com/v1/nid/me";
+			String apiURL = "https://openapi.naver.com/v1/nid/me";
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -307,12 +254,10 @@ public class MemberController {
 			// 왼쪽 변수 이름은 원하는 대로 정하면 된다.
 			// 단, 우측의 get()안에 들어가는 값은 와인색 상자 안의 값을 그대로 적어주어야 한다.
 			String naverCode = (String) resObj.get("id");
+			String email = (String) resObj.get("email");
 			String name = (String) resObj.get("name");
 			String nickname = (String) resObj.get("nickname");
-			String email = (String) resObj.get("email");
-			String sex = (String) resObj.get("gender");
 			String phone = (String) resObj.get("phone");
-			
 
 			// 테스트출력
 			String data = resObj.toString();
@@ -321,25 +266,22 @@ public class MemberController {
 			Member loginMember = new Member();
 			loginMember.setId(naverCode);
 			loginMember.setName(name);
-			loginMember.setNickname(nickname);
 			loginMember.setEmail(email);
+			loginMember.setNickname(nickname);
+			loginMember.setPhone(phone);
 
 			System.out.println("loginMember : " + loginMember);
 
 			// 네이버 아이디로 임시 로그인
-			HttpSession session = request.getSession(); // getsession() 괄호빈칸이면 있으면 가져오고 없으면 새로 만들라는 뜻
-			System.out.println("session ID : " + session.getId());
-			// 필요한 경우 세션 객체에 객체정보를 저장할 수도 있음. Map 방식임
-			// 세션레퍼런스.setAttribute("이름", 객체); 여러번쓸수 있는 메소드.
-			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("loginUser", loginMember);
 			// 뷰페이지를 선택해서 내보냄
-			response.sendRedirect("home.do");
+			response.sendRedirect("index.jsp");
 
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
 	}
+	
 
 	// 로그아웃
 	@RequestMapping("logout.do")
