@@ -47,20 +47,17 @@ public class QaDao {
 
 	
 	public int insertQa(Qa qa) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("qaMapper.insertQa", qa);
 	}
 
 	
 	public int updateQa(Qa qa) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("qaMapper.updateQa",qa);
 	}
 
 	
 	public int deleteQa(int qa_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("qaMapper.changeQastatusN",qa_id);
 	}
 
 }

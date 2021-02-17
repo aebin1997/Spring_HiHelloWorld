@@ -5,14 +5,14 @@
 <resultMap type="Qa" id="resultQa">
 	<id column="qa_id" property="qa_id"/>
 	<result column="qa_title" property="qa_title"/>
-	<result column="QA_WRITER" property="qa_writer"/>
-	<result column="QA_CONTENT" property="qa_content"/>
-	<result column="QA_ORIGIN_FILE_NAME" property="qa_origin_file_name"/>
-	<result column="QA_RENAME_FILE_NAME" property="qa_rename_file_name"/>
+	<result column="qa_writer" property="qa_writer"/>
+	<result column="qa_content" property="qa_content"/>
+	<result column="qa_origin_file_name" property="qa_origin_file_name"/>
+	<result column="qa_rename_file_name" property="qa_rename_file_name"/>
 	<result column="qa_readcount" property="qa_readcount"/>
-	<result column="QA_CREATE_DATE" property="qa_create_date"/>
-	<result column="QA_MODIFY_DATE" property="qa_modify_date"/>
-	<result column="QA_STATUS" property="qa_status"/>
+	<result column="qa_create_date" property="qa_create_date"/>
+	<result column="qa_modify_date" property="qa_modify_date"/>
+	<result column="qa_status" property="qa_status"/>
 </resultMap>
 
 <resultMap type="Qa" id="resultTop3">
@@ -57,5 +57,43 @@
 	where rnum >= #{ startRow } and rnum <= #{ endRow }
 	]]>
 </select>
+
+<insert id="insertQa" parameterType ="Qa" >
+	insert into qa
+	<if test="qa_origin_file_name != null">
+		values (seq_qa.nextval, #{ qa_title }, #{ qa_writer }, #{ qa_content }, 
+		#{ qa_origin_file_name }, #{ qa_rename_file_name },
+		default, sysdate, sysdate, default )
+	</if>
+	<if test="qa_origin_file_name == null">
+		values (seq_qa.nextval, #{ qa_title }, #{ qa_writer }, #{ qa_content },
+		 		null, null,
+		 		default, sysdate, sysdate, default)
+	</if>
+</insert>
+
+<update id="updateQa" parameterType="Qa">
+	update qa
+	set qa_title = #{ qa_title },
+		qa_content = #{ qa_content }
+		<if test="qa_origin_file_name == null">
+		, qa_origin_file_name = null,
+		qa_rename_file_name = null
+		</if>
+		<if test="qa_origin_file_name != null">
+		, qa_origin_file_name = #{ qa_origin_file_name },
+		qa_rename_file_name = #{ qa_rename_file_name }
+		</if>
+		where qa_id = #{ qa_id }
+</update>
+
+<update id="changeQastatusN" parameterType="_int">
+	update qa
+	set qa_status = 'N'
+	where qa_id = #{ qa_id }
+</update>
 	
 </mapper>
+
+
+

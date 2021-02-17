@@ -28,7 +28,7 @@
 	               for ( var i in json.list) {
 	                  values += "<tr><td>" 
 	                  		+ json.list[i].qa_id
-	                        + "</td><td><a href='${ pageContext.request.contextPath }/qadetail.do?qa_id="
+	                        + "</td><td><a href='${ pageContext.request.contextPath }/qadetail.do?qadetail="
 	                        + json.list[i].qa_id
 	                        + "'>"
 	                        + decodeURIComponent(json.list[i].qa_title).replace(/\+/gi, " ") /* 디코딩하면 공백이 +로 되기때문에  " " 공백으로 바꿔준다*/

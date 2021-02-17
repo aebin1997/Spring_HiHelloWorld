@@ -11,9 +11,7 @@
 <c:set var="currentPage" value="${ requestScope.currentPage }"  /> 
 
 <%-- 글쓰기 페이지 이동 요청 url --%>
-<c:url var="qawf" value="/qawmove.do" >
-	<c:param name="page" value="${ currentPage }"/>
-</c:url>
+<c:url var="qawf" value="/qawmove.do" />
 
 <!DOCTYPE html>
 <html>
@@ -22,15 +20,15 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	function showWriterForm(){
+	function showWriteForm(){
 		location.href = "${ qawf }";
 	}
 </script>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	
 	<hr>
+	<br><br><br>
 <%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
 <c:if test="${ !empty sessionScope.loginUser }">
 <div style="align:center; text-align:center;">
@@ -56,7 +54,7 @@
    <td>   
    <c:url var="qadetail" value="/qadetail.do">
       <c:param name="page" value="${ currentPage }"/>
-      <c:param name="qa_id" value="${ qa.qa_id }" />
+      <c:param name="qadetail" value="${ qa.qa_id }" />
    </c:url>
    <a href="${ qadetail }">${ qa.qa_title }</a>
    </td>
@@ -128,7 +126,7 @@
 <!-- 맨끝 페이지로 이동 처리 -->
 <c:if test="${ currentPage >= maxPage }">
    [맨끝]&nbsp;
-</c:if>   
+</c:if>
 <c:if test="${ currentPage < maxPage }">
    <c:url var="qalist5" value="/qalist.do">
       <c:param name="page" value="${ maxPage }"/>

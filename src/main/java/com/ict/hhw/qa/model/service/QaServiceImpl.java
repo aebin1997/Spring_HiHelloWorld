@@ -40,20 +40,17 @@ public class QaServiceImpl implements QaService{
 
 	@Override
 	public int insertQa(Qa qa) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qaDao.insertQa(qa);
 	}
 
 	@Override
 	public int updateQa(Qa qa) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qaDao.updateQa(qa);
 	}
 
 	@Override
 	public int deleteQa(int qa_id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return qaDao.deleteQa(qa_id);
 	}
 
 }

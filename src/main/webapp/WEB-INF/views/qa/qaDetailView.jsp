@@ -48,10 +48,7 @@
 	</c:url>
 	<a href="${ qauv }">[수정페이지로 이동]</a>&nbsp; &nbsp;
 	<c:url var="qadl" value="/qadelete.do">
-		<c:param name="qaid" value="${ qa.qa_id }"/>	
-		<c:if test="${ !empty qa.qa_origin_file_name }">
-				<c:param name="rfile" value="${ qa.qa_rename_file_name }"/>
-		</c:if>
+		<c:param name="qadelete" value="${ qa.qa_id }"/>	
 	</c:url>
 	<a href="${ qadl }">[글삭제]</a> &nbsp; &nbsp;
 </c:if>

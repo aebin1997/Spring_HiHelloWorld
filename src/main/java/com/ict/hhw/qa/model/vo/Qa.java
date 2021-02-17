@@ -2,8 +2,8 @@ package com.ict.hhw.qa.model.vo;
 
 import java.sql.Date;
 
-public class Qa implements java.io.Serializable{
-	private final static long serialVersionUID = 9999L;
+public class Qa {
+	private final static long serialVersionUID = 5555L;
 	
 	private int qa_id;
 	private String qa_title;
