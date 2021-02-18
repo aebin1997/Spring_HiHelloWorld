@@ -338,8 +338,8 @@
 					<div class="single-service">
 						<i class="fa fa-laptop"></i>
 						<h4>반갑습니다</h4>
-						<p>새해복많이받으세요 모두 건강한 한해 되시길 바라겠습니다 happy new year good day
-							수고하세요</p>
+						<p>Lorem Ipsum is simply dummy text of the printing and
+							typesetting industry typesetting industry</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
