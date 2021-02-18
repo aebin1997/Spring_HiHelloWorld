@@ -9,6 +9,7 @@
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="kimwoolina">
 <title>네이버 : 로그인</title>
 <link rel="stylesheet" type="text/css" href="/hhw/resources/css/e_w.css">
 <link rel="stylesheet" type="text/css" href="/hhw/resources/css/e_e.css">

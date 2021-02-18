@@ -223,6 +223,28 @@
 			<version>2.8.1</version>
 		</dependency>
 		
+		<!-- 카카오 로그인 -->
+		<!-- httpcore(카카오) -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.6</version>
+		</dependency>
+
+		<!-- httpclient(카카오) -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<!-- Jackson 라이브러리 추가 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.4</version>
+		</dependency>
+		
 		   <!-- 파일업로드관련 두개의 라이브러리 -->
       <dependency>
          <groupId>commons-fileupload</groupId>
