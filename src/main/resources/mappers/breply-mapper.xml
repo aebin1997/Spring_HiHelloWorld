@@ -4,9 +4,9 @@
 
 	<resultMap type="Reply" id="resultReply">
 		<id column="rid" property="RID" />
-		<result column="rwriter" property="RWRITER" />
-		<result column="ref_bid" property="REF_BID"/>
 		<result column="rcontent" property="RCONTENT" />
+		<result column="ref_bid" property="REF_BID"/>
+		<result column="rwriter" property="RWRITER" />
 		<result column="r_create_date" property="R_CREATE_DATE" />
 		<result column="r_modify_date" property="R_MODIFY_DATE" />
 		<result column="r_status" property="R_STATUS" />
@@ -25,7 +25,7 @@
 	
 	<insert id="insertReply" parameterType="Reply">
 		insert into reply
-		values (seq_bid.nextval, #{ rcontent }, #{ ref_bid }, 
+		values (seq_rid.nextval, #{ rcontent }, #{ ref_bid }, 
 				#{ rwriter }, sysdate, sysdate, default)
 	</insert>
 	

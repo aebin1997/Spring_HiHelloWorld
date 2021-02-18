@@ -140,7 +140,7 @@
 				</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%>
 				<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
 					<c:url var="buv" value="/bupview.do">
-						<c:param name="bid" value="${board.bid }" />
+						<c:param name="bid" value="${ board.bid }" />
 						<c:param name="page" value="${ currentPage }" />
 					</c:url>
 					<a href="${ buv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
@@ -157,11 +157,13 @@
 		</tr>
 	</table>
 	<hr>
+	
 	<%-- 댓글목록 표시 영역 --%>
-	<div id="rlistView" style="border: 1px dotted gray;">
+	<div id="rlistView" style="border: 1px dotted gray; height: 50px;">
 		<table id="rlistTbl" align="center" cellspacing="0" cellpadding="5" border="1"></table>
 	</div>
 	<hr>
+	
 	<%-- 댓글달기 폼 영역 --%>
 	<div id="replyDiv">
 		<form action="rinsert.do" method="post">

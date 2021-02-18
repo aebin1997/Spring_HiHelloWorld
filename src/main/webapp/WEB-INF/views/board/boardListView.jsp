@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>first</title>
+<title>자유게시판</title>
 <script type="text/javascript">
 	$(function() {
 		showDiv();
@@ -62,11 +62,11 @@
 	<center>
 		<div>
 			<h2>검색할 항목을 선택하시오.</h2>
-			<input type="radio" name="item" value="title" checked> 제목
-			&nbsp; &nbsp; &nbsp; <input type="radio" name="item" value="writer">
-			작성자 &nbsp; &nbsp; &nbsp; <input type="radio" name="item" value="date">
-			날짜
+			<input type="radio" name="item" value="title" checked> 제목 &nbsp; &nbsp; &nbsp;
+			<input type="radio" name="item" value="writer"> 작성자 &nbsp; &nbsp; &nbsp;
+			<input type="radio" name="item" value="date"> 날짜
 		</div>
+		
 		<div id="titleDiv">
 			<form action="bsearchTitle.do" method="post">
 				<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
@@ -76,6 +76,7 @@
 				<input type="submit" value="검색">
 			</form>
 		</div>
+		
 		<div id="writerDiv">
 			<form action="bsearchWriter.do" method="post">
 				<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
@@ -84,6 +85,7 @@
 				</label> <input type="submit" value="검색">
 			</form>
 		</div>
+		
 		<div id="dateDiv">
 			<form action="bsearchDate.do" method="post">
 				<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
@@ -93,6 +95,7 @@
 				</label> <input type="submit" value="검색">
 			</form>
 		</div>
+		
 	</center>
 	<br>
 	<%-- 목록 출력 --%>
@@ -125,11 +128,14 @@
 				<td align="center">${ b.bwriter }</td>
 				<td align="center">${ b.b_create_date }</td>
 				<td align="center">${ b.bcount }</td>
-				<td align="center"><c:if test="${ !empty b.b_original_filename }">
-      ◎
-      </c:if> <c:if test="${ empty b.b_original_filename }">
-      &nbsp;
-      </c:if></td>
+				<td align="center">
+				<c:if test="${ !empty b.b_original_filename }">
+      				◎
+     			</c:if> 
+      			<c:if test="${ empty b.b_original_filename }">
+      				&nbsp;
+    			</c:if>
+    		  </td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -139,13 +145,11 @@
 
 	<%-- 현재 페이지가 1이 아니면 링크설정, 현재 1페이지이면 링크없음 --%>
 	<c:if test="${ empty action}">
-		<%-- 페이징 처리 
-   [맨처음][이전] 숫자...........  [다음][맨끝]
---%>
+		<%-- 페이징 처리  [맨처음][이전] 숫자...........  [다음][맨끝] --%>
 		<div style="text-align: center;">
 			<c:if test="${ currentPage <= 1}">
-[맨처음]
-</c:if>
+				[맨처음]
+			</c:if>
 			<c:if test="${ currentPage > 1 }">
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="1" />
@@ -163,8 +167,8 @@
 			</c:if>
 			<c:if
 				test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
-[이전]
-</c:if>
+					[이전]
+			</c:if>
 			&nbsp;
 			<%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
 			<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
@@ -189,12 +193,13 @@
 			</c:if>
 			<c:if
 				test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
-   [다음그룹]&nbsp;
-</c:if>
+				   [다음그룹]&nbsp;
+			</c:if>
+			
 			<!-- 맨끝 페이지로 이동 처리 -->
 			<c:if test="${ currentPage >= maxPage }">
-   [맨끝]&nbsp;
-</c:if>
+			   [맨끝]&nbsp;
+			</c:if>
 			<c:if test="${ currentPage < maxPage }">
 				<c:url var="bls5" value="/blist.do">
 					<c:param name="page" value="${ maxPage }" />
@@ -206,13 +211,11 @@
 
 
 	<c:if test="${ !empty action}">
-		<%-- 페이징 처리 
-   [맨처음][이전] 숫자...........  [다음][맨끝]
---%>
+		<%-- 페이징 처리  [맨처음][이전] 숫자...........  [다음][맨끝] --%>
 		<div style="text-align: center;">
 			<c:if test="${ currentPage <= 1}">
-[맨처음]
-</c:if>
+				[맨처음]
+			</c:if>
 			<c:if test="${ currentPage > 1 }">
 				<c:url var="bsearch1" value="${ action }">
 					<c:if test="${ action ne 'bsearchDate.do'}">
@@ -236,8 +239,8 @@
 			</c:if>
 			<c:if
 				test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
-[이전]
-</c:if>
+					[이전]
+			</c:if>
 			&nbsp;
 			<%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
 			<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
@@ -262,12 +265,12 @@
 			</c:if>
 			<c:if
 				test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
-   [다음그룹]&nbsp;
-</c:if>
+				   [다음그룹]&nbsp;
+			</c:if>
 			<!-- 맨끝 페이지로 이동 처리 -->
 			<c:if test="${ currentPage >= maxPage }">
-   [맨끝]&nbsp;
-</c:if>
+			   [맨끝]&nbsp;
+			</c:if>
 			<c:if test="${ currentPage < maxPage }">
 				<c:url var="bsearch5" value="/blist.do">
 					<c:param name="page" value="${ maxPage }" />
