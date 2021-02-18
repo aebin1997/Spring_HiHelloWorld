@@ -341,6 +341,12 @@ public class MemberController {
 	public String myInfoView() {
 		return "member/myPage";
 	}
+	
+	// 내정보관리하기로 이동
+	@RequestMapping("myInfoUpdate.do")
+	public String infoUpdateView() {
+		return "member/infoUpdate";
+	}
 
 	// 회원가입
 	@RequestMapping("minsert.do")

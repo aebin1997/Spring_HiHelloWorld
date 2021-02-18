@@ -283,7 +283,7 @@ function photoView(uri){
 				</div>
 				
 				<div class="btn_info cert2">
-				출석하기 | <a href="#" onclick="">내정보관리하기</a>
+				출석하기 | <a href="myInfoUpdate.do" onclick="">내정보관리하기</a>
 				</div>
 			
 <script type="text/javascript" src="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/js/min/nhn.Kin.Userinfo.EditorHistory.js"></script>
