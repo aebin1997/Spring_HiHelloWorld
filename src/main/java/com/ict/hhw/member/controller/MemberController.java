@@ -296,13 +296,13 @@ public class MemberController {
 
 	
 	// 카카오 아이디로 로그인 페이지로 이동(redirect)
-	@RequestMapping(value = "/kakaoLogin.move")
+	@RequestMapping("kakaoLogin.move")
 	public String kakaoLogin() {
 		return "member/kakaoLogin";
 	}
 	
 	// 카카오 아이디로 로그인
-	@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "kakaoLogin.do", method = RequestMethod.POST)
 	public String kakaoLoginView(@RequestParam("kid") String kid, @RequestParam("kname") String kname, @RequestParam("kemail") String kemail, HttpSession session) {
 		Member loginMember = new Member();
 		
