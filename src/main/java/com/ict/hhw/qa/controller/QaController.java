@@ -5,6 +5,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.hhw.qa.model.service.QaService;
 import com.ict.hhw.qa.model.vo.Qa;
@@ -233,7 +236,23 @@ public class QaController {
 		}
 	}
 	
-	
+	//게시글 첨부파일 다운로드 요청 처리용
+	@RequestMapping("qafdown.do")
+	public ModelAndView fileDownMethod(
+			@RequestParam("ofile") String originalFilename,
+			@RequestParam("rfile") String renameFilename,
+			HttpServletRequest request) {
+		String savePath = request.getSession().getServletContext()
+				.getRealPath("resources/qa_files");
+		File renameFile = new File(savePath + "\\" + renameFilename);
+		
+		System.out.println("qafdown.do");
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("renameFile" , renameFile);
+		model.put("originalFilename", originalFilename);
+		return new ModelAndView("filedownqa", "downFile", model);
+	}
 }
 
 
