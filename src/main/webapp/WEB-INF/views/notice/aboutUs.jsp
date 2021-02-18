@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
 <meta charset="UTF-8">
 <meta name="Author" content="eunyouung and kimwoolina">
 <title>About us</title>

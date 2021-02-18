@@ -174,7 +174,7 @@
 					<div
 						class="col-lg-6 col-md-6 col-sm-12 col-12 copyright-text text-center text-lg-right text-md-right">
 						<p>
-							Copyright &copy; 2018 <a href="#"> Bitland </a> | All Rights
+							Copyright &copy; 2018 <a href=""> Bitland </a> | All Rights
 							Reserved
 						</p>
 					</div>

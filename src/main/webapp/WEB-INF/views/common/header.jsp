@@ -36,6 +36,8 @@
 <link rel="stylesheet" href="/hhw/resources/css/coca.css" />
 <!-- Responsive  CSS -->
 <link rel="stylesheet" href="/hhw/resources/css/responsive.css" />
+<!-- about us CSS -->
+<link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
 
 
 <!-- 아이콘 불러오는 사이트 -->

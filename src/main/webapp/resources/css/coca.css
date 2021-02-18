@@ -116,7 +116,7 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a, [class*='heading-'] a {
 
 h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover,
 	[class*='heading-'] a:hover {
-	color: #01b3a7;
+	color: #f7921a;
 }
 
 h1, .heading-1 {
@@ -279,11 +279,11 @@ a, a:focus, a:active, a:hover {
 }
 
 a, a:focus, a:active {
-	color: #01b3a7;
+	color: #f7921a;
 }
 
 a:hover {
-	color: #016760;
+	color: #f7921a;
 }
 
 a[href*='tel'], a[href*='mailto'] {
@@ -291,11 +291,11 @@ a[href*='tel'], a[href*='mailto'] {
 }
 
 .link-hover {
-	color: #016760;
+	color: #f7921a;
 }
 
 .link-press {
-	color: #016760;
+	color: #f7921a;
 }
 
 .privacy-link {
@@ -22151,7 +22151,7 @@ opacity
 
 .owl-dot::after {
 	opacity: 0;
-	background: #01b3a7;
+	background: #f7921a;
 	transform: translateY(-200%);
 	transition: transform 0.3s ease, opacity 0.3s ease, visibility 0s 0.3s;
 }
@@ -22253,13 +22253,13 @@ opacity
 
 .owl-classic .owl-prev:hover::before, .owl-classic .owl-next:hover::before
 	{
-	background-color: #01b3a7;
+	background-color:#f7921a;
 }
 
 .owl-classic .owl-prev:hover::after, .owl-classic .owl-next:hover::after
 	{
-	border-left-color: #01b3a7;
-	border-right-color: #01b3a7;
+	border-left-color: #f7921a;
+	border-right-color: #f7921a;
 }
 
 .owl-classic .owl-prev {
@@ -22396,20 +22396,20 @@ opacity
 }
 
 .owl-posts .owl-dot::after {
-	background: #50ba87;
+	background: #f7921a;
 }
 
 .owl-posts .owl-dot:hover::before, .owl-posts .owl-dot:focus::before {
-	background: #01b3a7;
+	background: #f7921a;
 }
 
 .owl-posts-2 .owl-dot::after {
-	background: #01b3a7;
+	background: #f7921a;
 }
 
 .owl-posts-2 .owl-dot:hover::before, .owl-posts-2 .owl-dot:focus::before
 	{
-	background: #50ba87;
+	background: #f7921a;
 }
 
 .owl-services .owl-stage-outer {
