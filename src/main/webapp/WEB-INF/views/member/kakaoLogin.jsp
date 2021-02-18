@@ -14883,6 +14883,37 @@ to {
 </style>
 </head>
 <body class="account_comm account_type2">
+<!-- 카카오 로그인 sdk -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script type="text/javascript">
+	Kakao.init("0ff663d827e934918400ca41b464f8ba"); //JS KEY
+	
+	Kakao.Auth.login({
+		success: function(authObj) {
+			
+			Kakao.API.request({
+				url:'/v2/user/me',
+				success: function(res){
+					console.log(res);
+					
+					var id = res.id;
+					var email = res.kakao_account.email;
+					var name = res.properties.nickname;
+					var html = '<BR>' + id + '<BR>' + email + '<BR>' + name;
+					
+					$('body').append(html);
+				}
+			})
+				console.log(authObj);
+			var token = authObj.access_token;
+		},
+		fail: function(err) {
+			alert(JSON.stringify(err));
+		}
+	});
+	</script>
+
 	<div id="kakaoWrap">
 		<div id="kakaoHead" role="banner">
 			<h1 id="kakaoServiceLogo">

@@ -8,7 +8,6 @@
 <meta name="Author" content="kimwoolina">
 <link rel="styleSheet" href="/hhw/resources/css/normalize.css">
 <link rel="styleSheet" href="/hhw/resources/css/common.css">
-]
 <style type="text/css">
 .hr-sect {
 	display: flex;
@@ -29,20 +28,22 @@
 	margin: 0px 16px;
 }
 </style>
-<!-- 카카오 로그인 sdk -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript">
-	window.Kakao.init("0ff663d827e934918400ca41b464f8ba"); //JS KEY
-	
-	Kakao.Auth.authorize({
-		redirectUrl: 'http://localhost:8888/hhw/kakaoLogin.do'
-	});
-
-</script>
 </head>
 <body class="member-login" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
 	style="">
+	<!-- 카카오 로그인 sdk -->
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script type="text/javascript">
+		function kakaoLogin(){
+			/* Kakao.init("0ff663d827e934918400ca41b464f8ba"); //JS KEY
+			
+			Kakao.Auth.authorize({
+				redirectUri: 'http://localhost:8888/hhw/kakoLogin.do'
+			}); */
+			
+		};
+	</script>
 
 	<!-- 헤더  -->
 	<jsp:include page="../common/header.jsp" />
@@ -90,11 +91,11 @@
 								<div align="center">
 									<a href="${ apiURL }"><img
 										src="/hhw/resources/images/icon/naverLogin.png" width="165px"
-										height="54px"></a>&nbsp;&nbsp; 
-										<a href="javascript:kakaoLogin();"><img
+										height="54px"></a>&nbsp;&nbsp; <a
+										href="kakaoLogin.do"><img
 										src="/hhw/resources/images/icon/kakaoLogin.jpg" width="165px"
 										height="54px"></a>
-										<%-- <a href="${ kakao_url }"><img
+									<%-- <a href="${ kakao_url }"><img
 										src="/hhw/resources/images/icon/kakaoLogin.jpg" width="165px"
 										height="54px"></a> --%>
 									<p id="token-result"></p>
