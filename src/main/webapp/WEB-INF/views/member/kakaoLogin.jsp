@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 .old-style div[data-role=page] {
 	display: none
@@ -3556,7 +3556,7 @@
 	box-sizing: border-box
 }
 
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 div[data-role=page] {
 	display: none
@@ -4328,7 +4328,7 @@ html:lang(ko) .link_gnb, html:lang(en) .link_gnb {
 	}
 }
 
-@charset "UTF-8"; 
+@charset "UTF-8";
 
 div[data-role=page] {
 	display: none
@@ -14885,37 +14885,41 @@ to {
 </style>
 </head>
 <body class="account_comm account_type2">
-<!-- 카카오 로그인 sdk -->
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+	<!-- 카카오 로그인 sdk -->
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 	<script type="text/javascript">
-	Kakao.init("0ff663d827e934918400ca41b464f8ba"); //JS KEY
-	
-	Kakao.Auth.login({
-		success: function(authObj) {
-			
-			Kakao.API.request({
-				url:'/v2/user/me',
-				success: function(res){
-					console.log(res);
-					
-					var id = res.id;
-					var email = res.kakao_account.email;
-					var name = res.properties.nickname;
-				}
-			})
+		Kakao.init("0ff663d827e934918400ca41b464f8ba"); //JS KEY
+
+		Kakao.Auth.login({
+			success : function(authObj) {
+
+				Kakao.API.request({
+					url : '/v2/user/me',
+					success : function(res) {
+						console.log(res);
+
+						var id = res.id;
+						var email = res.kakao_account.email;
+						var name = res.properties.nickname;
+
+						$('#kid').val(id);
+						$('#kname').val(name);
+						$('#kemail').val(email);
+					}
+				})
 				console.log(authObj);
-			var token = authObj.access_token;
-		},
-		fail: function(err) {
-			alert(JSON.stringify(err));
-		}
-	});
+				var token = authObj.access_token;
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			}
+		});
 	</script>
 
 	<div id="kakaoWrap">
 		<div id="kakaoHead" role="banner">
-			<img src="/hhw/resources/images/icon/kakao.png" >
+			<img src="/hhw/resources/images/icon/kakao.png">
 		</div>
 		<!-- // kakaoHead -->
 		<hr class="hide">
@@ -14928,15 +14932,25 @@ to {
 						data-account-type="account_type2"
 						data-url="page-select-verify-method-for-create"
 						class="km-page-active">
-						<h2 class="tit_page">카카오 아이디로<br> 로그인을 시작합니다!</h2>
+						<h2 class="tit_page">
+							카카오 아이디로<br> 로그인을 시작합니다!
+						</h2>
 						<p class="desc_page">
 							카카오계정 하나로<br> Hi Hello World 서비스를 이용할 수 있어요.
 						</p>
+
 						<div class="box_intro">
 							<div class="wrap_btn">
-								<button class="btn_g btn_confirm verify_eamil" type="button">카카오 계정으로 로그인</button>
+								<form action="kakaoLogin.do" method="post">
+									<input type="hidden" name="kid" id="kid"> <input
+										type="hidden" name="kname" id="kname"> <input
+										type="hidden" name="kemail" id="kemail">
+									<button class="btn_g btn_confirm verify_eamil" type="submit">카카오
+										계정으로 로그인</button>
+								</form>
 							</div>
 						</div>
+
 					</div>
 				</div>
 				<!--// mArticle -->

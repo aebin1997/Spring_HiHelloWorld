@@ -295,35 +295,30 @@ public class MemberController {
 	}
 
 	
-	// 카카오 아이디로 로그인
-	@RequestMapping(value = "/kakaoLogin.do")
+	// 카카오 아이디로 로그인 페이지로 이동(redirect)
+	@RequestMapping(value = "/kakaoLogin.move")
 	public String kakaoLogin() {
 		return "member/kakaoLogin";
 	}
 	
-	/*
-	@RequestMapping(value = "/kakaoLogin.do")
-	public String getKakaoSignIn(ModelMap model, @RequestParam("code") String code, HttpSession session) throws Exception {
+	// 카카오 아이디로 로그인
+	@RequestMapping(value = "/kakaoLogin.do", method = RequestMethod.POST)
+	public String kakaoLoginView(@RequestParam("kid") String kid, @RequestParam("kname") String kname, @RequestParam("kemail") String kemail, HttpSession session) {
+		Member loginMember = new Member();
+		
+		loginMember.setId(kid);
+		loginMember.setName(kname);
+		loginMember.setNickname(kname);
+		loginMember.setEmail(kemail);
 
-	  JsonNode userInfo = KakaoController.getKakaoUserInfo(code);
+		System.out.println("loginMember : " + loginMember);
 
-	  System.out.println(userInfo);
-
-	  String id = userInfo.get("id").toString();
-	  String email = userInfo.get("kaccount_email").toString();
-	  String nickname = userInfo.get("properties").get("nickname").toString();
-
-	  System.out.println(id + email + nickname);
-
-
-	  model.addAttribute("k_userInfo", userInfo);
-	  model.addAttribute("id", id);
-	  model.addAttribute("email", email);
-	  model.addAttribute("nickname", nickname);
-
-	  return "redirect:home.do";
+		// 카카오 아이디로 임시 로그인
+		session.setAttribute("loginUser", loginMember);
+		
+		return "redirect:home.do";
 	}
-	*/
+	
 
 	// 로그아웃
 	@RequestMapping("logout.do")

@@ -92,7 +92,7 @@
 									<a href="${ apiURL }"><img
 										src="/hhw/resources/images/icon/naverLogin.png" width="165px"
 										height="54px"></a>&nbsp;&nbsp; <a
-										href="kakaoLogin.do"><img
+										href="kakaoLogin.move"><img
 										src="/hhw/resources/images/icon/kakaoLogin.jpg" width="165px"
 										height="54px"></a>
 									<%-- <a href="${ kakao_url }"><img
