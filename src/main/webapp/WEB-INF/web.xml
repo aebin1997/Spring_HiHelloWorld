@@ -13,9 +13,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	 		/WEB-INF/spring/root-context.xml
-	 	    /WEB-INF/spring/spring-security.xml
-	 	</param-value>
+			/WEB-INF/spring/root-context.xml
+			/WEB-INF/spring/spring-security.xml
+		</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -59,22 +59,35 @@
 		<location>/WEB-INF/views/common/errorPage.jsp</location>
 	</error-page>
 
-    
-    <!-- url로 어떤 요청이 오느냐에 따라서 해당 필터를 거쳐가게끔 할지 url-pattern을 작성 -->
-    <filter-mapping>
-    	<filter-name>encodingFilter</filter-name>
-    	<url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- 경필 추가 -->
-    
-    <!-- Java Method 64KB보다 크게 허용 -->
-    <servlet>
-        <servlet-name>jsp</servlet-name>
-        <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-        <init-param>
-            <param-name>mappedfile</param-name>
-            <param-value>false</param-value>
-        </init-param>
-    </servlet>
+
+	<!-- url로 어떤 요청이 오느냐에 따라서 해당 필터를 거쳐가게끔 할지 url-pattern을 작성 -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- 경필 추가 -->
+
+	<!-- Java Method 64KB보다 크게 허용 -->
+	<servlet>
+		<servlet-name>jsp</servlet-name>
+		<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+		<init-param>
+			<param-name>mappedfile</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
+
+	<!-- 한글깨짐 해결 -->
+	<filter>
+		<filter-name>setCharacterEncodingFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<async-supported>true</async-supported>
+	</filter>
+
 
 </web-app>

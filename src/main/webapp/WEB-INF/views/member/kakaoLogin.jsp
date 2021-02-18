@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko" class="os_mac chrome pc version_71_0_3578_98">
+<html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
@@ -14900,9 +14902,6 @@ to {
 					var id = res.id;
 					var email = res.kakao_account.email;
 					var name = res.properties.nickname;
-					var html = '<BR>' + id + '<BR>' + email + '<BR>' + name;
-					
-					$('body').append(html);
 				}
 			})
 				console.log(authObj);
@@ -14916,10 +14915,7 @@ to {
 
 	<div id="kakaoWrap">
 		<div id="kakaoHead" role="banner">
-			<h1 id="kakaoServiceLogo">
-				<span class="ir_wa">kakao</span> <img id="brand" height="30"
-					class="img_logo" alt="kakao" style="display: none;">
-			</h1>
+			<img src="/hhw/resources/images/icon/kakao.png" >
 		</div>
 		<!-- // kakaoHead -->
 		<hr class="hide">
@@ -14932,14 +14928,13 @@ to {
 						data-account-type="account_type2"
 						data-url="page-select-verify-method-for-create"
 						class="km-page-active">
-						<h2 class="tit_page">카카오 아이디로 로그인을 시작합니다!</h2>
+						<h2 class="tit_page">카카오 아이디로<br> 로그인을 시작합니다!</h2>
 						<p class="desc_page">
 							카카오계정 하나로<br> Hi Hello World 서비스를 이용할 수 있어요.
 						</p>
 						<div class="box_intro">
 							<div class="wrap_btn">
-								<button class="btn_g btn_confirm verify_eamil" type="button">이메일이
-									있습니다.</button>
+								<button class="btn_g btn_confirm verify_eamil" type="button">카카오 계정으로 로그인</button>
 							</div>
 						</div>
 					</div>
