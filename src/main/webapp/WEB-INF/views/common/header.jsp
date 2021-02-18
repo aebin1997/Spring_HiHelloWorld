@@ -83,7 +83,7 @@
 
 	<!-- START PRELOADER -->
 	<div id="page-preloader">
-		<div class="theme-loader">coca</div>
+		<div class="theme-loader">HI HELLO WORLD</div>
 	</div>
 	<!-- END PRELOADER -->
 
