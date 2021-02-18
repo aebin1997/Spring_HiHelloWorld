@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,7 +32,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.ict.hhw.member.model.service.MemberService;
 import com.ict.hhw.member.model.vo.Member;
 
@@ -101,6 +104,13 @@ public class MemberController {
 		model.addAttribute("apiURL", apiURL);
 
 		/* 네이버 아이디로 로그인 (끝) */
+
+		/* 카카오 아이디로 로그인 (시작) */
+		//String kakaoUrl = KakaoController.getAuthorizationUrl(session);
+
+		// 생성한 인증 URL을 View로 전달
+		//model.addAttribute("kakao_url", kakaoUrl);
+		/* 카카오 아이디로 로그인 (끝) */
 
 		return "member/login";
 	}
@@ -219,7 +229,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-	
+
 	// 네이버 아이디로 로그인
 	@RequestMapping("naverLogin.do")
 	public void naverLogin(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
@@ -257,7 +267,9 @@ public class MemberController {
 			String email = (String) resObj.get("email");
 			String name = (String) resObj.get("name");
 			String nickname = (String) resObj.get("nickname");
-			String phone = (String) resObj.get("phone");
+			String mobile = (String) resObj.get("mobile");
+			// 핸드폰 번호에서 숫자만 추출
+			mobile = mobile.replaceAll("[^0-9]", "");
 
 			// 테스트출력
 			String data = resObj.toString();
@@ -268,7 +280,7 @@ public class MemberController {
 			loginMember.setName(name);
 			loginMember.setEmail(email);
 			loginMember.setNickname(nickname);
-			loginMember.setPhone(phone);
+			loginMember.setPhone(mobile);
 
 			System.out.println("loginMember : " + loginMember);
 
@@ -281,7 +293,37 @@ public class MemberController {
 			System.out.println(e);
 		}
 	}
+
 	
+	// 카카오 아이디로 로그인
+	@RequestMapping(value = "/kakaoLogin.do")
+	public String kakaoLogin() {
+		return "member/kakaoLogin";
+	}
+	
+	/*
+	@RequestMapping(value = "/kakaoLogin.do")
+	public String getKakaoSignIn(ModelMap model, @RequestParam("code") String code, HttpSession session) throws Exception {
+
+	  JsonNode userInfo = KakaoController.getKakaoUserInfo(code);
+
+	  System.out.println(userInfo);
+
+	  String id = userInfo.get("id").toString();
+	  String email = userInfo.get("kaccount_email").toString();
+	  String nickname = userInfo.get("properties").get("nickname").toString();
+
+	  System.out.println(id + email + nickname);
+
+
+	  model.addAttribute("k_userInfo", userInfo);
+	  model.addAttribute("id", id);
+	  model.addAttribute("email", email);
+	  model.addAttribute("nickname", nickname);
+
+	  return "redirect:home.do";
+	}
+	*/
 
 	// 로그아웃
 	@RequestMapping("logout.do")
@@ -298,6 +340,12 @@ public class MemberController {
 	@RequestMapping("myInfo.do")
 	public String myInfoView() {
 		return "member/myPage";
+	}
+	
+	// 내정보관리하기로 이동
+	@RequestMapping("myInfoUpdate.do")
+	public String infoUpdateView() {
+		return "member/infoUpdate";
 	}
 
 	// 회원가입
