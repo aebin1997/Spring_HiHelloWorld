@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="kimwoolina">
 <style type="text/css">
 @charset "UTF-8";
 
