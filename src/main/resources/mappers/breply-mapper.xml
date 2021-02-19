@@ -3,13 +3,13 @@
 <mapper namespace="replyMapper">
 
 	<resultMap type="Reply" id="resultReply">
-		<id column="rid" property="RID" />
-		<result column="rcontent" property="RCONTENT" />
-		<result column="ref_bid" property="REF_BID"/>
-		<result column="rwriter" property="RWRITER" />
-		<result column="r_create_date" property="R_CREATE_DATE" />
-		<result column="r_modify_date" property="R_MODIFY_DATE" />
-		<result column="r_status" property="R_STATUS" />
+		<id column="rid" property="rid" />
+		<result column="rcontent" property="rcontent" />
+		<result column="ref_bid" property="ref_bid"/>
+		<result column="rwriter" property="rwriter" />
+		<result column="r_create_date" property="r_create_date" />
+		<result column="r_modify_date" property="r_modify_date" />
+		<result column="r_status" property="r_status" />
 	</resultMap>
 
 	<select id="selectReply" parameterType="_int" resultMap="resultReply">

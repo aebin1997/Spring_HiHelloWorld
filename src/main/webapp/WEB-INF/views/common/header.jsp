@@ -8,7 +8,7 @@
 <meta name="Author" content="aebin">
 <title>Hi Hello World</title>
 
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
+ <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
 
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <link rel="stylesheet" href="/hhw/resources/css/bootstrap.min.css" />
@@ -33,11 +33,13 @@
 <!-- Style CSS -->
 <link rel="stylesheet" href="/hhw/resources/css/style.css" />
 <!-- Style CSS -->
-<link rel="stylesheet" href="/hhw/resources/css/coca.css" />
+ <link rel="stylesheet" href="/hhw/resources/css/coca.css" />
 <!-- Responsive  CSS -->
 <link rel="stylesheet" href="/hhw/resources/css/responsive.css" />
 <!-- about us CSS -->
-<link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
+ <link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
+ 
+ <link href='/hhw/resources/css/owl.theme.default.min.css' rel='stylesheet' type='text/css'>
 
 
 <!-- 아이콘 불러오는 사이트 -->
@@ -46,7 +48,7 @@
 
 
 <!-- Latest jQuery -->
-<script src="/hhw/resources/js/jquery-2.2.4.min.js"></script>
+ <script src="/hhw/resources/js/jquery-2.2.4.min.js"></script>
 <!-- popper js -->
 <script src="/hhw/resources/js/popper.min.js"></script>
 <!-- Latest compiled and minified Bootstrap -->

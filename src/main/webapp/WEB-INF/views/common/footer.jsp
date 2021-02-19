@@ -11,7 +11,7 @@
 	<footer>
 		<!--Footer top -->
 		<div class="footer-top overlay section-back-image-2"
-			data-background="assets/img/bg/slide1.jpg">
+			data-background="#">
 			<div class="auto-container">
 				<div class="row">
 					<div
@@ -82,21 +82,21 @@
 						<!-- END SECTION TITLE -->
 						<div class="col-12 footer-widget-inner recentPost">
 							<div class="singleRecpost">
-								<img src="assets/img/blog/1.jpg" alt="" class="img-fluid">
+								<img src="#" alt="" class="img-fluid">
 								<h6 class="recTitle">
 									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
 								</h6>
 								<p class="posted-on">3 DEC 2018</p>
 							</div>
 							<div class="singleRecpost">
-								<img src="assets/img/blog/2.jpg" alt="" class="img-fluid">
+								<img src="#" alt="" class="img-fluid">
 								<h6 class="recTitle">
 									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
 								</h6>
 								<p class="posted-on">4 DEC 2018</p>
 							</div>
 							<div class="singleRecpost">
-								<img src="assets/img/blog/3.jpg" alt="" class="img-fluid">
+								<img src="#" alt="" class="img-fluid">
 								<h6 class="recTitle">
 									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
 								</h6>

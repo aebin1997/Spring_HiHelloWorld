@@ -5,13 +5,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 작성</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <!-- 서머노트를 위해 추가해야할 부분 -->
+  <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+
 
 </head>
 <body>
 	<c:import url="../common/header.jsp" />
 	<hr>
-	<h1 align="center" style="padding-top: 90px;">새 게시글 등록 페이지</h1>
+	
+	
+	<div style="text-align: center; padding-top: 90px;">
+		<div>
+			<h2 style="margin: 20px 0 10px 0;">게시글 등록</h2>
+		</div>
+	</div>
+	
+	<br>
 	<%--form에서 입력값들과 파일을 같이 전송하려면, 반드시 enctype="multipart/form-data"속성 추가해야 함 --%>
 	<form action="binsert.do" method="post" enctype="multipart/form-data">
 	
@@ -40,7 +59,7 @@
 			</tr>
 			<tr>
 				<th>내 용</th>
-				<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
+				<td><textarea name="bcontent" rows="5" cols="50" id="summernote"></textarea></td>
 			</tr>
 			<tr>
 				<th colspan="2"><input type="submit" value="등록하기">
@@ -50,6 +69,18 @@
 		</table>
 	</form>
 
+
+<div class="container">
+  <textarea class="summernote" name="editordata"></textarea>    
+</div>
+<script>
+
+$('.summernote').summernote({
+	  height: 150,
+	  lang: "ko-KR"
+	});
+</script>
+ 
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

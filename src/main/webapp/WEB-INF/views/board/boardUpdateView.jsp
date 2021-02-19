@@ -6,15 +6,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 수정</title>
 </head>
 <body>
 	<c:import url="../common/header.jsp"/>
 	<hr>
 	<%--request에 board값 담겨져 왔다. 그래서 그냥 ${ board.bid }라고 써도됨  --%>
-	<h1 align="center" style="padding-top:100px;">${ requestScope.board.bid }번게시글 수정 페이지</h1>
+	<div style="text-align: center; padding-top: 90px;">
+		<div>
+			<h2 style="margin: 20px 0 10px 0;">${ requestScope.board.bid }게시글 수정</h2>
+		</div>
+	</div>
+	
+	
 	<%--form에서 입력값들과 파일을 같이 전송하려면, 반드시 enctype="multipart/form-data"속성 추가해야 함 --%>
-	<form action="bupdate.do" method="post" enctype="multipart/form-data">
+	<form action="bupdate.do" method="post" enctype="multipart/form-data" style="padding-bottom: 30px;">
 		<input type="hidden" name="bid" value="${ board.bid }">
 		<input type="hidden" name="b_original_filename" value="${ board.b_original_filename }">
 		<input type="hidden" name="b_rename_filename" value="${ board.b_rename_filename }">
@@ -39,15 +45,15 @@
 						<!-- 첨부파일이 있는데 삭제하는 경우 -->
 						<c:if test="${ !empty board.b_original_filename }">
 							${ board.b_original_filename } &nbsp; &nbsp; <input type="checkbox" name="delFlag" value="yes">파일삭제 <br>
-						
+						</c:if>
 						<!-- 다른 파일로 변경하는 경우 -->
-							바꿀 파일 선택 : <input type="file" name="upfile">
+						<c:if test="${ empty board.b_original_filename }"> 
+						<input type="file" name="upfile">
 						</c:if>
 					</td>
 			</tr>
 						
-						<c:if test="${ empty board.b_original_filename }"> 새로 첨부할 파일 선택 : <input type="file" name="upfile">
-			</c:if>
+						
 
 			<tr>
 				<th>내 용</th>
