@@ -1,0 +1,122 @@
+@charset "utf-8"; 
+body{background-image:none !important}
+.popup_wrap{width:100%}
+.popup_header{width:100%;height:30px;background-color:#f4a134}
+.popup_header2{min-width:100px;height:30px;background-color:#f4a134}
+.popup_container{margin:10px}
+
+/* 내용있는 팝업 */
+.popup_contents{line-height:1.5}
+/* 기본팝업 */
+.popup_contents_table{display:table;width:100%}
+.popup_contents_cell{display:table-cell;text-align:center;vertical-align:middle;line-height:20px}
+.popup_footer{width:100%;padding-top:8px;padding-bottom:8px;background-color:#f7f7f7;text-align:center}
+
+.poptitle .title{padding-top:9px;height:23px;padding-left:10px;color:#fff}
+.poptitle .url{margin-top:8px;margin-right:5px;font-size:11px;color:#51e245;font-family:'sans-serif';letter-spacing:0.5px}
+.popup_have_Cash{padding:10px 5px 8px 5px; color:#000}
+.have_Cash_btn{margin-top:-2px; cursor:pointer}
+
+/* 도움말팝업 */
+.icon_star{padding-left:10px;margin:20px 0 0 10px;background:url(../images/icon/left_navi_dot.gif) no-repeat 0 4px}
+.step{padding-left:58px;margin:30px 0 0 9px;background:url(../images/popup/help/help_icon_step01.gif) no-repeat;line-height:18px}
+.step01{background:url(../images/popup/help/help_icon_step01.gif) no-repeat}
+.step02{background:url(../images/popup/help/help_icon_step02.gif) no-repeat}
+.step03{background:url(../images/popup/help/help_icon_step03.gif) no-repeat}
+.step04{background:url(../images/popup/help/help_icon_step04.gif) no-repeat}
+.step05{background:url(../images/popup/help/help_icon_step05.gif) no-repeat}
+.step06{background:url(../images/popup/help/help_icon_step06.gif) no-repeat}
+.step07{background:url(../images/popup/help/help_icon_step07.gif) no-repeat}
+.step08{background:url(../images/popup/help/help_icon_step08.gif) no-repeat}
+.step09{background:url(../images/popup/help/help_icon_step09.gif) no-repeat}
+.step10{background:url(../images/popup/help/help_icon_step10.gif) no-repeat}
+
+/* 파일노리 수동설치 */
+.teb_btn{width:150px;}
+
+/* 성인인증 팝업 */
+.adult_title{height:30px;padding-left:20px;background:url(../images/icon/adult_icon.gif) no-repeat;background-size:20px 20px}
+
+/* 친구 선물하기 */
+.friend_box{overflow:auto;position:absolute;right:0px;top:0px;width:165px;max-height:100px;margin-left:-70px;border:1px solid #395ec4;background-color:#fff}
+/*.friend_arrow{position:absolute;right:6px;top:-5px;width:9px;height:5px;background:url(../images/icon/help_common_arrow.gif) no-repeat 0 0;}*/
+.friend_close{position:absolute;right:2px;top:2px;width:15px;height:15px;background:url(../images/icon/x.png) no-repeat 4px 4px;border:1px solid #ccc;cursor:pointer}
+.popup_friend_grop{padding:0 0 5px 5px;text-align:left;}
+.popup_friend_grop li{padding-top:10px;padding-left:18px;background:url(../images/popup/help/icon_friend_man.gif) no-repeat 0 8px}
+.popup_friend_grop .pop_friend_list{}
+.popup_friend_grop .pop_friend_list dd{padding-top:5px;color:#666;cursor:pointer}
+.popup_friend_grop .pop_friend_list dd:hover{padding-top:5px;color:#f59000}
+.btn_friend_list{cursor:pointer;}
+
+/* 친구 그룹 */
+.popup_friend_title{font-weight:bold;padding-bottom:4px;}
+.popup_friend_grop{overflow:hidden;margin-top:20px;padding:10px;border-top:2px solid #bbc6ef;border-bottom:1px solid #ebebeb}
+.popup_friend_grop:after{clear:both;content:'';zoom:1}
+.popup_friend_grop_set01{float:left;}
+.popup_friend_grop_set02{float:left;}
+.popup_friend_grop .popup_friend_grop_list{width:220px;border:1px solid #ccc}
+.popup_friend_grop .popup_friend_grop_list .box{overflow:auto;height:200px}
+.popup_friend_grop .popup_friend_grop_list .list{padding:3px;background-color:#fff;border-bottom:1px solid #f8f8f8}
+.popup_friend_grop .popup_friend_grop_list .list:hover{background-color:#f3f3f3;border-bottom:1px solid #f8f8f8}
+.popup_friend_grop .popup_friend_grop_list .list.on{background-color:#666;color:#fff}
+.popup_friend_grop .popup_friend_grop_list2{width:220px;border:1px solid #ccc}
+.popup_friend_grop .popup_friend_grop_list2 .box{overflow:auto;height:150px}
+.popup_friend_grop .popup_friend_grop_list2 .list{padding:3px;background-color:#fff;border-bottom:1px solid #f8f8f8}
+.popup_friend_grop .popup_friend_grop_list2 .list:hover{background-color:#f3f3f3;border-bottom:1px solid #f8f8f8}
+.popup_friend_grop .popup_friend_grop_list2 .list.on{background-color:#666;color:#fff}
+.popup_friend_grop .popup_friend_grop_gap{width:25px;float:left;border:1px solid #ccc;text-align:center;margin-top:90px;margin-left:5px;margin-right:5px;padding-top:4px;padding-bottom:2px;cursor:pointer;}
+
+/* 회원 로그인 팝업 */
+.member_idpw{padding-left:50px;background:url(../images/popup/member/idpw_text_id.gif) no-repeat 0 6px;line-height:18px}
+.pass_search{padding:10px;text-align:center;background-color:#f5f6fd;border:1px dashed #ccc}
+
+.popup_login_box{display:inline-block;width:311px}
+.popup_login_box2{display:inline-block;width:360px}
+.popup_login_btn{display:inline-block;height:33px;margin-left:5px;padding:16px 10px 0px 10px;background-color:#fff;border:1px solid #999;color:#333;text-decoration:none !important;text-decoration:none !important;cursor:pointer}
+.popup_login_input{height:21px;line-height:21px;}
+
+/* 아이템구매 팝업 */
+.item_arrow2{padding-left:13px;background:url(../images/icon/bu_pg1_r3.gif) no-repeat 0 3px;font-weight:bold;color:#395ec4}
+.item_buy{border-top:1px solid #82a3e6}
+.item_buy_lst{display:inline-block;text-align:middle;}
+.item_buy_lst li{float:left;}
+.item_buy_lst01{width:78px;padding-top:5px;text-align:left}
+.item_buy_lst02{width:78px;padding-top:5px;text-align:right}
+.item_buy_lst03{width:78px;padding-top:2px;padding-left:20px;}
+
+/* 이용도움말 팝업 */
+.nhelp_bodybg{background:url(../../images/popup/nhelp/lnb_bg.gif) repeat-y 0 0!important}
+.nhelp_contents{width:700px;}
+.lnb_area_p{position:fixed;top:45px;width:186px}
+.lnb_btn{font:bold 12px/30px dotum}
+.lnb_btn li{padding-left:10px}
+.lnb_btn li:hover{background:url(../images/popup/nhelp/lnb_btn_on.gif) no-repeat;color:#fff;cursor:pointer}
+.lnb_btn li.on{background:url(../images/popup/nhelp/lnb_btn_on.gif) no-repeat;color:#fff;cursonr:pointer}
+.nhelp_guide{width:491px;padding:15px 0 0 200px}
+.nhelp_title{height:32px;padding-left:25px;background:url(../images/popup/nhelp/nhelp_title.gif) no-repeat;font:bold 12px/30px dotum;color:#fff}
+.nhelp_guide_contents{padding-left:14px}
+.reg_guide{width:491px;padding:15px 0 0 10px}
+.lnb_close_btn{position:fixed;left:35px;bottom:10px}
+.ipin_icon{margin-top:20px;padding-left:20px;background:url(../images/popup/nhelp/ipin_icon.png) no-repeat 0 0; line-height:18px;}
+.arrow_top{text-align:right; margin:20px 40px 0 0;}
+.icon_star2{margin-top:10px; padding-left:10px;background:url(../images/icon/left_navi_dot.gif) no-repeat 0 5px}
+
+
+/* 회원탈퇴 팝업 */
+.isms_p{padding:15px 10px 15px 62px; background:url(../images/popup/member/isms_logo01.png) no-repeat 10px 6px; background-color:#ceecff;cursor:pointer}
+.Survey_lst{margin-top:10px; line-height:25px;}
+
+/* 쪽지 */
+.note_viewbox{overflow-y:scroll;height:150px;margin-top:10px;border:1px solid #ccc;padding:10px;}
+.note_reply_title{margin-top:10px;padding:5px;background-color:#f7f7f7;border-top:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc;text-align:center;font-weight:bold;}
+
+/* 의견남기기 */
+.newview_idea{height:12px; padding:7px 0 10px 0; background-color:#ebeffc; text-align:middle; border-bottom:1px solid #dcdcdc; border-top:1px solid #dcdcdc}
+.b_old{position:relative; top:120px;left:-30px}
+
+/* 이용약관 */
+.m_clause{overflow-y:scroll;height:380px;padding:10px;border:1px solid #ccc}
+
+/* 바로가기 설치 팝업 */
+.shortcut_icon{padding:9px 10px 5px 58px; background:url(/common/images/icon/shortcut.gif) no-repeat 10px 6px;font-size:14px;line-height:18px;}
+

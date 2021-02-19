@@ -1027,9 +1027,9 @@ html>body .location li.last{top:-1px}.location li.alt{width:auto;padding-top:0;b
 .grd_lv3,.grade3{color:#fb9300}.grd_lv3 .lv_state em,.grd_lv3 .grd_action,.grd_lv3 .detail_info,.grd_lv3 .gauge .my_level .level_number,.grade3 .lv_state em,.grade3 .grd_action,.grade3 .detail_info,.grade3 .gauge .my_level .level_number{background:#fb9300}
 .grd_lv3 .tit,.grade3 .tit{color:#fb9300}.grd_lv3 .lv_til em,.grade3 .lv_til em{background:#f7921a}.my_spec .grd_lv3,.my_spec .grade3{color:#fb9300}
 .grd_lv4,.grade4{color:#f7921a}.grd_lv4 .lv_state em,.grd_lv4 .grd_action,.grd_lv4 .detail_info,.grd_lv4 .gauge .my_level .level_number,.grade4 .lv_state em,.grade4 .grd_action,.grade4 .detail_info,.grade4 .gauge .my_level .level_number{background:#f7921a}
-.grd_lv4 .tit,.grade4 .tit{color:#f7921a}.grd_lv4 .lv_til em,.grade4 .lv_til em{background:#46cd14}.my_spec .grd_lv4,.my_spec .grade4{color:#f7921a}
-.grd_lv5,.grade5{color:#46cd14}.grd_lv5 .lv_state em,.grd_lv5 .grd_action,.grd_lv5 .detail_info,.grd_lv5 .gauge .my_level .level_number,.grade5 .lv_state em,.grade5 .grd_action,.grade5 .detail_info,.grade5 .gauge .my_level .level_number{background:#46cd14}
-.grd_lv5 .tit,.grade5 .tit{color:#46cd14}.grd_lv5 .lv_til em,.grade5 .lv_til em{background:#2fae00}.my_spec .grd_lv5,.my_spec .grade5{color:#46cd14}
+.grd_lv4 .tit,.grade4 .tit{color:#f7921a}.grd_lv4 .lv_til em,.grade4 .lv_til em{background:#f7921a}.my_spec .grd_lv4,.my_spec .grade4{color:#f7921a}
+.grd_lv5,.grade5{color:#f7921a}.grd_lv5 .lv_state em,.grd_lv5 .grd_action,.grd_lv5 .detail_info,.grd_lv5 .gauge .my_level .level_number,.grade5 .lv_state em,.grade5 .grd_action,.grade5 .detail_info,.grade5 .gauge .my_level .level_number{background:#f7921a}
+.grd_lv5 .tit,.grade5 .tit{color:#f7921a}.grd_lv5 .lv_til em,.grade5 .lv_til em{background:#2fae00}.my_spec .grd_lv5,.my_spec .grade5{color:#f7921a}
 .grd_lv6,.grade6{color:#2fae00}.grd_lv6 .lv_state em,.grd_lv6 .grd_action,.grd_lv6 .detail_info,.grd_lv6 .gauge .my_level .level_number,.grade6 .lv_state em,.grade6 .grd_action,.grade6 .detail_info,.grade6 .gauge .my_level .level_number{background:#2fae00}
 .grd_lv6 .tit,.grade6 .tit{color:#2fae00}.grd_lv6 .lv_til em,.grade6 .lv_til em{background:#5da7f8}.my_spec .grd_lv6,.my_spec .grade6{color:#2fae00}
 .grd_lv7,.grade7{color:#5da7f8}.grd_lv7 .lv_state em,.grd_lv7 .grd_action,.grd_lv7 .detail_info,.grd_lv7 .gauge .my_level .level_number,.grade7 .lv_state em,.grade7 .grd_action,.grade7 .detail_info,.grade7 .gauge .my_level .level_number{background:#5da7f8}

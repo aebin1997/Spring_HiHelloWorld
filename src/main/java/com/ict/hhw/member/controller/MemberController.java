@@ -337,12 +337,37 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	// 내정보관리하기로 이동
-	@RequestMapping("myInfoUpdate.do")
-	public String infoUpdateView() {
-		return "member/infoUpdate";
-	}
+	// '내정보 관리하기'로 이동
+		@RequestMapping("myInfoUpdate.do")
+		public String infoUpdateView() {
+			return "member/infoUpdate";
+		}
+		
+	// 포인트'충전'하기로 이동
+		@RequestMapping("payInfo.do")
+		public String payInfoView() {
+			return "member/payInfo";
+		}
+		
+	// 내공 '환전'하기로 이동
+		@RequestMapping("myNaegong.do")
+		public String myNaegongView() {
+			return "member/myNaegong";
+		}
+		
+	// '충전하기'로 이동
+		@RequestMapping("payCash.do")
+		public String payCashView() {
+			return "member/payCash";
+		}
 
+
+	// 프로필 수정페이지로 이동
+	@RequestMapping("myProfile.do")
+	public String profileView() {
+		return "member/profile";
+	}
+	
 	// 회원가입
 	@RequestMapping("minsert.do")
 	public String insertMember(@ModelAttribute Member m, Model model, @RequestParam("post") String post,

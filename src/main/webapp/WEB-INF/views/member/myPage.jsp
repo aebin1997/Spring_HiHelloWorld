@@ -277,9 +277,9 @@ function photoView(uri){
 			</div>
 			
                 <div class="btn_info cert">
-				∙포인트: <a href="" onclick="">충전</a><br>
+				∙포인트: <a href="payInfo.do" onclick="">충전</a><br>
 				∙보너스: <br>
-				∙내공: <a href="#" onclick="">환전</a><br>
+				∙내공: <a href="myNaegong.do" onclick="">환전</a><br>
 				</div>
 				
 				<div class="btn_info cert2">
