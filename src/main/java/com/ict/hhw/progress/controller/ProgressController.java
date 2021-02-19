@@ -11,4 +11,10 @@ public class ProgressController {
 	public String progress() {
 		return "progress/progress";
 	}
+	
+	// 목록 페이지로 이동
+	@RequestMapping("plist.do")
+	public String progressView() {
+		return "progress/proListView";
+	}
 }

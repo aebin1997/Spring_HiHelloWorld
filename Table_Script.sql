@@ -440,23 +440,23 @@ VALUES(SEQ_QARID.NEXTVAL, '마지막 댓글입니다.', 13, '일반회원1', SYS
 
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
 CREATE TABLE PAY(
-PAY_ID   		NUMBER,
-MEMBER_ID	VARCHAR2(30),
-PAY_KAKAO   	VARCHAR2(20),
-PAY_DATA   	VARCHAR2(1000),
-PAY_DATETIME 	DATE,
-PAY_IP  		VARCHAR2(20),
- CONSTRAINT PK_PAY_ID PRIMARY KEY (PAY_ID),
- CONSTRAINT FK_MEMBER_ID FOREIGN KEY (MEMBER_ID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
+PAYID   		NUMBER,
+MEMBERID	VARCHAR2(30),
+PAYPG	VARCHAR2(20),
+PAYINFO	VARCHAR2(1000),
+PAYDATE 	DATE,
+PAYIP  		VARCHAR2(20),
+ CONSTRAINT PK_PAY_ID PRIMARY KEY (PAYID),
+ CONSTRAINT FK_MEMBER_ID FOREIGN KEY (MEMBERID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
 );
 
 ------------------------------------------------------------------------------------------------------------------- PAY 컬러명 지정
-COMMENT ON COLUMN PAY.PAY_ID IS '결제 번호';
-COMMENT ON COLUMN PAY.MEMBER_ID IS '결제 회원';
-COMMENT ON COLUMN PAY.PAY_KAKAO IS '카카오페이';
-COMMENT ON COLUMN PAY.PAY_DATA IS '결제 내용';
-COMMENT ON COLUMN PAY.PAY_DATETIME IS '결제 일시';
-COMMENT ON COLUMN PAY.PAY_IP IS '결제 IP';
+COMMENT ON COLUMN PAY.PAYID IS '결제 번호';
+COMMENT ON COLUMN PAY.MEMBERID IS '결제 회원';
+COMMENT ON COLUMN PAY.PAYPG IS 'PG사';
+COMMENT ON COLUMN PAY.PAYINFO IS '결제 내용';
+COMMENT ON COLUMN PAY.PAYDATE IS '결제 일시';
+COMMENT ON COLUMN PAY.PAYIP IS '결제 IP';
 
 ------------------------------------------------------------------------------------------------------------------- PAY 시퀀스
 CREATE SEQUENCE SEQ_PAYID
