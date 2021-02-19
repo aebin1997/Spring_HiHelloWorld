@@ -52,6 +52,12 @@ public class MemberController {
 
 	// 로깅시 추가
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+	// 내정보 테스트 페이지로 이동 -- 임시 --나중에지움
+	@RequestMapping("test.do")
+	public String test() {
+		return "member/info";
+	}
 
 	// 로그인 페이지로 이동
 	@RequestMapping("loginView.do")

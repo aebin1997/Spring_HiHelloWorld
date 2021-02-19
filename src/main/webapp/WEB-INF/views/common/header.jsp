@@ -151,6 +151,7 @@
 									<li><a class="nav-link" href="#">CONTACT</a></li>
 									<li><a class="nav-link" href="progress.do">진행페이지</a></li>
 									<li><a class="nav-link" href="comingsoon.do">ETC</a></li>
+									<li><a class="nav-link" href="test.do">내정보(임시)</a></li>
 								</ul>
 							</nav>
 						</div>
