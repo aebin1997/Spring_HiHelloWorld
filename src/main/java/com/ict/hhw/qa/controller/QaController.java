@@ -193,8 +193,9 @@ public class QaController {
 		}
 	
 	@RequestMapping("qadetail.do")
-	public String qaDetailViewMethod(@RequestParam("qadetail") int qa_id,
-			@RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, Model model) {
+	public String qaDetailViewMethod(
+			@RequestParam(value = "qa_id", required =false) int qa_id,
+			@RequestParam( name = "page", required = false, defaultValue = "1") int currentPage, Model model) {
 		Qa qa = qaService.selectQa(qa_id);
 		int result = qaService.addReadCount(qa_id); // 조회수 1증가 처리
 

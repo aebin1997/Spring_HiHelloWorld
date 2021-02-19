@@ -75,7 +75,8 @@
 <update id="updateQa" parameterType="Qa">
 	update qa
 	set qa_title = #{ qa_title },
-		qa_content = #{ qa_content }
+		qa_content = #{ qa_content },
+		qa_modify_date = sysdate
 		<if test="qa_origin_file_name == null">
 		, qa_origin_file_name = null,
 		qa_rename_file_name = null
@@ -89,7 +90,8 @@
 
 <update id="changeQastatusN" parameterType="_int">
 	update qa
-	set qa_status = 'N'
+	set qa_status = 'N',
+	qa_modify_date = sysdate
 	where qa_id = #{ qa_id }
 </update>
 	

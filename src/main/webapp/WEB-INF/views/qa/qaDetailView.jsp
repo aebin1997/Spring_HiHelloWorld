@@ -14,8 +14,40 @@
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	hideReplyForm();
+	hideReplyForm();	//뷰 페이지 처음 실행시에는 댓글달기 폼이 안보이게 함
+	
+	//해당 게시글의 번호를 전송함
+	var qa_id = ${ qa.qa_id }; //el 의 값을 변수에 대입
+	$.ajax({
+        url : "${ pageContext.request.contextPath }/qarlist.do", /* 절대경로 */
+        type : "post",
+        data : { ref_qa_id: qa_id },	//전송값에 변수 사용
+        dataType : "json",
+        success : function(data) {
+           console.log("success : " + data);
+
+           // object ==> string
+           var jsonStr = JSON.stringify(data);
+           // string ==> json
+           var json = JSON.parse(jsonStr);
+
+           var values = "";
+           for ( var i in json.list) {
+              values += "<tr><td>" + json.list[i].qar_id + "</td><td>" + json.list[i].qar_create_date+ "</td><td>"+json.list[i].qar_writer+"</td></tr>"
+              + "<tr><td colspan='3'>" + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ") +"</td></tr>"; 
+           } //for in
+
+           $("#qarlistTbl").html($("#qarlistTbl").html() + values);
+        },
+        error : function(jqXHR, textstatus, errorthrown) {
+           console.log("error : " + jqXHR + ", " + textstatus + ", "
+                 + errorthrown);
+        }
+     });
 });
+	
+	//jquery ajax 로 헤당 게시글에 대한 댓글 조회 요청 
+ //jquery document ready
 
 function showReplyForm(){
 	$("#replyDiv").css("display","block");
@@ -72,20 +104,20 @@ function hideReplyForm(){
 <a href="${ qalist }">[목록]</a>
 </th></tr>
 </table>
-<hr>
-<%-- 댓글목록 표시 영역 --%>
 
-<hr>
+<%-- 댓글목록 표시 영역 --%>
+<div id="qarlistView" style="border: 1px dotted gray;">
+<table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1"></table>
+</div>
+
+<br><br><br>
 <%-- 댓글 달기 폼영역 --%>
 <div id="replyDiv">
-<form action="qarinsert.do" method="post" enctype="multipart/form-data">
+<form action="qarinsert.do" method="post">
 <input type="hidden" name="ref_qa_id" value="${ qa.qa_id }">
 <table align="center" width="500" border="1" cellpading="5" cellspacing="0">
-<tr><th>제 목</th><td><input type="text" name="qar_title"></td></tr>
 <tr><th>작성자</th>
 <td><input type="text" name="qar_writer" readonly value="${ sessionScope.loginUser.id }"></td></tr>
-<tr><th>파일선택</th>
-<td><input type="file" name="upfile"></td></tr>
 <tr><th>내용</th><td><textarea name="qar_content" rows="5" cols="50"></textarea></td></tr>
 <tr><th colspan="2">
 <input type="submit" value="댓글 등록"> &nbsp;

@@ -54,7 +54,7 @@
    <td>   
    <c:url var="qadetail" value="/qadetail.do">
       <c:param name="page" value="${ currentPage }"/>
-      <c:param name="qadetail" value="${ qa.qa_id }" />
+      <c:param name="qa_id" value="${ qa.qa_id }" />
    </c:url>
    <a href="${ qadetail }">${ qa.qa_title }</a>
    </td>

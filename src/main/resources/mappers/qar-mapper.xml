@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="qarMapper">
+
+<resultMap type="Qar" id="resultQar">
+	<id column="qar_id" property="qar_id"/>
+	<result column="qar_writer" property="qar_writer"/>
+	<result column="qar_content" property="qar_content"/>
+	<result column="ref_qa_id" property="ref_qa_id"/>
+	<result column="qar_create_date" property="qar_create_date"/>
+	<result column="qar_modify_date" property="qar_modify_date"/>
+	<result column="qar_status" property="qar_status"/>
+</resultMap>
+
+
+
+<select id="selectQar" parameterType="_int" resultMap="resultQar">
+	select * from qar
+	where qar_id = #{ qar_id }
+</select>
+
+
+<select id="selectList"   resultMap="resultQar" parameterType="_int">
+	select * from qar
+	where qar_status = 'Y' and ref_qa_id = #{ ref_qa_id }
+	order by qar_id asc
+</select>
+
+<insert id="insertQar" parameterType ="Qar" >
+	insert into qar
+	values (seq_qar.nextval, #{ qar_content }, #{ ref_qa_id },
+				#{ qar_writer }, sysdate, sysdate, default)
+</insert>
+
+<update id="updateQar" parameterType="Qar">
+	update qar
+	set qar_content = #{ qar_content },
+		 qar_modify_date = sysdate
+		 where qar_id = #{ qar_id }
+</update>
+
+<update id="changeQastatusN" parameterType="_int">
+	update qar
+	set qar_status = 'N',
+	qar_modify_date = sysdate
+	where qar_id = #{ qar_id }
+</update>
+ 
+<delete id="deleteQar" parameterType="_int">
+	delete from qar
+	where qar_id = #{ qar_id }
+</delete>
+	
+</mapper>
+
+
+
