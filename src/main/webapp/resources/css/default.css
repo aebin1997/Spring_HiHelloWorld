@@ -1672,7 +1672,7 @@ form.email_find_form {padding:1em}
 #sub_menu #consubmit2 a,
 #sub_menu #consubmit3 a {display:inline-block;width:300px;padding:20px 0;text-align:center;margin:0 0 10px;font-size:1.8rem;font-weight:bold;color:#fff;text-decoration:none}
 #sub_menu #consubmit a {color:#fff!important;border:1px solid #ff6565;border-top-color:#ff6565;box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.22);background:#ff6565;background:linear-gradient(to bottom, #ff6565 0%, #d23e3d 100%)}
-#sub_menu #consubmit2 a {background:#860cff; border:1px solid #860cff; border-top-color:#860cff; box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.22);}
+#sub_menu #consubmit2 a {background:#f7921a; border:1px solid #f7921a; border-top-color:#f7921a; box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.22);}
 #sub_menu #consubmit3 a {color:#fff!important;border:1px solid#1955ff;border-top-color:#1955ff;box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.22);background:#1955ff;background:linear-gradient(to bottom, #1955ff 0%, #0031bd 100%)}
 
 .sub-menu .menu {background:#f7f7f7}

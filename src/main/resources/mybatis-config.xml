@@ -11,6 +11,7 @@
 		<!-- <typeAlias type="com.ict.hhw.notice.model.vo.Notice" alias="Notice"/> -->
 		<typeAlias type="com.ict.hhw.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.ict.hhw.board_reply.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.ict.hhw.progress.model.vo.P_board" alias="P_board"/>
 	</typeAliases>
 	
 	<mappers>
@@ -19,5 +20,6 @@
 		<!-- <mapper resource="mappers/notice-mapper.xml"/> -->
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/breply-mapper.xml"/>
+		<mapper resource="mappers/pboard-mapper.xml"/>
 	</mappers>
 </configuration>

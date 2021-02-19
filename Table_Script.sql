@@ -404,18 +404,19 @@ INCREMENT BY 1;
 INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 7,'안녕녀', '캣티천사', '21/03/05', default, default, default);
 INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 8, '안녕녀', '캣티천사', '21/03/05', default,default, default);
 INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 9, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
-                                        
 
-------------------------------------------------------------------------------------------------------------------- P_BOARD(진행게시판) 생성
+------------------------------------------------------------------------------------------------------------------- 진행테이블()                                             
 CREATE TABLE P_BOARD(
 PID                            NUMBER,
 P_PROID                    NUMBER,
-PWRITER                     VARCHAR2(100),
+PWRITER                     VARCHAR2(100) NOT NULL,
+PTITLE                       VARCHAR2(1000) NOT NULL,
 PCONTENT                  VARCHAR2(4000),
 P_FILE_NAME               VARCHAR2(50),
 P_RFILE_NAME             VARCHAR2(50),
 P_DATE                       DATE,
 P_MODFIY_DATE           DATE,
+PCOUNT                  NUMBER DEFAULT 0,
 PSTATUS		       CHAR(2) DEFAULT 'Y',
 CONSTRAINT PK_PID PRIMARY KEY(PID),
 CONSTRAINT FK_P_PROID FOREIGN KEY (P_PROID) REFERENCES PROGRESS(PRO_ID) ON DELETE SET NULL
@@ -425,11 +426,13 @@ CONSTRAINT FK_P_PROID FOREIGN KEY (P_PROID) REFERENCES PROGRESS(PRO_ID) ON DELET
 COMMENT ON COLUMN P_BOARD.PID IS '진행게시판 글 번호';
 COMMENT ON COLUMN P_BOARD.P_PROID  IS '진행 프로젝트 참조 번호';
 COMMENT ON COLUMN P_BOARD.PWRITER IS '진행게시판 작성자';
+COMMENT ON COLUMN P_BOARD.PTITLE IS '진행게시판 글 제목';
 COMMENT ON COLUMN P_BOARD.PCONTENT IS '진행게시판 내용';
 COMMENT ON COLUMN P_BOARD.P_FILE_NAME IS '진행게시판 원래 첨부파일 명';
 COMMENT ON COLUMN P_BOARD.P_RFILE_NAME IS '진행게시판 바뀐 첨부파일 명';
 COMMENT ON COLUMN P_BOARD.P_DATE IS '진행게시판 작성 날짜';
 COMMENT ON COLUMN P_BOARD.P_MODFIY_DATE IS '진행게시판 수정날짜';
+COMMENT ON COLUMN P_BOARD.PCOUNT IS '진행게시글 조회수';
 COMMENT ON COLUMN P_BOARD.PSTATUS IS '진행게시판 상태';
                                         
 ------------------------------------------------------------------------------------------------------------------- P_BOARD 시퀀스
@@ -438,10 +441,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT);
-
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변2', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트 질문1', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
 CREATE TABLE P_REPLY(
   PRID                  NUMBER,

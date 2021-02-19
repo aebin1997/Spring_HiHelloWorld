@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pboardMapper">
+
+   <resultMap type="P_board" id="resultPboard">
+      <id column="pid" property="pid" />
+      <result column="p_proid" property="p_proid" />
+      <result column="pwriter" property="pwriter" />
+      <result column="ptitle" property="ptitle" />
+      <result column="pcontent" property="pcontent" />
+      <result column="p_file_name" property="p_file_name" />
+      <result column="p_rfile_name" property="p_rfile_name" />
+      <result column="p_date" property="p_date" />
+      <result column="p_modfiy_date" property="p_modfiy_date" />
+      <result column="pcount" property="pcount" />
+      <result column="pstatus" property="pstatus" />
+   </resultMap>
+
+   <select id="selectList" parameterType="com.ict.hhw.progress.model.vo.P_board" resultMap="resultPboard">
+      <![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
+                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODIFY_DATE, 
+                 PCOUNT, PSTATUS
+               FROM (SELECT * 
+                       FROM P_BOARD
+                     WHERE PSTATUS = 'Y'
+                      ORDER BY PID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+   </select>
+   
+</mapper>
