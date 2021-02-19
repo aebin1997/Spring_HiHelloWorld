@@ -40,10 +40,6 @@ span.error {
 }
 </style>
 
-<script type="text/javascript">
-$ 
-</script>
-
 
 </head>
 <body class="member-join" oncontextmenu="return false"
