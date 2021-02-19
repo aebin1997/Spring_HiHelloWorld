@@ -15,11 +15,11 @@ DROP TABLE B_TYPE CASCADE CONSTRAINTS;
 DROP TABLE BOARD CASCADE CONSTRAINTS;
 DROP TABLE REPLY CASCADE CONSTRAINTS;
 DROP TABLE BLAME CASCADE CONSTRAINTS;
-DROP TABLE P_BOARD CASCADE CONSTRAINTS;
-DROP TABLE P_REPLY CASCADE CONSTRAINTS;
-DROP TABLE PROGRESS CASCADE CONSTRAINTS;
 DROP TABLE QA CASCADE CONSTRAINTS;
 DROP TABLE QA_REPLY CASCADE CONSTRAINTS;
+DROP TABLE PROGRESS CASCADE CONSTRAINTS;
+DROP TABLE P_BOARD CASCADE CONSTRAINTS;
+DROP TABLE P_REPLY CASCADE CONSTRAINTS;
 DROP TABLE PAY CASCADE CONSTRAINTS;
 DROP TABLE POINT CASCADE CONSTRAINTS;
 
@@ -28,11 +28,11 @@ DROP SEQUENCE SEQ_NID;
 DROP SEQUENCE SEQ_BID;
 DROP SEQUENCE SEQ_RID;
 DROP SEQUENCE SEQ_BLID;
-DROP SEQUENCE SEQ_PID;
-DROP SEQUENCE SEQ_PRID;
-DROP SEQUENCE SEQ_PRO;
 DROP SEQUENCE SEQ_QA;
 DROP SEQUENCE SEQ_QARID;
+DROP SEQUENCE SEQ_PRO;
+DROP SEQUENCE SEQ_PID;
+DROP SEQUENCE SEQ_PRID;
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
 
@@ -257,111 +257,7 @@ INCREMENT BY 1;
 INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '1', '1', '일반회원1', '일반회원4', '21/01/24', NULL);
 INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '2', '일반회원2', '일반회원5', '21/01/24', NULL);
 INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '3', '3', '일반회원3', '일반회원1', '21/01/24', NULL);
-
-
-------------------------------------------------------------------------------------------------------------------- P_BOARD(진행게시판) 생성
-CREATE TABLE P_BOARD(
-PID                            NUMBER,
-P_PROID                    NUMBER,
-PWRITER                     VARCHAR2(100),
-PCONTENT                  VARCHAR2(4000),
-P_FILE_NAME               VARCHAR2(50),
-P_RFILE_NAME             VARCHAR2(50),
-P_DATE                       DATE,
-P_MODFIY_DATE           DATE,
-PSTATUS		       CHAR(2) DEFAULT 'Y',
-CONSTRAINT PK_PID PRIMARY KEY(PID),
-CONSTRAINT FK_P_PROID FOREIGN KEY (P_PROID) REFERENCES PROGRESS(PRO_ID) ON DELETE SET NULL
-);
-
-------------------------------------------------------------------------------------------------------------------- P_BOARD 컬럼명 지정
-COMMENT ON COLUMN P_BOARD.PID IS '진행게시판 글 번호';
-COMMENT ON COLUMN P_BOARD.P_PROID  IS '진행 프로젝트 참조 번호';
-COMMENT ON COLUMN P_BOARD.PWRITER IS '진행게시판 작성자';
-COMMENT ON COLUMN P_BOARD.PCONTENT IS '진행게시판 내용';
-COMMENT ON COLUMN P_BOARD.P_FILE_NAME IS '진행게시판 원래 첨부파일 명';
-COMMENT ON COLUMN P_BOARD.P_RFILE_NAME IS '진행게시판 바뀐 첨부파일 명';
-COMMENT ON COLUMN P_BOARD.P_DATE IS '진행게시판 작성 날짜';
-COMMENT ON COLUMN P_BOARD.P_MODFIY_DATE IS '진행게시판 수정날짜';
-COMMENT ON COLUMN P_BOARD.PSTATUS IS '진행게시판 상태';
                                         
-------------------------------------------------------------------------------------------------------------------- P_BOARD 시퀀스
-CREATE SEQUENCE SEQ_PID 
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT);
-
-------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
-CREATE TABLE P_REPLY(
-  PRID                  NUMBER,
-  REF_PID		 NUMBER,
-  PRCONTENT          VARCHAR2(400),
-  PRWRITER             VARCHAR2(100) NOT NULL,
-  PR_DATE               DATE,
-  PR_MODIFY_DATE   DATE,
-  PR_STATUS            CHAR(1) DEFAULT 'Y',
-  CONSTRAINT PK_PRID PRIMARY KEY(PRID),
-  CONSTRAINT FK_PID FOREIGN KEY (REF_PID) REFERENCES P_BOARD(PID) ON DELETE SET NULL
-);
-
-
-------------------------------------------------------------------------------------------------------------------- P_REPLY 컬러명 지정
-COMMENT ON COLUMN P_REPLY.PRID IS '진행게시판 댓글 번호';
-COMMENT ON COLUMN P_REPLY.REF_PID IS '참조 진행게시글 번호';
-COMMENT ON COLUMN P_REPLY.PRCONTENT IS '진행게시판 댓글 내용';
-COMMENT ON COLUMN P_REPLY.PRWRITER IS '진행게시판 댓글 작성자';
-COMMENT ON COLUMN P_REPLY.PR_DATE IS '진행게시판 댓글 작성 일자';
-COMMENT ON COLUMN P_REPLY.PR_MODIFY_DATE IS '진행게시판 댓글 수정 일자';
-COMMENT ON COLUMN P_REPLY.PR_STATUS IS '진행게시판 댓글 상태';
-
-------------------------------------------------------------------------------------------------------------------- P_REPLY 시퀀스
-CREATE SEQUENCE SEQ_PRID 
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_REPLY)
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '캣티천사', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 세번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
-
---------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
-CREATE TABLE PROGRESS(
-PRO_ID                            NUMBER,
-PRO_QID                      NUMBER,
-PRO_WRITER                     VARCHAR2(100) NOT NULL,
-PRO_ANSWERER                     VARCHAR2(100) NOT NULL,
-PRO_DEADLINE                      DATE,
-PRO_PAY                     NUMBER DEFAULT 0,
-PRO_PROCESS                    NUMBER DEFAULT 0,
-PRO_STATUS		       CHAR(2) DEFAULT 'Y',
-CONSTRAINT PK_PRO_ID PRIMARY KEY(PRO_ID),
-CONSTRAINT FK_QID FOREIGN KEY (PRO_QID) REFERENCES QA(QA_ID) ON DELETE SET NULL
-);
-
-------------------------------------------------------------------------------------------------------------------- PROGRESS 코멘트
-
-COMMENT ON COLUMN PROGRESS.PRO_ID IS '프로젝트 아이디';
-COMMENT ON COLUMN PROGRESS.PRO_QID IS '진행의뢰 참조 의뢰글 번호';
-COMMENT ON COLUMN PROGRESS.PRO_WRITER IS '질문자 닉네임';
-COMMENT ON COLUMN PROGRESS.PRO_ANSWERER IS '답변자 닉네임';
-COMMENT ON COLUMN PROGRESS.PRO_DEADLINE IS '프로젝트 마감기한';
-COMMENT ON COLUMN PROGRESS.PRO_PAY IS '프로젝트 결제금액';
-COMMENT ON COLUMN PROGRESS.PRO_PROCESS IS '프로젝트 진행도';
-COMMENT ON COLUMN PROGRESS.PRO_STATUS IS '프로젝트 상태';
-
-------------------------------------------------------------------------------------------------------------------- PROGRESS 시퀀스
-CREATE SEQUENCE SEQ_PRO 
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 7,'안녕녀', '캣티천사', '21/03/05', default, default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 8, '안녕녀', '캣티천사', '21/03/05', default,default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 9, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
 ------------------------------------------------------------------------------------------------------------------- QA 생성
 CREATE TABLE QA(
     QA_ID                  NUMBER NOT NULL,
@@ -473,6 +369,113 @@ INSERT INTO QA_REPLY
 VALUES(SEQ_QARID.NEXTVAL, '마지막 댓글입니다.', 13, '일반회원1', SYSDATE, SYSDATE, DEFAULT);
 
 
+
+--------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
+CREATE TABLE PROGRESS(
+PRO_ID                            NUMBER,
+PRO_QID                      NUMBER,
+PRO_WRITER                     VARCHAR2(100) NOT NULL,
+PRO_ANSWERER                     VARCHAR2(100) NOT NULL,
+PRO_DEADLINE                      DATE,
+PRO_PAY                     NUMBER DEFAULT 0,
+PRO_PROCESS                    NUMBER DEFAULT 0,
+PRO_STATUS		       CHAR(2) DEFAULT 'Y',
+CONSTRAINT PK_PRO_ID PRIMARY KEY(PRO_ID),
+CONSTRAINT FK_QID FOREIGN KEY (PRO_QID) REFERENCES QA(QA_ID) ON DELETE SET NULL
+);
+
+------------------------------------------------------------------------------------------------------------------- PROGRESS 코멘트
+
+COMMENT ON COLUMN PROGRESS.PRO_ID IS '프로젝트 아이디';
+COMMENT ON COLUMN PROGRESS.PRO_QID IS '진행의뢰 참조 의뢰글 번호';
+COMMENT ON COLUMN PROGRESS.PRO_WRITER IS '질문자 닉네임';
+COMMENT ON COLUMN PROGRESS.PRO_ANSWERER IS '답변자 닉네임';
+COMMENT ON COLUMN PROGRESS.PRO_DEADLINE IS '프로젝트 마감기한';
+COMMENT ON COLUMN PROGRESS.PRO_PAY IS '프로젝트 결제금액';
+COMMENT ON COLUMN PROGRESS.PRO_PROCESS IS '프로젝트 진행도';
+COMMENT ON COLUMN PROGRESS.PRO_STATUS IS '프로젝트 상태';
+
+------------------------------------------------------------------------------------------------------------------- PROGRESS 시퀀스
+CREATE SEQUENCE SEQ_PRO 
+START WITH 1
+INCREMENT BY 1;
+
+------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 7,'안녕녀', '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 8, '안녕녀', '캣티천사', '21/03/05', default,default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 9, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
+                                        
+
+------------------------------------------------------------------------------------------------------------------- P_BOARD(진행게시판) 생성
+CREATE TABLE P_BOARD(
+PID                            NUMBER,
+P_PROID                    NUMBER,
+PWRITER                     VARCHAR2(100),
+PCONTENT                  VARCHAR2(4000),
+P_FILE_NAME               VARCHAR2(50),
+P_RFILE_NAME             VARCHAR2(50),
+P_DATE                       DATE,
+P_MODFIY_DATE           DATE,
+PSTATUS		       CHAR(2) DEFAULT 'Y',
+CONSTRAINT PK_PID PRIMARY KEY(PID),
+CONSTRAINT FK_P_PROID FOREIGN KEY (P_PROID) REFERENCES PROGRESS(PRO_ID) ON DELETE SET NULL
+);
+
+------------------------------------------------------------------------------------------------------------------- P_BOARD 컬럼명 지정
+COMMENT ON COLUMN P_BOARD.PID IS '진행게시판 글 번호';
+COMMENT ON COLUMN P_BOARD.P_PROID  IS '진행 프로젝트 참조 번호';
+COMMENT ON COLUMN P_BOARD.PWRITER IS '진행게시판 작성자';
+COMMENT ON COLUMN P_BOARD.PCONTENT IS '진행게시판 내용';
+COMMENT ON COLUMN P_BOARD.P_FILE_NAME IS '진행게시판 원래 첨부파일 명';
+COMMENT ON COLUMN P_BOARD.P_RFILE_NAME IS '진행게시판 바뀐 첨부파일 명';
+COMMENT ON COLUMN P_BOARD.P_DATE IS '진행게시판 작성 날짜';
+COMMENT ON COLUMN P_BOARD.P_MODFIY_DATE IS '진행게시판 수정날짜';
+COMMENT ON COLUMN P_BOARD.PSTATUS IS '진행게시판 상태';
+                                        
+------------------------------------------------------------------------------------------------------------------- P_BOARD 시퀀스
+CREATE SEQUENCE SEQ_PID 
+START WITH 1
+INCREMENT BY 1;
+
+------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT);
+
+------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
+CREATE TABLE P_REPLY(
+  PRID                  NUMBER,
+  REF_PID		 NUMBER,
+  PRCONTENT          VARCHAR2(400),
+  PRWRITER             VARCHAR2(100) NOT NULL,
+  PR_DATE               DATE,
+  PR_MODIFY_DATE   DATE,
+  PR_STATUS            CHAR(1) DEFAULT 'Y',
+  CONSTRAINT PK_PRID PRIMARY KEY(PRID),
+  CONSTRAINT FK_PID FOREIGN KEY (REF_PID) REFERENCES P_BOARD(PID) ON DELETE SET NULL
+);
+
+
+------------------------------------------------------------------------------------------------------------------- P_REPLY 컬러명 지정
+COMMENT ON COLUMN P_REPLY.PRID IS '진행게시판 댓글 번호';
+COMMENT ON COLUMN P_REPLY.REF_PID IS '참조 진행게시글 번호';
+COMMENT ON COLUMN P_REPLY.PRCONTENT IS '진행게시판 댓글 내용';
+COMMENT ON COLUMN P_REPLY.PRWRITER IS '진행게시판 댓글 작성자';
+COMMENT ON COLUMN P_REPLY.PR_DATE IS '진행게시판 댓글 작성 일자';
+COMMENT ON COLUMN P_REPLY.PR_MODIFY_DATE IS '진행게시판 댓글 수정 일자';
+COMMENT ON COLUMN P_REPLY.PR_STATUS IS '진행게시판 댓글 상태';
+
+------------------------------------------------------------------------------------------------------------------- P_REPLY 시퀀스
+CREATE SEQUENCE SEQ_PRID 
+START WITH 1
+INCREMENT BY 1;
+
+------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_REPLY)
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '캣티천사', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 세번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
+                                             
+                                             
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
 CREATE TABLE PAY(
 PAYID   		NUMBER,
