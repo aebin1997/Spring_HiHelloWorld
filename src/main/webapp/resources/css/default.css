@@ -4780,7 +4780,7 @@ button:hover svg use {fill:#860CFF; stroke:#860CFF;}
 /* QA 답변 */
 .qa-answer h3 {margin: 20px 0; font-size: 1.4rem;}
 .qa-answer .qa-sort {position: relative; float: right; top: -50px;}
-.qa-answer .qa-sort select {-webkit-appearance: none; -moz-appearance: none; appearance: none; padding: 5px 10px; width:95px; background: url('../img/select_ico.svg') no-repeat 90%; background-size: 15px 15px; border: 1px solid #e4e4e4; color: #757575; font-size: 1.3rem; cursor: pointer;}
+.qa-answer .qa-sort select {-webkit-appearance: none; -moz-appearance: none; appearance: none; padding: 5px 10px; width:95px; background: url('../images/icon/ico_select.png') no-repeat 90%; background-size: 15px 15px; border: 1px solid #e4e4e4; color: #757575; font-size: 1.3rem; cursor: pointer;}
 .qa-answer .qa-sort select::-ms-expand {display: none;}
 .qa-answerList {margin: 15px 0;}
 .answer-item, .answer-item-select {border: 1px solid #e4e4e4; margin: 15px 0;}
