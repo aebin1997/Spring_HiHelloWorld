@@ -99,7 +99,7 @@
 						class="col-lg-5 col-md-3 col-sm-6 col-7 mx-auto pl-0 mb-lg-0 mb-5">
 						<div class="logo">
 							<a href="index.jsp"> <img class="img-fluid"
-								src="/hhw/resources/images/hiworld.png" alt=">Hi Hello World!_" style="width:280px; height:50px">
+								src="/hhw/resources/images/coding.png" alt=">Hi Hello World!_" style="width:280px; height:50px">
 							</a>
 						</div>
 					</div>
