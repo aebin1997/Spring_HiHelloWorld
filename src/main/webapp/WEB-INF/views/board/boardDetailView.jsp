@@ -167,7 +167,7 @@
 	<%-- 댓글달기 폼 영역 --%>
 	<div id="replyDiv">
 		<form action="rinsert.do" method="post">
-			<input type="hidden" name="ref_bid" value="${ board.bid }">
+			<input type="hidden" name="bid" value="${ board.bid }">
 			<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<th>작성자</th>

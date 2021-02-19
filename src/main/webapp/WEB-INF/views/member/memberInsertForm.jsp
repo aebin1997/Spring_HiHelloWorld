@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%-- 글쓰기 페이지 이동 요청 url --%>
+<c:url var="home" value="/home.do" />
+<c:url var="login" value="/loginView.do" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +39,12 @@ span.error {
 	color: red;
 }
 </style>
+
+<script type="text/javascript">
+$ 
+</script>
+
+
 </head>
 <body class="member-join" oncontextmenu="return false"
 	ondragstart="return false" onselectstart="return !disableSelection"
@@ -179,7 +190,32 @@ span.error {
 									</table>
 									<div id="formSubmit" class="form_footer">
 										<button class="btn active btn_join"
-											onclick='return validate();'>가입하기</button>
+											onclick='return validate();' data-toggle="modal" data-target="#success-modal">가입하기</button>
+											<!-- Success modal -->
+											
+
+											<c:if test="${ inOk == 'inOk' } ">
+											<div id="modal" class="col-md-4 col-sm-12 mb-30">
+												<div class="pd-20 card-box height-100-p">
+													<div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+														<div class="modal-dialog modal-dialog-centered" role="document">
+															<div class="modal-content">
+																<div class="modal-body text-center font-18">
+																	<h3 class="mb-20">회원가입 성공!</h3>
+																	<div class="mb-30 text-center"><img src="/hhw/resources/images/success.png"></div>
+																	Hi Hello World에 오신 것을 환영합니다!
+																</div>
+																<div class="modal-footer justify-content-center">
+																	<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="home();">Home</button>
+																	<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="login();">login</button>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											</c:if>
+									    	<!-- Success modal -->
 									</div>
 								</form>
 							</div>
@@ -190,6 +226,7 @@ span.error {
 		</div>
 
 		<script type="text/javascript">
+		
 			function validate() {
 				// 아이디 중복체크 여부
 				if ($("#idDuplicateCheck").val() == 0) {
@@ -199,6 +236,8 @@ span.error {
 				} else {
 					return true;
 				}
+				
+				$("#modal").modal('show');
 			}
 
 			$(function() {
@@ -252,6 +291,10 @@ span.error {
 						}
 					}
 				})
+				
+				// 회원가입 modal창
+				$("#modal").show();
+				
 			});
 			
 			// 이메일 중복확인
@@ -302,6 +345,10 @@ span.error {
 				      return false;
 				    }
 				  }
+			  
+			  
+			  
+			  
 		</script>
 		
 

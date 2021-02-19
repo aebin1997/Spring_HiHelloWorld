@@ -31,9 +31,10 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	
 	// 자유게시판 메뉴로 이동
-		@RequestMapping("blist1.do")
-		public String boardListView() {
+	@RequestMapping("blist1.do")
+	public String boardListView() {
 			return "board/boardListView";
 		}
 	
@@ -196,7 +197,8 @@ public class BoardController {
 
 	// 게시글 상세보기 요청 처리용
 	@RequestMapping("bdetail.do")
-	public String boardDetailViewMethod(@RequestParam("bid") int bid,
+	public String boardDetailViewMethod(
+			@RequestParam(value="bid", required=false) int bid,
 			@RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, Model model) {
 		Board board = boardService.selectBoard(bid);
 		int result = boardService.addReadCount(bid); // 조회수 1증가 처리
@@ -257,6 +259,7 @@ public class BoardController {
 		return new ModelAndView("filedown2", "downFile", model);
 	}
 
+	
 	// 검색
 	@RequestMapping(value = "bsearchTitle.do", method = RequestMethod.POST)
 	public String boardSearchTitleMethod(@RequestParam("keyword") String keyword,
