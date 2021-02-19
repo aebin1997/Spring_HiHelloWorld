@@ -17,6 +17,7 @@ DROP TABLE REPLY CASCADE CONSTRAINTS;
 DROP TABLE BLAME CASCADE CONSTRAINTS;
 DROP TABLE P_BOARD CASCADE CONSTRAINTS;
 DROP TABLE P_REPLY CASCADE CONSTRAINTS;
+DROP TABLE PROGRESS CASCADE CONSTRAINTS;
 DROP TABLE QA CASCADE CONSTRAINTS;
 DROP TABLE QA_REPLY CASCADE CONSTRAINTS;
 DROP TABLE PAY CASCADE CONSTRAINTS;
@@ -29,10 +30,12 @@ DROP SEQUENCE SEQ_RID;
 DROP SEQUENCE SEQ_BLID;
 DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
+DROP SEQUENCE SEQ_PRO;
 DROP SEQUENCE SEQ_QA;
 DROP SEQUENCE SEQ_QARID;
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
+
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 CREATE TABLE MEMBER (
@@ -326,7 +329,40 @@ INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, '진행게시판 첫번째 댓글�
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, '진행게시판 두번째 댓글입니다.', '일반회원2', '21/01/24', NULL, DEFAULT);
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, '진행게시판 세번째 댓글입니다.', '일반회원3', '21/01/24', NULL, DEFAULT);
 
+--------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
+CREATE TABLE PROGRESS(
+PRO_ID                            NUMBER,
+PRO_QID                      NUMBER,
+PRO_WRITER                     VARCHAR2(100) NOT NULL,
+PRO_ANSWERER                     VARCHAR2(100) NOT NULL,
+PRO_DEADLINE                      DATE,
+PRO_PAY                     NUMBER DEFAULT 0,
+PRO_PROCESS                    NUMBER DEFAULT 0,
+PRO_STATUS		       CHAR(2) DEFAULT 'Y',
+CONSTRAINT PK_PRO_ID PRIMARY KEY(PRO_ID),
+CONSTRAINT FK_QID FOREIGN KEY (PRO_QID) REFERENCES QA(QA_ID) ON DELETE SET NULL
+);
 
+------------------------------------------------------------------------------------------------------------------- PROGRESS 코멘트
+
+COMMENT ON COLUMN PROGRESS.PRO_ID IS '프로젝트 아이디';
+COMMENT ON COLUMN PROGRESS.PRO_QID IS '진행의뢰 참조 의뢰글 번호';
+COMMENT ON COLUMN PROGRESS.PRO_WRITER IS '질문자 닉네임';
+COMMENT ON COLUMN PROGRESS.PRO_ANSWERER IS '답변자 닉네임';
+COMMENT ON COLUMN PROGRESS.PRO_DEADLINE IS '프로젝트 마감기한';
+COMMENT ON COLUMN PROGRESS.PRO_PAY IS '프로젝트 결제금액';
+COMMENT ON COLUMN PROGRESS.PRO_PROCESS IS '프로젝트 진행도';
+COMMENT ON COLUMN PROGRESS.PRO_STATUS IS '프로젝트 상태';
+
+------------------------------------------------------------------------------------------------------------------- PROGRESS 시퀀스
+CREATE SEQUENCE SEQ_PRO 
+START WITH 1
+INCREMENT BY 1;
+
+------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 7,'안녕녀', '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 8, '안녕녀', '캣티천사', '21/03/05', default,default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 9, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
 ------------------------------------------------------------------------------------------------------------------- QA 생성
 CREATE TABLE QA(
     QA_ID                  NUMBER NOT NULL,
