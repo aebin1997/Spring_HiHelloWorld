@@ -95,18 +95,6 @@
 														action="//sir.kr/qa/write_comment_update.php"
 														onsubmit="return fcomment_submit(this);"
 														autocomplete="off">
-														<input type="hidden" name="w" value="c" id="w"> <input
-															type="hidden" name="unanswered" value=""> <input
-															type="hidden" name="wr_id" value="400632"> <input
-															type="hidden" name="comment_id" value="" id="comment_id">
-														<input type="hidden" name="s_tag" value=""> <input
-															type="hidden" name="sfl" value=""> <input
-															type="hidden" name="stx" value="" title="두단어 까지만 검색됩니다.">
-														<input type="hidden" name="sst" value=""> <input
-															type="hidden" name="vsst" value=""> <input
-															type="hidden" name="page" value="1"> <input
-															type="hidden" name="vpage" value="1"> <input
-															type="hidden" name="cwin" value="">
 
 
 														<div id="wcmt_content">
@@ -189,6 +177,10 @@
 								</article>
 								<!-- // 답변 end -->
 							</section>
+							<!-- 글작성 버튼 -->
+							<div id="consubmit2" align="right">
+                            	<a href="#" class="consubmit2"><i class="fa fa-pencil" aria-hidden="true"></i>  글 작성하기</a>
+                    		</div>
 						</div>
 					</article>
 				</div>
@@ -207,7 +199,6 @@
 							</div>
 						</div>
 					</div>
-					<!-- SIR 오른쪽 메뉴 아래 -->
 				</div>
 			</div>
 		</div>
