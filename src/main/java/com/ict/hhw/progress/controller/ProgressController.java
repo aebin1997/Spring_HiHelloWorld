@@ -26,7 +26,7 @@ public class ProgressController {
 	}
 
 	// 게시글 페이지별 목록 조회 요청 처리용
-	@RequestMapping("blist.do")
+	@RequestMapping("plist2.do")
 	public String boardListMethod(@RequestParam("page") int currentPage, Model model) {
 		int limit = 10;
 		ArrayList<P_board> list = PboardService.selectList(currentPage, limit);

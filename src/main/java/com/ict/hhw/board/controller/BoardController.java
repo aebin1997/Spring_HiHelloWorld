@@ -31,13 +31,6 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	
-	// 자유게시판 메뉴로 이동
-	@RequestMapping("blist1.do")
-	public String boardListView() {
-			return "board/boardListView";
-		}
-	
 	// 글쓰기 페이지 이동 요청 처리용
 	@RequestMapping("bwmove.do")
 	public String moveBoardWriteForm() {
