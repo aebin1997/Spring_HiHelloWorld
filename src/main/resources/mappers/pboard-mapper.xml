@@ -2,22 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pboardMapper">
 
-   <resultMap type="P_board" id="resultPboard">
-      <id column="pid" property="pid" />
-      <result column="p_proid" property="p_proid" />
-      <result column="pwriter" property="pwriter" />
-      <result column="ptitle" property="ptitle" />
-      <result column="pcontent" property="pcontent" />
-      <result column="p_file_name" property="p_file_name" />
-      <result column="p_rfile_name" property="p_rfile_name" />
-      <result column="p_date" property="p_date" />
-      <result column="p_modfiy_date" property="p_modfiy_date" />
-      <result column="pcount" property="pcount" />
-      <result column="pstatus" property="pstatus" />
-   </resultMap>
+	<resultMap type="P_board" id="resultPboard">
+		<id column="pid" property="pid" />
+		<result column="p_proid" property="p_proid" />
+		<result column="pwriter" property="pwriter" />
+		<result column="ptitle" property="ptitle" />
+		<result column="pcontent" property="pcontent" />
+		<result column="p_file_name" property="p_file_name" />
+		<result column="p_rfile_name" property="p_rfile_name" />
+		<result column="p_date" property="p_date" />
+		<result column="p_modify_date" property="p_modify_date" />
+		<result column="pcount" property="pcount" />
+		<result column="pstatus" property="pstatus" />
+	</resultMap>
 
-   <select id="selectList" parameterType="com.ict.hhw.progress.model.vo.P_board" resultMap="resultPboard">
+	<select id="selectList" 
+		parameterType="com.ict.hhw.progress.model.vo.P_board"
+		resultMap="resultPboard">
       <![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
+                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODFIY_DATE, PCOUNT, PSTATUS
+               FROM (SELECT * 
+                       FROM P_BOARD
+                     WHERE PSTATUS = 'Y'
+                      ORDER BY PID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+	</select>
+
+	<select id="getListCount" resultType="_int">
+		select count(*) from
+		p_board
+	</select>
+
+	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultPboard">
+   		<![CDATA[
       	SELECT *
         FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
                   P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODIFY_DATE, 
@@ -25,9 +45,76 @@
                FROM (SELECT * 
                        FROM P_BOARD
                      WHERE PSTATUS = 'Y'
+                     AND PTITLE LIKE '%' || #{ keyword } || '%'
                       ORDER BY PID DESC))
       	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
       	]]>
-   </select>
-   
+	</select>
+
+	<select id="searchWriter"
+		parameterType="com.ict.hhw.common.SearchAndPage"
+		resultMap="resultPboard">
+   		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
+                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODIFY_DATE, 
+                 PCOUNT, PSTATUS
+               FROM (SELECT * 
+                       FROM P_BOARD
+                     WHERE PSTATUS = 'Y'
+                     AND PWRITER LIKE '%' || #{ keyword } || '%'
+                      ORDER BY PID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+	</select>
+
+	<select id="searchDate"
+		parameterType="com.ict.hhw.common.SearchAndPage"
+		resultMap="resultPboard">
+   		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, BID, BTITLE, BWRITER,BCONTENT,
+                  ORIGINAL_FILENAME,RENAME_FILENAME,BCOUNT,
+                 B_CREATE_DATE, B_MODIFY_DATE,B_STATUS
+               FROM (SELECT * 
+                       FROM BOARD
+                     WHERE B_STATUS = 'Y'
+                     and b_create_date between #{ begin } and #{ end }
+                      ORDER BY BID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+	</select>
+
+	<select id="getSearchTitleListCount" parameterType="string"
+		resultType="_int">
+		select count(*) from p_board
+		where ptitle like '%' || #{ keyword } || '%'
+	</select>
+
+	<select id="getSearchWriterListCount" parameterType="string"
+		resultType="_int">
+		select count(*) from p_board
+		where pwriter like '%' || #{ keyword } || '%'
+	</select>
+
+	<select id="getSearchDateListCount"
+		parameterType="com.ict.hhw.common.SearchDate" resultType="_int">
+		select
+		count(*) from p_board
+		where p_date between #{ begin } and #{ end }
+	</select>
+
+	<select id="selectBoard" parameterType="_int"
+		resultMap="resultPboard">
+		select * from p_board
+		where pid = #{ pid }
+	</select>
+
+	<update id="updateBCount" parameterType="_int">
+		update p_board
+		set pcount =
+		pcount + 1
+		where pid = #{ pid }
+	</update>
+
 </mapper>

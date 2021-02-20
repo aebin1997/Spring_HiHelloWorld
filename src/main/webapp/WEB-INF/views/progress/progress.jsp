@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,7 +35,10 @@
 						<!-- 웹 -->
 						<div class="vbo_wr">
 							<ul class="sir_vbo_com">
-								<li><a href="plist.do" class="sir_b01">목록</a></li>
+								<c:url var="plist" value="/plist.do">
+								<c:param name="page" value="1" />
+								</c:url>
+								<li><a href="${ plist }" class="sir_b01">목록</a></li>
 							</ul>
 						</div>
 						<section id="vbo_con">
