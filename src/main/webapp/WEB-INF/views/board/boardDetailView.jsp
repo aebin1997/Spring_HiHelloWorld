@@ -80,7 +80,7 @@
 </script>
 </head>
 <body>
-	<%-- 상대경로만 사용 가능함 --%>
+	
 	<c:import url="../common/header.jsp" />
 	
 	<div style="text-align: center; padding-top: 90px;">

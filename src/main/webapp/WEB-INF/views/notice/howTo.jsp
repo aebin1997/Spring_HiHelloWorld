@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -198,16 +200,26 @@ body {
 
    <jsp:include page="../common/header.jsp" />
 
-   <section class="breadcrumbs-custom-inset">
-      <div class="breadcrumbs-custom context-dark bg-overlay-46">
-         <div class="container">
-            <h2 class="breadcrumbs-custom-title">사이트 이용 방법</h2>
-            <ul class="breadcrumbs-custom-path">
-               <li><a class="nav-link" href="noticeHome.do">공지사항</a></li>
-               <li><a class="nav-link" href="aboutUs.do">about Us</a></li>
-               <li><a class="nav-link" href="howTo.do">사이트 이용 방법</a></li>
-            </ul>
-         </div>
+	<c:url var="nlist" value="nlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="about" value="aboutUs.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="howto" value="howTo.do">
+		<c:param name="page" value="1" />
+	</c:url>
+
+	<section class="breadcrumbs-custom-inset">
+		<div class="breadcrumbs-custom context-dark bg-overlay-46">
+			<div class="container">
+				<h2 class="breadcrumbs-custom-title">사이트 이용 방법</h2>
+				<ul class="breadcrumbs-custom-path">
+					<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
+					<li><a class="nav-link" href="${ about }">About Us</a></li>
+					<li><a class="nav-link" href="${ howto }">사이트 이용 방법</a></li>
+				</ul>
+			</div>
          <div class="box-position-1"
             style="background-image: url(/hhw/resources/images/5F5F5F.jpg);"></div>
       </div>

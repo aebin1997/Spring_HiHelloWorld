@@ -137,6 +137,9 @@
 	<c:url var="blist" value="blist.do">
 		<c:param name="page" value="1" />
 	</c:url>
+	<c:url var="nlist" value="nlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
 
 		<!-- START NAVIGATION AREA -->
 		<div class="sticky-menu">
@@ -147,7 +150,7 @@
 							<nav class="navbar navbar-expand-lg justify-content-left">
 								<ul class="navbar-nav">
 									<li><a class="active nav-link" href="index.jsp">Home</a></li>
-									<li><a class="nav-link" href="noticeHome.do">공지사항</a></li>
+									<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="#">CONTACT</a></li>

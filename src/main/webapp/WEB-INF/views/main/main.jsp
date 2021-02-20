@@ -78,6 +78,43 @@
 							+ errorthrown);
 				}
 			});
+
+	$(function() {
+		// 최근 등록된 공지글 3개 자동 출력되게 함
+		$
+				.ajax({
+					url : "${ pageContext.request.contextPath }/ntop3.do", /* 절대경로 */
+					type : "post",
+					dataType : "json",
+					success : function(data) {
+						console.log("success : " + data);
+
+						// object ==> string
+						var jsonStr = JSON.stringify(data);
+						// string ==> json
+						var json = JSON.parse(jsonStr);
+
+						var values = "";
+						for ( var i in json.list) {
+							values += "<tr><td>"
+									+ json.list[i].nid
+									+ "</td><td><a href='${ pageContext.request.contextPath }/ndetail.do?nid="
+									+ json.list[i].nid
+									+ "'>"
+									+ decodeURIComponent(json.list[i].ntitle)
+											.replace(/\+/gi, " ") /* 디코딩하면 공백이 +로 되기때문에  " " 공백으로 바꿔준다*/
+									+ "</a></td><td>"
+									+ json.list[i].n_create_date + "</td></tr>";
+						} //for in
+
+						$("#new_notice").html($("#new_notice").html() + values);
+					},
+					error : function(jqXHR, textstatus, errorthrown) {
+						console.log("error : " + jqxHHR + ", " + textstatus
+								+ ", " + errorthrown);
+					}
+				});
+	}); // jquery document ready
 </script>
 
 </head>
@@ -162,8 +199,23 @@
 		<hr style="clear: both;">
 		<!-- float되있는거 해제 -->
 		<section>
+
+			<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
+			<div
+				style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
+				<h4>새로운 공지글</h4>
+				<table id="new_notice" border="1" cellspacing="0">
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>날짜</th>
+					</tr>
+				</table>
+			</div>
+
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
-			<div style="float: left; board: 1px solid olive; padding: 5px; margin: 5px;">
+			<div
+				style="float: left; board: 1px solid olive; padding: 5px; margin: 5px;">
 				<h4>자주 묻는 코딩</h4>
 				<table id="top_qa" border="1" cellspacing="0">
 					<tr>
@@ -191,16 +243,19 @@
 
 
 		<br>
-<style>
-		/* our services */
+		
+		<style>
+/* our services */
 .section-title {
 	position: relative
 }
+
 .section-title p {
 	font-size: 16px;
 	margin-bottom: 5px;
 	font-weight: 400;
 }
+
 .section-title h4 {
 	font-size: 40px;
 	font-weight: 600;
@@ -209,6 +264,7 @@
 	padding-bottom: 20px;
 	display: inline-block
 }
+
 .section-title h4:before {
 	position: absolute;
 	content: "";
@@ -219,6 +275,7 @@
 	left: 50%;
 	margin-left: -40px;
 }
+
 .section-title h4:after {
 	position: absolute;
 	content: "";
@@ -230,18 +287,23 @@
 	left: 50%;
 	margin-left: -25px;
 }
+
 .pt-100 {
 	padding-top: 100px;
 }
+
 .pb-100 {
 	padding-bottom: 100px;
 }
+
 .mb-100 {
 	margin-bottom: 100px;
 }
+
 .services {
 	background-color: #FBFBFB;
 }
+
 .single-service {
 	position: relative;
 	text-align: center;
@@ -251,6 +313,7 @@
 	padding: 30px 20px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16)
 }
+
 .single-service:before {
 	position: absolute;
 	width: 0;
@@ -262,6 +325,7 @@
 	-webkit-transition: .3s;
 	transition: .3s
 }
+
 .single-service:after {
 	position: absolute;
 	width: 0;
@@ -273,15 +337,18 @@
 	-webkit-transition: .3s;
 	transition: .3s
 }
+
 .single-service:hover:after, .single-service:hover:before {
 	width: 50%;
 	height: 2px;
 	-webkit-transition: .3s;
 	transition: .3s
 }
+
 .single-service:hover {
 	box-shadow: 1px 3px 10px 0 rgba(0, 0, 0, 0.10)
 }
+
 .single-service i.fa {
 	font-size: 20px;
 	width: 60px;
@@ -293,27 +360,47 @@
 	-webkit-transition: .3s;
 	transition: .3s
 }
+
 .single-service:hover i.fa {
 	background-color: #FF7200;
 	color: #fff;
 	border-color: #FF7200;
 	border-radius: 0;
 }
+
 .single-service h4 {
 	font-size: 20px;
 	font-weight: 400;
 	margin-bottom: 15px;
 	text-transform: capitalize;
 }
+
 .single-service p {
 	font-size: 15px;
 	line-height: 1.8;
 }
-</head>
-@@ -170,9 +304,76 @@
-				</script>
-			</div>
-		</div>
+</
+head
+>
+@@
+-170
+,
+9
++
+304
+,
+76
+ 
+@@
+</
+script
+>
+</
+div
+>
+</
+div
+>
 </style>
 
 
@@ -321,75 +408,75 @@
 
 
 
-	<!-- our services -->
-	<section class="services pt-100 pb-50" id="services">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-6 mx-auto text-center">
-					<div class="section-title mb-100">
-						<p>what i can do</p>
-						<h4>OUR SERVICES</h4>
+		<!-- our services -->
+		<section class="services pt-100 pb-50" id="services">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-6 mx-auto text-center">
+						<div class="section-title mb-100">
+							<p>what i can do</p>
+							<h4>OUR SERVICES</h4>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-laptop"></i>
+							<h4>반갑습니다</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-gears"></i>
+							<h4>Web Development</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-mobile"></i>
+							<h4>Responsive Design</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-magic"></i>
+							<h4>Graphic Design</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-pencil"></i>
+							<h4>Creative Design</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6">
+						<!-- Single Service -->
+						<div class="single-service">
+							<i class="fa fa-fa fa-lightbulb-o"></i>
+							<h4>Branding</h4>
+							<p>Lorem Ipsum is simply dummy text of the printing and
+								typesetting industry typesetting industry</p>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-laptop"></i>
-						<h4>반갑습니다</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-gears"></i>
-						<h4>Web Development</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-mobile"></i>
-						<h4>Responsive Design</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-magic"></i>
-						<h4>Graphic Design</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-pencil"></i>
-						<h4>Creative Design</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<!-- Single Service -->
-					<div class="single-service">
-						<i class="fa fa-fa fa-lightbulb-o"></i>
-						<h4>Branding</h4>
-						<p>Lorem Ipsum is simply dummy text of the printing and
-							typesetting industry typesetting industry</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+		</section>
 
 		<jsp:include page="../common/footer.jsp" />
 </body>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="blameMapper">
+   
+   <resultMap id="blameResultSet" type="Blame">
+      <id property="blame_no" column="blame_no"/>
+      <result property="blame_bid" column="blame_bid"/>
+      <result property="blame_type" column="blame_type"/>
+      <result property="mm_nickname" column="mm_nickname"/>
+      <result property="target_nickname" column="target_nickname"/>
+      <result property="blame_date" column="blame_date"/>
+      <result property="blame_content" column="blame_content"/>
+      <result property="blame_ip" column="blame_ip"/>
+   </resultMap>
+   
+   <select id="selectAll" resultMap="blameResultSet">
+      select * from blame
+      order by blame_no desc
+   </select>
+   
+   <select id="selectBlame" parameterType="_int" resultMap="blameResultSet">
+      select * from blame
+      where blame_no = #{blame_no}
+   </select>
+   
+   <insert id="insertBlame" parameterType="Blame">
+      insert into blame
+      values (seq_blid.nextval, #{ blame_bid }, #{ blame_type }, #{ mm_nickname }, #{ target_nickname }, default, #{ blame_content }, #{ blame_ip })
+   </insert>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
