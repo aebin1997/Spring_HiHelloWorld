@@ -49,7 +49,7 @@ public class PboardController {
 				model.addAttribute("startPage", startPage);
 				model.addAttribute("endPage", endPage);
 
-				return "progress/proListView";
+				return "progress/progress";
 			} else {
 				model.addAttribute("msg", currentPage + "페이지 출력 목록 조회 실패.");
 				return "common/errorPage";
