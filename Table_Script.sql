@@ -27,8 +27,6 @@ DROP TABLE REVIEW CASCADE CONSTRAINTS;
 DROP TABLE RE_TYPE CASCADE CONSTRAINTS;
 DROP TABLE RE_REPLY CASCADE CONSTRAINTS;
 
-DROP TABLE REPLY CASCADE CONSTRAINTS;
-
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
 DROP SEQUENCE SEQ_MID;
 DROP SEQUENCE SEQ_NID;
@@ -42,13 +40,6 @@ DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
-
-DROP SEQUENCE SEQ_QAR;
-DROP SEQUENCE SEQ_REBLID;
-DROP SEQUENCE SEQ_REID;
-DROP SEQUENCE SEQ_RID;
-DROP SEQUENCE SEQ_RREID;
-
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 CREATE TABLE MEMBER (
@@ -420,9 +411,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, '1','안녕녀', '캣티천사', '21/03/05', default, default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, '2', '안녕녀', '캣티천사', '21/03/05', default,default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, '3', '안녕녀',  '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'안녕녀', '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '안녕녀', '캣티천사', '21/03/05', default,default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
 
 ------------------------------------------------------------------------------------------------------------------- 진행테이블()                                             
 CREATE TABLE P_BOARD(
@@ -460,9 +451,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, '1', '캣티천사', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, '2', '캣티천사', '게시판 테스트 답변2', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, '3', '안녕녀', '게시판 테스트 질문1', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변2', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트 질문1', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
 CREATE TABLE P_REPLY(
   PRID                  NUMBER,
@@ -494,7 +485,7 @@ INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_REPLY)
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '캣티천사', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 세번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
                                              
                                              
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
