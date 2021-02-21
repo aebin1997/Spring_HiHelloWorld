@@ -28,17 +28,11 @@
       이 문제를 미리 방지하기 위해 xml 코드 중 xml parser에 의해 해석하지 말고 문장 그대로 해석하라는 뜻으로 <![CDATA 
       쿼리문장 ]]> 사용함 -->
       
-      <!-- 댓글수 보여지기 -->
-	<select id="BoardReplyCount" resultType="_int" parameterType="_int">
-	    SELECT COUNT(*) as B_RCOUNT
-		FROM B_REPLY R
-		LEFT JOIN BOARD B 
-		ON B.B_RCOUNT = R.B_REF_BID
-		WHERE R.B_STATUS = 'Y'
-		AND R.B_REF_BID = b.bid
-		
-		where b_rcount = #{ b_rcount }
-		
+      <!-- 댓글 추가시 카운터 증가 -->
+	<select id="BoardReplyCount" parameterType="_int">
+	    update board
+         set b_rcount = b_rcount + 1
+         where bid = #{ BID }		
 	</select>
 
    <!-- 조회수 top3 게시글 리스팅 -->
