@@ -27,8 +27,6 @@ DROP TABLE REVIEW CASCADE CONSTRAINTS;
 DROP TABLE RE_TYPE CASCADE CONSTRAINTS;
 DROP TABLE RE_REPLY CASCADE CONSTRAINTS;
 
-DROP TABLE REPLY CASCADE CONSTRAINTS;
-
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
 DROP SEQUENCE SEQ_MID;
 DROP SEQUENCE SEQ_NID;
@@ -42,13 +40,6 @@ DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
-
-DROP SEQUENCE SEQ_QAR;
-DROP SEQUENCE SEQ_REBLID;
-DROP SEQUENCE SEQ_REID;
-DROP SEQUENCE SEQ_RID;
-DROP SEQUENCE SEQ_RREID;
-
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 CREATE TABLE MEMBER (
