@@ -135,7 +135,7 @@
 						<button onclick="showReplyForm();">댓글달기</button>
    						&nbsp; &nbsp;
 						</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%> <c:if
-						test="${ !empty loginUser and loginUser.id eq pboard.pwriter }">
+						test="${ !empty loginUser and loginUser.nickname eq pboard.pwriter }">
 						<c:url var="puv" value="/pupview.do">
 							<c:param name="pid" value="${pboard.pid }" />
 							<c:param name="page" value="${ currentPage }" />
