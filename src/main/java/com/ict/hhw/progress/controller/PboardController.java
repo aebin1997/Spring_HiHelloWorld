@@ -26,7 +26,7 @@ public class PboardController {
 	
 	// 게시글 페이지별 목록 조회 요청 처리용 (+ 목록 페이지로 이동)
 		@RequestMapping("plist.do")
-		public String pboardListMethod(@RequestParam("page") int currentPage, Model model) {
+		public String pboardListMethod(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 			int limit = 10;
 			ArrayList<P_board> list = pboardService.selectList(currentPage, limit);
 

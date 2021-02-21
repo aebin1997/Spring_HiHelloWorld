@@ -16,6 +16,10 @@ public class PboardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	public int getListCount() {
+		return sqlSession.selectOne("pboardMapper.getListCount");
+	}
+	
 	public ArrayList<P_board> selectList(int currentPage, int limit) {
 		//전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
 		int startRow = (currentPage - 1) * limit -1;
@@ -25,8 +29,7 @@ public class PboardDao {
 		return (ArrayList<P_board>)list;
 	}
 
-	public int getListCount() {
-		return sqlSession.selectOne("pboardMapper.getListCount");
-	}
+	
+	
 	
 }

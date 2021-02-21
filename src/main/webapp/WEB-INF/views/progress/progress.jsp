@@ -476,8 +476,8 @@
 
 
 		<!-- 푸터 -->
-	</section>
-	<jsp:include page="../common/footer.jsp" />
+		</section>
+		<jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>
