@@ -18,15 +18,8 @@ public class BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	// 게시글 댓글 수 뽑기
-
-	public int selectBoardReply(int b_rcount) {
-		
-		int b_ref_bid = 0;
-		String b_status = null;
-		
-		b_rcount = sqlSession.selectOne("boardMapper.selectBoardReply", new B_Reply(b_ref_bid, b_status));
-		
+	public int getBoardReplyCount() {
+		int b_rcount = sqlSession.selectOne("boardMapper.BoardReplyCount");
 		return b_rcount;
 	}
 	

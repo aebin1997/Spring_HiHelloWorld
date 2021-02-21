@@ -13,7 +13,7 @@ public class B_Reply implements java.io.Serializable {
 	private Date b_modify_date;
 	private String b_status;
 	
-	public B_Reply(int b_ref_bid2, String b_status2) {}
+	public B_Reply() {}
 
 	public B_Reply(int b_rid, String b_rcontent, int b_ref_bid, String b_rwriter, Date b_create_date,
 			Date b_modify_date, String b_status) {

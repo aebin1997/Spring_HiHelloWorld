@@ -12,6 +12,15 @@
 		<result column="b_status" property="b_status" />
 	</resultMap>
 
+	<!-- 댓글 목록 -->
+	<select id="listB_Reply" resultType="com.ict.hhw.board_reply.model.vo.B_Reply">
+		select b_rid, b_rcontent, b_ref_bid, b_rwriter, b_create_date, b_modify_date, b_status
+		form b_reply r, board b 
+		where r.b_ref_bid = b.bid
+		and b_rid = #{ b_rid}
+		order by b_rid
+	</select>
+
 	<select id="selectB_Reply" parameterType="_int" resultMap="resultB_Reply">
 		select * from b_reply
 		where b_rid = #{ b_rid }

@@ -29,19 +29,16 @@
       쿼리문장 ]]> 사용함 -->
       
       <!-- 댓글수 보여지기 -->
-      <resultMap type="b_reply" id="B_Reply">
-		<result column="b_rid" property="b_rid" />
-		<result column="b_ref_bid" property="b_ref_bid"/>
-		<result column="b_status" property="b_status" />
-	</resultMap>
- 
-	<select id="selectBoardReply" parameterType="_int" resultMap="resultBoard">
-	    SELECT COUNT(*)
-		  FROM B_REPLY R
-	 LEFT JOIN BOARD B 
-		    ON B.B_RCOUNT = R.B_REF_BID
-		 WHERE R.B_STATUS = 'Y'
-		   AND R.B_REF_BID = B.BID;
+	<select id="BoardReplyCount" resultType="_int" parameterType="_int">
+	    SELECT COUNT(*) as B_RCOUNT
+		FROM B_REPLY R
+		LEFT JOIN BOARD B 
+		ON B.B_RCOUNT = R.B_REF_BID
+		WHERE R.B_STATUS = 'Y'
+		AND R.B_REF_BID = b.bid
+		
+		where b_rcount = #{ b_rcount }
+		
 	</select>
 
    <!-- 조회수 top3 게시글 리스팅 -->

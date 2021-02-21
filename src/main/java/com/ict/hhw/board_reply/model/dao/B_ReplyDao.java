@@ -35,4 +35,5 @@ public class B_ReplyDao {
 		List<B_Reply> list = sqlSession.selectList("b_replyMapper.selectList", b_ref_bid);
 		return (ArrayList<B_Reply>)list;
 	}
+	
 }
