@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" readonly name="pwriter" value="${ loginUser.id }"></td>
+				<td><input type="text" readonly name="pwriter" value="${ loginUser.nickname }"></td>
 			</tr>		
 			<tr>
 				<td>내용</td>

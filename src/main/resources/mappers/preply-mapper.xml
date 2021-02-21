@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="preplyMapper">
+	<resultMap type="P_reply" id="resultPreply">
+		<id column="prid" property="prid" />
+		<result column="ref_pid" property="ref_pid"/>
+		<result column="rcontent" property="rcontent" />
+		<result column="prwriter" property="prwriter" />
+		<result column="pr_date" property="pr_date" />
+		<result column="pr_modify_date" property="pr_modify_date" />
+		<result column="pr_status" property="pr_status" />
+	</resultMap>
+
+	<select id="selectPreply" parameterType="_int" resultMap="resultPreply">
+		select * from p_reply
+		where prid = #{ prid }
+	</select>
+
+	<select id="selectList" parameterType="_int" resultMap="resultPreply">
+		select * from p_reply
+		where pr_status = 'Y' and ref_pid = #{ ref_pid } 
+		order by pid asc
+	</select>
+	
+	<insert id="insertPreply" parameterType="P_reply">
+		insert into p_reply
+		values (seq_prid.nextval, #{ ref_pid }, #{ prcontent },  
+				#{ prwriter }, sysdate, sysdate, default)
+	</insert>
+	
+	<update id="updatePreply" parameterType="P_reply">
+		update p_reply
+		set prcontent = #{ prcontent },
+			pr_modify_date = sysdate
+		where prid = #{ prid }
+	</update>
+	
+	<update id="changeBstatusN" parameterType="_int">
+		update p_reply
+		set pr_status = 'N',
+			pr_modify_date = sysdate
+		where prid = #{ prid }
+	</update>
+
+	<delete id="deletePreply" parameterType="_int">
+		delete from p_reply
+		where prid = #{ prid }
+	</delete>
+
+</mapper>
