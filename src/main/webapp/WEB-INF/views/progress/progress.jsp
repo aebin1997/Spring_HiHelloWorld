@@ -291,9 +291,9 @@
 						<c:forEach items="${ requestScope.list }" var="p">
 							<tr>
 								<td align="center">${ p.pid }</td>
-								<td><c:url var="bdt" value="/pdetail.do">
+								<td><c:url var="pdt" value="/pdetail.do">
 										<c:param name="page" value="${ currentPage }" />
-										<c:param name="bid" value="${ p.pid }" />
+										<c:param name="pid" value="${ p.pid }" />
 									</c:url> <a href="${ pdt }">${ p.ptitle }</a></td>
 								<td align="center">${ p.pwriter }</td>
 								<td align="center">${ p.p_date }</td>

@@ -104,16 +104,39 @@
 		where p_date between #{ begin } and #{ end }
 	</select>
 
-	<select id="selectBoard" parameterType="_int"
+	<select id="selectPboard" parameterType="_int"
 		resultMap="resultPboard">
 		select * from p_board
 		where pid = #{ pid }
 	</select>
 
-	<update id="updateBCount" parameterType="_int">
+	<update id="updatePCount" parameterType="_int">
 		update p_board
 		set pcount =
 		pcount + 1
+		where pid = #{ pid }
+	</update>
+	
+	<update id="updatePboard" parameterType="P_board">
+		update p_board
+		set ptitle = #{ ptitle },
+			pcontent = #{ pcontent },
+			p_modify_date = sysdate
+			<if test="p_file_name == null">
+			, p_file_name = null,
+			p_rfile_name = null
+			</if>
+			<if test="p_file_name != null">
+			, p_file_name = #{ p_file_name },
+			p_rfile_name = #{ p_rfile_name }
+			</if>
+		where pid = #{ pid }
+	</update>
+	
+	<update id="changePstatusN" parameterType="_int">
+		update p_board
+		set pstatus = 'N',
+			p_modify_date = sysdate
 		where pid = #{ pid }
 	</update>
 

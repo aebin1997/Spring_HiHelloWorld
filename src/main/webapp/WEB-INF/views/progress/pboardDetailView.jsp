@@ -107,7 +107,7 @@
 			width="500">
 			<tr>
 				<th>제 목</th>
-				<td>${ pboard.btitle }</td>
+				<td>${ pboard.ptitle }</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
