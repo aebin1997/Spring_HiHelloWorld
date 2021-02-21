@@ -142,6 +142,7 @@
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">날짜</th>
 								<th style="text-align: center;">조회수</th>
+								<th style="text-align: center;">댓글수</th>
 								<th style="text-align: center;">첨부파일</th>
 							</tr>
 							<c:forEach items="${ requestScope.list }" var="b">
@@ -155,6 +156,7 @@
 									<td align="center" width="180">${ b.bwriter }</td>
 									<td align="center" width="130">${ b.b_create_date }</td>
 									<td align="center" width="80">${ b.bcount }</td>
+									<td align="center" width="80">${ b.b_rcount }</td>
 									<td align="center" width="100"><c:if
 											test="${ !empty b.b_original_filename }"> ◎  </c:if> <c:if
 											test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>

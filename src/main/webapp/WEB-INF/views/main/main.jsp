@@ -63,12 +63,14 @@
 					for ( var i in json.list) {
 						values += "<tr><td>"
 								+ json.list[i].bid
+								+ "</td><td>" + json.list[i].btype
 								+ "</td><td><a href='${ pageContext.request.contextPath }/bdetail.do?bid="
 								+ json.list[i].bid
 								+ "'>"
 								+ decodeURIComponent(json.list[i].btitle)
 										.replace(/\+/gi, " ") /* 디코딩하면 공백이 +로 되기때문에  " " 공백으로 바꿔준다*/
 								+ "</a></td><td>" + json.list[i].bcount
+								+ "</td><td>" + json.list[i].b_rcount
 								+ "</td></tr>";
 					} //for in
 					$("#top_board").html($("#top_board").html() + values);
@@ -212,7 +214,8 @@
 					</tr>
 				</table>
 			</div>
-
+</section>
+<section>
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
 			<div
 				style="float: left; board: 1px solid olive; padding: 5px; margin: 5px;">
@@ -225,7 +228,8 @@
 					</tr>
 				</table>
 			</div>
-
+</section>
+<section>
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
 			<div
 				style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
@@ -233,12 +237,13 @@
 				<table id="top_board" border="1" cellspacing="0">
 					<tr>
 						<th>번호</th>
+						<th>말머리</th>
 						<th>제목</th>
 						<th>조회수</th>
+						<th>댓글수</th>
 					</tr>
-				</table>
+				</table>	
 			</div>
-
 		</section>
 
 

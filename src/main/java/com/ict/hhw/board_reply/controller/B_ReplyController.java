@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ict.hhw.board_reply.model.service.ReplyService;
-import com.ict.hhw.board_reply.model.vo.Reply;
+import com.ict.hhw.board_reply.model.service.B_ReplyService;
+import com.ict.hhw.board_reply.model.vo.B_Reply;
 
 @Controller
-public class ReplyController {
+public class B_ReplyController {
 	@Autowired
-	private ReplyService replyService;
+	private B_ReplyService b_replyService;
 
 	@RequestMapping(value = "rinsert.do", method = RequestMethod.POST)
-	public String replyInsertMethod(Reply reply, Model model) {
-		if (replyService.insertReply(reply) > 0) {
-			return "redirect:bdetail.do?bid=" + reply.getRef_bid();
+	public String replyInsertMethod(B_Reply b_reply, Model model) {
+		if (b_replyService.insertB_Reply(b_reply) > 0) {
+			return "redirect:bdetail.do?bid=" + b_reply.getB_ref_bid();
 		} else {
-			model.addAttribute("msg", reply.getRef_bid() + "번 글에 대한 댓글달기 실패.");
+			model.addAttribute("msg", b_reply.getB_ref_bid() + "번 글에 대한 댓글달기 실패.");
 			return "common/errorPage";
 		}
 	}
@@ -36,9 +36,9 @@ public class ReplyController {
 	// ajax 원글에 대한 댓글 조회 처리용
 	@RequestMapping(value = "rlist.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String replyListMethod(@RequestParam("ref_bid") int ref_bid) throws UnsupportedEncodingException {
+	public String b_replyListMethod(@RequestParam("b_ref_bid") int b_ref_bid) throws UnsupportedEncodingException {
 		// 원글에 대한 댓글 조회 요청
-		ArrayList<Reply> list = replyService.selectList(ref_bid); // 결과를 받아줌
+		ArrayList<B_Reply> list = b_replyService.selectList(b_ref_bid); // 결과를 받아줌
 
 		// 전송용 json 객체 준비
 		JSONObject sendJson = new JSONObject();
@@ -46,15 +46,15 @@ public class ReplyController {
 		JSONArray jarr = new JSONArray();
 
 		// list 를 jarr 로 옮기기(복사)
-		for (Reply reply : list) {
+		for (B_Reply b_reply : list) {
 			// reply 필드값 저장할 json 객체 생성
 			JSONObject job = new JSONObject();
 
-			job.put("rid", reply.getRid()); 
-			job.put("rwriter", reply.getRwriter()); // 인코딩 해서 제이슨 객체 안에 담는다
-			job.put("rcontent", URLEncoder.encode(reply.getRcontent(), "utf-8"));
-			job.put("r_create_date", reply.getR_create_date().toString());
-			job.put("ref_bid", reply.getRef_bid());
+			job.put("b_rid", b_reply.getB_rid()); 
+			job.put("b_rwriter", b_reply.getB_rwriter()); // 인코딩 해서 제이슨 객체 안에 담는다
+			job.put("b_rcontent", URLEncoder.encode(b_reply.getB_rcontent(), "utf-8"));
+			job.put("b_create_date", b_reply.getB_create_date().toString());
+			job.put("b_ref_bid", b_reply.getB_ref_bid());
 
 			// job 를 jarr 에 저장
 			jarr.add(job);
@@ -68,22 +68,22 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("rdel.do")
-	public String replyDeleteMethod(@RequestParam("rid") int rid, @RequestParam("bid") int bid, Model model) {
-		if (replyService.deleteReply(rid) > 0) {
+	public String replyDeleteMethod(@RequestParam("b_rid") int b_rid, @RequestParam("bid") int bid, Model model) {
+		if (b_replyService.deleteB_Reply(b_rid) > 0) {
 			return "redirect:bdetail.do?bid=" + bid;
 		} else {
-			model.addAttribute("msg", rid + "번 댓글 삭제 실패.");
+			model.addAttribute("msg", b_rid + "번 댓글 삭제 실패.");
 			return "common/errorPage";
 		}
 	}
 	
 	@RequestMapping(value="rupdate.do", method=RequestMethod.POST)
-	public String replyUpdateMethod(Reply reply,
+	public String replyUpdateMethod(B_Reply reply,
 			@RequestParam("bid") int bid, Model model) {
-		if (replyService.updateReply(reply) > 0) {
+		if (b_replyService.updateB_Reply(reply) > 0) {
 			return "redirect:bdetail.do?bid=" + bid;
 		} else {
-			model.addAttribute("msg", reply.getRid() + "번 댓글 삭제 실패.");
+			model.addAttribute("msg", reply.getB_rid() + "번 댓글 삭제 실패.");
 			return "common/errorPage";
 		}
 	}

@@ -16,6 +16,11 @@ public class BoardServiceImpl implements BoardService {
    private BoardDao boardDao;
    
    @Override
+   public int selectBoardReply(int b_rcount) {
+      return boardDao.selectBoardReply(b_rcount);
+   }
+   
+   @Override
    public ArrayList<Board> selectTop3() {
       return boardDao.selectTop3();
    }
