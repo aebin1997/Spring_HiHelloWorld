@@ -11,7 +11,7 @@
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
 	
-	<h1 align="center">${ p.pId }게시글 수정하기</h1>
+	<h1 align="center">${ p.pid }게시글 수정하기</h1>
 	<br>
 	
 	<!-- 첨부파일도 수정할려고 하니 Multipart/form-data encType 지정!! 꼭!!!!!!-->

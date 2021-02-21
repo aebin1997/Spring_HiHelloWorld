@@ -100,7 +100,6 @@
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
-		<hr>
 		<h2 align="center">${ requestScope.pboard.pid }번 게시글 상세보기</h2>
 		<br>
 		<table align="center" cellpadding="10" cellspacing="0" border="1"
