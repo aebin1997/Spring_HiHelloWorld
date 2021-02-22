@@ -39,10 +39,10 @@
 			<tr>
 				<th>말머리</th>
 				<td><select type="test" name="btype">
-					<option value="1">질문이요</option>
-					<option value="2">일상글이요</option>
-					<option value="3">칭찬글이요</option>
-					<option value="4">참고글이요</option>
+					<option value="질문이요">질문이요</option>
+					<option value="일상글이요">일상글이요</option>
+					<option value="칭찬글이요">칭찬글이요</option>
+					<option value="참고글이요">참고글이요</option>
 				</select></td>
 			</tr>
 			<tr>

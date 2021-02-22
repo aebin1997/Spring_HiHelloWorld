@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.hhw.qa.model.service.QarService;
-import com.ict.hhw.qa.model.vo.Qa;
 import com.ict.hhw.qa.model.vo.Qar;
 
 @Controller
@@ -64,4 +61,37 @@ public class QarController {
 		return sendJson.toJSONString();
 		}
 
+@RequestMapping("qardel.do")
+	public  String qarDeleteMethod(@RequestParam("qar_id") int qar_id,
+			@RequestParam("qa_id") int qa_id, Model model) {
+		if(qarService.deleteQar(qar_id) > 0) {
+			return "redirect:qadetail.do?qa_id=" + qa_id;
+		}else {
+			model.addAttribute("msg", qar_id + "번글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+	
+@RequestMapping(value="qarupdate.do", method=RequestMethod.POST)
+public String qarUpdateMethod(Qar qar,
+	    @RequestParam("qa_id") int qa_id	,Model model) {
+	if(qarService.updateQar(qar) > 0) {
+		return "redirect:qadetail.do?qa_id=" + qa_id;
+	}else {
+		model.addAttribute("msg", qar.getQar_id() + "번글 댓글달기 실패");
+		return "common/errorPage";
+	}
 }
+
+
+}
+
+
+
+
+
+
+
+
+
+

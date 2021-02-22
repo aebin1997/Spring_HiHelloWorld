@@ -11,6 +11,7 @@ public interface PboardService {
 	int getListCount();
 	// 목록조회
 	ArrayList<P_board> selectList(int currentPage, int limit);
+	ArrayList<P_board> selectPlist(String nickname);
 	// 상세보기
 	P_board selectPboard(int pid);
 	int addReadCount(int pid);

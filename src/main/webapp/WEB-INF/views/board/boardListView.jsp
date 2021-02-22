@@ -142,22 +142,22 @@
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">날짜</th>
 								<th style="text-align: center;">조회수</th>
-								<th style="text-align: center;">첨부파일</th>
+								<th style="text-align: center;">댓글수</th>
 							</tr>
-							<c:forEach items="${ requestScope.list }" var="b">
+							<c:forEach items="${ requestScope.list }" var="b" >
 								<tr>
 									<td align="center" width="100">${ b.bid }</td>
 									<td align="center" width="180">${ b.btype }</td>
-									<td><c:url var="bdt" value="/bdetail.do">
+									<td align="left" ><c:url var="bdt" value="/bdetail.do">
 											<c:param name="page" value="${ currentPage }" />
 											<c:param name="bid" value="${ b.bid }" />
-										</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a></td>
-									<td align="center" width="180">${ b.bwriter }</td>
+										</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>
+											<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
+											<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+									<td align="center" width="180">${ b.bwriter } &nbsp; <img src="/hhw/resources/images/good.png" style="width:20px;"></td>
 									<td align="center" width="130">${ b.b_create_date }</td>
 									<td align="center" width="80">${ b.bcount }</td>
-									<td align="center" width="100"><c:if
-											test="${ !empty b.b_original_filename }"> ◎  </c:if> <c:if
-											test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+									<td align="center" width="80">${ b.b_rcount }</td>
 								</tr>
 							</c:forEach>
 						</table>

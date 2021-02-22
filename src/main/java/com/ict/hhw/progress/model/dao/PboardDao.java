@@ -14,7 +14,7 @@ import com.ict.hhw.progress.model.vo.PboardPage;
 
 @Repository("pboardDao")
 public class PboardDao {
-
+	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -28,6 +28,11 @@ public class PboardDao {
 		int endRow = startRow + limit - 1;
 		
 		List<P_board> list = sqlSession.selectList("pboardMapper.selectList", new PboardPage(startRow, endRow));
+		return (ArrayList<P_board>)list;
+	}
+	
+	public ArrayList<P_board> selectPlist(String nickname) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.selectPlist", nickname);
 		return (ArrayList<P_board>)list;
 	}
 

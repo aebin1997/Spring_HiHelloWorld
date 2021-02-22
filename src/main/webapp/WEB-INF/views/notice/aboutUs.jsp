@@ -207,14 +207,14 @@ ul {
 	<!-- 중간 메뉴 바 끝-->
 
 	<section style="padding: 100px 0 60px 0;">
-		<link
+		<!-- <link
 			href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 			rel="stylesheet" id="bootstrap-css">
 		<script
 			src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 		<script
 			src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<!------ Include the above in your HEAD tag ---------->
+		---- Include the above in your HEAD tag -------- -->
 
 		<div class="how-section1">
 			<div class="row">
@@ -250,11 +250,7 @@ ul {
 				<div class="col-md-6">
 					<h4>hihelloworld</h4>
 					<h4 class="subheading">어떤 기대효과</h4>
-					<p class="text-muted">Send and receive files. Deliver digital
-						assets in a secure environment. Share feedback in real time. Use
-						GetLance Messages to communicate via text, chat, or video. Use our
-						mobile app. Many features can be accessed on your mobile phone
-						when on the go.</p>
+					<p class="text-muted">S가나다라마다맏가아나항나나라나날아주ㅚㅓㅇ노리ㅏㅓㄴ리ㅏㅓㅇㄴ미ㅏㄹ이ㅏㅓㅜㅗㄴㅇㄹ</p>
 				</div>
 			</div>
 			<div class="row">
@@ -278,17 +274,17 @@ ul {
 				</div>
 			</div>
 		</div>
-			<link
+			<!-- <link
 				href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 				rel="stylesheet" id="bootstrap-css">
 			<script
 				src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 			<script
 				src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-			<!------ Include the above in your HEAD tag ---------->
+			---- Include the above in your HEAD tag --------
 
 			<link rel="stylesheet"
-				href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+				href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
 			<section class="our-webcoderskull padding-lg">
 				<div class="container">

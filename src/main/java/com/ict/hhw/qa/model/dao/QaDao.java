@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ict.hhw.common.SearchAndPage;
+import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.qa.model.vo.Qa;
 import com.ict.hhw.qa.model.vo.QaPage;
 
@@ -59,5 +61,35 @@ public class QaDao {
 	public int deleteQa(int qa_id) {
 		return sqlSession.update("qaMapper.changeQastatusN",qa_id);
 	}
+
+
+	public ArrayList<Qa> selectSearchTitle(SearchAndPage searches) {
+		List<Qa> list = sqlSession.selectList("qaMapper.searchTitle", searches);
+		return (ArrayList<Qa>)list;
+	}
+
+	public ArrayList<Qa> selectSearchWriter(SearchAndPage searches) {
+		List<Qa> list = sqlSession.selectList("qaMapper.searchWriter", searches);
+		return (ArrayList<Qa>)list;
+	}
+
+	public ArrayList<Qa> selectSearchAndDate(SearchAndPage searches) {
+		List<Qa> list = sqlSession.selectList("qaMapper.searchDate", searches);
+		return (ArrayList<Qa>)list;
+	}
+
+
+	public int getSearchTitleListCount(String keyword) {
+		return sqlSession.selectOne("qaMapper.getSearchTitleListCount", keyword);
+	}
+
+	public int getSearchWriterListCount(String keyword) {
+		return sqlSession.selectOne("qaMapper.getSearchWriterListCount", keyword);
+	}
+
+	public int getSearchDateListListCount(SearchDate dates) {
+		return sqlSession.selectOne("qaMapper.getSearchDateListCount", dates);
+	}
+
 
 }

@@ -13,6 +13,7 @@
       <result column="b_create_date" property="b_create_date" />
       <result column="b_modfiy_date" property="b_modfiy_date" />
       <result column="bcount" property="bcount" />
+      <result column="b_rcount" property="b_rcount" />
       <result column="bstatus" property="bstatus" />
    </resultMap>
 
@@ -20,11 +21,19 @@
       <id column="bid" property="bid" />
       <result column="btitle" property="btitle" />
       <result column="bcount" property="bcount" />
+      <result column="b_rcount" property="b_rcount" />
    </resultMap>
 
    <!-- 비교연산자를 쿼리문에 그냥 사용하면, 마이바티스에서 태그 앨리먼트의 꺽쇠괄호(<,>,&)와 혼동하는 문제가 발생할 수 있음 
       이 문제를 미리 방지하기 위해 xml 코드 중 xml parser에 의해 해석하지 말고 문장 그대로 해석하라는 뜻으로 <![CDATA 
       쿼리문장 ]]> 사용함 -->
+      
+      <!-- 댓글 추가시 카운터 증가 -->
+	<select id="addReplyCount" parameterType="_int">
+	    update board
+         set b_rcount = b_rcount + 1
+         where bid = #{ BID }		
+	</select>
 
    <!-- 조회수 top3 게시글 리스팅 -->
    <select id="selectTop3" resultMap="resultTop3">
@@ -33,8 +42,10 @@
         FROM (
       SELECT    ROWNUM RNUM
             , BID
+            , BTYPE
             , BTITLE
             , BCOUNT
+            , B_RCOUNT
         FROM (
       SELECT *
         FROM BOARD 
@@ -45,8 +56,7 @@
             ]]>
    </select>
 
-   <select id="selectBoard" parameterType="_int"
-      resultMap="resultBoard">
+   <select id="selectBoard" parameterType="_int" resultMap="resultBoard">
       select *
         from board
        where bid = #{ BID }
@@ -78,6 +88,7 @@
                , BCOUNT
                , B_CREATE_DATE
                , B_MODFIY_DATE
+               , B_RCOUNT
                , BSTATUS
           FROM  (
         SELECT * 
@@ -107,6 +118,7 @@
             , sysdate
             , default
             , default
+            , default
              )
       </if>
       <if test="b_original_filename == null"><!-- 첨부파일이 없을 때 -->
@@ -121,6 +133,7 @@
              , sysdate
              , sysdate
              , default
+           	 , default
              , default
              )
       </if>
@@ -164,6 +177,7 @@
                , BCOUNT
                , B_CREATE_DATE
                , B_MODFIY_DATE
+               , B_RCOUNT
                , BSTATUS
           FROM (
         SELECT * 
@@ -192,6 +206,7 @@
               , BCOUNT
               , B_CREATE_DATE
               , B_MODFIY_DATE
+              , B_RCOUNT
               , BSTATUS
           FROM (
         SELECT * 
@@ -219,6 +234,7 @@
               , BCOUNT
               , B_CREATE_DATE
               , B_MODFIY_DATE
+              , B_RCOUNT
               , BSTATUS
           FROM (
         SELECT * 

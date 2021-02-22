@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="b_replyMapper">
+
+	<resultMap type="B_Reply" id="resultB_Reply">
+		<id column="b_rid" property="b_rid" />
+		<result column="b_rcontent" property="b_rcontent" />
+		<result column="b_ref_bid" property="b_ref_bid"/>
+		<result column="b_rwriter" property="b_rwriter" />
+		<result column="b_create_date" property="b_create_date" />
+		<result column="b_modify_date" property="b_modify_date" />
+		<result column="b_status" property="b_status" />
+	</resultMap>
+
+	<!-- 댓글 목록 -->
+	<select id="listB_Reply" resultType="com.ict.hhw.board_reply.model.vo.B_Reply">
+		select b_rid, b_rcontent, b_ref_bid, b_rwriter, b_create_date, b_modify_date, b_status
+		form b_reply r, board b 
+		where r.b_ref_bid = b.bid
+		and b_rid = #{ b_rid}
+		order by b_rid
+	</select>
+
+	<select id="selectB_Reply" parameterType="_int" resultMap="resultB_Reply">
+		select * from b_reply
+		where b_rid = #{ b_rid }
+	</select>
+
+	<select id="selectList" parameterType="_int" resultMap="resultB_Reply">
+		select * from b_reply
+		where b_status = 'Y' and b_ref_bid = #{ b_ref_bid } 
+		order by b_rid asc
+	</select>
+	
+	<insert id="insertB_Reply" parameterType="B_Reply">
+		insert into b_reply
+		values (seq_brid.nextval, #{ b_rcontent }, #{ b_ref_bid }, 
+				#{ b_rwriter }, sysdate, sysdate, default)
+	</insert>
+	
+	<update id="updateB_Reply" parameterType="B_Reply">
+		update b_reply
+		set b_rcontent = #{ b_rcontent },
+			b_modify_date = sysdate
+		where b_rid = #{ b_rid }
+	</update>
+	
+	<update id="changeBstatusN" parameterType="_int">
+		update b_reply
+		set b_status = 'N',
+			b_modify_date = sysdate
+		where b_rid = #{ b_rid }
+	</update>
+
+	<delete id="deleteB_Reply" parameterType="_int">
+		delete from b_reply
+		where b_rid = #{b_rid}
+	</delete>
+</mapper>

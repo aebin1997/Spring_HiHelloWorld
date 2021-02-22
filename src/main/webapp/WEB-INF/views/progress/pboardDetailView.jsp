@@ -100,6 +100,7 @@
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
+	
 		<h2 align="center">${ requestScope.pboard.pid }번 게시글 상세보기</h2>
 		<br>
 		<table align="center" cellpadding="10" cellspacing="0" border="1"
@@ -152,25 +153,25 @@
 		</table>
 		<hr>
 		<%-- 댓글목록 표시 영역 --%>
-		<div id="rlistView" style="border: 1px dotted gray;">
-			<table id="rlistTbl" align="center" cellspacing="0" cellpadding="5"
+		<div id="prlistView" style="border: 1px dotted gray;">
+			<table id="prlistTbl" align="center" cellspacing="0" cellpadding="5"
 				border="1"></table>
 		</div>
 		<hr>
 		<%-- 댓글달기 폼 영역 --%>
 		<div id="replyDiv">
-			<form action="rinsert.do" method="post">
+			<form action="prinsert.do" method="post">
 				<input type="hidden" name="ref_pid" value="${ pboard.pid }">
 				<table align="center" width="500" border="1" cellspacing="0"
 					cellpadding="5">
 					<tr>
 						<th>작성자</th>
-						<td><input type="text" name="rwriter" readonly
-							value="${ sessionScope.loginUser.id }"></td>
+						<td><input type="text" name="prwriter" readonly
+							value="${ sessionScope.loginUser.nickname }"></td>
 					</tr>
 					<tr>
 						<th>내 용</th>
-						<td><textarea name="rcontent" rows="5" cols="50"></textarea></td>
+						<td><textarea name="prcontent" rows="5" cols="50"></textarea></td>
 					</tr>
 					<tr>
 						<th colspan="2"><input type="submit" value="댓글등록">

@@ -25,6 +25,11 @@ public class PboardServiceImpl implements PboardService{
 	public ArrayList<P_board> selectList(int currentPage, int limit) {
 		return pboardDao.selectList(currentPage, limit);
 	}
+	
+	@Override
+	public ArrayList<P_board> selectPlist(String nickname) {
+		return pboardDao.selectPlist(nickname);
+	}
 
 	 @Override
 	   public P_board selectPboard(int pid) {

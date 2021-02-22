@@ -16,6 +16,13 @@
 		<result column="pstatus" property="pstatus" />
 	</resultMap>
 
+	<select id="selectPlist" parameterType="string" resultMap="resultPboard">
+		SELECT *
+		FROM P_BOARD
+		WHERE PSTATUS = 'Y'
+			  AND PWRITER = #{ nickname }
+	</select>
+
 	<select id="selectList" 
 		parameterType="com.ict.hhw.progress.model.vo.P_board"
 		resultMap="resultPboard">
@@ -121,7 +128,7 @@
 		update p_board
 		set ptitle = #{ ptitle },
 			pcontent = #{ pcontent },
-			p_modify_date = sysdate
+			P_MODFIY_DATE = sysdate
 			<if test="p_file_name == null">
 			, p_file_name = null,
 			p_rfile_name = null

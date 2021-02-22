@@ -20,6 +20,36 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	showDiv();
+	
+	$("input[name=item]").on("change", function(){
+		showDiv();
+	});
+});
+
+function showDiv(){
+	if($("input[name=item]").eq(0).is(":checked")){
+		$("#titleDiv").css("display", "block");
+		$("#writerDiv").css("display", "none");
+		$("#dateDiv").css("display", "none");
+	}
+	
+	if($("input[name=item]").eq(1).is(":checked")){
+		$("#titleDiv").css("display", "none");
+		$("#writerDiv").css("display", "block");
+		$("#dateDiv").css("display", "none");
+	}
+	
+	if($("input[name=item]").eq(2).is(":checked")){
+		$("#titleDiv").css("display", "none");
+		$("#writerDiv").css("display", "none");
+		$("#dateDiv").css("display", "block");
+	}
+}
+
+
+
 	function showWriteForm(){
 		location.href = "${ qawf }";
 	}
@@ -36,6 +66,39 @@
 </div>
 </c:if>
 <br>
+<%-- 검색창 --%>
+<center>
+	<div>
+			<h2>검색할 항목</h2>
+			<input type="radio" name="item" value="title" checked>제목
+			<input type="radio" name="item" value="writer" checked>작성자
+			<input type="radio" name="item" value="date" checked>날짜
+	</div>
+	<div id="titleDiv">
+		<form action="qaSearchTitle.do" method="post">
+		<input type="hidden" name="page" value="1">
+		<label>제목<input type="search" name="keyword"></label>
+		<input type="submit" value="검색"> 
+		</form>
+	</div>
+	<div id="writerDiv">
+		<form action="qaSearchWriter.do" method="post">
+		<input type="hidden" name="page" value="1">
+		<label>작성자<input type="search" name="keyword"></label>
+		<input type="submit" value="검색"> 
+		</form>
+	</div>
+	<div id="dateDiv">
+		<form action="qaSearchDate.do" method="post">
+		<input type="hidden" name="page" value="1">
+		<label>날짜
+		<input type="date" name="begin">~<input type="date" name="end"></label>
+		<input type="submit" value="검색"> 
+		</form>
+	</div>
+</center>
+
+
 
 <%-- 목록 출력 --%>
 <div style="align:center;padding-left:400px;">
@@ -132,6 +195,71 @@
       <c:param name="page" value="${ maxPage }"/>
    </c:url>
    <a href="${ qalist5 }">[맨끝]</a>
+</c:if>
+</div>
+</c:if>
+
+<c:if test="${ !empty action}">
+<%-- 검색후 페이징 처리 
+   [맨처음][이전] 숫자...........  [다음][맨끝]
+--%>
+<div style="text-align: center;">
+<c:if test="${ currentPage <= 1}">
+[맨처음]
+</c:if>
+<c:if test="${ currentPage > 1 }">
+   <c:url var="qasearch1" value="/${ action }">
+   		<c:if test="${ action ne 'qasearchDate.do' }">
+      <c:param name="page" value="1" />
+      </c:if>
+      <c:if test="${ action eq 'qasearchDate.do' }">
+      		<c:param name="begin" value="${ begin }"/>
+      		<c:param name="end" value="${ end }"/>
+      </c:if>
+   </c:url>
+   <a href="${ qasearch1 }">[맨처음]</a>
+</c:if> &nbsp;
+<%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
+<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
+   <c:url var="qasearch2" value="/qalist.do">
+      <c:param name="page" value="${ startPage - 10 }"/>
+   </c:url>
+   <a href="${ qasearch2 }">[이전]</a>
+</c:if>
+<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
+[이전]
+</c:if> &nbsp;  
+<%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
+<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
+    <c:if test="${ p eq currentPage }">
+      <font size="4" color="red">[${ p }]</font>
+   </c:if>
+   <c:if test="${ p ne currentPage }">
+      <c:url var="qasearch3" value="/qalist.do">
+         <c:param name="page" value="${ p }" />
+      </c:url>
+      <a href="${ qasearch3 }">${ p }</a>
+   </c:if>
+</c:forEach> &nbsp;
+<%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
+<c:if test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
+   <c:url var="qasearch4" value="/qalist.do">
+      <c:param name="page" value="${ endPage + 10 }"/>
+   </c:url>
+   <a href="${ qasearch4 }">[다음그룹]</a>
+</c:if>
+<c:if test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
+   [다음그룹]&nbsp;
+</c:if>
+<!-- 맨끝 페이지로 이동 처리 -->
+<c:if test="${ currentPage >= maxPage }">
+   [맨끝]&nbsp;
+</c:if>   
+<c:if test="${ currentPage < maxPage }">
+   <c:url var="qasearch5" value="/qalist.do">
+      <c:param name="page" value="${ maxPage }"/>
+   </c:url>
+   <a href="${ qasearch5 }">[맨끝]</a>
 </c:if>
 </div>
 </c:if>
