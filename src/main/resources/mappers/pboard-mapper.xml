@@ -16,6 +16,13 @@
 		<result column="pstatus" property="pstatus" />
 	</resultMap>
 
+	<select id="selectPlist" parameterType="string" resultMap="resultPboard">
+		SELECT *
+		FROM P_BOARD
+		WHERE PSTATUS = 'Y'
+			  AND PWRITER = #{ nickname }
+	</select>
+
 	<select id="selectList" 
 		parameterType="com.ict.hhw.progress.model.vo.P_board"
 		resultMap="resultPboard">
