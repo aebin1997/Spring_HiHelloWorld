@@ -267,20 +267,18 @@ INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '2', '일반회원2', '일반회
 INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '3', '3', '일반회원3', '일반회원1', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
 
 
-                                        
 ------------------------------------------------------------------------------------------------------------------- QA 생성
 CREATE TABLE QA(
-    QA_ID                  NUMBER NOT NULL,
-    QA_TITLE                VARCHAR2(200) NOT NULL,
-    QA_WRITER            VARCHAR2(20) NOT NULL,
-    QA_CONTENT        VARCHAR2(4000) NOT NULL,
+    QA_ID          NUMBER PRIMARY KEY,
+    QA_TITLE                VARCHAR2(200),
+    QA_WRITER            VARCHAR2(20),
+    QA_CONTENT        VARCHAR2(4000),
     QA_ORIGIN_FILE_NAME     VARCHAR2(50)   NULL,
     QA_RENAME_FILE_NAME   VARCHAR2(50)   NULL,
     QA_READCOUNT    NUMBER DEFAULT 0,
     QA_CREATE_DATE      DATE DEFAULT SYSDATE,
     QA_MODIFY_DATE      DATE DEFAULT SYSDATE,
     QA_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK (QA_STATUS IN('Y', 'N')),
-    CONSTRAINT PK_QA_ID PRIMARY KEY (QA_ID),
     CONSTRAINT FK_QA_WRITER FOREIGN KEY (QA_WRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
 );
 
@@ -308,77 +306,64 @@ NOCACHE;
 
 ------------------------------------------------------------------------------------------------------------------- QA 샘플데이터
 INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1', 
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+
+INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
+       
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
+       
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
+       
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
+       
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
+       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
+       
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
        '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
        DEFAULT, SYSDATE, SYSDATE, DEFAULT);
        
-INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '2222', '일반회원1', 
-       '222.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       
-INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '3333', '일반회원1', 
-       '333333', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       
-INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '3333', '일반회원1', 
-       '333333', NULL, NULL, 
-       1, SYSDATE, SYSDATE, DEFAULT);
-       
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '3333', '일반회원1', 
-       '333333', NULL, NULL, 
-       2, SYSDATE, SYSDATE, DEFAULT);
-       
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '3333', '일반회원1', 
-       '333333', NULL, NULL, 
-       3, SYSDATE, SYSDATE, DEFAULT);
-       
-       
-----------------------------------------------------
----------------     QA_REPLY 관련         -------------------   
-----------------------------------------------------
-
-
-CREATE TABLE QA_REPLY(
-  QARID                  NUMBER,
-  QARCONTENT          VARCHAR2(400),
-  QAREF_BID                  NUMBER,
-  QARWRITER             VARCHAR2(100) NOT NULL,
-  QAR_DATE               DATE,
-  QAR_MODIFY_DATE   DATE,
-  QAR_STATUS            CHAR(1) DEFAULT 'Y',
-  CONSTRAINT PK_QARID PRIMARY KEY(QARID),
-  CONSTRAINT FK_QARWRITER FOREIGN KEY (QARWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
+------------------------------------------------------------------------------------------------------------------- QA_REPLY 관련
+ 
+CREATE TABLE QAR(
+  QAR_ID NUMBER PRIMARY KEY,
+  QAR_CONTENT VARCHAR2(4000),
+  REF_QA_ID NUMBER,
+  QAR_WRITER VARCHAR2(15),
+  QAR_CREATE_DATE DATE,
+  QAR_MODIFY_DATE DATE,
+  QAR_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK (QAR_STATUS IN ('Y', 'N')),
+  FOREIGN KEY (REF_QA_ID) REFERENCES QA(qa_id) ON DELETE CASCADE, 
+  FOREIGN KEY (QAR_WRITER) REFERENCES MEMBER(NICKNAME) ON DELETE CASCADE 
 );
 
 
-COMMENT ON COLUMN QA_REPLY.QARID IS '댓글번호';
-COMMENT ON COLUMN QA_REPLY.QARCONTENT IS '댓글내용';
-COMMENT ON COLUMN QA_REPLY.QAREF_BID IS '참조게시글번호';
-COMMENT ON COLUMN QA_REPLY.QARWRITER IS '댓글작성자아이디';
-COMMENT ON COLUMN QA_REPLY.QAR_DATE IS '댓글작성날짜';
-COMMENT ON COLUMN QA_REPLY.QAR_MODIFY_DATE IS '댓글수정날짜';
-COMMENT ON COLUMN QA_REPLY.QAR_STATUS IS '댓글상태값';
+COMMENT ON COLUMN QAR.QAR_ID IS '댓글번호';
+COMMENT ON COLUMN QAR.QAR_CONTENT IS '댓글내용';
+COMMENT ON COLUMN QAR.REF_QA_ID IS '참조게시글번호';
+COMMENT ON COLUMN QAR.QAR_WRITER IS '댓글작성자아이디';
+COMMENT ON COLUMN QAR.QAR_CREATE_DATE IS '댓글작성날짜';
+COMMENT ON COLUMN QAR.QAR_MODIFY_DATE IS '댓글수정날짜';
+COMMENT ON COLUMN QAR.QAR_STATUS IS '댓글상태값';
 
-CREATE SEQUENCE SEQ_QARID;
+CREATE SEQUENCE SEQ_QAR;
 
-INSERT INTO QA_REPLY
-VALUES(SEQ_QARID.NEXTVAL, '첫번째 댓글입니다.', 1, '일반회원1', SYSDATE, SYSDATE, DEFAULT);
-
-INSERT INTO QA_REPLY
-VALUES(SEQ_QARID.NEXTVAL, '첫번째 댓글입니다.', 13, '일반회원1', SYSDATE, SYSDATE, DEFAULT);
-
-INSERT INTO QA_REPLY
-VALUES(SEQ_QARID.NEXTVAL, '두번째 댓글입니다.', 13, '일반회원1', SYSDATE, SYSDATE, DEFAULT);
-
-INSERT INTO QA_REPLY
-VALUES(SEQ_QARID.NEXTVAL, '마지막 댓글입니다.', 13, '일반회원1', SYSDATE, SYSDATE, DEFAULT);
-
-
+INSERT INTO QAR
+VALUES(SEQ_QAR.NEXTVAL, SEQ_QAR.NEXTVAL,SEQ_QAR.NEXTVAL,
+            '일반회원1', SYSDATE, SYSDATE, DEFAULT);
+            
 
 --------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
 CREATE TABLE PROGRESS(
