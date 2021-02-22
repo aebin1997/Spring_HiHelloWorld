@@ -130,7 +130,7 @@
 .sub_qna_title_area .article .title_text{vertical-align:middle}.sub_qna_title_area .article .txt_type{width:665px;height:31px;line-height:30px;padding-left:6px;border:1px solid #a7a7a7;border-right:1px solid #d1d1d1;border-bottom:1px solid #d1d1d1;color:#a5a5a5;font-size:14px;font-weight:bold;-webkit-appearance:none;-webkit-border-radius:0}
 .sub_qna_title_area .article .input_box{position:absolute;top:-1px;left:77px;width:666px}.sub_qna_title_area input{-webkit-ime-mode:active;-moz-ime-mode:active;-ms-ime-mode:active;ime-mode:active}
 .sub_qna_title_area .article .on_focus{border:2px solid #5fc54e;color:#4c4c4c}.sub_qna_title_area .article2{float:right;width:200px;height:28px;_height:36px;padding:6px 1px 0 0;text-align:right}
-.sub_qna_title_area .article2 .desc{color:#949494;font-size:11px}.sub_qna_title_area .article_oto{display:none;position:absolute;z-index:100;top:31px;left:77px;width:587px;border-bottom:1px solid #f5f5f5;color:#101010;text-align:left}
+.sub_qna_title_area .article2 .desc{color:#980494;font-size:11px}.sub_qna_title_area .article_oto{display:none;position:absolute;z-index:100;top:31px;left:77px;width:587px;border-bottom:1px solid #f5f5f5;color:#101010;text-align:left}
 .sub_qna_title_area .article_oto_inr{padding:10px 0 9px 41px;border:1px solid #c2c7cc;background:#f1f8fe url(https://ssl.pstatic.net/static/kin/09renewal/ico_oto.gif) no-repeat 12px 6px}
 .sub_qna_title_area .article_oto a{display:inline-block;margin:-2px 0;vertical-align:top}.sub_qna_title_area .article_oto a img{vertical-align:top}
 .sub_qna_title_area .article_oto .add{margin-top:4px;font-size:11px;color:#878d91;letter-spacing:-1px}
@@ -892,23 +892,23 @@
 .my_lawyer .personal_mark .power_triangle{border-top-color:#22abc6}.my_labor .personal_mark .power_triangle{border-top-color:#24adc8}
 .my_doctor .personal_mark .power_triangle{border-top-color:#22abc6}.my_personal{position:relative;z-index:110;width:980px;background:url("/hhw/resources/images/myPage/bx_my_personal_mid.png") repeat-y}
 .my_personal .my_personal_top{height:4px;line-height:0;font-size:0;background:url("/hhw/resources/images/myPage/bx_my_personal_top.png") no-repeat}
-.my_personal .my_personal_inner{position:relative;width:949px;padding:0 4px 22px 27px;background:url("/hhw/resources/images/myPage/bx_my_personal_btm.png") no-repeat left bottom;zoom:1}
+.my_personal .my_personal_inner{position:relative;width:980px;padding:0 4px 22px 27px;background:url("/hhw/resources/images/myPage/bx_my_personal_btm.png") no-repeat left bottom;zoom:1}
 .my_personal .my_personal_inner:after{content:"";display:block;clear:both}
 .my_doctor{position:relative;z-index:110;width:980px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_doctor_mid_160808.png) repeat-y}
 .my_doctor .my_personal_top{height:4px;line-height:0;font-size:0;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_doctor_top_160808.png) no-repeat}
-.my_doctor .my_personal_inner{position:relative;width:949px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_doctor_btm_160808.png) no-repeat left bottom;zoom:1}
+.my_doctor .my_personal_inner{position:relative;width:980px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_doctor_btm_160808.png) no-repeat left bottom;zoom:1}
 .my_doctor .my_personal_inner:after{content:"";display:block;clear:both}
 .my_lawyer{position:relative;z-index:110;width:980px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_lawyer_mid_160808.png) repeat-y}
 .my_lawyer .my_personal_top{height:4px;line-height:0;font-size:0;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_lawyer_top_160808.png) no-repeat}
-.my_lawyer .my_personal_inner{position:relative;width:949px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_lawyer_btm_160808.png) no-repeat left bottom;zoom:1}
+.my_lawyer .my_personal_inner{position:relative;width:980px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_lawyer_btm_160808.png) no-repeat left bottom;zoom:1}
 .my_lawyer .my_personal_inner:after{content:"";display:block;clear:both}
 .my_labor{position:relative;z-index:110;width:980px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_labor_mid_160808.png) repeat-y}
 .my_labor .my_personal_top{height:4px;line-height:0;font-size:0;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_labor_top_160808.png) no-repeat}
-.my_labor .my_personal_inner{position:relative;width:949px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_labor_btm_160808.png) no-repeat left bottom;zoom:1}
+.my_labor .my_personal_inner{position:relative;width:980px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_labor_btm_160808.png) no-repeat left bottom;zoom:1}
 .my_labor .my_personal_inner:after{content:"";display:block;clear:both}
 .my_partner{position:relative;z-index:110;width:980px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_partner_mid_160808.png) repeat-y}
 .my_partner .my_personal_top{height:4px;line-height:0;font-size:0;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_partner_top_160808.png) no-repeat}
-.my_partner .my_personal_inner{position:relative;width:949px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_partner_btm_160808.png) no-repeat left bottom;zoom:1}
+.my_partner .my_personal_inner{position:relative;width:980px;padding:0 4px 28px 27px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bx_partner_btm_160808.png) no-repeat left bottom;zoom:1}
 .my_partner .my_personal_inner:after{content:"";display:block;clear:both}
 .profile_section{position:relative;float:left;width:134px;margin-right:51px;padding-top:28px;text-align:center}
 .profile_section .profile_group .power_kin,.profile_section .thumb .power_kin{position:absolute;top:6px;left:6px;z-index:2;width:63px;height:63px;background:url(https://ssl.pstatic.net/static/kin/09renewal/bg_power_kin.png) no-repeat left top;_background:0;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='https://ssl.pstatic.net/static/kin/09renewal/bg_power_kin.png',sizingMethod='scale')}

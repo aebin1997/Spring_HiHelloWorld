@@ -1,11 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="Author" content="aebin">
 <title>포인트 충전</title>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pay/base.css" />
 <link rel="stylesheet" type="text/css"
@@ -14,7 +15,7 @@
 	href="${pageContext.request.contextPath}/resources/css/pay/main.css" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pay/jquery-ui.css" />
-
+	
 <script type="text/javascript">
 function popupOpen(){ //자바스크립트
 	var popUrl = "payCash.do";	//팝업창에 출력될 페이지 URL
@@ -45,13 +46,13 @@ function popupOpen(){ //자바스크립트
 
 
 <body>
-<!-- 헤더 -->
 
-
-	<div id="contents" class="contents">
+<jsp:include page="../common/header.jsp" />
+<section style="padding: 100px 0 60px 0;">
+	<div id="contents" class="contents" style="width:48%; margin-left:26%; ">
 
 		<ul class="title_wrap">
-			<li class="title_l">포인트관리</li>
+			<li class="title_l">캐시관리</li>
 			<li class="title_r">* 오늘을 포함하여 14일간의 데이터만 유지됩니다.</li>
 		</ul>
 		<table class="tab_face_b" summary="탭메뉴">
@@ -63,21 +64,23 @@ function popupOpen(){ //자바스크립트
 			<tbody>
 				<tr>
 					<td class="on">
-						<div>포인트관리</div>
+						<div>캐시관리</div>
 						<div>
-							<script>
+							<!-- <script>
 								if (loginData.isLogin)
 									document.write("("+ util_setComma(loginData.myCash)	+ " 포인트)")
-							</script>
+							</script> -->
 							(0 포인트)
 						</div>
 						<div>
 							<a class="btn_s01" href="javascript:popupOpen();">충전하기</a>
 						</div>
 					</td>
-					<td onclick="goContents('/MyInfo/myPointList.do', null, true)">
-						<div>내공관리</div> <!-- 				<div><script>if(loginData.isLogin) document.write("("+util_setComma(loginData.myPoint)+" 포인트)")</script></div> -->
-						<!-- 				<div>1포인트 = 1캐시 (제휴 컨텐츠 제외)</div> -->
+					<td onclick="#">
+						<div>포인트관리</div> 
+					</td>
+					<td onclick="#">
+						<div>내공관리</div>
 					</td>
 				</tr>
 			</tbody>
@@ -87,14 +90,8 @@ function popupOpen(){ //자바스크립트
 			<ul class="table_box3_set">
 				<li class="table_box3_set_L ml3"><span>조회기간</span> <span>
 						<!-- 달력 -->
-
-
-
-
-
-						<link href="/common/css/jquery-ui.css" rel="stylesheet"
-							type="text/css"> <script
-							src="/common/js/jquery-1.8.ui.min.js"></script> <select
+						<link href="${pageContext.request.contextPath}/resources/css/myPage/jquery-ui.css" rel="stylesheet" type="text/css">
+						<script	src="${pageContext.request.contextPath}/resources/css/myPage/jquery-1.8.ui.min.js"></script> <select
 						id="searchStartYear" class="input_select03">
 							<option value="2020">2020</option>
 							<option value="2021" selected="">2021</option>
@@ -267,13 +264,12 @@ function popupOpen(){ //자바스크립트
 												"vertical-align:middle; cursor:pointer; position:relative; top:-1px; *z-index:0;"); //이미지버튼 style적용
 								$("#ui-datepicker-div").hide(); // 자동으로 생성되는 div객체 숨김
 
-								//ui-icons_222222_256x240.png
 							});
 						</script>
 				</span></li>
 				<li class="table_box3_set_R"><span class="btn_01 medium"
-					onclick="myCashFN.goList()"><em>조회</em></span> <span
-					class="btn_01 medium" onclick="myCashFN.goDel()"><em>삭제</em></span>
+					onclick="#"><em>조회</em></span> <span
+					class="btn_01 medium" onclick="#"><em>삭제</em></span>
 				</li>
 			</ul>
 		</div>
@@ -286,14 +282,15 @@ function popupOpen(){ //자바스크립트
 			</colgroup>
 			<tbody>
 				<tr>
-					<td id="cashViewType0" onclick="myCashFN.goView(0)" class="on">전체보기</td>
-					<td id="cashViewType1" onclick="myCashFN.goView(1)">입금</td>
-					<td id="cashViewType2" onclick="myCashFN.goView(2)">출금</td>
+					<td id="cashViewType0" onclick="#" class="on">전체보기</td>
+					<td id="cashViewType1" onclick="#">입금</td>
+					<td id="cashViewType2" onclick="#">출금</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<table id="cashList" class="tbl_typeA" border="1" cellspacing="0" summary="캐시관리">
+		<table id="cashList" class="tbl_typeA" border="1" cellspacing="0"
+			summary="캐시관리">
 			<caption>캐시관리</caption>
 			<colgroup>
 				<col width="5%">
@@ -320,11 +317,10 @@ function popupOpen(){ //자바스크립트
 				<tr class="">
 					<td colspan="7">캐시 내역이 없습니다.</td>
 				</tr>
-
 			</tbody>
 		</table>
 
-			<script>
+		<script>
 			function commonPage(pg) {
 				myCashFN.goPage(pg);
 			}
@@ -419,11 +415,149 @@ function popupOpen(){ //자바스크립트
 			})();
 		</script>
 	</div>
-	
-<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" style="position: absolute; top: 373px; left: 902px; z-index: 1; display: block;"><div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all"><a class="ui-datepicker-prev ui-corner-all" data-handler="prev" data-event="click" title="Prev"><span class="ui-icon ui-icon-circle-triangle-w">Prev</span></a><a class="ui-datepicker-next ui-corner-all ui-state-disabled" title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Next</span></a><div class="ui-datepicker-title"><select class="ui-datepicker-year" data-handler="selectYear" data-event="change"><option value="2020">2020</option><option value="2021" selected="selected">2021</option></select><select class="ui-datepicker-month" data-handler="selectMonth" data-event="change"><option value="0">1월</option><option value="1" selected="selected">2월</option></select></div></div><table class="ui-datepicker-calendar"><thead><tr><th class="ui-datepicker-week-end"><span title="Sunday">일</span></th><th><span title="Monday">월</span></th><th><span title="Tuesday">화</span></th><th><span title="Wednesday">수</span></th><th><span title="Thursday">목</span></th><th><span title="Friday">금</span></th><th class="ui-datepicker-week-end"><span title="Saturday">토</span></th></tr></thead><tbody><tr><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">1</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">2</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">3</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">4</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">5</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">6</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">7</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">8</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">9</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">10</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">11</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">12</a></td><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">13</a></td></tr><tr><td class=" ui-datepicker-week-end " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">14</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">15</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">16</a></td><td class=" " data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default" href="#">17</a></td><td class=" ui-datepicker-days-cell-over  ui-datepicker-today" data-handler="selectDay" data-event="click" data-month="1" data-year="2021"><a class="ui-state-default ui-state-highlight" href="#">18</a></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">19</span></td><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">20</span></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">21</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">22</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">23</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">24</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">25</span></td><td class=" ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">26</span></td><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">27</span></td></tr><tr><td class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span class="ui-state-default">28</span></td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td><td class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td></tr></tbody></table></div>
 
-<!-- 푸터 -->
+	<div id="ui-datepicker-div"
+		class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"
+		style="position: absolute; top: 373px; left: 902px; z-index: 1; display: block;">
+		<div
+			class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">
+			<a class="ui-datepicker-prev ui-corner-all" data-handler="prev"
+				data-event="click" title="Prev"><span
+				class="ui-icon ui-icon-circle-triangle-w">Prev</span></a><a
+				class="ui-datepicker-next ui-corner-all ui-state-disabled"
+				title="Next"><span class="ui-icon ui-icon-circle-triangle-e">Next</span></a>
+			<div class="ui-datepicker-title">
+				<select class="ui-datepicker-year" data-handler="selectYear"
+					data-event="change"><option value="2020">2020</option>
+					<option value="2021" selected="selected">2021</option></select><select
+					class="ui-datepicker-month" data-handler="selectMonth"
+					data-event="change"><option value="0">1월</option>
+					<option value="1" selected="selected">2월</option></select>
+			</div>
+		</div>
+		<table class="ui-datepicker-calendar">
+			<thead>
+				<tr>
+					<th class="ui-datepicker-week-end"><span title="Sunday">일</span></th>
+					<th><span title="Monday">월</span></th>
+					<th><span title="Tuesday">화</span></th>
+					<th><span title="Wednesday">수</span></th>
+					<th><span title="Thursday">목</span></th>
+					<th><span title="Friday">금</span></th>
+					<th class="ui-datepicker-week-end"><span title="Saturday">토</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">1</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">2</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">3</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">4</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">5</a></td>
+					<td class=" ui-datepicker-week-end " data-handler="selectDay"
+						data-event="click" data-month="1" data-year="2021"><a
+						class="ui-state-default" href="#">6</a></td>
+				</tr>
+				<tr>
+					<td class=" ui-datepicker-week-end " data-handler="selectDay"
+						data-event="click" data-month="1" data-year="2021"><a
+						class="ui-state-default" href="#">7</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">8</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">9</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">10</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">11</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">12</a></td>
+					<td class=" ui-datepicker-week-end " data-handler="selectDay"
+						data-event="click" data-month="1" data-year="2021"><a
+						class="ui-state-default" href="#">13</a></td>
+				</tr>
+				<tr>
+					<td class=" ui-datepicker-week-end " data-handler="selectDay"
+						data-event="click" data-month="1" data-year="2021"><a
+						class="ui-state-default" href="#">14</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">15</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">16</a></td>
+					<td class=" " data-handler="selectDay" data-event="click"
+						data-month="1" data-year="2021"><a class="ui-state-default"
+						href="#">17</a></td>
+					<td class=" ui-datepicker-days-cell-over  ui-datepicker-today"
+						data-handler="selectDay" data-event="click" data-month="1"
+						data-year="2021"><a
+						class="ui-state-default ui-state-highlight" href="#">18</a></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">19</span></td>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">20</span></td>
+				</tr>
+				<tr>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">21</span></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">22</span></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">23</span></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">24</span></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">25</span></td>
+					<td class=" ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">26</span></td>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">27</span></td>
+				</tr>
+				<tr>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-unselectable ui-state-disabled "><span
+						class="ui-state-default">28</span></td>
+					<td
+						class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td
+						class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td
+						class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td
+						class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td
+						class=" ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+					<td
+						class=" ui-datepicker-week-end ui-datepicker-other-month ui-datepicker-unselectable ui-state-disabled">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
+	<!-- 푸터 -->
+</section>
+<jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="Author" content="aebin">
+<meta name="Author" content="">
 <title>Hi Hello World</title>
 
  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
@@ -37,7 +37,7 @@
 <!-- Responsive  CSS -->
 <link rel="stylesheet" href="/hhw/resources/css/responsive.css" />
 <!-- about us CSS -->
- <link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
+<link href='/hhw/resources/css/reboot.css' rel='stylesheet' type='text/css'>
  
  <link href='/hhw/resources/css/owl.theme.default.min.css' rel='stylesheet' type='text/css'>
 

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,7 +9,7 @@
 <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
 <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/other.css" />
-<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/profile.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.2">
 
 <script type="text/javascript" src="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/js/min/kin.js"></script>
@@ -21,17 +20,13 @@
 
 
 <body>
+<jsp:include page="../common/header.jsp" />
+<section style="padding: 100px 0 60px 0;">
 	<div id="wrap" class="wrap wrap_my"> 
 <div class="header_wrap">
 
 
-
-<%-- 	
-	<div class="header_gnb">
-		<jsp:include page="../common/header.jsp" />
-	</div> --%>
-	
-	<!-- nav -->
+<!-- nav -->
 	
 </div>
 
@@ -259,19 +254,18 @@ function photoView(uri){
 				
 				
 				
-					<a href="#" onclick="nhn.Kin.Utility.nClicks('prf.imgedit', '', '', event);nhn.Kin.checkRosAndGoUrl(event, '/myinfo/namecardProfileForm.nhn?openProfilePopup=Y', '');return false;" class="edit_photo _ros" target="_blank">
+					<a href="#" onclick="#" class="edit_photo _ros" target="_blank">
 						<span class="photo_edit_button">
 							<span class="blind">프로필 사진 변경</span>
 						</span>
 					</a>
-				
 				
 			</div>
 			<div class="profile_info">
 				
 
 				<div class="profile_name">
-					<strong class="profile_user">빠라삐융</strong>
+					<strong class="profile_user">${ loginUser.name }</strong>
 					
 				</div>
 			</div>
@@ -305,7 +299,7 @@ function photoView(uri){
 				
 				
 					<p class="btn_report">
-						<a href="#" onclick="nhn.Kin.Utility.nClicks('prf.prfedit', '', '', event);nhn.Kin.checkRosAndGoUrl(event, '/myinfo/namecardProfileForm.nhn', '');" class="_ros"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_intro_edit_130927.gif" width="27" height="16" alt="수정"></a>
+						<a href="#" onclick="#" class="_ros"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_intro_edit_130927.gif" width="27" height="16" alt="수정"></a>
 					</p>
 				
 			</div>
@@ -313,7 +307,7 @@ function photoView(uri){
 				<div class="my_main no_my_main _licenseList">
 					<div class="tit">
 						<img class="myinfo_qual_title" src="https://ssl.pstatic.net/static/kin/09renewal/h_my_qual.png" width="39" height="11" alt="취득자격" />
-						<button class="tooltip_help_button _licenseHelpLayerOpenBtn" onclick="nhn.Kin.Utility.nClicks('prf.lcntip', '', '', event);"><img src="https://ssl.pstatic.net/static/kin/09renewal/ico_help.png" width="16" height="16" alt="도움말" /></button>
+						<button class="tooltip_help_button _licenseHelpLayerOpenBtn" onclick="#"><img src="https://ssl.pstatic.net/static/kin/09renewal/ico_help.png" width="16" height="16" alt="도움말" /></button>
 
 <div class="layer_base layer_balloon _licenseHelpGuideLayer" style="width:289px; top: 17px; left: -95px; display:none;">
     <div class="layer_header border_none">
@@ -324,7 +318,7 @@ function photoView(uri){
         <p>취득 자격은 <em>오프라인에서 취득한 국가자격</em>으로, 실명인증을 통해 지식iN 서비스에 노출할 수 있습니다. 나의 답변에 신뢰를 줄 수 있도록 취득 자격을 설정해보세요.</p>
     </div>
 
-    <button class="close _closeHelpGuide" onclick="nhn.Kin.Utility.nClicks('lct.x', '', '', event);"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_close_layer.gif" alt="레이어팝업 닫기"></button>
+    <button class="close _closeHelpGuide" onclick="#"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_close_layer.gif" alt="레이어팝업 닫기"></button>
     <div class="edge_center"></div>
 </div>
 					</div>
@@ -1177,6 +1171,7 @@ more than usual 저거 맞아용
     </div>
     
 	<!-- footer  -->
+	</section>
 	<jsp:include page="../common/footer.jsp" />
 
 	<script type="text/javascript">
