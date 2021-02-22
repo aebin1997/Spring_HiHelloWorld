@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="paymentMapper">
+
+	<resultMap id="paymentResultSet" type="Payment">
+		<id property="pid" column="pid"/>
+		<result property="payid" column="PAYID"/>
+		<result property="memberid" column="MEMBERID"/>
+		<result property="paypg" column="PAYPG"/>
+		<result property="payinfo" column="PAYINFO"/>
+		<result property="paydate" column="PAYDATE"/>
+		<result property="payip" column="PAYIP"/>
+	</resultMap>
+	
+</mapper>
