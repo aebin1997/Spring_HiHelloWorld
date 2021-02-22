@@ -333,7 +333,7 @@ ul.tab_rank_kin{overflow:visible;zoom:1}.tab_rank_kin:after{content:'';clear:bot
 .Ugc_login .sign_area .info_find *,.Ugc_login .sign_area .sign_in *{font-size:11px}.Ugc_login .sign_area .info_find em a{text-decoration:underline}
 .skip_nav{position:relative;margin:0 auto}.skip_nav a{position:absolute;top:-30px;left:0;z-index:1200;padding:2px 6px 0;border:1px solid #4ec53d;background-color:#000;line-height:24px;font-size:12px;color:#fff;text-decoration:none;-webkit-transition:.3s}
 .skip_nav a:active,.skip_nav a:focus{top:0;text-decoration:none}.ellipsis,.ellis{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.sp_common,.sort_list_module li.is_active .ico_sort,.nav_sub_list:before,.paging_area .prev:before,.paging_area .next:after,.ico_arr,.icon_check{display:block;overflow:hidden;background-image:url(/hhw/resources/images/myPage/sp_common_old_180806.png);background-repeat:no-repeat}
+.sp_common,.sort_list_module li.is_active .ico_sort,.nav_sub_list:before,.paging_area .prev:before,.paging_area .next:after,.ico_arr,.icon_check{display:block;overflow:hidden;background-image:url(https://ssl.pstatic.net/static/kin/section/sprite/sp_common_old_180806.png);background-repeat:no-repeat}
 .ico_common_q{background-image:url(https://ssl.pstatic.net/static/kin/section/common/ico_q__16x16.png);background-image:url(https://ssl.pstatic.net/static/kin/m/ico_q.svg),none}
 .ico_common_a{background-image:url(https://ssl.pstatic.net/static/kin/section/common/ico_a__16x16.png);background-image:url(https://ssl.pstatic.net/static/kin/m/ico_a.svg),none}
 .ico_common_q,.ico_common_a{overflow:hidden;display:inline-block;background-color:transparent;background-repeat:no-repeat;background-size:100% 100%;color:transparent;font-size:0;vertical-align:top}

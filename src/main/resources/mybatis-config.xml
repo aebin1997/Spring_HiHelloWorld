@@ -13,7 +13,6 @@
 		<typeAlias type="com.ict.hhw.board_reply.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.ict.hhw.progress.model.vo.P_board" alias="P_board"/>
 		<typeAlias type="com.ict.hhw.blame.model.vo.Blame" alias="Blame"/>
-		<typeAlias type="com.ict.hhw.payment.model.vo.Payment" alias="Payment"/>
 	</typeAliases>
 	
 	<mappers>
@@ -24,6 +23,5 @@
 		<mapper resource="mappers/breply-mapper.xml"/>
 		<mapper resource="mappers/pboard-mapper.xml"/>
 		<mapper resource="mappers/blame-mapper.xml"/>
-		<mapper resource="mappers/payment-mapper.xml"/>
 	</mappers>
 </configuration>
