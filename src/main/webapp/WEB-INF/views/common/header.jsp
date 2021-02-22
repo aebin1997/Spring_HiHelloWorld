@@ -154,8 +154,10 @@
 									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="#">CONTACT</a></li>
+									<!-- 임시 -->
+									<li><a class="nav-link" href="progress.move">진행 목록</a></li>
 									<li><a class="nav-link" href="plist.do">진행페이지</a></li>
-									<li><a class="nav-link" href="test.do">내정보(임시)</a></li>
+									<li><a class="nav-link" href="test.do">내정보</a></li>
 								</ul>
 							</nav>
 						</div>

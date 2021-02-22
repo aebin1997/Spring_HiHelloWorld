@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ProgressController {
 
-	
+	@RequestMapping("progress.move")
+	public String moveProgress() {
+		return "progress/projectApplyForm";
+	}
 
 }

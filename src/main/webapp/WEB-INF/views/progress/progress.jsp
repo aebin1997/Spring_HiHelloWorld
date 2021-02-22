@@ -270,6 +270,13 @@
 					</center>
 					<%-- 리스트 출력  ({)--%>
 					<br>
+					<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
+					<c:if test="${ !empty sessionScope.loginUser }">
+					<div style="align:center; text-align:center;">
+					   <button onclick="showWriteForm();">글쓰기</button>
+					</div>
+					</c:if>
+					<br>
 					<%-- 목록 출력 --%>
 					<div style="text-align: right; padding-right: 50px">
 						<c:url var="plist" value="/plist.do">
