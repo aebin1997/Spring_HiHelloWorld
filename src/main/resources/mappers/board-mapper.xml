@@ -29,7 +29,7 @@
       쿼리문장 ]]> 사용함 -->
       
       <!-- 댓글 추가시 카운터 증가 -->
-	<select id="BoardReplyCount" parameterType="_int">
+	<select id="addReplyCount" parameterType="_int">
 	    update board
          set b_rcount = b_rcount + 1
          where bid = #{ BID }		
@@ -54,12 +54,6 @@
        WHERE RNUM >= 1 
          AND RNUM <= 3
             ]]>
-   </select>
-
-	<select id="updateReplyCount" parameterType="_int">
-      select  * 
-      	from reply
-       where bid = #{ BID }
    </select>
 
    <select id="selectBoard" parameterType="_int" resultMap="resultBoard">

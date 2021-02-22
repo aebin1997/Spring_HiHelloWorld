@@ -15,6 +15,11 @@ public class BoardServiceImpl implements BoardService {
    @Autowired //의존성 어노테이션 
    private BoardDao boardDao;
    
+   //댓글 뷰
+   @Override
+   public int addReplyCount(int b_rcount) {
+	   return boardDao.addReplyCount(b_rcount);
+	}
       
    @Override
    public ArrayList<Board> selectTop3() {
@@ -84,12 +89,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getSearchDateListCount(SearchDate dates) {
 		return boardDao.getSearchDateListListCount(dates);
-	}
-
-	@Override
-	public int selectBoardReply(int b_rcount) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

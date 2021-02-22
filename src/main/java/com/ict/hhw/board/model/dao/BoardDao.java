@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.board.model.vo.BoardPage;
-import com.ict.hhw.board_reply.model.vo.B_Reply;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 
@@ -18,10 +17,9 @@ public class BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int getBoardReplyCount() {
-		int b_rcount = sqlSession.selectOne("boardMapper.BoardReplyCount");
-		return b_rcount;
-	}
+	public int addReplyCount(int b_rcount) {
+		return sqlSession.update("boardMapper.addReplyCount", b_rcount);
+	}	
 	
 	public ArrayList<Board> selectTop3() {
 		List<Board> list = sqlSession.selectList("boardMapper.selectTop3");

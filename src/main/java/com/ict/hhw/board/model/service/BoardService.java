@@ -8,7 +8,7 @@ import com.ict.hhw.common.SearchDate;
 
 public interface BoardService {
 	//게시글 댓글수
-	int selectBoardReply(int b_rcount);
+	int addReplyCount(int b_rcount);
 	
 	// 조회수 많은 게시글 top3
 	ArrayList<Board> selectTop3();

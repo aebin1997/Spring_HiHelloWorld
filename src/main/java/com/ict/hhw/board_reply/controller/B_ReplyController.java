@@ -25,7 +25,11 @@ public class B_ReplyController {
 
 	@RequestMapping(value = "rinsert.do", method = RequestMethod.POST)
 	public String replyInsertMethod(B_Reply b_reply, Model model) {
+		
 		if (b_replyService.insertB_Reply(b_reply) > 0) {
+			
+		
+			
 			return "redirect:bdetail.do?bid=" + b_reply.getB_ref_bid();
 		} else {
 			model.addAttribute("msg", b_reply.getB_ref_bid() + "번 글에 대한 댓글달기 실패.");
