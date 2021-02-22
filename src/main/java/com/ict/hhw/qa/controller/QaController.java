@@ -253,7 +253,7 @@ public class QaController {
 		
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("renameFile" , renameFile);
-		model.put("originalFilename", originalFilename);
+		model.put("originalFilename", originalFilename); 
 		return new ModelAndView("filedownqa", "downFile", model);
 	}
 	

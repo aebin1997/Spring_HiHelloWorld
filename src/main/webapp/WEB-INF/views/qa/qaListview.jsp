@@ -59,36 +59,34 @@ function showDiv(){
 	<jsp:include page="../common/header.jsp"/>
 	<hr>
 	<br><br><br>
-<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-<c:if test="${ !empty sessionScope.loginUser }">
-<div style="align:center; text-align:center;">
-   <button onclick="showWriteForm();">글쓰기</button>
-</div>
-</c:if>
+
+
+
+
 <br>
 <%-- 검색창 --%>
 <center>
-	<div>
-			<h2>검색할 항목</h2>
+<h2>의뢰 게시판</h2>
+	<div style="text-align: right; padding-right: 300px;">
 			<input type="radio" name="item" value="title" checked>제목
 			<input type="radio" name="item" value="writer" checked>작성자
 			<input type="radio" name="item" value="date" checked>날짜
 	</div>
-	<div id="titleDiv">
+	<div id="titleDiv" style="text-align: right; padding-right: 300px;">
 		<form action="qaSearchTitle.do" method="post">
 		<input type="hidden" name="page" value="1">
 		<label>제목<input type="search" name="keyword"></label>
 		<input type="submit" value="검색"> 
 		</form>
 	</div>
-	<div id="writerDiv">
+	<div id="writerDiv" style="text-align: right; padding-right: 300px;">
 		<form action="qaSearchWriter.do" method="post">
 		<input type="hidden" name="page" value="1">
 		<label>작성자<input type="search" name="keyword"></label>
 		<input type="submit" value="검색"> 
 		</form>
 	</div>
-	<div id="dateDiv">
+	<div id="dateDiv" style="text-align: right; padding-right: 300px;">
 		<form action="qaSearchDate.do" method="post">
 		<input type="hidden" name="page" value="1">
 		<label>날짜
@@ -101,41 +99,40 @@ function showDiv(){
 
 
 <%-- 목록 출력 --%>
-<div style="align:center;padding-left:400px;">
-   <c:url var="qalist" value="/qalist.do" >
-         <c:param name="page" value="1" />
-   </c:url>
-
-</div>
-<br>
-<table align="center" border="1" width="700" cellspacing="0">
-<tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th>
-<th>첨부파일</th></tr>
-<c:forEach items="${ requestScope.list }" var="qa">
-<tr>
-   <td align="center">${ qa.qa_id }</td>
-   <td>   
-   <c:url var="qadetail" value="/qadetail.do">
-      <c:param name="page" value="${ currentPage }"/>
-      <c:param name="qa_id" value="${ qa.qa_id }" />
-   </c:url>
-   <a href="${ qadetail }">${ qa.qa_title }</a>
-   </td>
-   <td align="center">${ qa.qa_writer }</td>
-   <td align="center">${ qa.qa_create_date }</td>
-   <td align="center">${ qa.qa_readcount }</td>
-   <td align="center">
-      <c:if test="${ !empty qa.qa_origin_file_name }">
-      ◎
-      </c:if>
-      <c:if test="${ empty qa.qa_origin_file_name }">
-      &nbsp;
-      </c:if>
-   </td>
-</tr>
-</c:forEach>
-</table>
-<br>
+<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid">
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" id="dataTable" width="600"
+							cellspacing="0" align="center" border="1" style="width: 1000px; text-align: center;">
+							<tr style="background-color: orange;">
+								<th style="text-align: center;">번호</th>
+								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;">작성자</th>
+								<th style="text-align: center;">날짜</th>
+								<th style="text-align: center;">조회수</th>
+							</tr>
+							<c:forEach items="${ requestScope.list }" var="qa" >
+								<tr>
+									<td align="center" width="100">${ qa.qa_id }</td>
+									<td>   
+										   <c:url var="qadetail" value="/qadetail.do">
+										      <c:param name="page" value="${ currentPage }"/>
+										      <c:param name="qa_id" value="${ qa.qa_id }" />
+										   </c:url>
+										   <a href="${ qadetail }" style="color: black;">${ qa.qa_title }</a>
+									<td align="center" width="180">${ qa.qa_writer } &nbsp; </td>
+									<td align="center" width="130">${ qa.qa_create_date }</td>
+									<td align="center" width="80">${ qa.qa_readcount }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
 
 
 
@@ -263,6 +260,15 @@ function showDiv(){
 </c:if>
 </div>
 </c:if>
+
+	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
+	<c:if test="${ !empty sessionScope.loginUser }">
+		<div style="text-align: right; padding-right: 500px; margin-top: -30px">
+			<button onclick="showWriteForm();" class="btn btn-warning btn-round"
+				style="color: #fff;">글쓰기</button>
+		</div>
+	</c:if>
+	<br>
 
 
 	<jsp:include page="../common/footer.jsp"/>

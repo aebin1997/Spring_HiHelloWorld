@@ -35,13 +35,12 @@ $(function(){
            var values = "";
            for (var i in json.list) {
               if(loginUser == json.list[i].qar_writer){
-                 values += "<tr><td>" + json.list[i].qar_writer 
-                 + "</td><td>" + json.list[i].qar_create_date
-                 + "</td></tr><tr><td colspan='2'>" 
+	                 values += "<tr><td>" + json.list[i].qar_writer + "</td><td>" + json.list[i].qar_create_date 
+	             + "</td></tr><tr><td colspan='2'>" 
                  + "<form action='qarupdate.do' method='post'>"
                  + "<input type='hidden' name='qar_id' value='" +  json.list[i].qar_id  + "'>"
                  + "<input type='hidden' name='qa_id' value='${qa.qa_id}'>"
-                 + "<textarea name='qar_content'>"
+                 + "<textarea cols='100' rows='4' name='qar_content'>"
                  + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ")
                  + "</textarea><input type='submit' value='수정'></form>"
                  + "<button onclick='replyDelete(" + json.list[i].qar_id + ");'>삭제</button></td></tr>"; 
@@ -82,25 +81,32 @@ function hideReplyForm(){
 <body>
    <jsp:include page="../common/header.jsp"/>
    <hr>
-   <h2 align="center">${ requestScope.qa.qa_id }번 게시글 상세보기</h2>
+   <br><br><br>
+   <h3 align="center">${ qa.qa_title }</h3>
+   <h6 style="text-align: right; padding-right: 300px; margin-top: 30px">${ qa.qa_writer }/${ qa.qa_create_date }</h6>
+   
    <br>
-<table align="center" cellpadding="10" cellspacing="0" border="1" width="500">
-<tr><th>제 목</th><td>${ qa.qa_title }</td></tr>
-<tr><th>작성자</th><td>${ qa.qa_writer }</td></tr>
-<tr><th>내 용</th><td>${ qa.qa_content }</td></tr>
-<tr><th>첨부파일</th>
-<td>
+   <hr>
+   <span>
+   <p style="text-align: right; padding-right: 300px; margin-top: 1px"><img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }
 <c:if test="${ empty qa.qa_origin_file_name }">
-첨부파일 없음
+<img src="/hhw/resources/images/nofile.png" style="width:20px;">
 </c:if>
 <c:if test="${ !empty qa.qa_origin_file_name }">
 <c:url var="qafd" value="/qafdown.do">
    <c:param name="ofile" value="${ qa.qa_origin_file_name }"/>
    <c:param name="rfile" value="${ qa.qa_rename_file_name }"/>
-</c:url>   
+</c:url>
+<img src="/hhw/resources/images/yesfile.png" style="width:12px;">
 <a href="${ qafd }">${ qa.qa_origin_file_name }</a>
 </c:if>
-</td></tr>
+</p>
+</span>
+
+<table align="center" cellpadding="10" cellspacing="0" border="1" width="1000">
+
+
+<tr><td colspan="2">${ qa.qa_content }</td></tr>
 <tr align="center" valign="middle" ><th colspan="2">
 <%-- 로그인한 상태일때 댓글 달기 사용하게 함 --%>
 <c:if test="${ !empty loginUser }">
@@ -126,13 +132,13 @@ function hideReplyForm(){
 </th></tr>
 </table>
 
-
+<br><br>
 <%-- 댓글 달기 폼영역 --%>
 <div id="replyDiv">
 <hr><br><br>
 <form action="qarinsert.do" method="post">
 <input type="hidden" name="ref_qa_id" value="${ qa.qa_id }">
-<table align="center" width="500" border="1" cellpading="5" cellspacing="0">
+<table align="center" width="680" border="1" cellpading="5" >
 <tr><th>작성자</th>
 <td><input type="text" name="qar_writer" readonly value="${ sessionScope.loginUser.id }"></td></tr>
 <tr><th>내용</th><td><textarea name="qar_content" rows="5" cols="50"></textarea></td></tr>
@@ -146,7 +152,8 @@ function hideReplyForm(){
 <br><br>
 <%-- 댓글목록 표시 영역 --%>
 <div id="qarlistView" style="border: 1px dotted gray;">
-<table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1"></table>
+<br><br>
+<table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1" width="500" ></table>
 </div>
 
    <jsp:include page="../common/footer.jsp"/>

@@ -15,13 +15,13 @@
 	<result column="qa_status" property="qa_status"/>
 </resultMap>
 
-<resultMap type="Qa" id="resultTop3">
+<resultMap type="Qa" id="qresultTop3">
 	<id column="qa_id" property="qa_id"/>
 	<result column="qa_title" property="qa_title"/>
 	<result column="qa_readcount" property="qa_readcount"/>
 </resultMap>
 
-<select id="selectTop3" resultMap="resultTop3">
+<select id="selectTop3" resultMap="qresultTop3">
 	<![CDATA[
 	select *
 	from(select rownum rnum, qa_id, qa_title, qa_readcount
@@ -124,12 +124,12 @@
 <insert id="insertQa" parameterType ="Qa" >
 	insert into qa
 	<if test="qa_origin_file_name != null">
-		values (seq_qa.nextval, #{ qa_title }, #{ qa_writer }, #{ qa_content }, 
+		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, 
 		#{ qa_origin_file_name }, #{ qa_rename_file_name },
 		default, sysdate, sysdate, default )
 	</if>
 	<if test="qa_origin_file_name == null">
-		values (seq_qa.nextval, #{ qa_title }, #{ qa_writer }, #{ qa_content },
+		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content },
 		 		null, null,
 		 		default, sysdate, sysdate, default)
 	</if>
