@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.hhw.common.SearchAndPage;
+import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.qa.model.service.QaService;
 import com.ict.hhw.qa.model.vo.Qa;
 
@@ -254,6 +256,138 @@ public class QaController {
 		model.put("originalFilename", originalFilename);
 		return new ModelAndView("filedownqa", "downFile", model);
 	}
+	
+	@RequestMapping(value = "qaSearchTitle.do", method = RequestMethod.POST)
+	public String qaSearchTitleMethod(@RequestParam("keyword") String keyword,
+			@RequestParam("page") int currentPage, Model model) {
+		// 전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
+		int limit = 10;
+		int startRow = (currentPage - 1) * limit - 1;
+		int endRow = startRow + limit - 1;
+
+		SearchAndPage searches = new SearchAndPage();
+		searches.setKeyword(keyword);
+		searches.setStartRow(startRow);
+		searches.setEndRow(endRow);
+
+		ArrayList<Qa> list = qaService.selectSearchTitle(searches);
+
+		// 페이지 처리와 관련된 값 처리
+		// 검색에 대한 총 페이지 계산을 위한 검색결과 총 목록 갯수 조회
+		int listCount = qaService.getSearchTitleListCount(keyword);
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
+		// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
+		int startPage = ((int) (double) currentPage / 10) * 10 + 1;
+		int endPage = startPage + 9;
+
+		if (maxPage < endPage)
+			endPage = maxPage;
+		
+		if (list.size() > 0) {
+			model.addAttribute("list", list);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("maxPage", maxPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("action", "qaSearchTitle.do");
+			model.addAttribute("keyword", keyword);
+
+			return "qa/qaListview";
+		} else {
+			model.addAttribute("msg", keyword + "로 검색된 게시글 정보가 없습니다.");
+			return "common/errorPage";
+		}
+	}
+
+	@RequestMapping(value = "qaSearchWriter.do", method = RequestMethod.POST)
+	public String qaSearchWriterMethod(@RequestParam("keyword") String keyword,
+			@RequestParam("page") int currentPage, Model model) {
+		// 전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
+		int limit = 10;
+		int startRow = (currentPage - 1) * limit - 1;
+		int endRow = startRow + limit - 1;
+
+		SearchAndPage searches = new SearchAndPage();
+		searches.setKeyword(keyword);
+		searches.setStartRow(startRow);
+		searches.setEndRow(endRow);
+
+		ArrayList<Qa> list = qaService.selectSearchWriter(searches);
+
+		// 페이지 처리와 관련된 값 처리
+		// 총 페이지 계산을 위한 총 목록 갯수 조회
+		int listCount = qaService.getSearchWriterListCount(keyword);
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
+		// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
+		int startPage = ((int) (double) currentPage / 10) * 10 + 1;
+		int endPage = startPage + 9;
+
+		if (maxPage < endPage)
+			endPage = maxPage;
+
+		if (list.size() > 0) {
+			model.addAttribute("list", list);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("maxPage", maxPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("action", "qaSearchWriter.do");
+			model.addAttribute("keyword", keyword);
+			
+			return "qa/qaListview";
+		} else {
+			model.addAttribute("msg", keyword + "로 검색된 게시글 정보가 없습니다.");
+			return "common/errorPage";
+		}
+	}
+
+	@RequestMapping(value = "qaSearchDate.do", method = RequestMethod.POST)
+	public String qaSearchDateMethod(SearchDate dates, @RequestParam("page") int currentPage, Model model) {
+		// 전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
+		int limit = 10;
+		int startRow = (currentPage - 1) * limit - 1;
+		int endRow = startRow + limit - 1;
+
+		SearchAndPage searches = new SearchAndPage();
+		searches.setBegin(dates.getBegin());
+		searches.setEnd(dates.getEnd());
+		searches.setStartRow(startRow);
+		searches.setEndRow(endRow);
+
+		ArrayList<Qa> list = qaService.selectSearchDate(searches);
+
+		// 페이지 처리와 관련된 값 처리
+		// 총 페이지 계산을 위한 총 목록 갯수 조회
+		int listCount = qaService.getSearchDateListCount(dates);
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
+		// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
+		int startPage = ((int) (double) currentPage / 10) * 10 + 1;
+		int endPage = startPage + 9;
+
+		if (maxPage < endPage)
+			endPage = maxPage;
+
+		if (list.size() > 0) {
+			model.addAttribute("list", list);
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("maxPage", maxPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			model.addAttribute("action", "qaSearchDate.do");
+			model.addAttribute("begin", dates.getBegin());
+			model.addAttribute("end", dates.getEnd());
+
+			return "qa/qaListview";
+		} else {
+			model.addAttribute("msg", dates.getBegin() + "~" + dates.getEnd() + 
+					"날짜로 검색된 게시글 정보가 없습니다.");
+			return "common/errorPage";
+		}
+	}
+	
 }
 
 

@@ -25,7 +25,9 @@
 	<![CDATA[
 	select *
 	from(select rownum rnum, qa_id, qa_title, qa_readcount
-        	from(select * from qa order by QA_READCOUNT desc))
+        	from(select * from qa 
+        	where qa_status = 'Y'
+        	order by QA_READCOUNT desc))
 	where rnum >= 1 and rnum <=3
 	]]>
 </select>
@@ -57,6 +59,67 @@
 	where rnum >= #{ startRow } and rnum <= #{ endRow }
 	]]>
 </select>
+
+	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+   		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+                  QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
+                 QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
+               FROM (SELECT * 
+                       FROM QA
+                     WHERE QA_STATUS = 'Y'
+                     and qa_title like '%' || #{ keyword } || '%'
+                      ORDER BY QA_ID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+   </select>
+	
+   <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+   		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+                  QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
+                 QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
+               FROM (SELECT * 
+                       FROM QA
+                     WHERE QA_STATUS = 'Y'
+                     and qa_writer like '%' || #{ keyword } || '%'
+                      ORDER BY QA_ID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+   </select>
+   
+   <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+   		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+                  QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
+                 QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
+               FROM (SELECT * 
+                       FROM QA
+                     WHERE QA_STATUS = 'Y'
+                     and qa_create_date between #{ begin } and #{ end }
+                      ORDER BY QA_ID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+   </select>
+
+	<select id="getSearchTitleListCount" parameterType="string" resultType="_int">
+		select count(*) from qa
+		where qa_title like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="getSearchWriterListCount" parameterType="string" resultType="_int">
+		select count(*) from qa
+		where qa_writer like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="getSearchDateListCount" parameterType="com.ict.hhw.common.SearchDate" resultType="_int">
+		select count(*) from qa
+		where qa_create_date between #{ begin } and #{ end }
+	</select>
+
 
 <insert id="insertQa" parameterType ="Qa" >
 	insert into qa
