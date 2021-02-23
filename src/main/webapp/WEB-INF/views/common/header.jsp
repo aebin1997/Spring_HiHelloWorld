@@ -14,7 +14,7 @@ font-size : 15px;
 font-weight : bold;
 font-family: 'Nanum Gothic', sans-serif;
 }
-span{
+face{
 font-size : 15px;
 font-weight : normal;
 font-family: 'Nanum Gothic', sans-serif;
@@ -137,7 +137,7 @@ font-family: 'Nanum Gothic', sans-serif;
 							
 						<font><c:if test="${ !empty sessionScope.loginUser }">
 								<c:out value="${ loginUser.name }" />
-								<span>님 환영합니다.</span>
+								<face>님 환영합니다.</face>
 							</c:if></font>
 						</div>
 					</div>
