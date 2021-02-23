@@ -5,14 +5,14 @@ import java.sql.Date;
 public class Blame {
 	private final static long serialVersionUID = 4312L;
 	
-	private int blame_no;
-	private int blame_bid;
-	private String blame_type;
-	private String mm_nickname;
-	private String target_nickname;
-	private Date blame_date;
-	private String blame_content;
-	private String blame_ip;
+	private int blame_no; 				//신고번호
+	private int blame_bid;				//신고 게시물의 번호
+	private String blame_type;			//신고 글 구분
+	private String mm_nickname;			//신고회원
+	private String target_nickname;		//신고 당한 회원
+	private Date blame_date;			//신고번호 일자
+	private String blame_content;		//신고자 신고내용
+	private String blame_ip;			//신고자 IP
 
 	public Blame() {}
 

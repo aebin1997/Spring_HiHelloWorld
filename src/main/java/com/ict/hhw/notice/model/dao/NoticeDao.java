@@ -24,6 +24,8 @@ public class NoticeDao {
 		return (ArrayList<Notice>)list;
 	}
 	
+	
+	//리스트 보기
 	public Notice selectOne(int nid) {
 		return sqlSession.selectOne("noticeMapper.selectNotice",nid);
 	}

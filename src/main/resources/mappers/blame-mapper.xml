@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="blameMapper">
    
-   <resultMap id="blameResultSet" type="Blame">
+   <resultMap type="Blame"  id="blameResultSet">
       <id property="blame_no" column="blame_no"/>
       <result property="blame_bid" column="blame_bid"/>
       <result property="blame_type" column="blame_type"/>
@@ -13,20 +13,143 @@
       <result property="blame_ip" column="blame_ip"/>
    </resultMap>
    
-   <select id="selectAll" resultMap="blameResultSet">
-      select * from blame
-      order by blame_no desc
-   </select>
-   
+   	
    <select id="selectBlame" parameterType="_int" resultMap="blameResultSet">
-      select * from blame
-      where blame_no = #{blame_no}
+      select *
+        from blame
+       where blame_no = #{ blame_no }
+   </select>
+
+   <select id="getListCount" resultType="_int">
+      select count(*)
+        from blame
    </select>
    
    <insert id="insertBlame" parameterType="Blame">
       insert into blame
-      values (seq_blid.nextval, #{ blame_bid }, #{ blame_type }, #{ mm_nickname }, #{ target_nickname }, default, #{ blame_content }, #{ blame_ip })
+      values 
+      		  (seq_blid.nextval
+      		, #{ blame_bid }
+      		, #{ blame_type }
+      		, #{ mm_nickname }
+      		, #{ target_nickname }
+      		, sysdate
+      		, #{ blame_content }
+      		, #{ blame_ip }
+      		)
    </insert>
+
+   <select id="selectList" parameterType="com.ict.hhw.blame.model.vo.BlamePage" resultMap="blameResultSet">
+      <![CDATA[
+         SELECT *
+          FROM  (
+                 SELECT ROWNUM RNUM
+      			, blame_bid
+      			, blame_type
+      			, mm_nickname
+      			, target_nickname
+      			, sysdate
+      			, blame_content
+      			, blame_ip
+          FROM  (
+        SELECT * 
+          FROM  Blame
+          ORDER BY blame_bid DESC))
+          WHERE RNUM >= #{ startRow }
+          AND RNUM <= #{ endRow }
+                ]]>
+   </select>
+  
+  
+   <select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="blameResultSet">
+         <![CDATA[
+         SELECT *
+          FROM (
+        SELECT    ROWNUM RNUM
+      			, blame_bid
+      			, blame_type
+      			, mm_nickname
+      			, target_nickname
+      			, sysdate
+      			, blame_content
+      			, blame_ip
+          FROM (
+        SELECT * 
+          FROM Blame
+         WHERE blame_type like '%' || #{ keyword } || '%'
+         ORDER BY blame_bid DESC
+               ))
+         WHERE RNUM >= #{ startRow }
+           AND RNUM <= #{ endRow }
+         ]]>
+   </select>
+   
+   <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="blameResultSet">
+         <![CDATA[
+         SELECT *
+          FROM (
+        SELECT   ROWNUM RNUM
+      			, blame_bid
+      			, blame_type
+      			, mm_nickname
+      			, target_nickname
+      			, sysdate
+      			, blame_content
+      			, blame_ip
+          FROM (
+        SELECT * 
+          FROM Blame
+         WHERE target_nickname like '%' || #{ keyword } || '%'
+      ORDER BY blame_bid DESC))
+         WHERE RNUM >= #{ startRow }
+           AND RNUM <= #{ endRow }
+                ]]>
+   </select>
+   
+   <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="blameResultSet">
+         <![CDATA[
+         SELECT *
+          FROM (
+        SELECT ROWNUM RNUM
+      			, blame_bid
+      			, blame_type
+      			, mm_nickname
+      			, target_nickname
+      			, sysdate
+      			, blame_content
+      			, blame_ip
+          FROM (
+        SELECT * 
+          FROM Blame
+         WHERE blame_date BETWEEN #{ begin }
+           AND #{ end }
+      ORDER BY blame_no DESC
+               ))
+          WHERE RNUM >= #{ startRow }
+            AND RNUM <= #{ endRow }
+               ]]>
+   </select>
+
+   <select id="getSearchTitleListCount" parameterType="string" resultType="_int">
+      select count(*)
+        from Blame
+       where blame_type like '%' || #{ keyword } || '%'
+   </select>
+   
+   <select id="getSearchWriterListCount" parameterType="string" resultType="_int">
+      select count(*) 
+        from Blame
+       where target_nickname like '%' || #{ keyword } || '%'
+   </select>
+   
+   <select id="getSearchDateListCount" parameterType="com.ict.hhw.common.SearchDate" resultType="_int">
+      select count(*) 
+        from Blame
+       where blame_date
+       between #{ begin }
+           and #{ end }
+   </select>
+	
 	
 </mapper>
 
