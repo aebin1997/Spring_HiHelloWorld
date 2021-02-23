@@ -76,11 +76,9 @@ $(function() {
 				},
 				type : "post",
 				success : function(data) {
-					console.log(data);
-					if (data == null) {
+					if (data == "fail") {
 						alert("회원 정보가 없습니다.");
 					} else {
-						console.log(data);
 						$("#selectUser").val(data);						
 					}
 	

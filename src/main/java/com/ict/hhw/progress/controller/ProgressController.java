@@ -56,11 +56,9 @@ public class ProgressController {
 		
 		String selectUser = null;
 		selectUser = progressService.selectUser(user);
-		
-		if(selectUser.equals(user)) {
+		if(selectUser != null) {
 			return selectUser;
 		}else {
-			System.out.println("fail");
 		return "fail";
 		}
 	}
