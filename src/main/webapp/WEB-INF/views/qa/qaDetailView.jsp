@@ -108,7 +108,8 @@ function hideReplyForm(){
 <table align="center" cellpadding="10" cellspacing="0" border="1" width="1000">
 
 
-<tr><td colspan="2">${ qa.qa_content }</td></tr>
+<tr><td colspan="2">${ qa.qa_content }<img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:100px;"></td></tr>
+
 <tr align="center" valign="middle" ><th colspan="2">
 <%-- 로그인한 상태일때 댓글 달기 사용하게 함 --%>
 <c:if test="${ !empty loginUser }">

@@ -22,26 +22,7 @@
 <td><input type="file" name="upfile"></td></tr>
 <tr><th>내 용</th><td><textarea name="qa_content" rows="5" cols="50"></textarea></td></tr>
 
-<div class="inputArea">
- <label for="gdsImg">이미지</label>
- <input type="file" id="gdsImg" name="iupfile" />
- <div class="select_img"><img src="" /></div>
- 
- <script>
-  $("#gdsImg").change(function(){
-   if(this.files && this.files[0]) {
-    var reader = new FileReader;
-    reader.onload = function(data) {
-     $(".select_img img").attr("src", data.target.result).width(500);        
-    }
-    reader.readAsDataURL(this.files[0]);
-   }
-  });
- </script>
- 
- <%= request.getRealPath("/") %>
- 
-</div>
+
 
 <tr><th colspan="2">
 <input type="submit" value="등록하기"> &nbsp;
