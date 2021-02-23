@@ -7,6 +7,7 @@
 	<result column="qa_title" property="qa_title"/>
 	<result column="qa_writer" property="qa_writer"/>
 	<result column="qa_content" property="qa_content"/>
+	<result column="qa_point" property="qa_point"/>
 	<result column="qa_origin_file_name" property="qa_origin_file_name"/>
 	<result column="qa_rename_file_name" property="qa_rename_file_name"/>
 	<result column="qa_readcount" property="qa_readcount"/>
@@ -50,7 +51,7 @@
 <select id="selectList" parameterType="com.ict.hhw.qa.model.vo.QaPage" resultMap="resultQa">
 	<![CDATA[
 	select *
-	from (select rownum rnum, qa_id, QA_TITLE, QA_WRITER, QA_CONTENT,
+	from (select rownum rnum, qa_id, QA_TITLE, QA_WRITER, QA_CONTENT,qa_point,
 	QA_ORIGIN_FILE_NAME, QA_RENAME_FILE_NAME,
 	QA_READCOUNT, QA_CREATE_DATE, QA_MODIFY_DATE, QA_STATUS
 	from (select * from qa
@@ -124,12 +125,12 @@
 <insert id="insertQa" parameterType ="Qa" >
 	insert into qa
 	<if test="qa_origin_file_name != null">
-		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, 
+		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{ qa_point },
 		#{ qa_origin_file_name }, #{ qa_rename_file_name },
 		default, sysdate, sysdate, default )
 	</if>
 	<if test="qa_origin_file_name == null">
-		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content },
+		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{ qa_point },
 		 		null, null,
 		 		default, sysdate, sysdate, default)
 	</if>
@@ -139,6 +140,7 @@
 	update qa
 	set qa_title = #{ qa_title },
 		qa_content = #{ qa_content },
+		qa_point = #{ qa_point },
 		qa_modify_date = sysdate
 		<if test="qa_origin_file_name == null">
 		, qa_origin_file_name = null,

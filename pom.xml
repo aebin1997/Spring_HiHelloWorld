@@ -257,6 +257,12 @@
          <artifactId>commons-io</artifactId>
          <version>2.6</version>
       </dependency>
+      
+      <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+
+
+<!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+
 
    </dependencies>
 

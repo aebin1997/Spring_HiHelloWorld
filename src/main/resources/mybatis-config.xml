@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="com.ict.hhw.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.ict.hhw.qa.model.vo.Qa" alias="Qa"/>
+		<typeAlias type="com.ict.hhw.qa.model.vo.Qar" alias="Qar"/>
 		<typeAlias type="com.ict.hhw.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.ict.hhw.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.ict.hhw.board_reply.model.vo.B_Reply" alias="B_Reply"/>
@@ -21,6 +22,7 @@
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/qa-mapper.xml"/>
+		<mapper resource="mappers/qar-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/b_reply-mapper.xml"/>

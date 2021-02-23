@@ -109,6 +109,7 @@ function showDiv(){
 							<tr style="background-color: orange;">
 								<th style="text-align: center;">번호</th>
 								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;">포인트</th>
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">날짜</th>
 								<th style="text-align: center;">조회수</th>
@@ -122,6 +123,7 @@ function showDiv(){
 										      <c:param name="qa_id" value="${ qa.qa_id }" />
 										   </c:url>
 										   <a href="${ qadetail }" style="color: black;">${ qa.qa_title }</a>
+									<td align="center" width="180">${ qa.qa_point } &nbsp; </td>
 									<td align="center" width="180">${ qa.qa_writer } &nbsp; </td>
 									<td align="center" width="130">${ qa.qa_create_date }</td>
 									<td align="center" width="80">${ qa.qa_readcount }</td>

@@ -88,7 +88,9 @@ function hideReplyForm(){
    <br>
    <hr>
    <span>
-   <p style="text-align: right; padding-right: 300px; margin-top: 1px"><img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }
+   <p style="text-align: right; padding-right: 300px; margin-top: 1px">
+   <img src="/hhw/resources/images/point.png" style="width:20px;">${ qa.qa_point }
+   <img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }
 <c:if test="${ empty qa.qa_origin_file_name }">
 <img src="/hhw/resources/images/nofile.png" style="width:20px;">
 </c:if>
