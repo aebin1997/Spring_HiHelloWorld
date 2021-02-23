@@ -155,11 +155,23 @@
 			</div>
 			<!-- end single slider -->
 		</div>
+	</section>
 
 
 		<hr style="clear: both;">
 		<!-- float되있는거 해제 -->
 		<section>
+		<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
+      <div
+         style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
+         <h4>새로운 공지글</h4>
+         <table id="new_notice" border="1" cellspacing="0">
+            <tr><th>번호</th><th>제목</th><th>날짜</th>
+            </tr>
+         </table>
+      </div>
+		
+		
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
 			<div style="float: left; board: 1px solid olive; padding: 5px; margin: 5px;">
 				<h4>자주 묻는 코딩</h4>
