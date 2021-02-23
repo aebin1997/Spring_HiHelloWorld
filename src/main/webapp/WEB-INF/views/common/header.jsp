@@ -7,6 +7,19 @@
 <meta charset="UTF-8">
 <meta name="Author" content="">
 <title>Hi Hello World</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+font{
+font-size : 20px;
+font-weight : bold;
+font-family: 'Nanum Gothic', sans-serif;
+}
+span{
+font-size : 20px;
+font-weight : normal;
+font-family: 'Nanum Gothic', sans-serif;
+}
+</style>
 
  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script> 
 
@@ -120,10 +133,12 @@
 													</div>
 													<p>Call Us</p>
 													<h6>123-456-0975</h6> -->
-							
-							<c:if test="${ !empty sessionScope.loginUser }">
-								<c:out value="${ loginUser.name }님 환영합니다!!" />
-							</c:if>
+						
+													
+						<font><c:if test="${ !empty sessionScope.loginUser }">
+								<c:out value="${ loginUser.name }" />
+							</c:if></font>
+							<span>님 환영합니다!!</span>
 						</div>
 					</div>
 				</div>
