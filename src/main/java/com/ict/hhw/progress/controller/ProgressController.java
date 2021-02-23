@@ -8,17 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ict.hhw.member.model.vo.Member;
-import com.ict.hhw.progress.model.service.PboardService;
-import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.service.ProgressService;
+import com.ict.hhw.progress.model.vo.Progress;
 
 
 @Controller
 public class ProgressController {
 	
 	@Autowired
-	private PboardService pboardService;
+	private ProgressService progressService;
 	
 	@RequestMapping("progress.move")
 	public String pboardListMethod(HttpSession session, Model model) {
@@ -27,15 +29,18 @@ public class ProgressController {
 		loginMember = (Member)session.getAttribute("loginUser");
 
 		String nickname = null;
-		ArrayList<P_board> list = null;
+		ArrayList<Progress> list = null;
+		ArrayList<String> titleList = null;
 
 		if( loginMember != null ) {
 			nickname = loginMember.getNickname();
-			list = pboardService.selectPlist(nickname);
+			list = progressService.selectPlist(nickname);
+			titleList = progressService.selectQatitle(nickname);
 		}
 
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
+			model.addAttribute("tlist", titleList);
 
 			return "progress/projectApplyForm";
 		} else {
@@ -43,4 +48,25 @@ public class ProgressController {
 			return "common/errorPage";
 		}
 	}
+	
+	@ResponseBody
+	@RequestMapping("selectUser.do")
+	public String selectUser(String user, HttpSession session, Model model) {
+		
+		String selectUser = null;
+		selectUser = progressService.selectUser(user);
+		
+		if(selectUser.equals(user)) {
+			return selectUser;
+		}else {
+			System.out.println("fail");
+		return "fail";
+		}
+	}
+	
+	@RequestMapping("processInsert.do")
+	public String processInsert() {
+		return "projetApplyForm";
+	}
+	
 }

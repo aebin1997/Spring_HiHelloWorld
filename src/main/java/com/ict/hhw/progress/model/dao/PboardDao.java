@@ -31,11 +31,6 @@ public class PboardDao {
 		return (ArrayList<P_board>)list;
 	}
 	
-	public ArrayList<P_board> selectPlist(String nickname) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.selectPlist", nickname);
-		return (ArrayList<P_board>)list;
-	}
-
 	public P_board selectPboard(int pid) {
 		return sqlSession.selectOne("pboardMapper.selectPboard", pid);
 	}

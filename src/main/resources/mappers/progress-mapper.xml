@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="progressMapper">
+
+	<resultMap type="Progress" id="resultProgress">
+		<id column="pro_id" property="pro_id" />
+		<result column="pro_qid" property="pro_qid" />
+		<result column="pro_writer" property="pro_writer" />
+		<result column="pro_answerer" property="pro_answerer" />
+		<result column="pro_deadline" property="pro_deadline" />
+		<result column="pro_pay" property="pro_pay" />
+		<result column="pro_process" property="pro_process" />
+		<result column="pro_status" property="pro_status" />
+	</resultMap>
+
+	<select id="selectPlist" parameterType="string" resultMap="resultProgress">
+		SELECT *
+		FROM PROGRESS
+		WHERE PRO_STATUS = 'Y'
+		AND PRO_WRITER = #{ nickname }
+	</select>
+
+	<select id="selectQatitle" parameterType="string" resultType="string">
+		SELECT QA_TITLE
+		FROM QA
+		WHERE QA_WRITER = #{ nickname }
+	</select>
+	
+	<select id="selectUser" parameterType="string" resultType="string">
+		SELECT NICKNAME
+		FROM MEMBER
+		WHERE NICKNAME = #{ nickname }
+		AND MSTATUS = 'Y'
+	</select>
+
+
 </mapper>

@@ -342,9 +342,6 @@ span.error {
 				    }
 				  }
 			  
-			  
-			  
-			  
 		</script>
 		
 
