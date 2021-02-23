@@ -28,7 +28,6 @@ DROP TABLE RE_TYPE CASCADE CONSTRAINTS;
 DROP TABLE RE_REPLY CASCADE CONSTRAINTS;
 
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
-DROP SEQUENCE SEQ_MID;
 DROP SEQUENCE SEQ_NID;
 DROP SEQUENCE SEQ_BID;
 DROP SEQUENCE SEQ_BRID;
@@ -42,23 +41,24 @@ DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
-CREATE TABLE MEMBER (
-  ID		 VARCHAR2(30) NOT NULL,
-  PWD 		 VARCHAR2(100) NOT NULL,
-  NAME		 VARCHAR2(15),
-  NICKNAME 	 VARCHAR2(30) NOT NULL,
-  EMAIL		 VARCHAR2(100),
-  SEX	 VARCHAR2(1) DEFAULT 'n' CHECK (SEX IN('m', 'w', 'n')),
-  PHONE 		 VARCHAR2(13),
-  ADDRESS 	 VARCHAR2(100),
-  ENROLLDATE 	 DATE DEFAULT SYSDATE,
-  UPDATEDATE 	 DATE DEFAULT SYSDATE,
-  MSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK(MSTATUS IN('Y', 'N')),
-  CONSTRAINT PK_NICKNAME PRIMARY KEY(NICKNAME)
-);
-------------------------------------------------------------------------------------------게시판 작성자 이름으로? 닉네임으로?? <우선 닉네임으로 넣어둠>
 
-------------------------------------------------------------------------------------------------------------------- MEMBER 컬러명 지정
+CREATE TABLE MEMBER (
+  ID       VARCHAR2(30) NOT NULL,
+  PWD        VARCHAR2(100) NOT NULL,
+  NAME       VARCHAR2(15),
+  NICKNAME     VARCHAR2(30) NOT NULL,
+  EMAIL       VARCHAR2(100),
+  SEX    VARCHAR2(1) DEFAULT 'n' CHECK (SEX IN('m', 'w', 'n')),
+  PHONE        VARCHAR2(13),
+  ADDRESS     VARCHAR2(100),
+  ENROLLDATE     DATE DEFAULT SYSDATE,
+  UPDATEDATE     DATE DEFAULT SYSDATE,
+  MSTATUS VARCHAR2(1) DEFAULT 'Y' CHECK(MSTATUS IN('Y', 'N')),
+  SELFINTRO_HEAD VARCHAR2(90) NULL, 
+  SELFINTRO_CONTENT VARCHAR2(600) NULL,
+  PROPIC VARCHAR2(60) NULL,
+  CONSTRAINT PK_NICKNAME PRIMARY KEY(NICKNAME)
+
 COMMENT ON COLUMN MEMBER.ID IS '회원아이디';
 COMMENT ON COLUMN MEMBER.PWD IS '회원비밀번호';
 COMMENT ON COLUMN MEMBER.NAME IS '회원이름';
@@ -70,14 +70,16 @@ COMMENT ON COLUMN MEMBER.ADDRESS IS '회원주소';
 COMMENT ON COLUMN MEMBER.ENROLLDATE IS '회원가입날짜';
 COMMENT ON COLUMN MEMBER.UPDATEDATE IS '회원수정날짜';
 COMMENT ON COLUMN MEMBER.MSTATUS IS '회원상태값';
+COMMENT ON COLUMN MEMBER.SELFINTRO_HEAD IS '한줄소개';
+COMMENT ON COLUMN MEMBER.SELFINTRO_CONTENT IS '상세소개';
+COMMENT ON COLUMN MEMBER.PROPIC IS '프로필사진';
 
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(MEMBER)
-INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'n', '01011112222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '일반회원1', 'user01@ict.or.kr', 'w', '01033334444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '일반회원2',  'user02@ict.or.kr', 'w', '01055556666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '일반회원3',  'user03@ict.or.kr', 'm', '01077778888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '일반회원4',  'user04@ict.or.kr', 'w', '01099996666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '일반회원5',  'user05@ict.or.kr', 'm', '01011111234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'n', '01011112222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '일반회원1', 'user01@ict.or.kr', 'w', '01033334444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '일반회원2',  'user02@ict.or.kr', 'w', '01055556666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '일반회원3',  'user03@ict.or.kr', 'm', '01077778888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '일반회원4',  'user04@ict.or.kr', 'w', '01099996666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
+INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '일반회원5',  'user05@ict.or.kr', 'm', '01011111234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT, 1, 1, 1);
 
 ------------------------------------------------------------------------------------------------------------------- N_TYPE 생성
 CREATE TABLE N_TYPE(
