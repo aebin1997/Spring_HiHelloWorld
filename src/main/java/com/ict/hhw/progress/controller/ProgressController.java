@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -50,7 +51,7 @@ public class ProgressController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("selectUser.do")
+	@RequestMapping(value="selectUser.do", method=RequestMethod.POST,produces ="application/text; charset=utf8")
 	public String selectUser(String user, HttpSession session, Model model) {
 		
 		String selectUser = null;
