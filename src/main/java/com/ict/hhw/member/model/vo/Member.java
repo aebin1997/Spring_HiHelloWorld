@@ -14,11 +14,15 @@ public class Member {
 	private Date enrollDate;
 	private Date updateDate;
 	private String mStatus;
+	private String selfintro_head;
+	private String selfintro_content;
+	private String propic;
 	
 	public Member() {}
 
 	public Member(String id, String pwd, String name, String nickname, String email, String sex, String phone,
-			String address, Date enrollDate, Date updateDate, String mStatus) {
+			String address, Date enrollDate, Date updateDate, String mStatus, String selfintro_head,
+			String selfintro_content, String propic) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -31,6 +35,9 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
 		this.mStatus = mStatus;
+		this.selfintro_head = selfintro_head;
+		this.selfintro_content = selfintro_content;
+		this.propic = propic;
 	}
 
 	public String getId() {
@@ -121,12 +128,36 @@ public class Member {
 		this.mStatus = mStatus;
 	}
 
+	public String getSelfintro_head() {
+		return selfintro_head;
+	}
+
+	public void setSelfintro_head(String selfintro_head) {
+		this.selfintro_head = selfintro_head;
+	}
+
+	public String getSelfintro_content() {
+		return selfintro_content;
+	}
+
+	public void setSelfintro_content(String selfintro_content) {
+		this.selfintro_content = selfintro_content;
+	}
+
+	public String getPropic() {
+		return propic;
+	}
+
+	public void setPropic(String propic) {
+		this.propic = propic;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", nickname=" + nickname + ", email=" + email
 				+ ", sex=" + sex + ", phone=" + phone + ", address=" + address + ", enrollDate=" + enrollDate
-				+ ", updateDate=" + updateDate + ", mStatus=" + mStatus + "]";
+				+ ", updateDate=" + updateDate + ", mStatus=" + mStatus + ", selfintro_head=" + selfintro_head
+				+ ", selfintro_content=" + selfintro_content + ", propic=" + propic + "]";
 	}
-
 
 }

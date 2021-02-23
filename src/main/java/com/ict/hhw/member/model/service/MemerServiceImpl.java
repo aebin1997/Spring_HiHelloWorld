@@ -62,5 +62,5 @@ public class MemerServiceImpl implements MemberService {
 	public int idCheck(String id) {
 		return mDao.idCheck(id);
 	}
-
+	
 }

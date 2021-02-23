@@ -244,9 +244,11 @@ function photoView(uri){
 					
 					
 					
-						<a href="/people/levelup/index.nhn" class="profile_animate profile_default">
+						<a href="myInfoUpdate.do" class="profile_animate profile_default">
 							<span class="thumbnail">
-								<img src="https://ssl.pstatic.net/static/kin/09renewal/avatar/200x200/4_3d.png" width="100%" height="100%" alt="pparappi6 님의 프로필">
+							
+								<img src="https://ssl.pstatic.net/static/kin/09renewal/avatar/200x200/4_3d.png" width="100%" height="100%" alt="회원님의 프로필">
+								<img src="/hhw/resources/propic/${member.propic}" width="100%" height="100%" alt="회원님의 프로필">
 							</span>
 							<span class="mask_bdr"></span>
 						</a>
@@ -277,7 +279,7 @@ function photoView(uri){
 				</div>
 				
 				<div class="btn_info cert2">
-				출석하기 | <a href="myInfoUpdate.do" onclick="">내정보관리하기</a>
+				<a href="myInfoUpdate.do" onclick="">내정보관리하기</a>
 				</div>
 			
 <script type="text/javascript" src="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/js/min/nhn.Kin.Userinfo.EditorHistory.js"></script>
@@ -299,7 +301,7 @@ function photoView(uri){
 				
 				
 					<p class="btn_report">
-						<a href="#" onclick="#" class="_ros"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_intro_edit_130927.gif" width="27" height="16" alt="수정"></a>
+						<a href="myInfoUpdate.do" onclick="#" class="_ros"><img src="https://ssl.pstatic.net/static/kin/09renewal/btn_intro_edit_130927.gif" width="27" height="16" alt="수정"></a>
 					</p>
 				
 			</div>
@@ -590,7 +592,7 @@ function photoView(uri){
 					        <div class="content_area">
 					            <em class="tit">도움을 준 사람 수 <a href="#" class="_helperLayerOpenBtn" onclick="nhn.Kin.Utility.nClicks('prf.helptip', '', '', event);"><img src="https://ssl.pstatic.net/static/kin/09renewal/ico_help.png" width="16" height="16" alt="도움말" /></a></em>
 					            <div class="layer_base layer_balloon" style="width:160px; top:16px; left:9px; display:none;" id="helperLayer">
-					                <p><em>빠라삐융님</em>의 답변으로 도움을 받은 질문자 수 입니다.</p>
+					                <p><em>${ loginUser.name }님</em>의 답변으로 도움을 받은 질문자 수 입니다.</p>
 									<button class="close _lookUpChildElement('img') _helperLayerCloseBtn">
 										<img src="https://ssl.pstatic.net/static/kin/09renewal/btn_close_layer.gif" alt="레이어팝업 닫기" />
 									</button>

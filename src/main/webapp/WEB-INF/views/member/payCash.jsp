@@ -20,6 +20,7 @@
 <script src="/common/js/jquery.base64.js"></script><script src="/common/js/jquery.cookie.js">
 </script><script src="/common/js/json3.min.js"></script><script src="/common/js/modal/jquery.bpopup.min.js"></script><script src="/common/js/global.js?v=20200421"></script><script src="/common/js/util.js?v=20201207" charset="UTF-8"></script><link href="/common/js/Swiper/2.7.6/idangerous.swiper.css" rel="stylesheet"><script src="/common/js/Swiper/2.7.6/idangerous.swiper.js"></script><script src="/common/js/contentsListScroll.js?v=20171101"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/pay/popup.css" type="text/css">
+
 </head>
 
 <body style="overflow-y:scroll">
@@ -34,7 +35,7 @@
 	</div>
 	<div class="popup_container">
 		<div class="popup_contents">
-			<!-- 내용 -->
+			<!-- 내용 & 값 가져오기 -->
 			<div id="eventCashBanner"><div class="mb10">
 <img src="${pageContext.request.contextPath}/resources/images/pay/web_cash_popup_bn.jpg" style="width:100%">
 </div></div>
@@ -347,7 +348,7 @@
 				<ul class="nf_select2">
 					<li class="selectLine group1">
 						<ul class="payBtnArea">
-							<li class="payBtn b01 pay_36" onclick="payCashViewFN.paySelect('*', '카카오페이', 0)">카카오페이</li>
+							<li class="payBtn b01 pay_36" onclick="location.href='kakao.do'">카카오페이</li>
 							<li class="payBtn b00 pay_32" onclick="payCashViewFN.paySelect('32', '핸드폰', 0)">핸드폰</li>
 						</ul>
 						<div class="cb"></div>
@@ -404,193 +405,6 @@
 </div>
 
 <div id="cashFormDiv" class="skip"></div>
-
-<script>
-loginData.isLogin = true;
-
-var payCashViewFN = (function () {
-	var payCode = "";
-	var payName = "";
-	var payVatCode = 0;
-	var productNO = 0;
-	var selectBonus = 0;
-
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_32").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('32', '핸드폰', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_31").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('31', '신용카드', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_37").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('37', '컬처랜드', 1)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_33").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('33', '계좌이체', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3I").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3I', '가상계좌', 1)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3E").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3E', '해피머니', 1)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_38").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('38', '도서상품권', 1)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_36").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('36', '폰빌', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3G").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3G', '티머니', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_39").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('39', 'OK포인트백', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3M").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3M', '스마트문상', 1)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3D").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3D', '해외신용카드', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_00").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('00', '포인트선물', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3T").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3T', '토스(toss)', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_3F").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('3F', '페이코', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_74").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('74', '포인트다모아', 0)");
-	
-	$(".nf_select2 li .payBtnArea .payBtn.pay_77").removeClass("hidden").attr("onclick","payCashViewFN.paySelect('77', '케이뱅크', 0)");
-	
-
-	function productSelect(pno){
-		productNO = pno;
-		payCode = "";
-		payName = "";
-		payVatCode = 0;
-		prodictView();
-	}
-
-	function paySelect(pCode, pName, pVatCode){
-		payCode = pCode;
-		payName = pName;
-		payVatCode = pVatCode;
-		prodictView();
-		if (payVatCode == 0) payProcess(productNO, payCode);
-	}
-
-	function prodictView(){
-		$("#productID"+productNO).prop("checked", true);
-
-		$.post("/noriPay/payInfoView.do", { productNO : productNO, payVatCode : payVatCode, paySelectBonus : selectBonus }, function( payInfo ) {
-			var payInfoView = "";
-
-			if (payVatCode == 1){
-				payInfoView = "<div class=txt><strong class=font_395ec4>"+ payName +"</strong> 결제 시 해당금액의 10%는 부가세로 포함되어 결제 됩니다.<br>실제결제금액(부가세10% 포함) : " + payInfo.viewInfo;
-				if (payCode == "3I") payInfoView += "<br><strong>※ 일부 은행(하나, 부산, 국민, 농협)은 ATM기의 입금이 제한됩니다.</strong><br><strong>※ 입금 후 포인트 적립까지 5~10분의 대기시간이 소요됩니다.</strong>";
-				payInfoView += "</div><div class=btn><span class=\"btn_01 xlarge font_s14\"><a class=font_s14 href=#null onclick=\"payCashViewFN.payProcess("+ productNO +", '"+ payCode +"')\" style=\"font-family: Dotum;\">결제하기</a></span></div>";
-
-				$("#payGiftInfoView").empty();
-				$("#payGiftInfoView").html( payInfoView );
-				$("#payGiftInfoDiv").show();
-				$("#payInfoDiv").hide();
-				$("html, body").scrollTop(document.body.scrollHeight);
-			}else{
-				payInfoView = "실제결제금액(부가세10% 포함) : " + payInfo.viewInfo;
-				$("#payInfoView").empty();
-				$("#payInfoView").html( payInfoView );
-				$("#payGiftInfoDiv").hide();
-				$("#payInfoDiv").show();
-			}
-
-			if ( productNO == 57 || productNO == 58 || productNO == 59 || productNO == 60 || productNO == 61 ) {
-				$(".nf_select2 .group1, .group4, .group5").hide();
-				$(".nf_select2 li .payBtnArea .payBtn").hide();
-				$(".nf_select2 li .payBtnArea .payBtn.pay_31,.pay_3D,.pay_33,.pay_3I,.pay_3T").show();
-			} else {
-				$(".nf_select2 .group1, .group4, .group5").show();
-				if (payInfo.benefitInfo.price < 90000) {
-					$(".nf_select2 li .payBtnArea .payBtn").show();
-				} else{
-					$(".nf_select2 li .payBtnArea .payBtn").show();
-					$(".nf_select2 li .payBtnArea .payBtn.pay_74").hide();
-				}
-			}
-
-			
-			if (payInfo.benefitInfo.bCash && payInfo.benefitInfo.bPoint && payInfo.benefitInfo.bCoupon){
-				$("#selectBonusView").removeClass("skip");
-				$("#eventSelectCash").html( util_setComma(payInfo.benefitInfo.bCash) );
-				$("#eventSelectPoint").html( util_setComma(payInfo.benefitInfo.bPoint) );
-				$("#eventSelectCoupon").html( util_setComma(payInfo.benefitInfo.bCoupon)+"장" );
-			}else{
-				$("#selectBonusView").addClass("skip");
-			}
-			
-
-			util_popupAutoHeight();
-		});
-	}
-
-	function payProcess(productNO, payCode) {
-		if (payCode == "33" || payCode == "3D"){
-			if (!browserInfo.isMSIE){
-				alert("익스플로러(IE)에서 이용 가능합니다.");
-				return;
-			}
-		}
-
-		if (!loginData.isLogin) { util_layerMemberlogin(); return false; }
-
-		if (payCode == "00"){
-			var payGift = util_popupwindow("/noriPay/payGiftView.do?productNO="+ productNO +"&selectBonus="+selectBonus, "payGift", 633, 576, true, 5);
-			try { payGift.focus(); } catch (e) {}
-		}else{
-			var payInfoWin = window.open("","noriPayInfo","status=0,resizable=1,scrollbars=0,width=10,height=10");
-			var cashForm =	"<form action='/noriPay/payInfo.do' method='post' name='theFormForCash' target='noriPayInfo' >"+
-							"<input type='hidden' name='productNO' value='"+ productNO +"'>"+
-							"<input type='hidden' name='payCode' value='"+ payCode +"'>"+
-							"<input type='hidden' name='selectBonus' value='"+ selectBonus +"'>"+
-							"</form>";
-			$("#cashFormDiv").html(cashForm);
-			theFormForCash.submit();
-			try { payInfoWin.focus(); } catch (e) {}
-			self.close();
-		}
-	}
-
-	function goQnApage(cateNO, cateSubNO) {
-		var sendData = {cateNO:cateNO, cateSubNO:cateSubNO};
-		try{
-			opener.goContents("/Support/quickQNAList.do", encodeURI(JSON.stringify(sendData)), false);
-			self.close();
-		}catch(e){
-			window.open("/noriNew/Support/quickQNAList.do?data=" + encodeURI(JSON.stringify(sendData)) , '' );
-		}
-	}
-
-	(function fullTVSelect(no) {
-		$("#fullTVAddNO").remove();
-		$("#pno57, #pno58, #pno59, #pno60, #pno61").hide();
-
-		$("#pno"+no).show();
-		$("#pno"+no+" td").eq(1).append(' <select style="height:17px" id="fullTVAddNO"><option value="57">1</option><option value="58">2</option><option value="59">3</option><option value="60">4</option><option value="61">5</option></select>');
-		$("#fullTVAddNO").val(no);
-		$("#fullTVAddNO").off("change").on("change", function(){
-			fullTVSelect( $(this).val() );
-			payCashViewFN.productSelect($(this).val());
-		});
-	})(57);
-
-	
-	selectBonus = 2;
-	function selectBonusFN(bonusCode){ selectBonus = bonusCode; prodictView(); }
-	$("#selectBonusView").load("/common/html/pay/selectBonus.html", null, function(){
-		payCashViewFN.productSelect(8);
-	});
-	
-
-	return {
-		selectBonusFN : selectBonusFN,
-		productSelect : productSelect,
-		paySelect : paySelect,
-		payProcess : payProcess,
-		okCashBagMove : okCashBagMove,
-		goQnApage : goQnApage
-	};
-})();
-
-
-
-</script>
 
 </body>
 </html>

@@ -46,7 +46,10 @@
 		       , #{ address }
 		       , sysdate
 		       , sysdate
-		       , default		
+		       , default
+		       , null
+		       , null
+		       , null
       	       )
 	</insert>
 	

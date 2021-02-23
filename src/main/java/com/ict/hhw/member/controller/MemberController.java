@@ -1,6 +1,7 @@
 package com.ict.hhw.member.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -8,6 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.Cookie;
@@ -32,11 +34,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ict.hhw.member.model.service.MemberService;
 import com.ict.hhw.member.model.vo.Member;
+import com.ict.hhw.qa.model.vo.Qa;
 
 @SessionAttributes("loginUser")
 
@@ -374,6 +378,45 @@ public class MemberController {
 		return "member/profile";
 	}
 	
+	// '프로필 사진' 업로드
+		@RequestMapping(value = "propic.do", method = RequestMethod.POST)
+		public String propicInsertMethod(Member member,
+				HttpServletRequest request, Model model,
+				@RequestParam(name = "upfile", required = false) MultipartFile mfile) {
+			// 업로드된 파일 저장 폴더 지정하기
+			String savePath = request.getSession().getServletContext()
+					.getRealPath("resources/propic");
+
+			// 첨부파일이 있을때 업로드된 파일을 지정 폴더로 옮기기
+			// 단 첨부된 파일의 이름이 yyyyMMddHHmmss.확장자 형식으로 바뀌어 저장함
+			if (mfile != null) {
+				String fileName = mfile.getOriginalFilename();
+				if (fileName != null && fileName.length() > 0) {
+					member.setPropic(fileName); //원래 파일명 vo 에 저장, set뒤에 대문자
+					
+					/*
+					 * //첨부된 파일의 파일명 바꾸기 SimpleDateFormat sdf = new
+					 * SimpleDateFormat("yyyyMMddHHmmss"); String renameFileName = sdf.format(new
+					 * java.sql.Date(System.currentTimeMillis())); renameFileName += "." +
+					 * fileName.substring(fileName.lastIndexOf(".") + 1);
+					 * 
+					 * try { mfile.transferTo(new File(savePath + "\\" + renameFileName)); } catch
+					 * (Exception e) { e.printStackTrace(); model.addAttribute("msg",
+					 * "전송 파일 저장 실패"); return "common/errorPage"; }
+					 * qa.setQa_rename_file_name(renameFileName);
+					 */
+	 
+				}
+			}
+
+			if (mService.insertMember(member) > 0) {
+				return "redirect:myProfile.do";
+			} else {
+				model.addAttribute("msg", "의뢰 등록 실패.");
+				return "common/errorPage";
+			}
+		}
+		
 	// 회원가입
 	@RequestMapping("minsert.do")
 	public String insertMember(@ModelAttribute Member m, Model model, @RequestParam("post") String post,
