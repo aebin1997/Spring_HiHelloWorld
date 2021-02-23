@@ -273,6 +273,7 @@ CREATE TABLE QA(
     QA_TITLE                VARCHAR2(200),
     QA_WRITER            VARCHAR2(20),
     QA_CONTENT        VARCHAR2(4000),
+    QA_POINT            NUMBER DEFAULT 0,
     QA_ORIGIN_FILE_NAME     VARCHAR2(50)   NULL,
     QA_RENAME_FILE_NAME   VARCHAR2(50)   NULL,
     QA_READCOUNT    NUMBER DEFAULT 0,
@@ -284,14 +285,15 @@ CREATE TABLE QA(
 
 ------------------------------------------------------------------------------------------------------------------- QA 컬럼명 지정
 COMMENT ON COLUMN QA.QA_ID  IS '문의사항 번호';
-COMMENT ON COLUMN QA.QA_TITLE IS '게시글 제목';
+COMMENT ON COLUMN QA.QA_TITLE IS '문의사항 제목';
 COMMENT ON COLUMN QA.QA_WRITER IS '작성자 아이디';
-COMMENT ON COLUMN QA.QA_CONTENT IS '게시글 내용';
+COMMENT ON COLUMN QA.QA_CONTENT IS '문의사항 내용';
+COMMENT ON COLUMN QA.QA_POINT IS '문의사항 포인트';
 COMMENT ON COLUMN QA.QA_ORIGIN_FILE_NAME IS '첨부파일 이름 변경전';
 COMMENT ON COLUMN QA.QA_RENAME_FILE_NAME IS '첨부파일 이름 변경후';
 COMMENT ON COLUMN QA.QA_READCOUNT IS '조회수';
-COMMENT ON COLUMN QA.QA_CREATE_DATE IS '게시글올린날짜';
-COMMENT ON COLUMN QA.QA_MODIFY_DATE IS '게시글수정한날짜';
+COMMENT ON COLUMN QA.QA_CREATE_DATE IS '문의사항올린날짜';
+COMMENT ON COLUMN QA.QA_MODIFY_DATE IS '문의사항수정한날짜';
 COMMENT ON COLUMN QA.QA_STATUS IS '게시글상태값';
 
 ------------------------------------------------------------------------------------------------------------------- QA 시퀀스
@@ -306,33 +308,33 @@ NOCACHE;
 
 ------------------------------------------------------------------------------------------------------------------- QA 샘플데이터
 INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
        DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-
-INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
        
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
-       
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
-       
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
-       
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);INSERT INTO QA
-       
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '일반회원1',
-       '저희 사이트를 이용해 주셔서 감사합니다.', NULL, NULL, 
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       INSERT INTO QA
+VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
+       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
        DEFAULT, SYSDATE, SYSDATE, DEFAULT);
        
 ------------------------------------------------------------------------------------------------------------------- QA_REPLY 관련
