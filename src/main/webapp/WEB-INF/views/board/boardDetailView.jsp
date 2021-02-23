@@ -51,7 +51,13 @@
 				} else { //본인 댓글이 아닐 때
 					values += "<tr><td>"+ json.list[i].b_rwriter
 							+ "</td><td>"+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
+							+ "</td></tr><tr><td colspan='2'>"<tr><td colspan='2'>"
+							+ "<form action='b.blame.insert.do' method='post'>"
+							+ "<input type='hidden' name='blame_no' value='" +  json.list[i].blame_no  + "'>"
+							+ "<input type='hidden' name='blame_bid' value='${blame.blame_bid}'>"
+							+ "<textarea name='blame_content'>"
+							+ decodeURIComponent(json.list[i].blame_content).replace(/\+/gi, " ")
+							+ "</textarea><input type='submit' value='신고'></form>"
 							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") + "</td></tr>";
 				}
 			} //for in
@@ -120,10 +126,42 @@
 				</c:if>
 			</td>
 		</tr>
-	
-		<tr align="center" valign="middle">
+		
+		
+		<tr style="text-align: right;" valign="middle">
 			<th colspan="2">
 			
+		<%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%>
+			<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
+				<c:url var="buv" value="/bupview.do">
+					<c:param name="bid" value="${ board.bid }" />
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+				<a href="${ buv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
+					<c:url var="bdl" value="/bdelete.do">
+					<c:param name="bid" value="${ board.bid }" />
+					</c:url>
+				<a href="${ bdl }">[글삭제]</a> &nbsp; &nbsp; 
+			</c:if> 
+			
+			<%-- 로그인 안한상태 --%>
+			<div style="text-align: right;">
+			<c:url var="bls" value="/blist.do">
+				<c:param name="page" value="${ currentPage }" />
+			</c:url>
+			<a href="${ bls }">[목록]</a>
+			
+			<c:url var="boardBlame" value="/b.blame.insert.do">
+				<c:param name="page" value="${ currentPage }" />
+			</c:url>
+			<a href="${ boardBlame }">[신고]</a>
+			</div>
+			</th>
+		</tr>
+	</table>
+	
+	
+	
 			<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> 
 			<c:if test="${ !empty loginUser }">
 			
@@ -153,35 +191,6 @@
 				</div>
 			<button onclick="showReplyForm();">댓글달기</button>&nbsp; &nbsp; 
 			</c:if> 
-			
-			<%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%>
-			<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
-				<c:url var="buv" value="/bupview.do">
-					<c:param name="bid" value="${ board.bid }" />
-					<c:param name="page" value="${ currentPage }" />
-				</c:url>
-				<a href="${ buv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
-					<c:url var="bdl" value="/bdelete.do">
-					<c:param name="bid" value="${ board.bid }" />
-					</c:url>
-				<a href="${ bdl }">[글삭제]</a> &nbsp; &nbsp; 
-			</c:if> 
-			
-			<%-- 로그인 안한상태 --%>
-			<div style="text-align: right;">
-			<c:url var="bls" value="/blist.do">
-				<c:param name="page" value="${ currentPage }" />
-			</c:url>
-			<a href="${ bls }">[목록]</a>
-			
-			<c:url var="boardBlame" value="/b.blame.insert.do">
-				<c:param name="page" value="${ currentPage }" />
-			</c:url>
-			<a href="${ boardBlame }">[신고]</a>
-			</div>
-			</th>
-		</tr>
-	</table>
 
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="padding-bottom: 30px;">
