@@ -168,7 +168,7 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
-									<li><a class="nav-link" href="#">CONTACT</a></li>
+									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
 									<!-- 임시 -->
 									<li><a class="nav-link" href="progress.move">진행 목록</a></li>
 									<li><a class="nav-link" href="plist.do">진행페이지</a></li>

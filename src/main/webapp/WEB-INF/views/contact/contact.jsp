@@ -8,10 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp"/>
-
-
+	<section style="padding: 100px 250px 60px 250px;">
+	
+	
+	
+	
+	<!-- 푸터 -->
+	</section>
 	<jsp:include page="../common/footer.jsp"/>
 
 
