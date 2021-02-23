@@ -63,8 +63,19 @@ public class ProgressController {
 		}
 	}
 	
-	@RequestMapping("processInsert.do")
-	public String processInsert() {
+	@RequestMapping("progressInsert.do")
+	public String processInsert(@RequestParam("pro_answerer") String answerer, HttpSession session, Model model) {
+		
+		// 의뢰 프로젝트 추가
+		//int result = progressService.insertProgress();
+//
+		//if (result > 0) {
+		//	return "progress/projectApplyForm"; 
+		//} else {
+		//	model.addAttribute("msg", "회원가입실패!");
+		//	return "common/errorPage";
+		//}
+		
 		return "projetApplyForm";
 	}
 	

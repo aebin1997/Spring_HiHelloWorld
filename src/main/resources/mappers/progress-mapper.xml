@@ -33,5 +33,20 @@
 		AND MSTATUS = 'Y'
 	</select>
 
+	<insert id="insertProgress" parameterType="Progress">
+	INSERT 
+		  INTO MEMBER
+		VALUES ( 
+				 #{ pro_id }
+		       , #{ pro_qid }
+		       , #{ pro_writer }
+		       , #{ pro_anwerer }
+		       , #{ pro_deadline }
+		       , default
+		       , default
+		       , 'W'
+      	       )
+	</insert>
+
 
 </mapper>

@@ -103,17 +103,17 @@ $(function() {
 
 		<!-- 의뢰 요청 form -->
 		<div>
-			<form action="processInsert.do" method="post">
+			<form action="progressInsert.do" method="post">
 				<table id="apply">
 					<tr>
 						<td>답변자 선택</td>
-						<td><input type="text" id="selectUser" value="" required readonly
+						<td><input type="text" name="pro_answerer" id="selectUser" value="" required readonly
 							style="width: 150px;"></td>
 						<td><button type="button" id="modal_open_btn">찾기</button></td>
 					</tr>
 					<tr>
 						<td>질문 선택</td>
-						<td><select style="width: 150px;" required>
+						<td><select name="qa_title" style="width: 150px;" required>
 								<option value="" selected>질문 선택</option>
 								<c:if test="${ requestScope.tlist != null }">
 									<c:forEach items="${ requestScope.tlist }" var="t">
@@ -125,12 +125,12 @@ $(function() {
 					</tr>
 					<tr>
 						<td>마감 기한</td>
-						<td><input type="date" style="width: 150px;" required></td>
+						<td><input type="date" name="pro_deadline" style="width: 150px;" required></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>금액</td>
-						<td><input type="number" min="1000" step="1000"
+						<td><input type="number" name="pro_pay" min="1000" step="1000"
 							style="width: 150px;" required></td>
 						<td><button>결제</button></td>
 					</tr>

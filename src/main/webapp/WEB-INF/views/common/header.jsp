@@ -137,8 +137,8 @@ font-family: 'Nanum Gothic', sans-serif;
 													
 						<font><c:if test="${ !empty sessionScope.loginUser }">
 								<c:out value="${ loginUser.name }" />
+								<span>님 환영합니다!!</span>
 							</c:if></font>
-							<span>님 환영합니다!!</span>
 						</div>
 					</div>
 				</div>
