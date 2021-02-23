@@ -10,16 +10,14 @@
 <c:set var="currentPage" value="${ requestScope.currentPage }" />
 
 <%-- 글쓰기 페이지 이동 요청 url --%>
-<c:url var="bwf" value="/bwmove.do" />
-<c:url var="login" value="/loginView.do" />
-<c:url var="blamelist" value="/b.blame.list.do" />
+<c:url var="bll" value="/b.blame.list.do" />
 
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판</title>
+<title>관리자 신고회원 관리페이지</title>
 
 <script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
@@ -33,33 +31,22 @@
 	});
 	function showDiv() {
 		if ($("input[name=item]").eq(0).is(":checked")) { //첫번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
-			$("#titleDiv").css("display", "block");
-			$("#writerDiv").css("display", "none");
-			$("#dateDiv").css("display", "none");
+			$("#target_nickname").css("display", "block");
+			$("#blame_type").css("display", "none");
+			$("#blame_date").css("display", "none");
 		}
 		if ($("input[name=item]").eq(1).is(":checked")) { //두번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
-			$("#titleDiv").css("display", "none");
-			$("#writerDiv").css("display", "block");
-			$("#dateDiv").css("display", "none");
+			$("#target_nickname").css("display", "none");
+			$("#blame_type").css("display", "block");
+			$("#blame_date").css("display", "none");
 		}
 		if ($("input[name=item]").eq(2).is(":checked")) { //세번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
-			$("#titleDiv").css("display", "none");
-			$("#writerDiv").css("display", "none");
-			$("#dateDiv").css("display", "block");
+			$("#target_nickname").css("display", "none");
+			$("#blame_type").css("display", "none");
+			$("#blame_date").css("display", "block");
 		}
 	}
-	
-	function showWriteForm() {
-		location.href = "${ bwf }";
-	}
-	
-	function login() {
-		location.href = "${ login }";
-	} 
-
-	function testBlame() {
-		location.href = "${ blamelist }";
-	}
+	 
 	
 </script>
 
@@ -70,7 +57,7 @@
 	
 	<div style="text-align: center; padding-top: 90px;">
 		<div>
-			<h2 style="margin: 20px 0 10px 0;">자유게시판</h2>
+			<h2 style="margin: 20px 0 10px 0;">신고회원 관리페이지</h2>
 		</div>
 	</div>
 	
@@ -79,54 +66,54 @@
 	<div>
 		<div style="text-align: left; padding-left: 550px;">
 			<div>
-				<select name="btype" id="item">
+				<select name="blame" id="item">
 					<option id="item" value="">검색 항목 선택</option>
-					<option id="item" value="title">제목</option>
-					<option id="item" value="writer">작성자</option>
-					<option id="item" value="date">게시날짜</option>
+					<option id="item" value="target_nickname">신고회원</option>
+					<option id="item" value="blame_type">신고유형</option>
+					<option id="item" value="blame_date">신고날짜</option>
 				</select>
 	
-				<input type="radio" name="item" value="title" checked> 제목&nbsp; &nbsp; &nbsp; 
-				<input type="radio" name="item" value="writer">	 작성자 &nbsp; &nbsp; &nbsp; 
-				<input type="radio" name="item" value="date"> 날짜
+				<input type="radio" name="item" value="target_nickname" checked> 신고회원&nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="blame_type">	신고회원&nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="blame_date"> 신고날짜
 			</div>
 	
-			<div id="titleDiv">
-				<form action="bsearchTitle.do" method="post">
+			<div id="target_nickname">
+				<form action="b.blame.searchWriter.do" method="post">
 					<input type="hidden" name="page" value="1">
-					<input type="search" name="keyword" placeholder="제목">
+					<input type="search" name="keyword" placeholder="신고회원">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="blist" value="/blist.do">
+					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
 				</form>
 			</div>
 	
-			<div id="writerDiv">
-				<form action="bsearchWriter.do" method="post">
+			<div id="blame_type">
+				<form action="b.blame.searchTitle.do" method="post">
 					<input type="hidden" name="page" value="1">
-					<input type="search" name="keyword" placeholder="닉네임">
+					<input type="search" name="keyword" placeholder="신고유형">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="blist" value="/blist.do">
+					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
 				</form>
 			</div>
 	
-			<div id="dateDiv">
-				<form action="bsearchDate.do" method="post">
+			<div id="blame_date">
+				<form action="b.blame.searchDate.do" method="post">
 					<input type="hidden" name="page" value="1">
 					<input type="date" name="begin"> ~ <input type="date" name="end">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="blist" value="/blist.do">
+					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
 				</form>
 			</div>
 		</div>
@@ -142,27 +129,24 @@
 							cellspacing="0" align="center" border="1" style="width:1500px; text-align: center;">
 							<tr style="background-color: orange;">
 								<th style="text-align: center;">번호</th>
-								<th style="text-align: center;">말머리</th>
-								<th style="text-align: center;">제목</th>
-								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">날짜</th>
-								<th style="text-align: center;">조회수</th>
-								<th style="text-align: center;">댓글수</th>
+								<th style="text-align: center;">게시글 번호</th>
+								<th style="text-align: center;">신고유형</th>
+								<th style="text-align: center;">신고자</th>
+								<th style="text-align: center;">신고접수자</th>
+								<th style="text-align: center;">신고접수일</th>
 							</tr>
 							<c:forEach items="${ requestScope.list }" var="b" >
 								<tr>
-									<td align="center" width="100">${ b.bid }</td>
-									<td align="center" width="180">${ b.btype }</td>
-									<td align="left" ><c:url var="bdt" value="/bdetail.do">
-											<c:param name="page" value="${ currentPage }" />
-											<c:param name="bid" value="${ b.bid }" />
-										</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>
-											<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
-											<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
-									<td align="center" width="180">${ b.bwriter } &nbsp; <img src="/hhw/resources/images/good.png" style="width:20px;"></td>
-									<td align="center" width="130">${ b.b_create_date }</td>
-									<td align="center" width="80">${ b.bcount }</td>
-									<td align="center" width="80">${ b.b_rcount }</td>
+									<td align="center" width="100">${ b.blame_no }</td>
+									<td align="center" width="180">${ b.blame_bid }</td>
+									<td align="left" >
+										<c:url var="boardblamelist" value="/b.blame.list.do">
+												<c:param name="page" value="${ currentPage }" />
+												<c:param name="blame_no" value="${ b.blame_no }" />
+										</c:url> <a href="${ boardblamelist }" style="color: black;">${ b.blame_type }</a></td>
+									<td align="center" width="180">${ b.mm_nickname } &nbsp; <img src="/hhw/resources/images/good.png" style="width:20px;"></td>
+									<td align="center" width="130">${ b.target_nickname }</td>
+									<td align="center" width="80">${ b.blame_date }</td>
 								</tr>
 							</c:forEach>
 						</table>
@@ -173,10 +157,10 @@
 	</div>
 
 	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-	<c:if test="${ !empty sessionScope.loginUser }">
+	<c:if test="${ !empty sessionScope.loginUser  }">   <%-- 나중에 추가 and sessionScope.loginUser.id eq 'admin123' --%>
 		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
-			<button onclick="testBlame();" class="btn btn-warning btn-round" style="color: #fff;">관리자 신고자 목록 확인 이동</button>
+			<button onclick="showWriteForm();" class="btn btn-warning btn-round"
+				style="color: #fff;">글쓰기</button>
 		</div>
 	</c:if>
 	
@@ -220,19 +204,19 @@
             [맨처음]
          </c:if>
 			<c:if test="${ currentPage > 1 }">
-				<c:url var="bls" value="/blist.do">
+				<c:url var="bbls" value="/b.blame.list.do">
 					<c:param name="page" value="1" />
 				</c:url>
-				<a href="${ bls }">[맨처음]</a>
+				<a href="${ bbls }">[맨처음]</a>
 			</c:if>
 			&nbsp;
 			<%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
 			<c:if
 				test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
-				<c:url var="bls2" value="/blist.do">
+				<c:url var="bbls2" value="/b.blame.list.do">
 					<c:param name="page" value="${ startPage - 10 }" />
 				</c:url>
-				<a href="${ bls2 }">[이전]</a>
+				<a href="${ bbls2 }">[이전]</a>
 			</c:if>
 			<c:if
 				test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
@@ -245,20 +229,20 @@
 					<font size="4" color="red">[${ p }]</font>
 				</c:if>
 				<c:if test="${ p ne currentPage }">
-					<c:url var="bls3" value="/blist.do">
+					<c:url var="bbls3" value="/b.blame.list.do">
 						<c:param name="page" value="${ p }" />
 					</c:url>
-					<a href="${ bls3 }">${ p }</a>
+					<a href="${ bbls3 }">${ p }</a>
 				</c:if>
 			</c:forEach>
 			&nbsp;
 			<%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
 			<c:if
 				test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
-				<c:url var="bls4" value="/blist.do">
+				<c:url var="bbls4" value="/b.blame.list.do">
 					<c:param name="page" value="${ endPage + 10 }" />
 				</c:url>
-				<a href="${ bls4 }">[다음그룹]</a>
+				<a href="${ bbls4 }">[다음그룹]</a>
 			</c:if>
 			<c:if
 				test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
@@ -270,10 +254,10 @@
             [맨끝]&nbsp;
          </c:if>
 			<c:if test="${ currentPage < maxPage }">
-				<c:url var="bls5" value="/blist.do">
+				<c:url var="bbls5" value="/b.blame.list.do">
 					<c:param name="page" value="${ maxPage }" />
 				</c:url>
-				<a href="${ bls5 }">[맨끝]</a>
+				<a href="${ bbls5 }">[맨끝]</a>
 			</c:if>
 		</div>
 	</c:if>
@@ -286,25 +270,25 @@
             [맨처음]
          </c:if>
 			<c:if test="${ currentPage > 1 }">
-				<c:url var="bsearch1" value="${ action }">
-					<c:if test="${ action ne 'bsearchDate.do'}">
+				<c:url var="search1" value="${ action }">
+					<c:if test="${ action ne 'bsearchDate.do'}">'}">
 						<c:param name="page" value="1" />
 					</c:if>
-					<c:if test="${ action eq 'bsearchDate.do'}">
+					<c:if test="${ action eq 'bsearchDate.do'}">'}">
 						<c:param name="begin" value="${ begin }" />
 						<c:param name="end" value="${ end }" />
 					</c:if>
 				</c:url>
-				<a href="${ bsearch1 }">[맨처음]</a>
+				<a href="${ search1 }">[맨처음]</a>
 			</c:if>
 			&nbsp;
 			<%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
 			<c:if
 				test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
-				<c:url var="bsearch2" value="/blist.do">
+				<c:url var="search2" value="/blist.do">
 					<c:param name="page" value="${ startPage - 10 }" />
 				</c:url>
-				<a href="${ bsearch2 }">[이전]</a>
+				<a href="${ search2 }">[이전]</a>
 			</c:if>
 			<c:if
 				test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
@@ -317,20 +301,20 @@
 					<font size="4" color="red">[${ p }]</font>
 				</c:if>
 				<c:if test="${ p ne currentPage }">
-					<c:url var="bsearch3" value="/blist.do">
+					<c:url var="search3" value="/b.blame.list.do">
 						<c:param name="page" value="${ p }" />
 					</c:url>
-					<a href="${ bsearch3 }">${ p }</a>
+					<a href="${ search3 }">${ p }</a>
 				</c:if>
 			</c:forEach>
 			&nbsp;
 			<%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
 			<c:if
 				test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
-				<c:url var="bsearch4" value="/blist.do">
+				<c:url var="search4" value="/b.blame.list.do">
 					<c:param name="page" value="${ endPage + 10 }" />
 				</c:url>
-				<a href="${ bsearch4 }">[다음그룹]</a>
+				<a href="${ search4 }">[다음그룹]</a>
 			</c:if>
 			<c:if
 				test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
@@ -341,10 +325,10 @@
             [맨끝]&nbsp;
          </c:if>
 			<c:if test="${ currentPage < maxPage }">
-				<c:url var="bsearch5" value="/blist.do">
+				<c:url var="search5" value="/b.blame.list.do">
 					<c:param name="page" value="${ maxPage }" />
 				</c:url>
-				<a href="${ bsearch5 }">[맨끝]</a>
+				<a href="${ search5 }">[맨끝]</a>
 			</c:if>
 		</div>
 	</c:if>

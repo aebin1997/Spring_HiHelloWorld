@@ -14,12 +14,9 @@ public class NoticeServiceImpl implements NoticeService {
 	//의존성 주입(new 객체 생성 구문 자동으로)
 	@Autowired
 	private NoticeDao noticeDao;
-	
-	@Override
-	public ArrayList<Notice> selectAll() {
-		return noticeDao.selectList();
-	}
 
+	
+	//리스트보기
 	@Override
 	public Notice selectnotice(int nid) {
 		return noticeDao.selectOne(nid);
@@ -58,6 +55,12 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public ArrayList<Notice> selectSearchDate(SearchDate dates) {
 		return noticeDao.selectSearchDate(dates);
+	}
+
+	@Override
+	public ArrayList<Notice> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
