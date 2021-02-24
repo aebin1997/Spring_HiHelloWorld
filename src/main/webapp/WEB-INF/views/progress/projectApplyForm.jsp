@@ -83,7 +83,8 @@
 		$("#modal_close_btn").click(function() {
 			$("#modal").attr("style", "display:none");
 		});
-
+		
+		
 		$("#UserSelectBtn").click(function() {
 			$.ajax({
 				url : "selectUser.do",
@@ -185,7 +186,7 @@
 					</tr>
 					<tr>
 						<td>질문 제목</td>
-						<td></td>
+						<td>조인!!</td>
 					</tr>
 					<tr>
 						<td>기한</td>

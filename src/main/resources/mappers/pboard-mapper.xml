@@ -16,12 +16,13 @@
 		<result column="pstatus" property="pstatus" />
 	</resultMap>
 
-	<select id="selectList" parameterType="_int" resultMap="resultPboard">
+	<select id="selectList" parameterType="_int"
+		resultMap="resultPboard">
 		SELECT *
-		  FROM P_BOARD
-		 WHERE P_PROID = #{ pro_id }
-		       AND PSTATUS = 'Y'
-		       ORDER BY PID DESC
+		FROM P_BOARD
+		WHERE P_PROID = #{ pro_id }
+		AND PSTATUS = 'Y'
+		ORDER BY PID DESC
 	</select>
 
 	<select id="getListCount" parameterType="_int" resultType="_int">
@@ -32,52 +33,33 @@
 	<select id="searchTitle"
 		parameterType="com.ict.hhw.common.SearchAndPage"
 		resultMap="resultPboard">
-   		<![CDATA[
-      	SELECT *
-        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
-                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODIFY_DATE, 
-                 PCOUNT, PSTATUS
-               FROM (SELECT * 
-                       FROM P_BOARD
-                     WHERE PSTATUS = 'Y'
-                     AND PTITLE LIKE '%' || #{ keyword } || '%'
-                      ORDER BY PID DESC))
-      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
-      	]]>
+		SELECT *
+		FROM P_BOARD
+		WHERE PSTATUS = 'Y'
+		AND PTITLE LIKE '%'
+		|| #{ keyword } || '%'
+		ORDER BY PID DESC
+
 	</select>
 
 	<select id="searchWriter"
 		parameterType="com.ict.hhw.common.SearchAndPage"
 		resultMap="resultPboard">
-   		<![CDATA[
-      	SELECT *
-        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
-                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODIFY_DATE, 
-                 PCOUNT, PSTATUS
-               FROM (SELECT * 
-                       FROM P_BOARD
-                     WHERE PSTATUS = 'Y'
-                     AND PWRITER LIKE '%' || #{ keyword } || '%'
-                      ORDER BY PID DESC))
-      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
-      	]]>
+		SELECT *
+		FROM P_BOARD
+		WHERE PSTATUS = 'Y'
+		AND PWRITER LIKE '%' || #{ keyword } || '%'
+		ORDER BY PID DESC
 	</select>
 
 	<select id="searchDate"
 		parameterType="com.ict.hhw.common.SearchAndPage"
 		resultMap="resultPboard">
-   		<![CDATA[
-      	SELECT *
-        FROM(SELECT ROWNUM RNUM, BID, BTITLE, BWRITER,BCONTENT,
-                  ORIGINAL_FILENAME,RENAME_FILENAME,BCOUNT,
-                 B_CREATE_DATE, B_MODIFY_DATE,B_STATUS
-               FROM (SELECT * 
-                       FROM BOARD
-                     WHERE B_STATUS = 'Y'
-                     and b_create_date between #{ begin } and #{ end }
-                      ORDER BY BID DESC))
-      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
-      	]]>
+		SELECT *
+		FROM BOARD
+		WHERE B_STATUS = 'Y'
+		and b_create_date between #{ begin } and #{ end }
+		ORDER BY BID DESC
 	</select>
 
 	<select id="getSearchTitleListCount" parameterType="string"

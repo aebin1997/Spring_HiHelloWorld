@@ -114,6 +114,7 @@ public class ProgressController {
 
 	}
 
+
 	@RequestMapping(value="requestAccept.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String requestAccept(@RequestParam("r_pro_id") int r_pro_id) {
 
