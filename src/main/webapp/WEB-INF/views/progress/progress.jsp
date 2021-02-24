@@ -4,11 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<c:set var="maxPage" value="${ requestScope.maxPage }" />
-<c:set var="startPage" value="${ requestScope.startPage }" />
-<c:set var="endPage" value="${ requestScope.endPage }" />
-<c:set var="currentPage" value="${ requestScope.currentPage }" />
-
 <%-- 글쓰기 페이지 이동 요청 url --%>
 <c:url var="pwf" value="/pwmove.do" />
 
@@ -80,7 +75,7 @@
 						<div class="vbo_wr">
 							<ul class="sir_vbo_com">
 								<c:url var="plist" value="/plist.do">
-								<c:param name="page" value="1" />
+								<c:param name="pro_id" value="${ pro_id }" />
 								</c:url>
 								<li><a href="${ plist }" class="sir_b01">목록</a></li>
 							</ul>
@@ -280,12 +275,13 @@
 					<%-- 목록 출력 --%>
 					<div style="text-align: right; padding-right: 50px">
 						<c:url var="plist" value="/plist.do">
-							<c:param name="page" value="1" />
+							<c:param name="pro_id" value="${ pro_id }" />
 						</c:url>
 						<button onclick="javascript:location.href='${ plist }';">
 							전체 목록 보기</button>
 					</div>
 					<br>
+					<c:if test="${ requestScope.list ne null }">
 					<table align="center" border="1" width="700" cellspacing="0">
 						<tr>
 							<th>번호</th>
@@ -299,7 +295,6 @@
 							<tr>
 								<td align="center">${ p.pid }</td>
 								<td><c:url var="pdt" value="/pdetail.do">
-										<c:param name="page" value="${ currentPage }" />
 										<c:param name="pid" value="${ p.pid }" />
 									</c:url> <a href="${ pdt }">${ p.ptitle }</a></td>
 								<td align="center">${ p.pwriter }</td>
@@ -314,148 +309,8 @@
 							</tr>
 						</c:forEach>
 					</table>
+					</c:if>
 					<br>
-					<%-- 현재 페이지가 1이 아니면 링크설정, 현재 1페이지이면 링크없음 --%>
-					<c:if test="${ empty action }">
-						<%-- 페이징 처리 
-						   [맨처음][이전] 숫자...........  [다음][맨끝]
-						--%>
-						<div style="text-align: center;">
-							<c:if test="${ currentPage <= 1}">
-							[맨처음]
-							</c:if>
-							<c:if test="${ currentPage > 1 }">
-								<c:url var="pls" value="/plist.do">
-									<c:param name="page" value="1" />
-								</c:url>
-								<a href="${ pls }">[맨처음]</a>
-							</c:if>
-							&nbsp;
-							<%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
-							<c:if
-								test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
-								<c:url var="pls2" value="/plist.do">
-									<c:param name="page" value="${ startPage - 10 }" />
-								</c:url>
-								<a href="${ pls2 }">[이전]</a>
-							</c:if>
-							<c:if
-								test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
-							[이전]
-							</c:if>
-							&nbsp;
-							<%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
-							<c:forEach var="p2" begin="${ startPage }" end="${ endPage }"
-								step="1">
-								<c:if test="${ p2 eq currentPage }">
-									<font size="4" color="red">[${ p2 }]</font>
-								</c:if>
-								<c:if test="${ p2 ne currentPage }">
-									<c:url var="pls3" value="/plist.do">
-										<c:param name="page" value="${ p2 }" />
-									</c:url>
-									<a href="${ pls3 }">${ p2 }</a>
-								</c:if>
-							</c:forEach>
-							&nbsp;
-							<%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
-							<c:if
-								test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
-								<c:url var="pls4" value="/plist.do">
-									<c:param name="page" value="${ endPage + 10 }" />
-								</c:url>
-								<a href="${ pls4 }">[다음그룹]</a>
-							</c:if>
-							<c:if
-								test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
-							   [다음그룹]&nbsp;
-							</c:if>
-							<!-- 맨끝 페이지로 이동 처리 -->
-							<c:if test="${ currentPage >= maxPage }">
-							   [맨끝]&nbsp;
-							</c:if>
-							<c:if test="${ currentPage < maxPage }">
-								<c:url var="pls5" value="/plist.do">
-									<c:param name="page" value="${ maxPage }" />
-								</c:url>
-								<a href="${ pls5 }">[맨끝]</a>
-							</c:if>
-						</div>
-					</c:if>
-
-
-					<c:if test="${ !empty action}">
-						<%-- 페이징 처리 
-						   [맨처음][이전] 숫자...........  [다음][맨끝]
-						--%>
-						<div style="text-align: center;">
-							<c:if test="${ currentPage <= 1}">
-							[맨처음]
-							</c:if>
-							<c:if test="${ currentPage > 1 }">
-								<c:url var="psearch1" value="${ action }">
-									<c:if test="${ action ne 'psearchDate.do'}">
-										<c:param name="page" value="1" />
-									</c:if>
-									<c:if test="${ action eq 'psearchDate.do'}">
-										<c:param name="begin" value="${ begin }" />
-										<c:param name="end" value="${ end }" />
-									</c:if>
-								</c:url>
-								<a href="${ psearch1 }">[맨처음]</a>
-							</c:if>
-							&nbsp;
-							<%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
-							<c:if
-								test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
-								<c:url var="psearch2" value="/plist.do">
-									<c:param name="page" value="${ startPage - 10 }" />
-								</c:url>
-								<a href="${ psearch2 }">[이전]</a>
-							</c:if>
-							<c:if
-								test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
-							[이전]
-							</c:if>
-							&nbsp;
-							<%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
-							<c:forEach var="p" begin="${ startPage }" end="${ endPage }"
-								step="1">
-								<c:if test="${ p eq currentPage }">
-									<font size="4" color="red">[${ p }]</font>
-								</c:if>
-								<c:if test="${ p ne currentPage }">
-									<c:url var="psearch3" value="/plist.do">
-										<c:param name="page" value="${ p }" />
-									</c:url>
-									<a href="${ psearch3 }">${ p }</a>
-								</c:if>
-							</c:forEach>
-							&nbsp;
-							<%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
-							<c:if
-								test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
-								<c:url var="psearch4" value="/plist.do">
-									<c:param name="page" value="${ endPage + 10 }" />
-								</c:url>
-								<a href="${ psearch4 }">[다음그룹]</a>
-							</c:if>
-							<c:if
-								test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
-							   [다음그룹]&nbsp;
-							</c:if>
-							<!-- 맨끝 페이지로 이동 처리 -->
-							<c:if test="${ currentPage >= maxPage }">
-							   [맨끝]&nbsp;
-							</c:if>
-							<c:if test="${ currentPage < maxPage }">
-								<c:url var="psearch5" value="/plist.do">
-									<c:param name="page" value="${ maxPage }" />
-								</c:url>
-								<a href="${ psearch5 }">[맨끝]</a>
-							</c:if>
-						</div>
-					</c:if>
 					<%-- 리스트 출력(}) --%>
 					
 					</article>

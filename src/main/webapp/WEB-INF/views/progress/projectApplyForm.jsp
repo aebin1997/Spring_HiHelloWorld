@@ -129,7 +129,7 @@
 		</div>
 
 		<div class="main_left_btn" align="center">
-			<!-- 의뢰 요청 form -->
+			<%-- 의뢰 요청 하기 --%>
 			<form action="progressInsert.do" method="post">
 				<table id="apply" width="280" height="160">
 					<tr>
@@ -172,6 +172,7 @@
 			</form>
 		</div>
 		
+		<%-- 의뢰 수락하기 --%>
 		<c:if test="${ rlist ne null }" >
 		<c:forEach items="${ requestScope.rlist }" var="r">
 		<form action="requestAccept.do" method="post">
@@ -222,9 +223,9 @@
 				<c:if test="${ requestScope.list ne null }">
 				<c:forEach items="${ requestScope.list }" var="p">
 					<tr>
-						<td align="center"><img
+						<td align="center"><a href="plist.do?pro_id=${ p.pro_id }"><img
 							src="/hhw/resources/images/icon/ico_go.png" width="15px"
-							height="15px"><input type="hidden" value="${ p.pro_id }"></td>
+							height="15px"></a></td>
 						<td align="center">${ p.pro_answerer }</td>
 						<td align="center">${ p.pro_deadline }</td>
 						<td align="center">${ p.pro_pay }</td>

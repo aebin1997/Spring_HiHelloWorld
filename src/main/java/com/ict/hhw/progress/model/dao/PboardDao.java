@@ -22,12 +22,8 @@ public class PboardDao {
 		return sqlSession.selectOne("pboardMapper.getListCount");
 	}
 	
-	public ArrayList<P_board> selectList(int currentPage, int limit) {
-		//전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
-		int startRow = (currentPage - 1) * limit -1;
-		int endRow = startRow + limit - 1;
-		
-		List<P_board> list = sqlSession.selectList("pboardMapper.selectList", new PboardPage(startRow, endRow));
+	public ArrayList<P_board> selectList(int pro_id) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.selectList", pro_id);
 		return (ArrayList<P_board>)list;
 	}
 	

@@ -16,27 +16,22 @@
 		<result column="pstatus" property="pstatus" />
 	</resultMap>
 
-	<select id="selectList" 
-		parameterType="com.ict.hhw.progress.model.vo.P_board"
+	<select id="selectList" parameterType="_int" resultMap="resultPboard">
+		SELECT *
+		  FROM P_BOARD
+		 WHERE P_PROID = #{ pro_id }
+		       AND PSTATUS = 'Y'
+		       ORDER BY PID DESC
+	</select>
+
+	<select id="getListCount" parameterType="_int" resultType="_int">
+		select count(*)
+		from p_board
+	</select>
+
+	<select id="searchTitle"
+		parameterType="com.ict.hhw.common.SearchAndPage"
 		resultMap="resultPboard">
-      <![CDATA[
-      	SELECT *
-        FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
-                  P_FILE_NAME, P_RFILE_NAME, P_DATE, P_MODFIY_DATE, PCOUNT, PSTATUS
-               FROM (SELECT * 
-                       FROM P_BOARD
-                     WHERE PSTATUS = 'Y'
-                      ORDER BY PID DESC))
-      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
-      	]]>
-	</select>
-
-	<select id="getListCount" resultType="_int">
-		select count(*) from
-		p_board
-	</select>
-
-	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultPboard">
    		<![CDATA[
       	SELECT *
         FROM(SELECT ROWNUM RNUM, PID, P_PROID, PTITLE, PWRITER, PCONTENT,
@@ -88,13 +83,15 @@
 	<select id="getSearchTitleListCount" parameterType="string"
 		resultType="_int">
 		select count(*) from p_board
-		where ptitle like '%' || #{ keyword } || '%'
+		where ptitle like '%' || #{
+		keyword } || '%'
 	</select>
 
 	<select id="getSearchWriterListCount" parameterType="string"
 		resultType="_int">
 		select count(*) from p_board
-		where pwriter like '%' || #{ keyword } || '%'
+		where pwriter like '%' || #{
+		keyword } || '%'
 	</select>
 
 	<select id="getSearchDateListCount"
@@ -112,31 +109,34 @@
 
 	<update id="updatePCount" parameterType="_int">
 		update p_board
-		set pcount =
+		set pcount
+		=
 		pcount + 1
 		where pid = #{ pid }
 	</update>
-	
+
 	<update id="updatePboard" parameterType="P_board">
 		update p_board
 		set ptitle = #{ ptitle },
-			pcontent = #{ pcontent },
-			P_MODFIY_DATE = sysdate
-			<if test="p_file_name == null">
+		pcontent = #{ pcontent },
+		P_MODFIY_DATE = sysdate
+		<if test="p_file_name == null">
 			, p_file_name = null,
 			p_rfile_name = null
-			</if>
-			<if test="p_file_name != null">
+		</if>
+		<if test="p_file_name != null">
 			, p_file_name = #{ p_file_name },
-			p_rfile_name = #{ p_rfile_name }
-			</if>
+			p_rfile_name = #{
+			p_rfile_name }
+		</if>
 		where pid = #{ pid }
 	</update>
-	
+
 	<update id="changePstatusN" parameterType="_int">
 		update p_board
-		set pstatus = 'N',
-			p_modify_date = sysdate
+		set
+		pstatus = 'N',
+		p_modify_date = sysdate
 		where pid = #{ pid }
 	</update>
 
