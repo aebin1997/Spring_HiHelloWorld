@@ -170,8 +170,10 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
 									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
 									<!-- 임시 -->
+									<c:if test="${ !empty sessionScope.loginUser }">
 									<li><a class="nav-link" href="progress.move">진행 목록</a></li>
 									<li><a class="nav-link" href="plist.do">진행페이지</a></li>
+									</c:if>
 									<li><a class="nav-link" href="test.do">내정보</a></li>
 								</ul>
 							</nav>
