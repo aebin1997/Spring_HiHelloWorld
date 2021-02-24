@@ -16,8 +16,7 @@
 	<select id="selectPlist" parameterType="string" resultMap="resultProgress">
 		SELECT *
 		FROM PROGRESS
-		WHERE PRO_STATUS = 'Y'
-		AND PRO_WRITER = #{ nickname }
+		WHERE PRO_WRITER = #{ nickname }
 	</select>
 
 	<select id="selectQatitle" parameterType="string" resultType="string">

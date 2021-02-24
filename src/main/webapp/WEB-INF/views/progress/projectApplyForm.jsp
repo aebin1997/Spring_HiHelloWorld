@@ -55,20 +55,35 @@
 	background: rgba(0, 0, 0, 0.5);
 	z-index: -1;
 }
+
+.main_left_btn {
+	width: 50%;
+	height: 280px;
+	float: left;
+}
+
+.main_right_btn {
+	width: 50%;
+	height: 280px;
+	float: left;
+}
 </style>
 <script type="text/javascript"
 	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-$(function() {
-		 
+	$(function() {
+
 		$("#modal_open_btn").click(function() {
-			$("#modal").attr("style", "display:block");
+			$("#modal").show();
+			
+			var offset = $("#modal" + seq).offset();
+	        $('html, body').animate({scrollTop : offset.top}, 50);
 		});
 
 		$("#modal_close_btn").click(function() {
 			$("#modal").attr("style", "display:none");
 		});
-		
+
 		$("#UserSelectBtn").click(function() {
 			$.ajax({
 				url : "selectUser.do",
@@ -80,13 +95,13 @@ $(function() {
 					if (data == "fail") {
 						alert("회원 정보가 없습니다.");
 					} else {
-						$("#selectUser").val(data);						
+						$("#selectUser").val(data);
 					}
-	
+
 				},
 				error : function(jqxhr, textStatus, errorThrown) {
 					console.log("ajax 처리 실패");
-	
+
 					console.log(jqxhr);
 					console.log(textStatus);
 					console.log(errorThrown);
@@ -94,7 +109,6 @@ $(function() {
 			});
 		});
 	});
-	
 </script>
 </head>
 <body>
@@ -103,10 +117,21 @@ $(function() {
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 100px 250px 60px 250px;">
 
-		<!-- 의뢰 요청 form -->
-		<div>
+			<%-- modal창(답변자 검색) --%>
+			<div id="modal">
+				<div class="modal_content">
+					<h5>답변자 검색</h5>
+					<br> <input type="text" id="userId"> <input
+						type="button" id="UserSelectBtn" value="검색"> <br>
+					<button type="button" id="modal_close_btn">모달 창 닫기</button>
+					<br>
+				</div>
+			</div>
+		
+		<div class="main_left_btn" align="center">
+			<!-- 의뢰 요청 form -->
 			<form action="progressInsert.do" method="post">
-				<table id="apply">
+				<table id="apply" width="280" height="160">
 					<tr>
 						<td>답변자 선택</td>
 						<td><input type="text" name="pro_answerer" id="selectUser"
@@ -128,8 +153,9 @@ $(function() {
 					<tr>
 						<td>마감 기한</td>
 						<td><input type="date" name="pro_deadline"
-							id="date_timepicker_end" min="${ today }" data-date-format="YYYY/MM/DD"
-							pattern="YYYY/MM/DD" style="width: 150px;" required></td>
+							id="date_timepicker_end" min="${ today }"
+							data-date-format="YYYY/MM/DD" pattern="YYYY/MM/DD"
+							style="width: 150px;" required></td>
 						<td></td>
 					</tr>
 					<tr>
@@ -146,27 +172,36 @@ $(function() {
 			</form>
 		</div>
 
-		<%-- modal창(답변자 검색) --%>
-		<div id="modal">
-			<div class="modal_content">
-				<h5>답변자 검색</h5>
-				<br> <input type="text" id="userId"> <input
-					type="button" id="UserSelectBtn" value="검색"> <br>
-				<button type="button" id="modal_close_btn">모달 창 닫기</button>
-				<br>
-			</div>
-			<div class="modal_layer"></div>
-		</div>
 
-		<div id="ex1" class="modal">
-			<p>안녕하세요. 모달창안의 내용부분입니다.</p>
-			<a href="#" rel="modal:close">닫기</a>
+		<div class="main_right_btn" align="center">
+			<form action="" method="post">
+				<table id="apply" width="280" height="160">
+					<tr>
+						<td>요청자</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>질문 제목</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>기한</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>금액</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td align="right"><button>의뢰 수락</button></td>
+					</tr>
+				</table>
+			</form>
 		</div>
-
-		<br> <br>
 
 		<div align="center">
-			<h4>진행 중인 Q&A</h4>
+			<h4>나의 Q&A</h4>
 
 			<%-- 목록 출력 --%>
 			<br>
@@ -187,7 +222,20 @@ $(function() {
 						<td align="center">${ p.pro_deadline }</td>
 						<td align="center">${ p.pro_pay }</td>
 						<td align="center">${ p.pro_process }</td>
-						<td align="center">${ p.pro_status }</td>
+						<c:choose>
+							<c:when test="${ p.pro_status eq 'Y' }">
+								<td align="center">진행중</td>
+							</c:when>
+							<c:when test="${ p.pro_status eq 'W' }">
+								<td align="center">수락 대기중</td>
+							</c:when>
+							<c:when test="${ p.pro_status eq 'N' }">
+								<td align="center">거절됨</td>
+							</c:when>
+							<c:otherwise>
+								<td align="center">기간 만료됨</td>
+							</c:otherwise>
+						</c:choose>
 					</tr>
 				</c:forEach>
 			</table>
