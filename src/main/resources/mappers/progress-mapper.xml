@@ -33,16 +33,22 @@
 		AND MSTATUS = 'Y'
 	</select>
 
+	<select id="findQaId" parameterType="string" resultType="string">
+		SELECT QA_ID
+    	FROM QA
+    	WHERE QA_TITLE = #{qa_title}
+	</select>
+
 	<insert id="insertProgress" parameterType="Progress">
 	INSERT 
-		  INTO MEMBER
+		  INTO Progress
 		VALUES ( 
-				 #{ pro_id }
+				 seq_pro.nextval
 		       , #{ pro_qid }
 		       , #{ pro_writer }
-		       , #{ pro_anwerer }
+		       , #{ pro_answerer }
 		       , #{ pro_deadline }
-		       , default
+		       , #{ pro_pay }
 		       , default
 		       , 'W'
       	       )

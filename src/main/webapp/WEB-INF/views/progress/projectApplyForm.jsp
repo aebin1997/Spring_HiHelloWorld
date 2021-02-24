@@ -60,6 +60,7 @@
 	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
+		 
 		$("#modal_open_btn").click(function() {
 			$("#modal").attr("style", "display:block");
 		});
@@ -93,6 +94,7 @@ $(function() {
 			});
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -107,8 +109,8 @@ $(function() {
 				<table id="apply">
 					<tr>
 						<td>답변자 선택</td>
-						<td><input type="text" name="pro_answerer" id="selectUser" value="" required readonly
-							style="width: 150px;"></td>
+						<td><input type="text" name="pro_answerer" id="selectUser"
+							value="" required readonly style="width: 150px;"></td>
 						<td><button type="button" id="modal_open_btn">찾기</button></td>
 					</tr>
 					<tr>
@@ -125,13 +127,15 @@ $(function() {
 					</tr>
 					<tr>
 						<td>마감 기한</td>
-						<td><input type="date" name="pro_deadline" style="width: 150px;" required></td>
+						<td><input type="date" name="pro_deadline"
+							id="date_timepicker_end" min="${ today }" data-date-format="YYYY/MM/DD"
+							pattern="YYYY/MM/DD" style="width: 150px;" required></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>금액</td>
-						<td><input type="number" name="pro_pay" min="1000" step="1000"
-							style="width: 150px;" required></td>
+						<td><input type="number" name="pro_pay" min="1000"
+							step="1000" style="width: 150px;" required></td>
 						<td><button>결제</button></td>
 					</tr>
 					<tr>
@@ -146,9 +150,8 @@ $(function() {
 		<div id="modal">
 			<div class="modal_content">
 				<h5>답변자 검색</h5>
-				<br> <input type="text" id="userId">
-				<input type="button" id="UserSelectBtn" value="검색">
-				<br>
+				<br> <input type="text" id="userId"> <input
+					type="button" id="UserSelectBtn" value="검색"> <br>
 				<button type="button" id="modal_close_btn">모달 창 닫기</button>
 				<br>
 			</div>

@@ -28,4 +28,15 @@ public class ProgressServiceImpl implements ProgressService {
 	public String selectUser(String nickname) {
 		return progressDao.selectUser(nickname);
 	}
+
+	@Override
+	public String findQaId(String qa_title) {
+		return progressDao.findQaId(qa_title);
+	}
+
+	@Override
+	public int insertProgress(Progress progress) {
+		int result = progressDao.insertProgress(progress);
+		return result;
+	}
 }

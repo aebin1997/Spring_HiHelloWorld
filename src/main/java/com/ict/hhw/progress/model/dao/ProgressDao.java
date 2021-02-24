@@ -32,4 +32,13 @@ public class ProgressDao {
 		String user = sqlSession.selectOne("progressMapper.selectUser", nickname);
 		return user;
 	}
+	
+	public String findQaId(String qa_title) {
+		String qa_id = sqlSession.selectOne("progressMapper.findQaId", qa_title);
+		return qa_id;
+	}
+	
+	public int insertProgress(Progress progress) {
+		return sqlSession.insert("progressMapper.insertProgress", progress);
+	}
 }

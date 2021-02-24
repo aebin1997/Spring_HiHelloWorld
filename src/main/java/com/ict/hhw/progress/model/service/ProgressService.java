@@ -8,4 +8,6 @@ public interface ProgressService {
 	ArrayList<Progress> selectPlist(String nickname);
 	ArrayList<String> selectQatitle(String nickname);
 	String selectUser(String nickname);
+	String findQaId(String qa_title);
+	int insertProgress(Progress progress);
 }

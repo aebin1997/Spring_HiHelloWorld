@@ -1,5 +1,7 @@
 package com.ict.hhw.progress.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -33,6 +35,11 @@ public class ProgressController {
 		ArrayList<Progress> list = null;
 		ArrayList<String> titleList = null;
 
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		String date = simpleDateFormat.format(new java.util.Date());
+		
 		if( loginMember != null ) {
 			nickname = loginMember.getNickname();
 			list = progressService.selectPlist(nickname);
@@ -42,6 +49,7 @@ public class ProgressController {
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
 			model.addAttribute("tlist", titleList);
+			model.addAttribute("today", date);
 
 			return "progress/projectApplyForm";
 		} else {
@@ -64,19 +72,36 @@ public class ProgressController {
 	}
 	
 	@RequestMapping("progressInsert.do")
-	public String processInsert(@RequestParam("pro_answerer") String answerer, HttpSession session, Model model) {
+	public String processInsert(@RequestParam("qa_title") String qa_title, @RequestParam("pro_answerer") String pro_answerer,
+			@RequestParam("pro_deadline") Date pro_deadline, @RequestParam("pro_pay") int pro_pay, HttpSession session, Model model) {
 		
-		// 의뢰 프로젝트 추가
-		//int result = progressService.insertProgress();
-//
-		//if (result > 0) {
-		//	return "progress/projectApplyForm"; 
-		//} else {
-		//	model.addAttribute("msg", "회원가입실패!");
-		//	return "common/errorPage";
-		//}
+		Member loginMember = new Member();
+		loginMember = (Member)session.getAttribute("loginUser");
+		String nickname = null;
+		nickname = loginMember.getNickname();
 		
-		return "projetApplyForm";
+		int qa_id = 0;
+		Progress progress = new Progress();
+		
+		qa_id = Integer.parseInt(progressService.findQaId(qa_title));
+
+		
+		progress.setPro_qid(qa_id);
+		progress.setPro_writer(nickname);
+		progress.setPro_answerer(pro_answerer);
+		progress.setPro_deadline(pro_deadline);
+		progress.setPro_pay(pro_pay);
+		
+		//의뢰 프로젝트 추가
+		int result = progressService.insertProgress(progress);
+
+		if (result > 0) {
+			return "progress/projectApplyForm"; 
+		} else {
+			model.addAttribute("msg", "Q&A 요청 실패!");
+			return "common/errorPage";
+		}
+		
 	}
 	
 }
