@@ -23,6 +23,8 @@
 <tr><th>제 목</th><td><input type="text" name="qa_title" value="${qa.qa_title}"></td></tr>
 <tr><th>작성자</th>
 <td><input type="text" name="qa_writer" readonly value="${ qa.qa_writer }"></td></tr>
+<tr><th>포인트</th>
+<td><input type="text" name="qa_point"  value="${ qa.qa_point }"></td></tr>
 <tr><th>첨부파일</th>
 <td>
 <!-- 첨부파일이 있는데 삭제하는 경우 -->

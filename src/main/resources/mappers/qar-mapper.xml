@@ -13,7 +13,6 @@
 </resultMap>
 
 
-
 <select id="selectQar" parameterType="_int" resultMap="resultQar">
 	select * from qar
 	where qar_id = #{ qar_id }

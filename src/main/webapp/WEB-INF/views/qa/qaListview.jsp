@@ -4,6 +4,12 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
     
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/other.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.2">
+    
     <%-- 응답온 페이지값 추출함 --%>
 <c:set var="maxPage" value="${ requestScope.maxPage }" /> 
 <c:set var="startPage" value="${ requestScope.startPage }"  /> 
@@ -95,51 +101,80 @@ function showDiv(){
 		</form>
 	</div>
 </center>
+<br><br>
 
 
 
 <%-- 목록 출력 --%>
-<div id="layoutSidenav_content">
-		<main>
-			<div class="container-fluid">
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="600"
-							cellspacing="0" align="center" border="1" style="width: 1000px; text-align: center;">
-							<tr style="background-color: orange;">
-								<th style="text-align: center;">번호</th>
-								<th style="text-align: center;">제목</th>
-								<th style="text-align: center;">포인트</th>
-								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">날짜</th>
-								<th style="text-align: center;">조회수</th>
-							</tr>
-							<c:forEach items="${ requestScope.list }" var="qa" >
-								<tr>
-									<td align="center" width="100">${ qa.qa_id }</td>
-									<td>   
+
+
+
+	<div class="my_info_area" align="center">
+		</h4>
+		<table cellspacing="0" class="boardtype2 th_border my_table"
+			width="1000" >
+			<caption>
+				<span class="blind">나의 답변 목록으로 제목, 디렉토리, 채택, 표정, 작성</span>
+			</caption>
+			<colgroup>
+				<col width="1000">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col" class="title" >제목</th>
+					<th scope="col">포인트</th>
+					<th scope="col">작성자</th>
+					<th scope="col">조회수</th>
+					<th scope="col" class="title">작성</th>
+				</tr>
+				<tr>
+					<td colspan="5" class="blank2">&nbsp; </th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                
+                    <tr>
+                    <c:forEach items="${ requestScope.list }" var="qa" >
+                    <tr></tr>
+                        <td class="qna">
+                            <dl class="dlist_qna">
+                                <dt>
+                                    <span class="ico_q"><img
+									src="https://ssl.pstatic.net/static/kin/09renewal/blank.gif"
+									width="18" height="14" alt="질문"></span>
 										   <c:url var="qadetail" value="/qadetail.do">
 										      <c:param name="page" value="${ currentPage }"/>
 										      <c:param name="qa_id" value="${ qa.qa_id }" />
 										   </c:url>
 										   <a href="${ qadetail }" style="color: black;">${ qa.qa_title }</a>
-									<td align="center" width="180">${ qa.qa_point } &nbsp; </td>
-									<td align="center" width="180">${ qa.qa_writer } &nbsp; </td>
-									<td align="center" width="130">${ qa.qa_create_date }</td>
-									<td align="center" width="80">${ qa.qa_readcount }</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
+                                </dt>
+                                <dd>
+                                    <span class="ico_a"><img
+									src="https://ssl.pstatic.net/static/kin/09renewal/blank.gif"
+									width="18" height="14" alt="답변"></span>
+                                </dd>
+                            </dl>
+                        </td>
+                        <td class="field" ><font color="red">${ qa.qa_point }</font></td>
+                        <td  class="field">${ qa.qa_writer } &nbsp; </td>
+                        <td  class="t_num">${ qa.qa_readcount }</td>
+                        <td class="t_num tc">${ qa.qa_create_date }</td>
+                        </c:forEach>
+                    </tr>
+            </tbody>
+        </table>
+  
+    </div>
 
 
 
 <%-- 현재 페이지가 1이 아니면 링크설정, 현재 1페이지이면 링크없음 --%>
-<c:if test="${ empty action}">
+						<c:if test="${ empty action}">
 <%-- 페이징 처리 
    [맨처음][이전] 숫자...........  [다음][맨끝]
 --%>
@@ -151,16 +186,18 @@ function showDiv(){
    <c:url var="qalist1" value="/qalist.do">
       <c:param name="page" value="1" />
    </c:url>
-   <a href="${ qalist }">[맨처음]</a>
+   <a href="${ qalist1 }">[맨처음]</a>
 </c:if> &nbsp;
 <%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
-<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
+<c:if
+									test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
    <c:url var="qalist2" value="/qalist.do">
-      <c:param name="page" value="${ startPage - 10 }"/>
+      <c:param name="page" value="${ startPage - 10 }" />
    </c:url>
    <a href="${ qalist2 }">[이전]</a>
 </c:if>
-<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
+<c:if
+									test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
 [이전]
 </c:if> &nbsp; 
 <%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
@@ -176,13 +213,15 @@ function showDiv(){
    </c:if>
 </c:forEach> &nbsp;
 <%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
-<c:if test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
+<c:if
+									test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
    <c:url var="qalist4" value="/qalist.do">
-      <c:param name="page" value="${ startPage + 10 }"/>
+      <c:param name="page" value="${ startPage + 10 }" />
    </c:url>
    <a href="${ qalist4 }">[다음그룹]</a>
 </c:if>
-<c:if test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
+<c:if
+									test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
    [다음그룹]&nbsp;
 </c:if>
 <!-- 맨끝 페이지로 이동 처리 -->
@@ -191,7 +230,7 @@ function showDiv(){
 </c:if>
 <c:if test="${ currentPage < maxPage }">
    <c:url var="qalist5" value="/qalist.do">
-      <c:param name="page" value="${ maxPage }"/>
+      <c:param name="page" value="${ maxPage }" />
    </c:url>
    <a href="${ qalist5 }">[맨끝]</a>
 </c:if>
@@ -212,20 +251,22 @@ function showDiv(){
       <c:param name="page" value="1" />
       </c:if>
       <c:if test="${ action eq 'qasearchDate.do' }">
-      		<c:param name="begin" value="${ begin }"/>
-      		<c:param name="end" value="${ end }"/>
+      		<c:param name="begin" value="${ begin }" />
+      		<c:param name="end" value="${ end }" />
       </c:if>
    </c:url>
    <a href="${ qasearch1 }">[맨처음]</a>
 </c:if> &nbsp;
 <%-- 이전 그룹이 있으면 링크설정, 이전 그룹 없으면 링크없음 --%>
-<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
+<c:if
+									test="${ (currentPage - 10) < startPage and (currentPage - 10) >= 1 }">
    <c:url var="qasearch2" value="/qalist.do">
-      <c:param name="page" value="${ startPage - 10 }"/>
+      <c:param name="page" value="${ startPage - 10 }" />
    </c:url>
    <a href="${ qasearch2 }">[이전]</a>
 </c:if>
-<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
+<c:if
+									test="${ !((currentPage - 10) < startPage and (currentPage - 10) >= 1) }">
 [이전]
 </c:if> &nbsp;  
 <%-- 가운데 표시할 페이지 그룹 숫자 링크 설정 --%>
@@ -241,13 +282,15 @@ function showDiv(){
    </c:if>
 </c:forEach> &nbsp;
 <%-- 다음 그룹이 있으면 링크설정, 다음 그룹 없으면 링크없음 --%>
-<c:if test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
+<c:if
+									test="${ (currentPage + 10) > endPage && (currentPage + 10) < maxPage }">
    <c:url var="qasearch4" value="/qalist.do">
-      <c:param name="page" value="${ endPage + 10 }"/>
+      <c:param name="page" value="${ endPage + 10 }" />
    </c:url>
    <a href="${ qasearch4 }">[다음그룹]</a>
 </c:if>
-<c:if test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
+<c:if
+									test="${ !((currentPage + 10) > endPage && (currentPage + 10) < maxPage) }">
    [다음그룹]&nbsp;
 </c:if>
 <!-- 맨끝 페이지로 이동 처리 -->
@@ -256,7 +299,7 @@ function showDiv(){
 </c:if>   
 <c:if test="${ currentPage < maxPage }">
    <c:url var="qasearch5" value="/qalist.do">
-      <c:param name="page" value="${ maxPage }"/>
+      <c:param name="page" value="${ maxPage }" />
    </c:url>
    <a href="${ qasearch5 }">[맨끝]</a>
 </c:if>
@@ -265,14 +308,16 @@ function showDiv(){
 
 	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
 	<c:if test="${ !empty sessionScope.loginUser }">
-		<div style="text-align: right; padding-right: 500px; margin-top: -30px">
+		<div
+								style="text-align: right; padding-right: 500px; margin-top: -30px">
 			<button onclick="showWriteForm();" class="btn btn-warning btn-round"
-				style="color: #fff;">글쓰기</button>
+									style="color: #fff;">글쓰기</button>
 		</div>
 	</c:if>
 	<br>
 
 
-	<jsp:include page="../common/footer.jsp"/>
-</body>
+	<jsp:include page="../common/footer.jsp" />
+
+					</body>
 </html>-
