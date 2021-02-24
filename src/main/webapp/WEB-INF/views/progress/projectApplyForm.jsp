@@ -59,13 +59,13 @@
 .main_left_btn {
 	width: 50%;
 	height: 280px;
-	float: left;
+	float: center;
 }
 
 .main_right_btn {
 	width: 50%;
 	height: 280px;
-	float: left;
+	float: center;
 }
 </style>
 <script type="text/javascript"
@@ -76,8 +76,8 @@
 		$("#modal_open_btn").click(function() {
 			$("#modal").show();
 			
-			var offset = $("#modal" + seq).offset();
-	        $('html, body').animate({scrollTop : offset.top}, 50);
+			var offset = $("#modal").offset();
+	        $('html').animate({scrollTop : offset.top}, 1000);
 		});
 
 		$("#modal_close_btn").click(function() {
@@ -117,17 +117,17 @@
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 100px 250px 60px 250px;">
 
-			<%-- modal창(답변자 검색) --%>
-			<div id="modal">
-				<div class="modal_content">
-					<h5>답변자 검색</h5>
-					<br> <input type="text" id="userId"> <input
-						type="button" id="UserSelectBtn" value="검색"> <br>
-					<button type="button" id="modal_close_btn">모달 창 닫기</button>
-					<br>
-				</div>
+		<%-- modal창(답변자 검색) --%>
+		<div id="modal">
+			<div class="modal_content">
+				<h5>답변자 검색</h5>
+				<br> <input type="text" id="userId"> <input
+					type="button" id="UserSelectBtn" value="검색"> <br>
+				<button type="button" id="modal_close_btn">모달 창 닫기</button>
+				<br>
 			</div>
-		
+		</div>
+
 		<div class="main_left_btn" align="center">
 			<!-- 의뢰 요청 form -->
 			<form action="progressInsert.do" method="post">
@@ -171,14 +171,16 @@
 				</table>
 			</form>
 		</div>
-
-
-		<div class="main_right_btn" align="center">
-			<form action="" method="post">
+		
+		<c:if test="${ rlist ne null }" >
+		<c:forEach items="${ requestScope.rlist }" var="r">
+		<form action="requestAccept.do" method="post">
+			<div class="main_right_btn" align="center">
+			<input type="hidden" name="r_pro_id" value="${ r.pro_id }" >
 				<table id="apply" width="280" height="160">
 					<tr>
 						<td>요청자</td>
-						<td></td>
+						<td>${ r.pro_writer }</td>
 					</tr>
 					<tr>
 						<td>질문 제목</td>
@@ -186,19 +188,21 @@
 					</tr>
 					<tr>
 						<td>기한</td>
-						<td></td>
+						<td>${ r.pro_deadline }</td>
 					</tr>
 					<tr>
 						<td>금액</td>
-						<td></td>
+						<td>${ r.pro_pay }</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td align="right"><button>의뢰 수락</button></td>
+						<td align="right"><button type="submit">의뢰 수락</button></td>
 					</tr>
 				</table>
-			</form>
-		</div>
+			</div>
+		</form>
+		</c:forEach>
+		</c:if>
 
 		<div align="center">
 			<h4>나의 Q&A</h4>
@@ -208,36 +212,36 @@
 			<table border="1" width="700" cellspacing="0"
 				style="text-align: center;">
 				<tr>
-					<th align="center">번호</th>
+					<th align="center">바로가기</th>
 					<th align="center">답변자</th>
 					<th align="center">마감기한</th>
 					<th align="center">금액</th>
 					<th align="center">진행도</th>
 					<th align="center">상태</th>
 				</tr>
+				<c:if test="${ requestScope.list ne null }">
 				<c:forEach items="${ requestScope.list }" var="p">
 					<tr>
-						<td align="center">${ p.pro_id }</td>
+						<td align="center"><img
+							src="/hhw/resources/images/icon/ico_go.png" width="15px"
+							height="15px"><input type="hidden" value="${ p.pro_id }"></td>
 						<td align="center">${ p.pro_answerer }</td>
 						<td align="center">${ p.pro_deadline }</td>
 						<td align="center">${ p.pro_pay }</td>
 						<td align="center">${ p.pro_process }</td>
-						<c:choose>
-							<c:when test="${ p.pro_status eq 'Y' }">
-								<td align="center">진행중</td>
-							</c:when>
-							<c:when test="${ p.pro_status eq 'W' }">
-								<td align="center">수락 대기중</td>
-							</c:when>
-							<c:when test="${ p.pro_status eq 'N' }">
-								<td align="center">거절됨</td>
-							</c:when>
-							<c:otherwise>
-								<td align="center">기간 만료됨</td>
-							</c:otherwise>
-						</c:choose>
+						<td align="center"><c:if
+								test="${ fn:trim(p.pro_status) eq 'Y' }">
+							진행중
+						</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
+							수락 대기중
+						</c:if> <c:if test="${ p.pro_status eq'D ' }">
+							거절됨
+						</c:if> <c:if test="${ p.pro_status eq 'N ' }">
+								기간 만료됨
+						</c:if></td>
 					</tr>
 				</c:forEach>
+				</c:if>
 			</table>
 		</div>
 		<br>

@@ -41,4 +41,13 @@ public class ProgressDao {
 	public int insertProgress(Progress progress) {
 		return sqlSession.insert("progressMapper.insertProgress", progress);
 	}
+	
+	public ArrayList<Progress> selectRequest(String nickname) {
+		List<Progress> list = sqlSession.selectList("progressMapper.selectRequest", nickname);
+		return (ArrayList<Progress>)list;
+	}
+	
+	public int requestAccept(int pro_id) {
+		return sqlSession.update("progressMapper.requestAccept", pro_id);
+	}
 }

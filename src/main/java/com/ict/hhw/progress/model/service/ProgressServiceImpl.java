@@ -39,4 +39,15 @@ public class ProgressServiceImpl implements ProgressService {
 		int result = progressDao.insertProgress(progress);
 		return result;
 	}
+	
+	@Override
+	public ArrayList<Progress> selectRequest(String nickname) {
+		return progressDao.selectRequest(nickname);
+	}
+
+	@Override
+	public int acceptRequest(int pro_id) {
+		return progressDao.requestAccept(pro_id);
+	}
+	
 }

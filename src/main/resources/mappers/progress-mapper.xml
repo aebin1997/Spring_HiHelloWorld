@@ -52,6 +52,19 @@
 		       , 'W'
       	       )
 	</insert>
+	
+	<select id="selectRequest" parameterType="string" resultMap="resultProgress">
+		SELECT  *
+		  FROM PROGRESS
+		 WHERE PRO_ANSWERER = #{ nickname }
+		   AND PRO_STATUS = 'W'
+	</select>
+	
+	 <update id="requestAccept" parameterType="_int">
+      update progress
+         set pro_status = 'Y'
+         where pro_id = #{ pro_id }
+   </update>
 
 
 </mapper>
