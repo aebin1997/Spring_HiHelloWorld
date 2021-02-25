@@ -51,4 +51,9 @@ public class ProgressServiceImpl implements ProgressService {
 		return progressDao.requestAccept(pro_id);
 	}
 	
+	@Override
+	public int refuseRequest(int pro_id) {
+		return progressDao.requestAccept(pro_id);
+	}
+	
 }

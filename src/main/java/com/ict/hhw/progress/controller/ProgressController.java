@@ -129,5 +129,18 @@ public class ProgressController {
 		}
 	}
 	
+	@RequestMapping(value="requestRefuse.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	public @ResponseBody String requestRefuse(@RequestParam("r_pro_id") int r_pro_id) {
+
+		int result = progressService.refuseRequest(r_pro_id);
+
+		if (result > 0) {
+			return "<script type='text/javascript'>" + "alert(\"의뢰 요청을 거절하였습니다.\");"
+					+ "location.href=\"/hhw/progress.move\";" + "</script>";
+		} else {
+			return "common.errorPage";
+		}
+	}
+	
 
 }

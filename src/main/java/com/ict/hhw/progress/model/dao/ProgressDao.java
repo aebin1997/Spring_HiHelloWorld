@@ -51,4 +51,8 @@ public class ProgressDao {
 	public int requestAccept(int pro_id) {
 		return sqlSession.update("progressMapper.requestAccept", pro_id);
 	}
+	
+	public int requestRefuse(int pro_id) {
+		return sqlSession.update("progressMapper.requestRefuse", pro_id);
+	}
 }

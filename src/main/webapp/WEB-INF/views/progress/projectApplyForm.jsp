@@ -237,15 +237,16 @@
 							<td align="center">${ p.pro_deadline }</td>
 							<td align="center">${ p.pro_pay }</td>
 							<td align="center">${ p.pro_process }</td>
-							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' }">
+							<td align="center">
+							<c:if test="${ fn:trim(p.pro_status) eq 'Y' }">
 							진행중
-						</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
+							</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
 							수락 대기중
-						</c:if> <c:if test="${ p.pro_status eq'D ' }">
+							</c:if> <c:if test="${ p.pro_status eq'D ' }">
 							거절됨
-						</c:if> <c:if test="${ p.pro_status eq 'N ' }">
+							</c:if> <c:if test="${ p.pro_status eq 'N ' }">
 								기간 만료됨
-						</c:if></td>
+							</c:if></td>
 						</tr>
 					</c:forEach>
 				</c:if>

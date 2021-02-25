@@ -98,6 +98,12 @@
 		pro_status = 'Y'
 		where pro_id = #{ pro_id }
 	</update>
-
+	
+	<update id="requestRefuse" parameterType="_int">
+		update progress
+		set
+		pro_status = 'D'
+		where pro_id = #{ pro_id }
+	</update>
 
 </mapper>

@@ -13,4 +13,5 @@ public interface ProgressService {
 	int insertProgress(Progress progress);
 	ArrayList<QaProgress> selectRequest(String nickname);
 	int acceptRequest(int pro_id);
+	int refuseRequest(int pro_id);
 }
