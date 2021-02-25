@@ -229,7 +229,7 @@
 				<c:if test="${ requestScope.list ne null }">
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
-							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || p.pro_status eq 'N ' }"><a href="plist.do?pro_id=${ p.pro_id }"><img
+							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' }"><a href="plist.do?pro_id=${ p.pro_id }"><img
 									src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
 							<td align="center">${ p.qa_title }</td>
 							<td align="center">${ p.pro_writer }</td>
@@ -242,9 +242,9 @@
 							진행중
 							</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
 							수락 대기중
-							</c:if> <c:if test="${ p.pro_status eq'D ' }">
+							</c:if> <c:if test="${ fn:trim(p.pro_status) eq'D' }">
 							거절됨
-							</c:if> <c:if test="${ p.pro_status eq 'N ' }">
+							</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'N' }">
 								기간 만료됨
 							</c:if></td>
 						</tr>
