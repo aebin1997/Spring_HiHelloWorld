@@ -177,7 +177,7 @@
 		<%-- 의뢰 수락하기 --%>
 		<c:if test="${ rlist ne null }">
 			<c:forEach items="${ requestScope.rlist }" var="r">
-				<form action="requestAccept.do" method="post">
+				<form name="form" method="post">
 					<div class="main_right_btn" align="center">
 						<input type="hidden" name="r_pro_id" value="${ r.pro_id }">
 						<table id="apply" width="280" height="160">
@@ -190,7 +190,7 @@
 								<td><a href="qadetail.do?qa_id=${ r.pro_qid }">${ r.qa_title }</a></td>
 							</tr>
 							<tr>
-								<td>기한</td>
+								<td>마감 기한</td>
 								<td>${ r.pro_deadline }</td>
 							</tr>
 							<tr>
@@ -198,8 +198,10 @@
 								<td>${ r.pro_pay }</td>
 							</tr>
 							<tr>
-								<td></td>
-								<td align="right"><button type="submit">의뢰 수락</button></td>
+								<td colspan=2 align="right">
+									<input type="submit" value="의뢰 수락" onclick="javascript: form.action='/hhw/requestAccept.do';"/>
+    								<input type="submit" value="의뢰 거절" onclick="javascript: form.action='/hhw/requestRefuse.do';"/>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -227,16 +229,15 @@
 				<c:if test="${ requestScope.list ne null }">
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
-							<td align="center"><a href="plist.do?pro_id=${ p.pro_id }"><img
-									src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></td>
+							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || p.pro_status eq 'N ' }"><a href="plist.do?pro_id=${ p.pro_id }"><img
+									src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
 							<td align="center">${ p.qa_title }</td>
 							<td align="center">${ p.pro_writer }</td>
 							<td align="center">${ p.pro_answerer }</td>
 							<td align="center">${ p.pro_deadline }</td>
 							<td align="center">${ p.pro_pay }</td>
 							<td align="center">${ p.pro_process }</td>
-							<td align="center"><c:if
-									test="${ fn:trim(p.pro_status) eq 'Y' }">
+							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' }">
 							진행중
 						</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
 							수락 대기중

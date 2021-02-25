@@ -56,13 +56,13 @@ public class PboardDao {
 		return sqlSession.update("pboardMapper.changeBstatusN", pid);
 	}
 
-	public ArrayList<P_board> selectSearchTitle(SearchAndPage searches) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.searchTitle", searches);
+	public ArrayList<P_board> selectSearchTitle(String keyword) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.searchTitle", keyword);
 		return (ArrayList<P_board>)list;
 	}
 
-	public ArrayList<P_board> selectSearchWriter(SearchAndPage searches) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.searchWriter", searches);
+	public ArrayList<P_board> selectSearchWriter(String keyword) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.searchWriter", keyword);
 		return (ArrayList<P_board>)list;
 	}
 

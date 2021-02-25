@@ -75,8 +75,7 @@
 		seq_pro.nextval
 		, #{ pro_qid }
 		, #{ pro_writer }
-		, #{
-		pro_answerer }
+		, #{ pro_answerer }
 		, #{ pro_deadline }
 		, #{ pro_pay }
 		, default

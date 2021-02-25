@@ -21,8 +21,8 @@ public interface PboardService {
 	//int insertPboard(P_board pboard);
 	int updatePboard(P_board pboard);
 	int deletePboard(int pid);
-	ArrayList<P_board> selectSearchTitle(SearchAndPage searches);
-	ArrayList<P_board> selectSearchWriter(SearchAndPage searches);
+	ArrayList<P_board> selectSearchTitle(String keyword);
+	ArrayList<P_board> selectSearchWriter(String keyword);
 	ArrayList<P_board> selectSearchDate(SearchAndPage searches);
 	int getSearchTitleListCount(String keyword);
 	int getSearchWriterListCount(String keyword);

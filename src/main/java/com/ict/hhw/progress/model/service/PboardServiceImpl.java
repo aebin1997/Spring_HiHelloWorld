@@ -63,13 +63,13 @@ public class PboardServiceImpl implements PboardService{
 	   }
 
 		@Override
-		public ArrayList<P_board> selectSearchTitle(SearchAndPage searches) {
-			return pboardDao.selectSearchTitle(searches);
+		public ArrayList<P_board> selectSearchTitle(String keyword) {
+			return pboardDao.selectSearchTitle(keyword);
 		}
 		
 		@Override
-		public ArrayList<P_board> selectSearchWriter(SearchAndPage searches) {
-			return pboardDao.selectSearchWriter(searches);
+		public ArrayList<P_board> selectSearchWriter(String keyword) {
+			return pboardDao.selectSearchWriter(keyword);
 		}
 		
 		@Override
