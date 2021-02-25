@@ -9,6 +9,7 @@ import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.dao.PboardDao;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Service("pboardService")
 public class PboardServiceImpl implements PboardService{
@@ -26,10 +27,20 @@ public class PboardServiceImpl implements PboardService{
 		return pboardDao.selectList(pro_id);
 	}
 	
+	@Override
+	public ArrayList<P_board> selectOldList(int pro_id) {
+		return pboardDao.selectOldList(pro_id);
+	}
+	
 	 @Override
 	   public P_board selectPboard(int pid) {
 	      return pboardDao.selectPboard(pid);
 	   }
+	 
+	 @Override
+		public QaProgress selectProgress(int pro_id) {
+			return pboardDao.selectProgress(pro_id);
+		}
 
 	   @Override
 	   public int addReadCount(int pid) {

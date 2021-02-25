@@ -19,6 +19,7 @@ import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.service.PboardService;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Controller
 public class PboardController {
@@ -50,11 +51,15 @@ public class PboardController {
 	@RequestMapping(value="plist.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
 	public String pboardListMethod(@RequestParam("pro_id") int pro_id, Model model) {
 		ArrayList<P_board> list = pboardService.selectList(pro_id);
+		ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
+		QaProgress qplist = pboardService.selectProgress(pro_id);
 		
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
+			model.addAttribute("olist", olist);
 		}
 		model.addAttribute("pro_id", pro_id);
+		model.addAttribute("qplist", qplist);
 		
 		return "progress/progress";
 	}

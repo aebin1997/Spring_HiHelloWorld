@@ -14,13 +14,30 @@
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
 
-<script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript"
+	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
-	// 검색 기능 jquery
 	$(function() {
+		// 검색
 		showDiv();
-
+		$("#oldlist").css("display", "none");
+		
+		// 정렬 방식 선택
+		$("#qa_sort").on("change", function(){
+	    	var option = $("#qa_sort option:selected").val();
+	    	console.log(option);
+	    	
+	    	if(option == "latest") {
+	    		$("#latelist").css("display", "block");
+	    		$("#oldlist").css("display", "none");
+	        } else if(option == "old"){
+	        	$("#latelist").css("display", "none");
+	        	$("#oldlist").css("display", "block");
+	        }
+	    })
+		
+	    // 검색
 		$("input[name=item]").on("change", function() { //on으로 이벤트 설정가능 "change"이벤트일때 function()을 실행해라
 			showDiv(); // = radio버튼상태가 바뀔때 showDiv를 실행해라
 		});
@@ -60,176 +77,319 @@
 			<!-- 콘텐츠 시작 { -->
 			<div id="bo_qa" class="container ">
 				<div id="con_lf">
+					<h1 class="pg_tit">질문</h1>
 					<article id="sir_qav" class="sir_vbo">
 						<header id="qav_head" class="vbo_head">
-							<h2>질문제목</h2>
+							<h2>${ qplist.qa_title }</h2>
 							<div id="qav_info">
 								<span class="info_span info_name"><span class="sv_wrap">
-										<span class="member">질문자닉네임</span>
+										<span class="member">${ qplist.pro_writer }</span>
 								</span></span><span class="info_span info_date"><time
-										datetime="2021-02-18T14:58:09+09:00">질문작성시간</time></span><span
+										datetime="2021-02-18T14:58:09+09:00">${ qplist.qa_create_date }</time></span><span
 									class="info_span info_ip"></span>
 							</div>
 						</header>
-						<!-- 웹 -->
-						<div class="vbo_wr">
-							<ul class="sir_vbo_com">
-								<c:url var="plist" value="/plist.do">
-								<c:param name="pro_id" value="${ pro_id }" />
-								</c:url>
-								<li><a href="${ plist }" class="sir_b01">목록</a></li>
-							</ul>
-						</div>
 						<section id="vbo_con">
 							<div class="con_inner">
-								<p>질문 내용</p>
+								<p>${ qplist.qa_content }</p>
 								<p>&nbsp;</p>
 								<div style="clear: both;"></div>
 							</div>
 							<div class="qa_tags qa_tags_view"></div>
 						</section>
-						<!-- 답변이 존재한다면 -->
+						<br>
 						<div id="qa_answer" class="qa-answer">
 							<a id="qa_answer-anchor"></a>
 							<div class="qa-answer-sort">
 								<h3>답변</h3>
 								<div class="qa-sort">
 									<select name="qa_sort_select" id="qa_sort" title="답변 정렬">
-										<option value="lastet" data-target="vsst=lastet#qa_answer">최근순</option>
-										<option value="old" data-target="vsst=old#qa_answer">오래된순</option>
+										<option value="latest">최근순</option>
+										<option value="old">오래된순</option>
 									</select>
 								</div>
 							</div>
-							<section class="qa-answerList">
-								<!-- 답변 아이템 반복, 채택 답변 최상단 -->
-								<a id="answer_400521"></a>
-								<article class="answer-item answer-item-select">
-									<div class="answer-header">
-										<div class="answer-header-profile">
-											<h4>
-												<span class="sv_wrap"> <span class="member">답변자닉네임</span>
-												</span>님의 답변
-											</h4>
-											<div class="answer-date">
-												<time>답변 시간</time>
-											</div>
-										</div>
-									</div>
-									<div class="answer-main">
-										<div class="answer-main-content">
-											<!-- 답변 본문 내용 -->
-											<p>답변 내용</p>
-											<div style="clear: both;"></div>
-										</div>
-										<div class="answer-main-btn">
-											<!-- 댓글 쓰기 및 갯수 -->
-											<button title="댓글쓰기" class="answer-main-btn-left"
-												data-wr_id="400521" data-w="c" data-check="active"
-												onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400521&#39;)">
-												<span class="des-left">댓글쓰기</span>
-											</button>
-										</div>
-									</div>
-									<section class="answer-replyList">
-										<!-- 댓글 입력창 -->
-										<section class="answer-reply-write">
-											<div id="c400632" class="alist_wcmt wcmt"
-												style="display: block;">
-												<div id="vbo_wcmt" class="answer-reply-modify">
-													<form id="fcomment" name="fcomment" method="post"
-														action="//sir.kr/qa/write_comment_update.php"
-														onsubmit="return fcomment_submit(this);"
-														autocomplete="off">
+							
+							<!-- 최신순으로 정렬 -->
+							<!-- 답변이 존재한다면 -->
+							<div id="latelist">
+							<c:if test="${ requestScope.list ne null }">
 
-
-														<div id="wcmt_content">
-															<div class="sir_ta reply-write-text">
-																<label for="wr_content" class="sir_sr">댓글내용</label>
-																<textarea name="wr_content" id="wr_content" required=""
-																	maxlength="5000" cols="30" rows="1" title="댓글 내용 입력"
-																	style="height: 70px;"></textarea>
-															</div>
-														</div>
-
-														<div id="wcmt_btn" class="reply-write-submit">
-															<input type="reset" id="wcmt_btn_cancel" value="취소"
-																title="댓글 취소"> <input type="submit"
-																id="wcmt_btn_submit" value="등록" accesskey="s"
-																title="댓글 등록">
-														</div>
-													</form>
+							<!-- listing -->
+							<c:forEach items="${ requestScope.list }" var="p">
+								<section class="qa-answerList">
+									<!-- 답변 아이템 반복  -->
+									<c:if test="${ p.pwriter eq sessionScope.loginUser.nickname }">
+									<a id="answer_400521"></a>
+									<article class="answer-item answer-item-select">
+										<div class="answer-header">
+											<div class="answer-header-profile">
+												<h4>
+													<span class="member">${ p.ptitle }</span>
+												</h4>
+												<div class="answer-date">
+													<time>${ p.p_date }</time>
 												</div>
 											</div>
+										</div>
+										<div class="answer-main">
+											<div class="answer-main-content">
+												<!-- 답변 본문 내용 -->
+												<p>${ p.pcontent }</p>
+												<div style="clear: both;"></div>
+											</div>
+											<div class="answer-main-btn">
+												<!-- 댓글 쓰기 및 갯수 -->
+												<button title="댓글쓰기" class="answer-main-btn-left"
+													data-wr_id="400521" data-w="c" data-check="active"
+													onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400521&#39;)">
+													<span class="des-left">댓글쓰기</span>
+												</button>
+											</div>
+										</div>
+										<br>
+										<section class="answer-replyList">
+											<!-- 댓글 입력창 -->
+											<section class="answer-reply-write">
+												<div id="c400632" class="alist_wcmt wcmt"
+													style="display: block;">
+													<div id="vbo_wcmt" class="answer-reply-modify">
+														<form id="fcomment" name="fcomment" method="post"
+															action="//sir.kr/qa/write_comment_update.php"
+															onsubmit="return fcomment_submit(this);"
+															autocomplete="off">
+
+
+															<div id="wcmt_content">
+																<div class="sir_ta reply-write-text">
+																	<label for="wr_content" class="sir_sr">댓글내용</label>
+																	<textarea name="wr_content" id="wr_content" required=""
+																		maxlength="5000" cols="30" rows="1" title="댓글 내용 입력"
+																		style="height: 70px;"></textarea>
+																</div>
+															</div>
+
+															<div id="wcmt_btn" class="reply-write-submit">
+																<input type="reset" id="wcmt_btn_cancel" value="취소"
+																	title="댓글 취소"> <input type="submit"
+																	id="wcmt_btn_submit" value="등록" accesskey="s"
+																	title="댓글 등록">
+															</div>
+														</form>
+													</div>
+												</div>
+											</section>
+											<!-- 답변 아래 리플 반복 -->
+											<a id="c_400535"></a>
+											<article class="answer-reply vcmt">
+												<div class="answer-reply-header">
+													<h5>
+														<img src="/hhw/resources/images/icon/ico_reply_arrow.PNG">
+														<span class="sv_wrap"> <span class="member">댓글작성자닉네임</span>
+														</span>
+													</h5>
+													<span class="reply-date"><time>댓글작성시간</time></span>
+												</div>
+												<div class="answer-reply-content ">
+													<!-- 답변 댓글 내용 -->
+													<p>댓글 내용</p>
+												</div>
+											</article>
+											<!-- // 리플 end -->
 										</section>
-										<!-- 답변 아래 리플 반복 -->
-										<a id="c_400535"></a>
-										<article class="answer-reply vcmt">
-											<div class="answer-reply-header">
-												<h5>
-													<img src="/hhw/resources/images/icon/ico_reply_arrow.PNG">
-													<span class="sv_wrap"> <span class="member">댓글작성자닉네임</span>
-													</span>
-												</h5>
-												<span class="reply-date"><time>댓글작성시간</time></span>
+									</article>
+									</c:if>
+									<!-- // 답변 end -->
+									<c:if test="${ p.pwriter ne sessionScope.loginUser.nickname }">
+									<article class="answer-item">
+										<div class="answer-header">
+											<div class="answer-header-profile">
+												<h4>
+													<span class="member">${ p.ptitle }</span>
+												</h4>
+												<div class="answer-date">
+													<time>${ p.p_date }</time>
+												</div>
 											</div>
-											<div class="answer-reply-content ">
-												<!-- 답변 댓글 내용 -->
-												<p>댓글 내용</p>
+											<div class="answer-header-btn"></div>
+										</div>
+										<div class="answer-main">
+											<div class="answer-main-content">
+												<!-- 답변 본문 내용 -->
+												<p>${ p.pcontent }</p>
+												<div style="clear: both;"></div>
 											</div>
-										</article>
-										<!-- // 리플 end -->
-									</section>
-								</article>
-								<!-- // 답변 end -->
-								<a id="answer_400516"></a>
-								<!-- // 답변 end -->
-								<a id="answer_400518"></a>
-								<article class="answer-item">
-									<div class="answer-header">
-										<div class="answer-header-profile">
-											<h4>
-												<span class="sv_wrap"><span class="member">답변자닉네임</span>
-												</span>님의 답변
-											</h4>
-											<div class="answer-date">
-												<time>답변작성시간</time>
+											<div class="answer-main-btn">
+												<!-- 댓글 쓰기 및 갯수 -->
+												<button title="댓글쓰기" class="answer-main-btn-left"
+													data-wr_id="400518" data-w="c" data-check="active"
+													onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400518&#39;)">
+													<span class="des-left">댓글쓰기</span>
+												</button>
 											</div>
 										</div>
-										<div class="answer-header-btn"></div>
-									</div>
-									<div class="answer-main">
-										<div class="answer-main-content">
-											<!-- 답변 본문 내용 -->
-											<p>답변내용</p>
-											<div style="clear: both;"></div>
-										</div>
-										<div class="answer-main-btn">
-											<!-- 댓글 쓰기 및 갯수 -->
-											<button title="댓글쓰기" class="answer-main-btn-left"
-												data-wr_id="400518" data-w="c" data-check="active"
-												onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400518&#39;)">
-												<span class="des-left">댓글쓰기</span>
-											</button>
-										</div>
-									</div>
-									<section class="answer-replyList">
-										<!-- 댓글 입력창 -->
-										<section class="answer-reply-write">
-											<div id="c400518" class="alist_wcmt wcmt"
-												style="display: none;"></div>
+										<section class="answer-replyList">
+											<!-- 댓글 입력창 -->
+											<section class="answer-reply-write">
+												<div id="c400518" class="alist_wcmt wcmt"
+													style="display: none;"></div>
+											</section>
 										</section>
-									</section>
-								</article>
-								<!-- // 답변 end -->
-							</section>
-							<!-- 글작성 버튼 -->
+										<br> <br>
+									</article>
+									</c:if>
+									<!-- // 답변 end -->
+								</section>
+							</c:forEach>
+							</c:if>
+							</div>
+							
+							<!-- 오래된 순으로 정렬 -->
+							<!-- 답변이 존재한다면 -->
+							<div id="oldlist">
+							<c:if test="${ requestScope.olist ne null }">
+
+							<!-- listing -->
+							<c:forEach items="${ requestScope.olist }" var="p">
+								<section id="oldList" class="qa-answerList">
+									<!-- 답변 아이템 반복  -->
+									<c:if test="${ p.pwriter eq sessionScope.loginUser.nickname }">
+									<a id="answer_400521"></a>
+									<article class="answer-item answer-item-select">
+										<div class="answer-header">
+											<div class="answer-header-profile">
+												<h4>
+													<span class="member">${ p.ptitle }</span>
+												</h4>
+												<div class="answer-date">
+													<time>${ p.p_date }</time>
+												</div>
+											</div>
+										</div>
+										<div class="answer-main">
+											<div class="answer-main-content">
+												<!-- 답변 본문 내용 -->
+												<p>${ p.pcontent }</p>
+												<div style="clear: both;"></div>
+											</div>
+											<div class="answer-main-btn">
+												<!-- 댓글 쓰기 및 갯수 -->
+												<button title="댓글쓰기" class="answer-main-btn-left"
+													data-wr_id="400521" data-w="c" data-check="active"
+													onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400521&#39;)">
+													<span class="des-left">댓글쓰기</span>
+												</button>
+											</div>
+										</div>
+										<br>
+										<section class="answer-replyList">
+											<!-- 댓글 입력창 -->
+											<section class="answer-reply-write">
+												<div id="c400632" class="alist_wcmt wcmt"
+													style="display: block;">
+													<div id="vbo_wcmt" class="answer-reply-modify">
+														<form id="fcomment" name="fcomment" method="post"
+															action="//sir.kr/qa/write_comment_update.php"
+															onsubmit="return fcomment_submit(this);"
+															autocomplete="off">
+
+
+															<div id="wcmt_content">
+																<div class="sir_ta reply-write-text">
+																	<label for="wr_content" class="sir_sr">댓글내용</label>
+																	<textarea name="wr_content" id="wr_content" required=""
+																		maxlength="5000" cols="30" rows="1" title="댓글 내용 입력"
+																		style="height: 70px;"></textarea>
+																</div>
+															</div>
+
+															<div id="wcmt_btn" class="reply-write-submit">
+																<input type="reset" id="wcmt_btn_cancel" value="취소"
+																	title="댓글 취소"> <input type="submit"
+																	id="wcmt_btn_submit" value="등록" accesskey="s"
+																	title="댓글 등록">
+															</div>
+														</form>
+													</div>
+												</div>
+											</section>
+											<!-- 답변 아래 리플 반복 -->
+											<a id="c_400535"></a>
+											<article class="answer-reply vcmt">
+												<div class="answer-reply-header">
+													<h5>
+														<img src="/hhw/resources/images/icon/ico_reply_arrow.PNG">
+														<span class="sv_wrap"> <span class="member">댓글작성자닉네임</span>
+														</span>
+													</h5>
+													<span class="reply-date"><time>댓글작성시간</time></span>
+												</div>
+												<div class="answer-reply-content ">
+													<!-- 답변 댓글 내용 -->
+													<p>댓글 내용</p>
+												</div>
+											</article>
+											<!-- // 리플 end -->
+										</section>
+									</article>
+									</c:if>
+									<!-- // 답변 end -->
+									<c:if test="${ p.pwriter ne sessionScope.loginUser.nickname }">
+									<article class="answer-item">
+										<div class="answer-header">
+											<div class="answer-header-profile">
+												<h4>
+													<span class="member">${ p.ptitle }</span>
+												</h4>
+												<div class="answer-date">
+													<time>${ p.p_date }</time>
+												</div>
+											</div>
+											<div class="answer-header-btn"></div>
+										</div>
+										<div class="answer-main">
+											<div class="answer-main-content">
+												<!-- 답변 본문 내용 -->
+												<p>${ p.pcontent }</p>
+												<div style="clear: both;"></div>
+											</div>
+											<div class="answer-main-btn">
+												<!-- 댓글 쓰기 및 갯수 -->
+												<button title="댓글쓰기" class="answer-main-btn-left"
+													data-wr_id="400518" data-w="c" data-check="active"
+													onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400518&#39;)">
+													<span class="des-left">댓글쓰기</span>
+												</button>
+											</div>
+										</div>
+										<section class="answer-replyList">
+											<!-- 댓글 입력창 -->
+											<section class="answer-reply-write">
+												<div id="c400518" class="alist_wcmt wcmt"
+													style="display: none;"></div>
+											</section>
+										</section>
+										<br> <br>
+									</article>
+									</c:if>
+									<!-- // 답변 end -->
+								</section>
+							</c:forEach>
+							</c:if>
+							</div>
+							
+							
+							
+							<!-- 글작성 버튼 start-->
 							<div id="consubmit2" align="right">
-                            	<a href="#" class="consubmit2"><i class="fa fa-pencil" aria-hidden="true"></i>  글 작성하기</a>
-                    		</div>
+								<a href="#" class="consubmit2"> <i class="fa fa-pencil"
+									aria-hidden="true"></i> 글 작성하기
+								</a>
+							</div>
+							<!-- 글작성 버튼 end-->
 						</div>
 						<br>
-					<%-- 검색기능 --%>
-					<center>
+						<%-- 검색기능 --%>
 						<div>
 							<input type="radio" name="item" value="title" checked> 제목
 							&nbsp; &nbsp; &nbsp; <input type="radio" name="item"
@@ -262,59 +422,49 @@
 								</label> <input type="submit" value="검색">
 							</form>
 						</div>
-					</center>
-					<%-- 리스트 출력  ({)--%>
-					<br>
-					<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-					<c:if test="${ !empty sessionScope.loginUser }">
-					<div style="align:center; text-align:center;">
-					   <button onclick="showWriteForm();">글쓰기</button>
-					</div>
-					</c:if>
-					<br>
-					<%-- 목록 출력 --%>
-					<div style="text-align: right; padding-right: 50px">
-						<c:url var="plist" value="/plist.do">
-							<c:param name="pro_id" value="${ pro_id }" />
-						</c:url>
-						<button onclick="javascript:location.href='${ plist }';">
-							전체 목록 보기</button>
-					</div>
-					<br>
-					<c:if test="${ requestScope.list ne null }">
-					<table align="center" border="1" width="700" cellspacing="0">
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>날짜</th>
-							<th>첨부파일</th>
-							<th>조회수</th>
-						</tr>
-						<c:forEach items="${ requestScope.list }" var="p">
-							<tr>
-								<td align="center">${ p.pid }</td>
-								<td><c:url var="pdt" value="/pdetail.do">
-										<c:param name="pid" value="${ p.pid }" />
-									</c:url> <a href="${ pdt }">${ p.ptitle }</a></td>
-								<td align="center">${ p.pwriter }</td>
-								<td align="center">${ p.p_date }</td>
-								<td align="center">${ p.pcount }</td>
-								<td align="center"><c:if
-										test="${ !empty p.p_file_name }">
+						<%-- 리스트 출력  ({)--%>
+						<%-- 목록 출력 --%>
+						<div style="text-align: right; padding-right: 25px">
+							<c:url var="plist" value="/plist.do">
+								<c:param name="pro_id" value="${ pro_id }" />
+							</c:url>
+							<button onclick="javascript:location.href='${ plist }';">
+								전체 목록 보기</button>
+						</div>
+						<br>
+						<c:if test="${ requestScope.list ne null }">
+							<table align="center" border="1" width="700" cellspacing="0">
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>날짜</th>
+									<th>첨부파일</th>
+									<th>조회수</th>
+								</tr>
+								<c:forEach items="${ requestScope.list }" var="p">
+									<tr>
+										<td align="center">${ p.pid }</td>
+										<td><c:url var="pdt" value="/pdetail.do">
+												<c:param name="pid" value="${ p.pid }" />
+											</c:url> <a href="${ pdt }">${ p.ptitle }</a></td>
+										<td align="center">${ p.pwriter }</td>
+										<td align="center">${ p.p_date }</td>
+										<td align="center">${ p.pcount }</td>
+										<td align="center"><c:if test="${ !empty p.p_file_name }">
      					 ◎
 				      </c:if> <c:if test="${ empty p.p_file_name }">
 				      &nbsp;
 				      </c:if></td>
-							</tr>
-						</c:forEach>
-					</table>
-					</c:if>
-					<br>
-					<%-- 리스트 출력(}) --%>
-					
+									</tr>
+								</c:forEach>
+							</table>
+						</c:if>
+						<br>
+						<%-- 리스트 출력(}) --%>
+
 					</article>
-					
+
 				</div>
 				<div id="con_ri">
 					<!--/ 커뮤니티 전용 사이드 배너 -->
@@ -338,8 +488,8 @@
 
 
 		<!-- 푸터 -->
-		</section>
-		<jsp:include page="../common/footer.jsp" />
+	</section>
+	<jsp:include page="../common/footer.jsp" />
 
 </body>
 </html>

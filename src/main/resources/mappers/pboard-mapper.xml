@@ -16,13 +16,20 @@
 		<result column="pstatus" property="pstatus" />
 	</resultMap>
 
-	<select id="selectList" parameterType="_int"
-		resultMap="resultPboard">
+	<select id="selectList" parameterType="_int" resultMap="resultPboard">
 		SELECT *
 		FROM P_BOARD
 		WHERE P_PROID = #{ pro_id }
 		AND PSTATUS = 'Y'
 		ORDER BY PID DESC
+	</select>
+	
+	<select id="selectOldList" parameterType="_int" resultMap="resultPboard">
+		SELECT *
+		FROM P_BOARD
+		WHERE P_PROID = #{ pro_id }
+		AND PSTATUS = 'Y'
+		ORDER BY PID
 	</select>
 
 	<select id="getListCount" parameterType="_int" resultType="_int">

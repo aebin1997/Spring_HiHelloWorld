@@ -217,6 +217,7 @@
 				<tr>
 					<th align="center">바로가기</th>
 					<th align="center">제목</th>
+					<th align="center">질문자</th>
 					<th align="center">답변자</th>
 					<th align="center">마감기한</th>
 					<th align="center">금액</th>
@@ -227,9 +228,9 @@
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
 							<td align="center"><a href="plist.do?pro_id=${ p.pro_id }"><img
-									src="/hhw/resources/images/icon/ico_go.png" width="15px"
-									height="15px"></a></td>
+									src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></td>
 							<td align="center">${ p.qa_title }</td>
+							<td align="center">${ p.pro_writer }</td>
 							<td align="center">${ p.pro_answerer }</td>
 							<td align="center">${ p.pro_deadline }</td>
 							<td align="center">${ p.pro_pay }</td>

@@ -35,8 +35,15 @@
 		PRO_DEADLINE, PRO_PAY, PRO_PROCESS, PRO_STATUS
 		FROM QA, PROGRESS PRO
 		WHERE QA.QA_ID = PRO.PRO_QID
-		AND PRO_WRITER = #{ nickname }
 		AND PRO_STATUS != 'X'
+		AND (PRO_WRITER = #{ nickname } OR PRO_ANSWERER = #{ nickname })
+	</select>
+	
+	<select id="selectProgress" parameterType="_int" resultMap="resultQaPro">
+		SELECT *
+		FROM QA, PROGRESS PRO
+		WHERE QA.QA_ID = PRO.PRO_QID
+		AND PRO_ID = #{ pro_id }
 	</select>
 
 	<select id="selectQatitle" parameterType="string"

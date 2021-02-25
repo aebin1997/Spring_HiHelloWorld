@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.vo.P_board;
-import com.ict.hhw.progress.model.vo.PboardPage;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Repository("pboardDao")
 public class PboardDao {
@@ -27,8 +27,17 @@ public class PboardDao {
 		return (ArrayList<P_board>)list;
 	}
 	
+	public ArrayList<P_board> selectOldList(int pro_id) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.selectOldList", pro_id);
+		return (ArrayList<P_board>)list;
+	}
+	
 	public P_board selectPboard(int pid) {
 		return sqlSession.selectOne("pboardMapper.selectPboard", pid);
+	}
+	
+	public QaProgress selectProgress(int pro_id) {
+		return sqlSession.selectOne("progressMapper.selectProgress", pro_id);
 	}
 
 	public int addReadCount(int pid) {
