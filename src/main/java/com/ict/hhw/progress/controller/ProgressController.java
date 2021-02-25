@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ict.hhw.member.model.vo.Member;
 import com.ict.hhw.progress.model.service.ProgressService;
 import com.ict.hhw.progress.model.vo.Progress;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Controller
 public class ProgressController {
@@ -31,8 +32,8 @@ public class ProgressController {
 		loginMember = (Member) session.getAttribute("loginUser");
 
 		String nickname = null;
-		ArrayList<Progress> list = null;
-		ArrayList<Progress> requestList = null;
+		ArrayList<QaProgress> list = null;
+		ArrayList<QaProgress> requestList = null;
 		ArrayList<String> titleList = null;
 
 		String pattern = "yyyy-MM-dd";
@@ -127,5 +128,6 @@ public class ProgressController {
 			return "common.errorPage";
 		}
 	}
+	
 
 }

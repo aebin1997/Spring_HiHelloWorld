@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.progress.model.vo.Progress;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 
 
@@ -18,9 +19,9 @@ public class ProgressDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public ArrayList<Progress> selectPlist(String nickname) {
-		List<Progress> list = sqlSession.selectList("progressMapper.selectPlist", nickname);
-		return (ArrayList<Progress>)list;
+	public ArrayList<QaProgress> selectPlist(String nickname) {
+		List<QaProgress> list = sqlSession.selectList("progressMapper.selectPlist", nickname);
+		return (ArrayList<QaProgress>)list;
 	}
 	
 	public ArrayList<String> selectQaTitle(String nickname) {
@@ -42,9 +43,9 @@ public class ProgressDao {
 		return sqlSession.insert("progressMapper.insertProgress", progress);
 	}
 	
-	public ArrayList<Progress> selectRequest(String nickname) {
-		List<Progress> list = sqlSession.selectList("progressMapper.selectRequest", nickname);
-		return (ArrayList<Progress>)list;
+	public ArrayList<QaProgress> selectRequest(String nickname) {
+		List<QaProgress> list = sqlSession.selectList("progressMapper.selectRequest", nickname);
+		return (ArrayList<QaProgress>)list;
 	}
 	
 	public int requestAccept(int pro_id) {

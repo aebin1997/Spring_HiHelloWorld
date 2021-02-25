@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.hhw.progress.model.dao.ProgressDao;
 import com.ict.hhw.progress.model.vo.Progress;
+import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Service("progressService")
 public class ProgressServiceImpl implements ProgressService {
@@ -15,7 +16,7 @@ public class ProgressServiceImpl implements ProgressService {
 	private ProgressDao progressDao;
 	
 	@Override
-	public ArrayList<Progress> selectPlist(String nickname) {
+	public ArrayList<QaProgress> selectPlist(String nickname) {
 		return progressDao.selectPlist(nickname);
 	}
 
@@ -41,7 +42,7 @@ public class ProgressServiceImpl implements ProgressService {
 	}
 	
 	@Override
-	public ArrayList<Progress> selectRequest(String nickname) {
+	public ArrayList<QaProgress> selectRequest(String nickname) {
 		return progressDao.selectRequest(nickname);
 	}
 

@@ -13,7 +13,7 @@
 		<typeAlias type="com.ict.hhw.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.ict.hhw.board_reply.model.vo.B_Reply" alias="B_Reply"/>
 		<typeAlias type="com.ict.hhw.progress.model.vo.Progress" alias="Progress"/>
-		<typeAlias type="com.ict.hhw.progress.model.vo.QaProgress" alias="Progress"/>
+		<typeAlias type="com.ict.hhw.progress.model.vo.QaProgress" alias="QaProgress"/>
 		<typeAlias type="com.ict.hhw.progress.model.vo.P_board" alias="P_board"/>
 		<typeAlias type="com.ict.hhw.progress.model.vo.P_reply" alias="P_reply"/>
 		<typeAlias type="com.ict.hhw.blame.model.vo.Blame" alias="Blame"/>

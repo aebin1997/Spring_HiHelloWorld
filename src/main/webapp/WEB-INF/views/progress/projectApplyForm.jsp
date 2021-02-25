@@ -75,16 +75,17 @@
 
 		$("#modal_open_btn").click(function() {
 			$("#modal").show();
-			
+
 			var offset = $("#modal").offset();
-	        $('html').animate({scrollTop : offset.top}, 1000);
+			$('html').animate({
+				scrollTop : offset.top
+			}, 1000);
 		});
 
 		$("#modal_close_btn").click(function() {
 			$("#modal").attr("style", "display:none");
 		});
-		
-		
+
 		$("#UserSelectBtn").click(function() {
 			$.ajax({
 				url : "selectUser.do",
@@ -172,38 +173,38 @@
 				</table>
 			</form>
 		</div>
-		
+
 		<%-- 의뢰 수락하기 --%>
-		<c:if test="${ rlist ne null }" >
-		<c:forEach items="${ requestScope.rlist }" var="r">
-		<form action="requestAccept.do" method="post">
-			<div class="main_right_btn" align="center">
-			<input type="hidden" name="r_pro_id" value="${ r.pro_id }" >
-				<table id="apply" width="280" height="160">
-					<tr>
-						<td>요청자</td>
-						<td>${ r.pro_writer }</td>
-					</tr>
-					<tr>
-						<td>질문 제목</td>
-						<td>조인!!</td>
-					</tr>
-					<tr>
-						<td>기한</td>
-						<td>${ r.pro_deadline }</td>
-					</tr>
-					<tr>
-						<td>금액</td>
-						<td>${ r.pro_pay }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td align="right"><button type="submit">의뢰 수락</button></td>
-					</tr>
-				</table>
-			</div>
-		</form>
-		</c:forEach>
+		<c:if test="${ rlist ne null }">
+			<c:forEach items="${ requestScope.rlist }" var="r">
+				<form action="requestAccept.do" method="post">
+					<div class="main_right_btn" align="center">
+						<input type="hidden" name="r_pro_id" value="${ r.pro_id }">
+						<table id="apply" width="280" height="160">
+							<tr>
+								<td>요청자</td>
+								<td>${ r.pro_writer }</td>
+							</tr>
+							<tr>
+								<td>질문 제목</td>
+								<td><a href="qadetail.do?qa_id=${ r.pro_qid }">${ r.qa_title }</a></td>
+							</tr>
+							<tr>
+								<td>기한</td>
+								<td>${ r.pro_deadline }</td>
+							</tr>
+							<tr>
+								<td>금액</td>
+								<td>${ r.pro_pay }</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td align="right"><button type="submit">의뢰 수락</button></td>
+							</tr>
+						</table>
+					</div>
+				</form>
+			</c:forEach>
 		</c:if>
 
 		<div align="center">
@@ -215,6 +216,7 @@
 				style="text-align: center;">
 				<tr>
 					<th align="center">바로가기</th>
+					<th align="center">제목</th>
 					<th align="center">답변자</th>
 					<th align="center">마감기한</th>
 					<th align="center">금액</th>
@@ -222,17 +224,18 @@
 					<th align="center">상태</th>
 				</tr>
 				<c:if test="${ requestScope.list ne null }">
-				<c:forEach items="${ requestScope.list }" var="p">
-					<tr>
-						<td align="center"><a href="plist.do?pro_id=${ p.pro_id }"><img
-							src="/hhw/resources/images/icon/ico_go.png" width="15px"
-							height="15px"></a></td>
-						<td align="center">${ p.pro_answerer }</td>
-						<td align="center">${ p.pro_deadline }</td>
-						<td align="center">${ p.pro_pay }</td>
-						<td align="center">${ p.pro_process }</td>
-						<td align="center"><c:if
-								test="${ fn:trim(p.pro_status) eq 'Y' }">
+					<c:forEach items="${ requestScope.list }" var="p">
+						<tr>
+							<td align="center"><a href="plist.do?pro_id=${ p.pro_id }"><img
+									src="/hhw/resources/images/icon/ico_go.png" width="15px"
+									height="15px"></a></td>
+							<td align="center">${ p.qa_title }</td>
+							<td align="center">${ p.pro_answerer }</td>
+							<td align="center">${ p.pro_deadline }</td>
+							<td align="center">${ p.pro_pay }</td>
+							<td align="center">${ p.pro_process }</td>
+							<td align="center"><c:if
+									test="${ fn:trim(p.pro_status) eq 'Y' }">
 							진행중
 						</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'W' }">
 							수락 대기중
@@ -241,8 +244,8 @@
 						</c:if> <c:if test="${ p.pro_status eq 'N ' }">
 								기간 만료됨
 						</c:if></td>
-					</tr>
-				</c:forEach>
+						</tr>
+					</c:forEach>
 				</c:if>
 			</table>
 		</div>
