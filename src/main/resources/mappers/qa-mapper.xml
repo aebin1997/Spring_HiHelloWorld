@@ -64,7 +64,7 @@
 	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
-        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
                   QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
                  QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
                FROM (SELECT * 
@@ -79,7 +79,7 @@
    <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
-        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
                   QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
                  QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
                FROM (SELECT * 
@@ -94,7 +94,7 @@
    <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
-        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,
+        FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
                   QA_ORIGIN_FILE_NAME,QA_RENAME_FILE_NAME,QA_READCOUNT,
                  QA_CREATE_DATE, QA_MODIFY_DATE,QA_STATUS
                FROM (SELECT * 

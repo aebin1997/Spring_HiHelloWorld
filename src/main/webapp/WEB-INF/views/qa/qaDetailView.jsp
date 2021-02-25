@@ -60,71 +60,12 @@
 		<script type="text/javascript" src="https://ssl.pstatic.net/static.kin/static/kin-web-pc/20210209173414/js/min/naver.kin.pc.base.js"></script>
 	
 	
-	<script type="text/javascript">
-		window.naver = window.naver || {};
-		naver.isLogin = false;
-		naver.isJunior = ("N"=="Y");
-		naver.isKinUser = false;
-		naver.isPortableDevice = false;
-		naver.jsDir = "https://ssl.pstatic.net/static.kin/static/kin-web-pc/20210209173414/js/min";
-		document.domain = "naver.com";
-		if(!window.console) { window.console = {}; console.log = function() {}; console.warn = function() {}; console.error = function() {}; }
-
-		var g_ssc = ("kin.endpage" == "") ? "kin.temp" : "kin.endpage";
-		var ccsrv = "cc.naver.com";
-		var kinRos = {
-			isActionNoticeDisplay : ("false" == "" || "false" == "false") ? false : true
-			
-		};
-
-	</script>
+	
 
 		<link type="text/css" rel="stylesheet" href="//editor-static.pstatic.net/v/kinreply/css/se.viewer.desktop.css?v=1.1.5-20201110152136">
 
 	<script src="https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js"></script>
-	<script type="text/javascript">
-		var spwp = spwp || {};
-		spwp.cmd = spwp.cmd || [];
-		spwp.cmd.push(function () {
-			// 뒤로가기 복귀 시, 이전 광고내용 복원 여부
-			spwp.setConfig({enablePersistAd: true});
-
-			var adUnits = [];
-			var adUnitIds = [];
-			
-				adUnits.push({
-					unitId: "pc_kin_end_flt",
-					divId: "floatingda_home"
-				});
-				adUnitIds.push("pc_kin_end_flt");
-			
-			
-				adUnits.push({
-					unitId: "pc_kin_bottom",
-					divId: "powerlink_kin",
-					targeting: {
-						yob: "1988",
-						gender: "O",
-						uct: "KR"
-					},
-					extraOption: {
-						mediaParams: {
-							dirId: 11040301,
-							docId: 381232049,
-							
-							sessionId: "",
-							styleDefault: "#222222",
-							styleHighlight: "#3867E8"
-						}
-					}
-				});
-				adUnitIds.push("pc_kin_bottom");
-			
-
-			spwp.addAdUnits(adUnits);
-			spwp.requestAds({adUnitIds: adUnitIds});
-		});
-	</script>
+	
 	
 	<script type="text/javascript">
 $(function(){
@@ -520,7 +461,7 @@ function hideReplyForm(){
 <div id="qarlistView" style="border: 1px dotted gray;">
 <br><br>
 <table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1" width="500" ></table>
-</div>
+</div> 
 
 		       </div>
 		       </div> 
@@ -559,29 +500,10 @@ function hideReplyForm(){
 				${ qa.qa_content }
 			</div>
 			
-			<br><br>
-<%-- 댓글 달기 폼영역 --%>
-<div id="replyDiv">
-<hr><br><br>
-<form action="qarinsert.do" method="post">
-<input type="hidden" name="ref_qa_id" value="${ qa.qa_id }">
-<table align="center" width="680" border="1" cellpading="5" >
-<tr><th>작성자</th>
-<td><input type="text" name="qar_writer" readonly value="${ sessionScope.loginUser.id }"></td></tr>
-<tr><th>내용</th><td><textarea name="qar_content" rows="5" cols="50"></textarea></td></tr>
-<tr><th colspan="2">
-<input type="submit" value="댓글 등록"> &nbsp;
-<input type="reset" value="댓글 취소" onclick="hideReplyForm(); return false;"></th></tr>
-</table>
-</form>
-</div>
 
-<br><br>
-<%-- 댓글목록 표시 영역 --%>
-<div id="qarlistView" style="border: 1px dotted gray;">
-<br><br>
-<table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1" width="500" ></table>
-</div>
+
+
+
 			
 		</div>
 		<div class="c-opinion _commentListArea" data-answer-no="1" data-thanks-message="" style="display:none;"></div>

@@ -5,12 +5,13 @@
 <resultMap type="Qar" id="resultQar">
 	<id column="qar_id" property="qar_id"/>
 	<result column="qar_writer" property="qar_writer"/>
-	<result column="qar_content" property="qar_content"/>
+	<result column="QAR_CONTENT" property="qar_content"/>
 	<result column="ref_qa_id" property="ref_qa_id"/>
 	<result column="qar_create_date" property="qar_create_date"/>
 	<result column="qar_modify_date" property="qar_modify_date"/>
 	<result column="qar_status" property="qar_status"/>
 </resultMap>
+
 
 
 <select id="selectQar" parameterType="_int" resultMap="resultQar">
