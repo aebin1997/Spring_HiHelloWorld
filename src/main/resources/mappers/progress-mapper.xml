@@ -13,19 +13,41 @@
 		<result column="pro_status" property="pro_status" />
 	</resultMap>
 
-	<select id="selectPlist" parameterType="string" resultMap="resultProgress">
+	<resultMap type="QaProgress" id="resultQaPro">
+		<id column="pro_id" property="pro_id" />
+		<result column="pro_qid" property="pro_qid" />
+		<result column="qa_title" property="qa_title" />
+		<result column="qa_content" property="qa_content" />
+		<result column="pro_writer" property="pro_writer" />
+		<result column="pro_answerer" property="pro_answerer" />
+		<result column="qa_origin_file_name" property="qa_origin_file_name" />
+		<result column="qa_rename_file_name" property="qa_rename_file_name" />
+		<result column="qa_create_date" property="qa_create_date" />
+		<result column="pro_deadline" property="pro_deadline" />
+		<result column="pro_pay" property="pro_pay" />
+		<result column="pro_process" property="pro_process" />
+		<result column="pro_status" property="pro_status" />
+		<result column="qa_status" property="qa_status" />
+	</resultMap>
+
+	<select id="selectPlist" parameterType="string"
+		resultMap="resultProgress">
 		SELECT *
 		FROM PROGRESS
 		WHERE PRO_WRITER = #{ nickname }
+		AND
+		PRO_STATUS != 'X'
 	</select>
 
-	<select id="selectQatitle" parameterType="string" resultType="string">
+	<select id="selectQatitle" parameterType="string"
+		resultType="string">
 		SELECT QA_TITLE
 		FROM QA
 		WHERE QA_WRITER = #{ nickname }
 	</select>
-	
-	<select id="selectUser" parameterType="string" resultType="string">
+
+	<select id="selectUser" parameterType="string"
+		resultType="string">
 		SELECT NICKNAME
 		FROM MEMBER
 		WHERE NICKNAME = #{ nickname }
@@ -33,38 +55,45 @@
 	</select>
 
 	<select id="findQaId" parameterType="string" resultType="string">
-		SELECT QA_ID
-    	FROM QA
-    	WHERE QA_TITLE = #{qa_title}
+		SELECT
+		QA_ID
+		FROM QA
+		WHERE QA_TITLE = #{qa_title}
 	</select>
 
 	<insert id="insertProgress" parameterType="Progress">
-	INSERT 
-		  INTO Progress
-		VALUES ( 
-				 seq_pro.nextval
-		       , #{ pro_qid }
-		       , #{ pro_writer }
-		       , #{ pro_answerer }
-		       , #{ pro_deadline }
-		       , #{ pro_pay }
-		       , default
-		       , 'W'
-      	       )
+		INSERT
+		INTO Progress
+		VALUES (
+		seq_pro.nextval
+		, #{ pro_qid }
+		, #{ pro_writer }
+		, #{
+		pro_answerer }
+		, #{ pro_deadline }
+		, #{ pro_pay }
+		, default
+		, 'W'
+		)
 	</insert>
-	
-	<select id="selectRequest" parameterType="string" resultMap="resultProgress">
-		SELECT  *
-		  FROM PROGRESS
-		 WHERE PRO_ANSWERER = #{ nickname }
-		   AND PRO_STATUS = 'W'
+
+	<select id="selectRequest" parameterType="string"
+		resultMap="resultProgress">
+		SELECT PRO_ID, PRO_QID, QA_TITLE, PRO_WRITER, PRO_ANSWERER,
+		PRO_DEADLINE, PRO_PAY, PRO_PROCESS, PRO_STATUS
+		FROM QA, PROGRESS PRO
+		WHERE QA.QA_ID = PRO.PRO_QID;
+		AND PRO_ANSWERER = #{ nickname }
+		AND
+		PRO_STATUS = 'W'
 	</select>
-	
-	 <update id="requestAccept" parameterType="_int">
-      update progress
-         set pro_status = 'Y'
-         where pro_id = #{ pro_id }
-   </update>
+
+	<update id="requestAccept" parameterType="_int">
+		update progress
+		set
+		pro_status = 'Y'
+		where pro_id = #{ pro_id }
+	</update>
 
 
 </mapper>
