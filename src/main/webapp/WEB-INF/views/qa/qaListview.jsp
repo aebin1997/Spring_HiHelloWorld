@@ -3,6 +3,9 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
     
 <link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
 <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
@@ -24,6 +27,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -154,9 +158,17 @@ function showDiv(){
 										   <a href="${ qadetail }" style="color: black;">${ qa.qa_title }</a>
                                 </dt>
                                 <dd>
-                                    <span class="ico_a"><img
-									src="https://ssl.pstatic.net/static/kin/09renewal/blank.gif"
-									width="18" height="14" alt="답변"></span>
+                                    <span class="ico_a"><img src="/hhw/resources/images/content.jpg" style="width:40px;">
+                                 <c:choose>
+
+												<c:when test="${fn:length(qa.qa_content) > 0}">
+												${fn:substring(qa.qa_content, 0, 100)}...
+												</c:when>
+												<c:otherwise>
+												${qa.qa_content}
+												</c:otherwise>
+												</c:choose>
+												</span>
                                 </dd>
                             </dl>
                         </td>
@@ -301,7 +313,7 @@ function showDiv(){
    <c:url var="qasearch5" value="/qalist.do">
       <c:param name="page" value="${ maxPage }" />
    </c:url>
-   <a href="${ qasearch5 }">[맨끝]</a>
+   <a href="${ qasearch5 }">[맨끝]</a> 
 </c:if>
 </div>
 </c:if>
@@ -320,4 +332,4 @@ function showDiv(){
 	<jsp:include page="../common/footer.jsp" />
 
 					</body>
-</html>
+</html>-

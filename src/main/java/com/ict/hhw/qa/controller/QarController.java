@@ -44,7 +44,7 @@ public class QarController {
 		JSONArray jarr = new JSONArray();
 		
 		for(Qar qar : list) {
-			System.out.println("확인"+ qar);
+			
 			JSONObject job = new JSONObject();
 			
 			job.put("qar_id", qar.getQar_id());

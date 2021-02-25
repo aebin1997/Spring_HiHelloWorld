@@ -19,7 +19,8 @@
 <tr><th>작성자</th><td><input type="text" name="qa_writer" readonly value="${ sessionScope.loginUser.id }"></td></tr>
 <tr><th>포인트</th><td><input type="text" name="qa_point"></td></tr>
 <tr><th>파일선택</th>
-<td><input type="file" name="upfile"></td></tr>
+<td><input multiple="multiple"  type="file" name="upfile">
+</tr>
 <tr><th>내 용</th><td><textarea name="qa_content" rows="5" cols="50"></textarea></td></tr>
 
 
@@ -30,6 +31,14 @@
 <button onclick="javascript:history.go(-1); return false;">목록</button></th></tr>
 </table>
 </form>
+
+
+
+
+
+
+
+
 <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

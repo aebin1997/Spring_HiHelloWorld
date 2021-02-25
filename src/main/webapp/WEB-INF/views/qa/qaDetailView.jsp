@@ -40,6 +40,7 @@
 		<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/kin-web-pc/20210209173414/css/min/powerlink.css"/>
 	
 
+
 <script>
 	
 	var pcDomain = "kin.naver.com";
@@ -67,7 +68,7 @@
 	<script src="https://ssl.pstatic.net/tveta/libs/ssp/ssp.web.sdk.js"></script>
 	
 	
-	<script type="text/javascript">
+<script type="text/javascript">
 $(function(){
    hideReplyForm();   //뷰 페이지 처음 실행시에는 댓글달기 폼이 안보이게 함
    
@@ -99,16 +100,16 @@ $(function(){
                  + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ")
                  + "</textarea><input type='submit' value='수정'></form>"
                  + "<button onclick='replyDelete(" + json.list[i].qar_id + ");'>삭제</button></td></tr>"
-                 + "<td><c:url var='qalist1' value='/qalist.do'>"
+                 + "<c:url var='qalist1' value='/qalist.do'>"
 	             + "<c:param name='page' value='1'/>"
 	             + "</c:url>"
-	             + "<a href='${ qalist1 }'>[list]</a></td>"
+	             + "<td><a href='${ qalist1 }'>[list]</a></td><br>"
            }else{
                  values += "<tr><td>" + json.list[i].qar_writer
                  + "</td><td>" + json.list[i].qar_create_date 
                  + "</td></tr><tr><td colspan='2'>" 
                  + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ") 
-                 +"</td></tr>"; 
+                 +"</td></tr><br>"; 
                  }
            } //for in
 
@@ -183,17 +184,6 @@ function hideReplyForm(){
 	}
 </script>
 	
-	
-
-
-
-
-	
-
-
-
-					
-
 
 					
 					<div class="gnb_common_area">
@@ -220,11 +210,7 @@ function hideReplyForm(){
 					
 				</div>
 
-					</div>
-				
-			</div>
-		</div>
-	</div>
+	
 
 
 <script type="text/javascript">
@@ -373,7 +359,24 @@ function hideReplyForm(){
 						<span class="c-userinfo__author"><span class="blind">작성자</span>${ qa.qa_writer }</span>
 			</div>
 			<span class="c-userinfo__info"><span class="blind">작성일</span>${ qa.qa_create_date }</span>
-			<span class="c-userinfo__count"><img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }<br><img src="/hhw/resources/images/point.png" style="width:20px;"><font color="red">${ qa.qa_point }</font></span>
+			<span class="c-userinfo__count"><img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }<br>
+			<img src="/hhw/resources/images/point.png" style="width:20px;"><font color="red">${ qa.qa_point }</font>
+
+<c:if test="${ empty qa.qa_origin_file_name }">
+<img src="/hhw/resources/images/nofile.png" style="width:20px;">
+</c:if>
+<c:if test="${ !empty qa.qa_origin_file_name }">
+<c:url var="qafd" value="/qafdown.do">
+   <c:param name="ofile" value="${ qa.qa_origin_file_name }"/>
+   <c:param name="rfile" value="${ qa.qa_rename_file_name }"/>
+</c:url>
+<img src="/hhw/resources/images/yesfile.png" style="width:12px;">
+<a href="${ qafd }">${ qa.qa_origin_file_name }</a>
+</c:if>
+			
+			
+			
+			</span>
 	</div>
 			</div>
 		</div>
@@ -387,15 +390,14 @@ function hideReplyForm(){
 
 <div class="_endContents _hashtagHighlightingContents c-heading-answer__content" data-tag="%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4">
 
-		<div class="_endContentsText c-heading-answer__content-user"><div class="se-viewer se-theme-default" lang="ko-KR">    <!-- SE_DOC_HEADER_START -->    <!--@CONTENTS_HEADER-->    <!-- SE_DOC_HEADER_END -->   
-		 <div class="se-main-container">                
+		               
 		 <div class="se-component se-text se-l-default" id="SE-0442ede1-bac0-4a49-b43c-e8a06ddc8a22">                  
 		   <div class="se-component-content">                        
 		   <div class="se-section se-section-text se-l-default">                            
 		   <div class="se-module se-module-text">                                    <!-- SE-TEXT { -->
-		   <p class="se-text-paragraph se-text-paragraph-align- " style="" id="SE-9a384909-f8b1-4ce3-aa16-975e4654d6e6">
-		   <span style="" class="se-fs- se-ff-   " id="SE-881f69bc-fc3e-4f02-af26-67fd43f982f5">${ qa.qa_content }</span>
-		   </p><!-- } SE-TEXT -->                            
+		   
+		   
+		                              
 		   
 		   </div>                        
 		   </div>                    
@@ -407,14 +409,16 @@ function hideReplyForm(){
 		   <div class="se-section se-section-image se-l-default se-section-align-" >                               
 		    <div class="se-module se-module-image" style="">                                    
 		    <a href="#" class="se-module-image-link __se_image_link __se_link" style="" onclick="return false;" data-linktype="img" data-linkdata='{"id" : "SE-a48780b4-c628-455a-ba57-e71252dfb83a", "src" : "https://kin-phinf.pstatic.net/20210207_77/16126801519567gfaG_JPEG/20210207_154226.jpg", "linkUse" : "false", "link" : ""}'>                                        
-		    <img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;">                                   
+		    <img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;">             
 		     </a>                               
+		     <br>
+		     ${ qa.qa_content }
 		      </div>         
 		      </div>               
 		                  
 	        
 		      
-		      
+<div align="right">
 <br><br><%-- 로그인한 상태일때 댓글 달기 사용하게 함 --%>
 <c:if test="${ !empty loginUser }">
    <button onclick="showReplyForm();">댓글 달기</button>
@@ -433,11 +437,10 @@ function hideReplyForm(){
    <a href="${ qadl }">[글삭제]</a> &nbsp; &nbsp;
 </c:if>
 <c:url var="qalist" value="/qalist.do">
-      <c:param name="page" value="${ currentPage }"/> 
+      <c:param name="page" value="${ currentPage }"/>
 </c:url>
 <a href="${ qalist }">[목록]</a>
-</th></tr>
-</table>
+</div>
 
 <br><br>
 <%-- 댓글 달기 폼영역 --%>
@@ -460,14 +463,15 @@ function hideReplyForm(){
 <%-- 댓글목록 표시 영역 --%>
 <div id="qarlistView" style="border: 1px dotted gray;">
 <br><br>
-<table id="qarlistTbl"  align="center" cellspacing="0" cellspacing="5" border="1" width="500" ></table>
+<table id="qarlistTbl" ></table>
 </div> 
-
+<br><br>
 		       </div>
 		       </div> 
 		       </div>
 		       </div>
 		       </div>        
+
 
 
 
@@ -496,9 +500,7 @@ function hideReplyForm(){
 					</div>
 				</div>			
 			</div>
-			<div class="tag-list tag-list--end-title" role="region" aria-label="관련태그 목록" data-select="type-a">
-				${ qa.qa_content }
-			</div>
+
 			
 
 
