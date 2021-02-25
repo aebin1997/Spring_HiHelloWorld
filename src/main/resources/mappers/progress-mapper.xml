@@ -93,17 +93,17 @@
 	</select>
 
 	<update id="requestAccept" parameterType="_int">
-		update progress
-		set
-		pro_status = 'Y'
-		where pro_id = #{ pro_id }
+		UPDATE PROGRESS
+		SET
+		PRO_STATUS = 'Y'
+		WHERE PRO_ID = #{ r_pro_id }
 	</update>
 	
 	<update id="requestRefuse" parameterType="_int">
-		update progress
-		set
-		pro_status = 'D'
-		where pro_id = #{ pro_id }
+		UPDATE PROGRESS
+		SET
+		PRO_STATUS = 'D'
+		WHERE PRO_ID = #{ r_pro_id }
 	</update>
 
 </mapper>
