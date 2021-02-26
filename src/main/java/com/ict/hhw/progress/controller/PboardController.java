@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.service.PboardService;
@@ -29,17 +30,18 @@ public class PboardController {
 
 	// 글쓰기 페이지 이동 요청 처리용
 	@RequestMapping("pwmove.do")
-	public String movePboardWriteForm() {
+	public String movePboardWriteForm(@RequestParam("pro_id") int pro_id, Model model) {
+		model.addAttribute("pro_id", pro_id);
 		return "progress/pboardWriteForm";
 	}
 
 	// 게시글 수정 페이지로 이동 요청 처리용
 	@RequestMapping("pupview.do")
-	public String boardUpdateForm(@RequestParam("pid") int pid, @RequestParam("page") int currentPage, Model model) {
+	public String boardUpdateForm(@RequestParam("pid") int pid, @RequestParam("pro_id") int pro_id, Model model) {
 		P_board Pboard = pboardService.selectPboard(pid);
 		if (Pboard != null) {
 			model.addAttribute("pboard", Pboard);
-			model.addAttribute("page", currentPage);
+			model.addAttribute("pro_id", pro_id);
 			return "progress/pboardUpdateView";
 		} else {
 			model.addAttribute("msg", pid + "번 게시글 수정페이지로 이동 실패");
@@ -48,29 +50,30 @@ public class PboardController {
 	}
 
 	// 게시글 페이지별 목록 조회 요청 처리용 (+ 목록 페이지로 이동)
-	@RequestMapping(value="plist.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
+	@RequestMapping(value = "plist.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
 	public String pboardListMethod(@RequestParam("pro_id") int pro_id, Model model) {
 		ArrayList<P_board> list = pboardService.selectList(pro_id);
 		ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
 		QaProgress qplist = pboardService.selectProgress(pro_id);
-		
+
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
 			model.addAttribute("olist", olist);
 		}
 		model.addAttribute("pro_id", pro_id);
 		model.addAttribute("qplist", qplist);
-		
+
 		return "progress/progress";
 	}
 
 	// 검색
 	@RequestMapping(value = "psearchTitle.do", method = RequestMethod.POST)
-	public String pboardSearchTitleMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id, Model model) {
+	public String pboardSearchTitleMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id,
+			Model model) {
 
 		ArrayList<P_board> list = pboardService.selectSearchTitle(keyword);
 		model.addAttribute("pro_id", pro_id);
-		
+
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
 			model.addAttribute("action", "psearchTitle.do");
@@ -84,11 +87,12 @@ public class PboardController {
 	}
 
 	@RequestMapping(value = "psearchWriter.do", method = RequestMethod.POST)
-	public String boardSearchWriterMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id, Model model) {
-		
+	public String boardSearchWriterMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id,
+			Model model) {
+
 		ArrayList<P_board> list = pboardService.selectSearchWriter(keyword);
 		model.addAttribute("pro_id", pro_id);
-		
+
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
 			model.addAttribute("action", "psearchWriter.do");
@@ -145,11 +149,52 @@ public class PboardController {
 		}
 	}
 
+	// 진행 게시판 게시글 등록 처리용
+	@RequestMapping(value = "pinsert.do", method = RequestMethod.POST)
+	public String boardUpdateMethod(P_board pboard, HttpServletRequest request,
+			@RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id, Model model) {
+		// 업로드된 파일 저장 폴더 지정하기
+		String savePath = request.getSession().getServletContext().getRealPath("resources/pboard_files");
+
+		// 첨부파일이 있을때 업로드된 파일을 지정 폴더로 옮기기
+		// 단, 첨부된 파일의 이름을 'yyyyMMddHHmmss.확장자'형식으로 바꾸어 저장함
+		if (mfile != null) {
+			String fileName = mfile.getOriginalFilename();
+			pboard.setP_file_name(fileName); // 원래 파일명 vo에 저장
+
+			// 첨부된 파일의 파일명 바꾸기
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String renameFileName = sdf.format(new java.sql.Date(System.currentTimeMillis()));
+			// 원래 파일의 확장자 분리추출하여 확장자 붙여주기
+			renameFileName += "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+
+			if (fileName != null && fileName.length() > 0) {
+				try {
+					mfile.transferTo(new File(savePath + "\\" + renameFileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+					model.addAttribute("msg", "전송 파일 저장 실패");
+					return "common/errorPage";
+				}
+				pboard.setP_rfile_name(renameFileName);
+			}
+		}
+
+		if (pboardService.insertPboard(pboard) > 0) {
+			model.addAttribute("pro_id", pro_id);
+			return "redirect:plist.do";
+		} else {
+			model.addAttribute("msg", "게시글 등록 실패.");
+			return "common/errorPage";
+		}
+	}
+
 	// 게시글 삭제 요청 처리용
 	@RequestMapping("pdelete.do")
-	public String pboardDeleteMethod(@RequestParam("pid") int pid, Model model) {
+	public String pboardDeleteMethod(@RequestParam("pid") int pid, @RequestParam("pro_id") int pro_id, Model model) {
 		if (pboardService.deletePboard(pid) > 0) {
-			return "redirect:plist.do?page=1";
+			model.addAttribute("pro_id", pro_id);
+			return "redirect:plist.do";
 		} else {
 			model.addAttribute("msg", pid + "번 게시글 삭제 실패");
 			return "common/errorPage";
@@ -158,9 +203,8 @@ public class PboardController {
 
 	// 게시글 수정 요청 처리용
 	@RequestMapping(value = "pupdate.do", method = RequestMethod.POST)
-	public String boardUpdateMethod(P_board pboard, @RequestParam("page") int currentPage,
-			@RequestParam(name = "delFlag", required = false) String delFlag, HttpServletRequest request, Model model,
-			@RequestParam(name = "upfile", required = false) MultipartFile mfile) {
+	public String boardUpdateMethod(P_board pboard, @RequestParam(name = "delFlag", required = false) String delFlag, 
+			HttpServletRequest request, Model model, @RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id) {
 
 		// 업로드된 파일 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("resources/pboard_files");
@@ -203,7 +247,8 @@ public class PboardController {
 		} // mfile != null
 
 		if (pboardService.updatePboard(pboard) > 0) {
-			return "redirect:plist.do?page=" + currentPage; // redirect는 컨트롤러에서 컨트롤러 호출
+			model.addAttribute("pro_id", pro_id);
+			return "redirect:plist.do"; // redirect는 컨트롤러에서 컨트롤러 호출
 		} else {
 			model.addAttribute("msg", pboard.getPid() + "번 게시글 수정 실패.");
 			return "common/errorPage";
@@ -212,13 +257,11 @@ public class PboardController {
 
 	// 게시글 상세보기 요청 처리용
 	@RequestMapping("pdetail.do")
-	public String boardDetailViewMethod(@RequestParam("pid") int pid,
-			@RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, Model model) {
+	public String boardDetailViewMethod(@RequestParam("pid") int pid, Model model) {
 		P_board pboard = pboardService.selectPboard(pid);
 		int result = pboardService.addReadCount(pid); // 조회수 1증가 처리
 
 		if (pboard != null && result > 0) {
-			model.addAttribute("page", currentPage);
 			model.addAttribute("pboard", pboard);
 			return "progress/pboardDetailView";
 		} else {

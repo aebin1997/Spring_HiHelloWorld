@@ -96,6 +96,42 @@
 		where pid = #{ pid }
 	</select>
 
+<insert id="insertPboard" parameterType="P_board">
+      
+      INSERT 
+        INTO P_BOARD
+      <if test="p_file_name != null"><!-- 첨부파일이 있을 때 -->
+      values (
+              seq_pid.nextval
+            , #{ p_proid }
+            , #{ pwriter }
+            , #{ ptitle }
+            , #{ pcontent }
+            , #{ p_file_name }
+            , #{ p_rfile_name }
+            , sysdate
+            , sysdate
+            , default
+            , default
+             )
+      </if>
+      <if test="p_file_name == null"><!-- 첨부파일이 없을 때 -->
+      values (
+              seq_pid.nextval
+             , #{ p_proid }
+            , #{ pwriter }
+            , #{ ptitle }
+            , #{ pcontent }
+            , null
+            , null
+            , sysdate
+            , sysdate
+            , default
+            , default
+             )
+      </if>
+   </insert>
+
 	<update id="updatePCount" parameterType="_int">
 		update p_board
 		set pcount
@@ -115,18 +151,14 @@
 		</if>
 		<if test="p_file_name != null">
 			, p_file_name = #{ p_file_name },
-			p_rfile_name = #{
-			p_rfile_name }
+			p_rfile_name = #{ p_rfile_name }
 		</if>
 		where pid = #{ pid }
 	</update>
 
 	<update id="changePstatusN" parameterType="_int">
-		update p_board
-		set
-		pstatus = 'N',
-		p_modify_date = sysdate
-		where pid = #{ pid }
+		UPDATE P_BOARD
+		SET PSTATUS = 'N', P_MODIFY_DATE = SYSDATE WHERE PID = #{ pid }
 	</update>
 
 </mapper>

@@ -19,8 +19,7 @@
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
 
-<script type="text/javascript"
-	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {

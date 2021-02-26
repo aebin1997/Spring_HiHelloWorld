@@ -44,16 +44,16 @@ public class PboardDao {
 		return sqlSession.update("pboardMapper.updatePCount", pid);
 	}
 
-//	public int insertBoard(P_board pboard) {
-//		return sqlSession.insert("pboardMapper.insertPboard", pboard);
-//	}
+	public int insertPboard(P_board pboard) {
+		return sqlSession.insert("pboardMapper.insertPboard", pboard);
+	}
 
 	public int updateBoard(P_board pboard) {
 		return sqlSession.update("pboardMapper.updatePboard", pboard);
 	}
 
 	public int deletePboard(int pid) {
-		return sqlSession.update("pboardMapper.changeBstatusN", pid);
+		return sqlSession.update("pboardMapper.changePstatusN", pid);
 	}
 
 	public ArrayList<P_board> selectSearchTitle(String keyword) {

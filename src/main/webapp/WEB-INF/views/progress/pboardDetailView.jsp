@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%-- 응답온 페이지값 추출함 --%>
-<c:set var="currentPage" value="${ requestScope.page }" />
 
 <!DOCTYPE html>
 <html>
@@ -137,16 +135,16 @@
 						</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%> <c:if
 						test="${ !empty loginUser and loginUser.nickname eq pboard.pwriter }">
 						<c:url var="puv" value="/pupview.do">
-							<c:param name="pid" value="${pboard.pid }" />
-							<c:param name="page" value="${ currentPage }" />
+							<c:param name="pid" value="${ pboard.pid }" />
+							<c:param name="pro_id" value="${ pboard.p_proid }" />
 						</c:url>
 						<a href="${ puv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
    						<c:url var="pdl" value="/pdelete.do">
 							<c:param name="pid" value="${ pboard.pid }" />
+							<c:param name="pro_id" value="${ pboard.p_proid }" />
 						</c:url>
 						<a href="${ pdl }">[글삭제]</a> &nbsp; &nbsp; 
 						</c:if> <c:url var="pls" value="/plist.do">
-						<c:param name="page" value="${ currentPage }" />
 					</c:url> <a href="${ pls }">[목록]</a>
 				</th>
 			</tr>

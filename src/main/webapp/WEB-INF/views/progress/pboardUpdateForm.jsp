@@ -16,6 +16,7 @@
 	
 	<!-- 첨부파일도 수정할려고 하니 Multipart/form-data encType 지정!! 꼭!!!!!!-->
 	<form action="pupdate.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="p_proid" value="${ pro_id }">
 		<input type="hidden" name="pid" value="${ p.pid }">
 		<input type="hidden" name="p_file_name" value="${ p.p_file_name }">
 		<input type="hidden" name="p_rfile_name" value="${ p.p_rfile_name }">

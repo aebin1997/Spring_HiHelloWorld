@@ -47,10 +47,10 @@ public class PboardServiceImpl implements PboardService{
 	      return pboardDao.addReadCount(pid);
 	   }
 
-//	   @Override
-//	   public int insertPboard(P_board P_board) {
-//	      return pboardDao.insertPboard(P_board);
-//	   }
+	   @Override
+	   public int insertPboard(P_board P_board) {
+	      return pboardDao.insertPboard(P_board);
+	   }
 
 	   @Override
 	   public int updatePboard(P_board pboard) {
