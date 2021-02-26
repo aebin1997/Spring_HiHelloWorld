@@ -13,9 +13,6 @@
 <title>게시글 열람 페이지</title>
 <script type="text/javascript"
 	src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-latest.js"></script> 
-
-
 <script type="text/javascript">
 	$(function() {
 		
@@ -97,16 +94,8 @@
 	}
 	
 
+	
 </script>
-
-
-<script language="javascript">
-  function showPopup() {
-	  $("#blameDiv").css("display", "block");
-	  window.open("width=400, height=300, left=100, top=50"); }
-  </script>
-
-
 </head>
 <body>
 	
@@ -227,7 +216,7 @@
 		
 		<%-- 신고하기 폼 영역  --%>
 		<%-- <c:if test="${ !empty loginUser }"> --%>
-		<%-- <c:if test="${ !empty loginUser and loginUser.nickname ne B_Reply.b_rwriter }"> --%>
+		<c:if test="${ !empty loginUser and loginUser.nickname ne B_Reply.b_rwriter }">
 			<div id="blameDiv" style="padding-bottom: 30px;">
 				<form action="b.blame.insert.do" method="post">
 					<input type="hidden" name="blame_bid" value="${ board.bid }">
@@ -267,7 +256,7 @@
 				</form>
 			</div>
 			<!-- <button onclick="showBlameForm()">신고</button> -->
- 		<%-- </c:if> --%>
+ 		</c:if>
  
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="padding-bottom: 30px;">

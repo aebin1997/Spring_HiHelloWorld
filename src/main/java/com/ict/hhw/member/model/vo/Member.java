@@ -13,16 +13,18 @@ public class Member {
 	private String address;
 	private Date enrollDate;
 	private Date updateDate;
-	private String mStatus;
+	private String mstatus;
 	private String selfintro_head;
 	private String selfintro_content;
 	private String propic;
+	private String user_lv;
+	private String grade;
 	
 	public Member() {}
 
 	public Member(String id, String pwd, String name, String nickname, String email, String sex, String phone,
-			String address, Date enrollDate, Date updateDate, String mStatus, String selfintro_head,
-			String selfintro_content, String propic) {
+			String address, Date enrollDate, Date updateDate, String mstatus, String selfintro_head,
+			String selfintro_content, String propic, String user_lv, String grade) {
 		super();
 		this.id = id;
 		this.pwd = pwd;
@@ -34,10 +36,12 @@ public class Member {
 		this.address = address;
 		this.enrollDate = enrollDate;
 		this.updateDate = updateDate;
-		this.mStatus = mStatus;
+		this.mstatus = mstatus;
 		this.selfintro_head = selfintro_head;
 		this.selfintro_content = selfintro_content;
 		this.propic = propic;
+		this.user_lv = user_lv;
+		this.grade = grade;
 	}
 
 	public String getId() {
@@ -120,12 +124,12 @@ public class Member {
 		this.updateDate = updateDate;
 	}
 
-	public String getmStatus() {
-		return mStatus;
+	public String getMstatus() {
+		return mstatus;
 	}
 
-	public void setmStatus(String mStatus) {
-		this.mStatus = mStatus;
+	public void setMstatus(String mstatus) {
+		this.mstatus = mstatus;
 	}
 
 	public String getSelfintro_head() {
@@ -152,12 +156,30 @@ public class Member {
 		this.propic = propic;
 	}
 
+	public String getUser_lv() {
+		return user_lv;
+	}
+
+	public void setUser_lv(String user_lv) {
+		this.user_lv = user_lv;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", pwd=" + pwd + ", name=" + name + ", nickname=" + nickname + ", email=" + email
 				+ ", sex=" + sex + ", phone=" + phone + ", address=" + address + ", enrollDate=" + enrollDate
-				+ ", updateDate=" + updateDate + ", mStatus=" + mStatus + ", selfintro_head=" + selfintro_head
-				+ ", selfintro_content=" + selfintro_content + ", propic=" + propic + "]";
+				+ ", updateDate=" + updateDate + ", mstatus=" + mstatus + ", selfintro_head=" + selfintro_head
+				+ ", selfintro_content=" + selfintro_content + ", propic=" + propic + ", user_lv=" + user_lv
+				+ ", grade=" + grade + "]";
 	}
 
+	
 }

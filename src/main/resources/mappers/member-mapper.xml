@@ -13,7 +13,12 @@
 		<result property="address" column="ADDRESS"/>
 		<result property="enrollDate" column="ENROLLDATE"/>
 		<result property="updateDate" column="UPDATEDATE"/>
-		<result property="mStatus" column="MSTATUS"/>
+		<result property="mstatus" column="MSTATUS"/>
+		<result property="selfintro_head" column="selfintro_head"/>
+		<result property="selfintro_content" column="selfintro_content"/>
+		<result property="propic" column="propic"/>
+		<result property="user_lv" column="user_lv"/>
+		<result property="grade" column="grade"/>
 	</resultMap>
 
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
@@ -50,6 +55,8 @@
 		       , null
 		       , null
 		       , null
+		       , default
+		       , default
       	       )
 	</insert>
 	
