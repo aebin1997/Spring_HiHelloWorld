@@ -158,7 +158,7 @@
 
 	<update id="changePstatusN" parameterType="_int">
 		UPDATE P_BOARD
-		SET PSTATUS = 'N', P_MODIFY_DATE = SYSDATE WHERE PID = #{ pid }
+		SET PSTATUS = 'N', P_MODFIY_DATE = SYSDATE WHERE PID = #{ pid }
 	</update>
 
 </mapper>
