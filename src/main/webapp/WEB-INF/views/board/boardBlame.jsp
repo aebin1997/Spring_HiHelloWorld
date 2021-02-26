@@ -10,92 +10,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 열람 페이지</title>
+<title>신고 페이지</title>
 <script type="text/javascript"
 	src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		
-		/* hideReplyForm(); */  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
-		hideBlameForm();  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
-
-		//jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
-		//해당 게시글의 번호를 전송함
-		var bid = ${ board.bid };//el 의 값을 변수에 대입
-		var loginUser = "${ sessionScope.loginUser.nickname }"; //로그인한 회원 아이디 변수에 대입
-		$.ajax({
-		url : "${ pageContext.request.contextPath }/rlist.do",
-		type : "post",
-		data : { b_ref_bid : bid }, //전송값에 변수 사용
-		dataType : "json",
-		success : function(data) {
-			console.log("success : " + data);
-
-			//object ==> string
-			var jsonStr = JSON.stringify(data);
-			//string ==> json 
-			var json = JSON.parse(jsonStr);
-
-			var values = "";
-			for ( var i in json.list) {
-				//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
-				if (loginUser == json.list[i].b_rwriter) {
-					values += "<tr><td><"+ json.list[i].b_rwriter
-							+ "> 님 댓글</td><td>"	+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
-							+ "<form action='rupdate.do' method='post'>"
-							+ "<input type='hidden' name='b_rid' value='" +  json.list[i].b_rid  + "'>"
-							+ "<input type='hidden' name='bid' value='${board.bid}'>"
-							+ "<textarea name='b_rcontent'>"
-							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ")
-							+ "</textarea><input type='submit' value='수정'></form>"
-							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");'>삭제</button></td></tr>";
-				} else { //본인 댓글이 아닐 때
-					values += "<tr><td><"+ json.list[i].b_rwriter
-							+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
-							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
-							+ "<button onclick='showBlamForm();' style='float:right'>신고</button></td></tr>";
-				}
-			} //for in
-
-			$("#rlistTbl").html($("#rlistTbl").html() + values);
-			
-		}, // success
-		
-		error : function(jqXHR, textstatus, errorthrown) {
-			console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
-		} // 에러
-		
-	}); //notice top3 ajax
-
-}); //jquery document ready
 
 
-	function replyDelete(b_rid) {
-		location.href = "${ pageContext.request.contextPath }/rdel.do?b_rid="
-				+ b_rid + "&bid=${ board.bid }";
-	}
-
-	function showReplyForm() {
-		$("#replyDiv").css("display", "block");
-	}
-	
-	function hideReplyForm() {
-		$("#replyDiv").css("display", "none");
-	} 
-
-	function showBlamForm() {
-		$("#blameDiv").css("display", "block");
-	}
-	
-	function hideBlameForm() {
-		$("#blameDiv").css("display", "none");
-	}
-	
-
-	
-</script>
 </head>
 <body>
 	

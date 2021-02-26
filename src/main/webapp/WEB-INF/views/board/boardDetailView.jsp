@@ -54,7 +54,11 @@
 							+ "</textarea><input type='submit' value='수정'></form>"
 							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");'>삭제</button></td></tr>";
 				} else { //본인 댓글이 아닐 때
-					values += "<tr><td><"+ json.list[i].b_rwriter
+/* 					values += "<tr><td><name='b_rwriter' value='${b_rwriter}'> 님 댓글</td><td>"+ json.list[i].b_create_date
+							+ "</td></tr><tr><td colspan='2'>"
+							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
+							+ "<button onclick='showBlamForm();' style='float:right'>신고</button></td></tr>"; */
+ 					values += "<tr><td><"+ json.list[i].b_rwriter
 							+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
 							+ "</td></tr><tr><td colspan='2'>"
 							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
@@ -250,7 +254,7 @@
 						
 						<tr>
 							<th>신고대상</th>
-							<td><input type="text" name="target_nickname" readonly value=" ${ B_Reply.b_rwriter } "></td>
+							<td><input type="text" name="target_nickname" readonly value=" ${ b_reply.b_rwriter } "></td>
 						</tr>
 						
 						<tr>
