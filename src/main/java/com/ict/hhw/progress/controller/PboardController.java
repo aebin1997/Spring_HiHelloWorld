@@ -70,8 +70,11 @@ public class PboardController {
 	@RequestMapping(value = "psearchTitle.do", method = RequestMethod.POST)
 	public String pboardSearchTitleMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id,
 			Model model) {
-
-		ArrayList<P_board> list = pboardService.selectSearchTitle(keyword);
+		Psearch searches = new Psearch();
+		searches.setKeyword(keyword);
+		searches.setP_proid(pro_id);
+		
+		ArrayList<P_board> list = pboardService.selectSearchTitle(searches);
 		model.addAttribute("pro_id", pro_id);
 
 		if (list.size() > 0) {
@@ -89,8 +92,12 @@ public class PboardController {
 	@RequestMapping(value = "psearchWriter.do", method = RequestMethod.POST)
 	public String boardSearchWriterMethod(@RequestParam("keyword") String keyword, @RequestParam("pro_id") int pro_id,
 			Model model) {
+		Psearch searches = new Psearch();
+		searches.setKeyword(keyword);
+		searches.setP_proid(pro_id);
 
-		ArrayList<P_board> list = pboardService.selectSearchWriter(keyword);
+		
+		ArrayList<P_board> list = pboardService.selectSearchWriter(searches);
 		model.addAttribute("pro_id", pro_id);
 
 		if (list.size() > 0) {
@@ -106,11 +113,12 @@ public class PboardController {
 	}
 
 	@RequestMapping(value = "psearchDate.do", method = RequestMethod.POST)
-	public String boardSearchDateMethod(SearchDate dates, Model model) {
+	public String boardSearchDateMethod(SearchDate dates, @RequestParam("pro_id") int pro_id,Model model) {
 
 		Psearch searches = new Psearch();
 		searches.setBegin(dates.getBegin());
 		searches.setEnd(dates.getEnd());
+		searches.setP_proid(pro_id);
 
 		ArrayList<P_board> list = pboardService.selectSearchDate(searches);
 

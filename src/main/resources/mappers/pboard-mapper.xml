@@ -45,6 +45,7 @@
 		WHERE PSTATUS = 'Y'
 		AND PTITLE LIKE '%'
 		|| #{ keyword } || '%'
+		AND P_PROID = #{ p_proid }
 		ORDER BY PID DESC
 
 	</select>
@@ -56,6 +57,7 @@
 		FROM P_BOARD
 		WHERE PSTATUS = 'Y'
 		AND PWRITER LIKE '%' || #{ keyword } || '%'
+		AND P_PROID = #{ p_proid }
 		ORDER BY PID DESC
 	</select>
 
@@ -65,6 +67,7 @@
 		SELECT *
 		FROM BOARD
 		WHERE B_STATUS = 'Y'
+		AND P_PROID = #{ p_proid }
 		and b_create_date between #{ begin } and #{ end }
 		ORDER BY BID DESC
 	</select>

@@ -7,9 +7,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Repository("pboardDao")
@@ -56,18 +56,18 @@ public class PboardDao {
 		return sqlSession.update("pboardMapper.changePstatusN", pid);
 	}
 
-	public ArrayList<P_board> selectSearchTitle(String keyword) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.searchTitle", keyword);
+	public ArrayList<P_board> selectSearchTitle(Psearch psearch) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.searchTitle", psearch);
 		return (ArrayList<P_board>)list;
 	}
 
-	public ArrayList<P_board> selectSearchWriter(String keyword) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.searchWriter", keyword);
+	public ArrayList<P_board> selectSearchWriter(Psearch psearch) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.searchWriter", psearch);
 		return (ArrayList<P_board>)list;
 	}
 
-	public ArrayList<P_board> selectSearchDate(SearchAndPage searches) {
-		List<P_board> list = sqlSession.selectList("pboardMapper.searchDate", searches);
+	public ArrayList<P_board> selectSearchDate(Psearch psearch) {
+		List<P_board> list = sqlSession.selectList("pboardMapper.searchDate", psearch);
 		return (ArrayList<P_board>)list;
 	}
 

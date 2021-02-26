@@ -412,9 +412,6 @@
 						</div>
 						<div id="titleDiv">
 							<form action="psearchTitle.do" method="post">
-								<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
-								<input type="hidden" name="page" value="1">
-								<!-- 페이지 요청할때는 ${ page }대신에 그냥 무조건 1페이지로 가게끔 -->
 								<label> 검색할 제목을 입력하시오 : <input type="search"
 									name="keyword"></label> <input type="hidden"
 									name="pro_id" value="${ pro_id }"><input type="submit" value="검색">
@@ -423,8 +420,7 @@
 						<div id="writerDiv">
 							<form action="psearchWriter.do" method="post">
 								<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
-								<input type="hidden" name="page" value="1"> <label>
-									검색할 작성자 아이디를 입력하시오 : <input type="search" name="keyword">
+								<label>검색할 작성자 아이디를 입력하시오 : <input type="search" name="keyword">
 								</label><input type="hidden" name="pro_id" value="${ pro_id }">
 									<input type="submit" value="검색">
 							</form>

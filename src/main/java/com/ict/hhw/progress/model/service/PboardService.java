@@ -2,9 +2,9 @@ package com.ict.hhw.progress.model.service;
 
 import java.util.ArrayList;
 
-import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
 public interface PboardService {
@@ -21,9 +21,9 @@ public interface PboardService {
 	int insertPboard(P_board pboard);
 	int updatePboard(P_board pboard);
 	int deletePboard(int pid);
-	ArrayList<P_board> selectSearchTitle(String keyword);
-	ArrayList<P_board> selectSearchWriter(String keyword);
-	ArrayList<P_board> selectSearchDate(SearchAndPage searches);
+	ArrayList<P_board> selectSearchTitle(Psearch psearch);
+	ArrayList<P_board> selectSearchWriter(Psearch psearch);
+	ArrayList<P_board> selectSearchDate(Psearch psearch);
 	int getSearchTitleListCount(String keyword);
 	int getSearchWriterListCount(String keyword);
 	int getSearchDateListCount(SearchDate dates);

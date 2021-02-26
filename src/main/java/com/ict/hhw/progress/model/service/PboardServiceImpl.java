@@ -9,6 +9,7 @@ import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.dao.PboardDao;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Service("pboardService")
@@ -63,18 +64,18 @@ public class PboardServiceImpl implements PboardService{
 	   }
 
 		@Override
-		public ArrayList<P_board> selectSearchTitle(String keyword) {
-			return pboardDao.selectSearchTitle(keyword);
+		public ArrayList<P_board> selectSearchTitle(Psearch psearch) {
+			return pboardDao.selectSearchTitle(psearch);
 		}
 		
 		@Override
-		public ArrayList<P_board> selectSearchWriter(String keyword) {
-			return pboardDao.selectSearchWriter(keyword);
+		public ArrayList<P_board> selectSearchWriter(Psearch psearch) {
+			return pboardDao.selectSearchWriter(psearch);
 		}
 		
 		@Override
-		public ArrayList<P_board> selectSearchDate(SearchAndPage searches) {
-			return pboardDao.selectSearchDate(searches);
+		public ArrayList<P_board> selectSearchDate(Psearch psearch) {
+			return pboardDao.selectSearchDate(psearch);
 		}
 
 		@Override
