@@ -18,8 +18,7 @@ public class P_board implements Serializable{
 	private int pcount;
 	private String pstatus;
 
-	public P_board() {
-	}
+	public P_board() {}
 
 	public P_board(int pid, int p_proid, String pwriter, String ptitle, String pcontent, String p_file_name,
 			String p_rfile_name, Date p_date, Date p_modify_date, int pcount, String pstatus) {

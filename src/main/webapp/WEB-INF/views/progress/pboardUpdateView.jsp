@@ -18,6 +18,7 @@
 	<h1 align="center">${ requestScope.pboard.pid }번게시글 수정 페이지</h1>
 	<%--form에서 입력값들과 파일을 같이 전송하려면, 반드시 enctype="multipart/form-data"속성 추가해야 함 --%>
 	<form action="pupdate.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="p_proid" value="${ pro_id }">
 		<input type="hidden" name="pid" value="${ pboard.pid }"> <input
 			type="hidden" name="p_file_name"
 			value="${ pboard.p_file_name }"> <input type="hidden"

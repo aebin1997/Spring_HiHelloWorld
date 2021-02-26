@@ -18,11 +18,12 @@
 				cellpadding="5">
 				<tr>
 					<th>제 목</th>
-					<td><input type="text" name="btitle"></td>
+					<td><input type="hidden" name="p_proid" value="${ pro_id }">
+					<input type="text" name="ptitle"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="bwriter" readonly
+					<td><input type="text" name="pwriter" readonly
 						value="${ sessionScope.loginUser.nickname }"></td>
 				</tr>
 				<tr>
@@ -31,7 +32,7 @@
 				</tr>
 				<tr>
 					<th>내 용</th>
-					<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
+					<td><textarea name="pcontent" rows="5" cols="50"></textarea></td>
 				</tr>
 				<tr>
 					<th colspan="2"><input type="submit" value="등록하기">

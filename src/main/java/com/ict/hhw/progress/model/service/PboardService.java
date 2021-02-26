@@ -18,7 +18,7 @@ public interface PboardService {
 	QaProgress selectProgress(int pro_id);
 	int addReadCount(int pid);
 	// 원글 조회
-	//int insertPboard(P_board pboard);
+	int insertPboard(P_board pboard);
 	int updatePboard(P_board pboard);
 	int deletePboard(int pid);
 	ArrayList<P_board> selectSearchTitle(String keyword);
