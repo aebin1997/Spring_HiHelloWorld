@@ -25,6 +25,12 @@ public class ProgressController {
 	@Autowired
 	private ProgressService progressService;
 
+	// contact 페이지로 이동
+	@RequestMapping("contact.move")
+	public String contact() {
+		return "contact/contact";
+	}
+
 	@RequestMapping("progress.move")
 	public String pboardListMethod(HttpSession session, Model model) {
 
@@ -80,7 +86,7 @@ public class ProgressController {
 		}
 	}
 
-	@RequestMapping(value="progressInsert.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	@RequestMapping(value = "progressInsert.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String processInsert(@RequestParam("qa_title") String qa_title,
 			@RequestParam("pro_answerer") String pro_answerer, @RequestParam("pro_deadline") Date pro_deadline,
 			@RequestParam("pro_pay") int pro_pay, HttpSession session, Model model) {
@@ -105,7 +111,7 @@ public class ProgressController {
 		int result = progressService.insertProgress(progress);
 
 		if (result > 0) {
-			//alert 창
+			// alert 창
 			return "<script type='text/javascript'>" + "alert(\"의뢰 요청을 성공적으로 전송하였습니다.\");"
 					+ "location.href=\"/hhw/progress.move\";" + "</script>";
 		} else {
@@ -115,8 +121,7 @@ public class ProgressController {
 
 	}
 
-
-	@RequestMapping(value="requestAccept.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	@RequestMapping(value = "requestAccept.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String requestAccept(@RequestParam("r_pro_id") int r_pro_id) {
 
 		int result = progressService.acceptRequest(r_pro_id);
@@ -128,8 +133,8 @@ public class ProgressController {
 			return "common.errorPage";
 		}
 	}
-	
-	@RequestMapping(value="requestRefuse.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+
+	@RequestMapping(value = "requestRefuse.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String requestRefuse(@RequestParam("r_pro_id") int r_pro_id) {
 
 		int result = progressService.refuseRequest(r_pro_id);
@@ -141,6 +146,5 @@ public class ProgressController {
 			return "common.errorPage";
 		}
 	}
-	
 
 }
