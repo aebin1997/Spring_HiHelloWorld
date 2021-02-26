@@ -21,17 +21,35 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- 업로드 패스 설정 --> 
-<beans:bean class="java.lang.String" id="uploadPath">
- <beans:constructor-arg value="D:\kubg\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kubg\resources" />
-</beans:bean>
+		<!-- 업로드 패스 설정 --> 
+	<beans:bean class="java.lang.String" id="uploadPath">
+	 <beans:constructor-arg value="D:\kubg\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\kubg\resources" />
+	</beans:bean>
+	
+	<!-- 일반 파일 업로드 경로 -->
+	<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
 
-<!-- 일반 파일 업로드 경로 -->
-<resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
-
-<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
- <beans:property name="maxUploadSize" value="10485760"/>
-</beans:bean>
+	<beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+	 <beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+	
+		<!-- 파일 다운을 위한 뷰리졸버 지정 (JsonView도 해당됨) 
+		주의 : id 속성을 지정하지 않는다.
+		여러 개의 뷰리졸버를 지정할 때는 실행 순서를 정해야함
+		파일 다운 뷰리졸버가 반드시 맨 처음 실행되게 순서를 지정해야함
+		즉, 컨트롤러 메소드가 리턴하는 뷰이름과 동일한 뷰클래스(bean)가 있으면
+		자동으로 해당 뷰클래스(파일다운로드 처리용 뷰클래스)를 실행함
+	-->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0" />
+	</beans:bean>
+	
+	<!-- 컨트롤러 메소드가 리턴한 json 객체 출력용 뷰 클래스를 등록함  :
+		maven dependency로 다운받은 라이브러리가 제공함 -->
+	<beans:bean class="net.sf.json.spring.web.servlet.view.JsonView"
+		lazy-init="false" id="jsonView">
+	</beans:bean>
+	
 	
 	<context:component-scan base-package="com.ict.hhw" />
 	
