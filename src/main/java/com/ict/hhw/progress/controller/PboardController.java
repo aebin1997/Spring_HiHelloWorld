@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.hhw.board.model.vo.Board;
-import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.service.PboardService;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
 @Controller
@@ -106,38 +106,16 @@ public class PboardController {
 	}
 
 	@RequestMapping(value = "psearchDate.do", method = RequestMethod.POST)
-	public String boardSearchDateMethod(SearchDate dates, @RequestParam("page") int currentPage, Model model) {
-		// 전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
-		int limit = 10;
-		int startRow = (currentPage - 1) * limit - 1;
-		int endRow = startRow + limit - 1;
+	public String boardSearchDateMethod(SearchDate dates, Model model) {
 
-		SearchAndPage searches = new SearchAndPage();
+		Psearch searches = new Psearch();
 		searches.setBegin(dates.getBegin());
 		searches.setEnd(dates.getEnd());
-		searches.setStartRow(startRow);
-		searches.setEndRow(endRow);
 
 		ArrayList<P_board> list = pboardService.selectSearchDate(searches);
 
-		// 페이지 처리와 관련된 값 처리
-		// 총 페이지 계산을 위한 총 목록 갯수 조회
-		int listCount = pboardService.getSearchDateListCount(dates);
-		int maxPage = (int) ((double) listCount / limit + 0.9);
-		// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
-		// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
-		int startPage = ((int) (double) currentPage / 10) * 10 + 1;
-		int endPage = startPage + 9;
-
-		if (maxPage < endPage)
-			endPage = maxPage;
-
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("maxPage", maxPage);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
 			model.addAttribute("action", "psearchDate.do");
 			model.addAttribute("begin", dates.getBegin());
 			model.addAttribute("end", dates.getEnd());

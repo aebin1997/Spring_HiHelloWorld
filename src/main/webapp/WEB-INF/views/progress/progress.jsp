@@ -431,7 +431,6 @@
 						</div>
 						<div id="dateDiv">
 							<form action="psearchDate.do" method="post">
-								<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
 								<input type="hidden" name="page" value="1"> <label>
 									검색할 날짜를 입력하시오 : <input type="date" name="begin"> ~ <input
 									type="date" name="end">
@@ -466,12 +465,12 @@
 											</c:url> <a href="${ pdt }">${ p.ptitle }</a></td>
 										<td align="center">${ p.pwriter }</td>
 										<td align="center">${ p.p_date }</td>
-										<td align="center">${ p.pcount }</td>
 										<td align="center"><c:if test="${ !empty p.p_file_name }">
-     					 ◎
-				      </c:if> <c:if test="${ empty p.p_file_name }">
-				      &nbsp;
-				      </c:if></td>
+				     					 ◎
+								      </c:if> <c:if test="${ empty p.p_file_name }">
+				      				  &nbsp;
+				      				  </c:if></td>
+				      				  <td align="center">${ p.pcount }</td>
 									</tr>
 								</c:forEach>
 							</table>
