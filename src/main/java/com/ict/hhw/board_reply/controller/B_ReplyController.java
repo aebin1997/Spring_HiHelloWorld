@@ -71,14 +71,6 @@ public class B_ReplyController {
 
 	}
 	
-	// 댓글목록(@RestController Json방식으로 처리 : 데이터를 리턴
-	@RequestMapping("listJson.do")
-	@ResponseBody // 리턴데이터를 json으로 변환(생략가능)
-	public ArrayList<B_Reply> listJson(@RequestParam int b_rid) {
-		ArrayList<B_Reply> b_rlist = b_replyService.selectList(b_rid);
-		return b_rlist;
-	}
-	
 	
 	@RequestMapping("rdel.do")
 	public String replyDeleteMethod(@RequestParam("b_rid") int b_rid, @RequestParam("bid") int bid, Model model) {

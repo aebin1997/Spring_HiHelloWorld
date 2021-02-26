@@ -10,20 +10,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ict.hhw.blame.model.service.BlameService;
 import com.ict.hhw.blame.model.vo.Blame;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
+import com.ict.hhw.notice.model.vo.Notice;
 
 @Controller
 public class BlameController {
 	@Autowired
 	private BlameService BlameService;
 	
+	
 	// 신고글 등록 요청 처리용
 	@RequestMapping(value = "b.blame.insert.do", method = RequestMethod.POST)
-	public String BlameUpdateMethod(Blame Blame, HttpServletRequest request, Model model) {
+	public String BlameInsertMethod(Blame Blame, HttpServletRequest request,
+			@RequestParam(name = "upfile", required = false) MultipartFile mfile,  Model model) {
 
 		if (BlameService.insertBlame(Blame) > 0) {
 			return "redirect:blist.do?page=1";
