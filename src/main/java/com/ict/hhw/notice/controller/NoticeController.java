@@ -50,12 +50,6 @@ public class NoticeController {
 	public String howTo() {
 		return "notice/howTo";
 	}
-	
-	// contact 페이지로 이동
-	@RequestMapping("contact.move")
-	public String contact() {
-		return "contact/contact";
-	}
 
 	// ajax로 최신 공지글 조회 요청 처리용
 		@RequestMapping(value = "ntop3.do", method = RequestMethod.POST)

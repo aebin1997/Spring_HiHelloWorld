@@ -7,8 +7,6 @@ import com.ict.hhw.notice.model.vo.Notice;
 
 public interface NoticeService {
 	ArrayList<Notice> selectAll();
-	
-	//리스트보기
 	Notice selectnotice(int nid);
 	int insertNotice(Notice notice);
 	int updateNotice(Notice notice);

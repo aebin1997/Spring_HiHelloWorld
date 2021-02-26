@@ -40,8 +40,8 @@
 			for ( var i in json.list) {
 				//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
 				if (loginUser == json.list[i].b_rwriter) {
-					values += "<tr><td>"+ json.list[i].b_rwriter
-							+ "</td><td>"	+ json.list[i].b_create_date
+					values += "<tr><td><"+ json.list[i].b_rwriter
+							+ "> 님 댓글</td><td>"	+ json.list[i].b_create_date
 							+ "</td></tr><tr><td colspan='2'>"
 							+ "<form action='rupdate.do' method='post'>"
 							+ "<input type='hidden' name='b_rid' value='" +  json.list[i].b_rid  + "'>"
@@ -51,10 +51,11 @@
 							+ "</textarea><input type='submit' value='수정'></form>"
 							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");'>삭제</button></td></tr>";
 				} else { //본인 댓글이 아닐 때
-					values += "<tr><td>"+ json.list[i].b_rwriter
-							+ "</td><td>"+ json.list[i].b_create_date
+					values += "<tr><td><"+ json.list[i].b_rwriter
+							+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
 							+ "</td></tr><tr><td colspan='2'>"
-							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") + "</td></tr>";
+							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
+							+ "<button onclick='showBlameForm();'>신고</button></td></tr>";
 				}
 			} //for in
 
@@ -187,9 +188,6 @@
 						<input type="hidden" name="b_ref_bid" value="${ board.bid }">
 						<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
 						
-							<tr valign="middle">
-								<th style="text-align: center;" colspan="2">댓글작성</th>
-							</tr>
 						
 							<tr>
 								<th>작성자</th>
@@ -202,7 +200,7 @@
 							</tr>
 							
 							<tr>
-								<th colspan="2">
+								<th colspan="2"  style="text-align: right;">
 								<input type="submit" value="댓글등록">&nbsp;
 							</tr>
 						</table>
@@ -213,9 +211,10 @@
 	
 	
 			
-	<%-- 		
-		신고하기 폼 영역
-		<c:if test="${ !empty loginUser }">
+		
+		<%-- 신고하기 폼 영역  --%>
+		<%-- <c:if test="${ !empty loginUser }"> --%>
+		<c:if test="${ !empty loginUser and loginUser.nickname ne B_Reply.b_rwriter }">
 			<div id="blameDiv" style="padding-bottom: 30px;">
 				<form action="b.blame.insert.do" method="post">
 					<input type="hidden" name="blame_bid" value="${ board.bid }">
@@ -238,7 +237,7 @@
 						
 						<tr>
 							<th>신고대상</th>
-							<td><input type="text" name="target_nickname" readonly value=" ${ board.bwriter } "></td>
+							<td><input type="text" name="target_nickname" readonly value=" ${ B_Reply.b_rwriter } "></td>
 						</tr>
 						
 						<tr>
@@ -254,8 +253,9 @@
 					</table>
 				</form>
 			</div>
-		</c:if>  --%>
-
+			<!-- <button onclick="showBlameForm()">신고</button> -->
+ 		</c:if>
+ 
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="padding-bottom: 30px;">
 		<table id="rlistTbl" align="center" cellspacing="0" cellpadding="20" border="1" width="500"></table>
