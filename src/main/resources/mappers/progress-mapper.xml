@@ -105,5 +105,13 @@
 		PRO_STATUS = 'D'
 		WHERE PRO_ID = #{ r_pro_id }
 	</update>
+	
+	<update id="checkDeadline">
+	 <![CDATA[
+		UPDATE PROGRESS
+		SET PRO_STATUS = 'N'
+		WHERE PRO_DEADLINE < TO_DATE(SYSDATE, 'YY/MM/DD')		
+	]]>
+	</update>
 
 </mapper>

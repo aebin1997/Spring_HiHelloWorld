@@ -42,6 +42,7 @@ public class ProgressController {
 		ArrayList<QaProgress> requestList = null;
 		ArrayList<String> titleList = null;
 
+		// 오늘 날짜 생성
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 

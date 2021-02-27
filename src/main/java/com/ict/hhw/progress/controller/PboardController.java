@@ -49,6 +49,15 @@ public class PboardController {
 		}
 	}
 
+	// 마감(review 페이지로 이동)
+	@RequestMapping("review.move")
+	public String reviewMove(@RequestParam("pro_id") int pro_id, Model model) {
+		QaProgress qplist = pboardService.selectProgress(pro_id);
+
+		model.addAttribute("qplist", qplist);
+		return "review/reviewWriteForm";
+	}
+
 	// 게시글 페이지별 목록 조회 요청 처리용 (+ 목록 페이지로 이동)
 	@RequestMapping(value = "plist.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
 	public String pboardListMethod(@RequestParam("pro_id") int pro_id, Model model) {
@@ -73,7 +82,7 @@ public class PboardController {
 		Psearch searches = new Psearch();
 		searches.setKeyword(keyword);
 		searches.setP_proid(pro_id);
-		
+
 		ArrayList<P_board> list = pboardService.selectSearchTitle(searches);
 		model.addAttribute("pro_id", pro_id);
 
@@ -96,7 +105,6 @@ public class PboardController {
 		searches.setKeyword(keyword);
 		searches.setP_proid(pro_id);
 
-		
 		ArrayList<P_board> list = pboardService.selectSearchWriter(searches);
 		model.addAttribute("pro_id", pro_id);
 
@@ -113,7 +121,7 @@ public class PboardController {
 	}
 
 	@RequestMapping(value = "psearchDate.do", method = RequestMethod.POST)
-	public String boardSearchDateMethod(SearchDate dates, @RequestParam("pro_id") int pro_id,Model model) {
+	public String boardSearchDateMethod(SearchDate dates, @RequestParam("pro_id") int pro_id, Model model) {
 
 		Psearch searches = new Psearch();
 		searches.setBegin(dates.getBegin());
@@ -138,7 +146,8 @@ public class PboardController {
 	// 진행 게시판 게시글 등록 처리용
 	@RequestMapping(value = "pinsert.do", method = RequestMethod.POST)
 	public String boardUpdateMethod(P_board pboard, HttpServletRequest request,
-			@RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id, Model model) {
+			@RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id,
+			Model model) {
 		// 업로드된 파일 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("resources/pboard_files");
 
@@ -189,8 +198,9 @@ public class PboardController {
 
 	// 게시글 수정 요청 처리용
 	@RequestMapping(value = "pupdate.do", method = RequestMethod.POST)
-	public String boardUpdateMethod(P_board pboard, @RequestParam(name = "delFlag", required = false) String delFlag, 
-			HttpServletRequest request, Model model, @RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id) {
+	public String boardUpdateMethod(P_board pboard, @RequestParam(name = "delFlag", required = false) String delFlag,
+			HttpServletRequest request, Model model,
+			@RequestParam(name = "upfile", required = false) MultipartFile mfile, @RequestParam("p_proid") int pro_id) {
 
 		// 업로드된 파일 저장 폴더 지정하기
 		String savePath = request.getSession().getServletContext().getRealPath("resources/pboard_files");

@@ -9,6 +9,9 @@
 	<c:param name="pro_id" value="${ pro_id }" />
 </c:url>
 
+<c:url var="review" value="/review.move">
+	<c:param name="pro_id" value="${ pro_id }" />
+</c:url>
 
 
 
@@ -19,7 +22,8 @@
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
 
-<script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript"
+	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {
@@ -81,31 +85,54 @@
 			<!-- 콘텐츠 시작 { -->
 			<div id="bo_qa" class="container ">
 				<div id="con_lf">
-				<c:if test="${ qplist ne null }"><h1 class="pg_tit">질문</h1></c:if>
-					<article id="sir_qav" class="sir_vbo">
-					<c:if test="${ qplist ne null }">
-						<header id="qav_head" class="vbo_head">
-							<h2>${ qplist.qa_title }</h2>
-							<div id="qav_info">
-								<span class="info_span info_name"><span class="sv_wrap">
-										<span class="member">${ qplist.pro_writer }</span>
-								</span></span><span class="info_span info_date"><time
-										datetime="2021-02-18T14:58:09+09:00">${ qplist.qa_create_date }</time></span><span
-									class="info_span info_ip"></span>
-							</div>
-						</header>
-						<section id="vbo_con">
-							<div class="con_inner">
-								<p>${ qplist.qa_content }</p>
-								<p>&nbsp;</p>
-								<div style="clear: both;"></div>
-							</div>
-							<div class="qa_tags qa_tags_view"></div>
-						</section>
-						<br>
+					
+					<h1 class="pg_tit">마감일 : ${qplist.pro_deadline}</h1>
+					<progress value="${ qplist.pro_process }" max="100"
+						style="width: 730px;"></progress>
+					
+					<div class="vbo_wr">
+						<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
+						<ul class="sir_vbo_com">
+							<li><a href="#" class="sir_b01">수정</a></li>
+						</ul>
+						<ul class="sir_vbo_com">
+							<li><a href="${ review }" class="sir_b01">마감</a></li>
+						</ul>
 						</c:if>
-						
-						
+						<ul class="sir_vbo_com">
+							<li><a href="#" class="sir_b01">목록</a></li>
+						</ul>
+					</div>
+					
+					<br>
+					
+					<c:if test="${ qplist ne null }">
+						<h1 class="pg_tit">질문</h1>
+					</c:if>
+					<article id="sir_qav" class="sir_vbo">
+						<c:if test="${ qplist ne null }">
+							<header id="qav_head" class="vbo_head">
+								<h2>${ qplist.qa_title }</h2>
+								<div id="qav_info">
+									<span class="info_span info_name"><span class="sv_wrap">
+											<span class="member">${ qplist.pro_writer }</span>
+									</span></span><span class="info_span info_date"><time
+											datetime="2021-02-18T14:58:09+09:00">${ qplist.qa_create_date }</time></span><span
+										class="info_span info_ip"></span>
+								</div>
+							</header>
+							<section id="vbo_con">
+								<div class="con_inner">
+									<p>${ qplist.qa_content }</p>
+									<p>&nbsp;</p>
+									<div style="clear: both;"></div>
+								</div>
+								<div class="qa_tags qa_tags_view"></div>
+							</section>
+							<br>
+						</c:if>
+
+
 						<div id="qa_answer" class="qa-answer">
 							<a id="qa_answer-anchor"></a>
 							<div class="qa-answer-sort">
@@ -413,16 +440,17 @@
 						<div id="titleDiv">
 							<form action="psearchTitle.do" method="post">
 								<label> 검색할 제목을 입력하시오 : <input type="search"
-									name="keyword"></label> <input type="hidden"
-									name="pro_id" value="${ pro_id }"><input type="submit" value="검색">
+									name="keyword"></label> <input type="hidden" name="pro_id"
+									value="${ pro_id }"><input type="submit" value="검색">
 							</form>
 						</div>
 						<div id="writerDiv">
 							<form action="psearchWriter.do" method="post">
 								<!-- 여기서부터 서블릿 때랑 약간다름. method메소드가 따로따로 가게됨 -->
-								<label>검색할 작성자 아이디를 입력하시오 : <input type="search" name="keyword">
+								<label>검색할 작성자 아이디를 입력하시오 : <input type="search"
+									name="keyword">
 								</label><input type="hidden" name="pro_id" value="${ pro_id }">
-									<input type="submit" value="검색">
+								<input type="submit" value="검색">
 							</form>
 						</div>
 						<div id="dateDiv">
@@ -466,7 +494,7 @@
 								      </c:if> <c:if test="${ empty p.p_file_name }">
 				      				  &nbsp;
 				      				  </c:if></td>
-				      				  <td align="center">${ p.pcount }</td>
+										<td align="center">${ p.pcount }</td>
 									</tr>
 								</c:forEach>
 							</table>
