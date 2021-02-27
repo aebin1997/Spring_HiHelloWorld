@@ -314,8 +314,8 @@ NOCACHE;
 
 ------------------------------------------------------------------------------------------------------------------- QA 샘플데이터
 INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
+VALUES(SEQ_QA.NEXTVAL, '자바스크립트 질문', '김우린',
+       '클로저가 뭔가요?',100 , NULL, NULL, 
        DEFAULT, SYSDATE, SYSDATE, DEFAULT);
        
        INSERT INTO QA
@@ -404,7 +404,7 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'안녕녀', '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'김우린', '캣티천사', '21/03/05', default, default, default);
 INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '안녕녀', '캣티천사', '21/03/05', default,default, default);
 INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
 
@@ -444,7 +444,7 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변2', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트 질문1', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
