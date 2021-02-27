@@ -51,11 +51,11 @@ public class PreplyController {
 			// reply 필드값 저장할 json 객체 생성
 			JSONObject job = new JSONObject();
 
-			job.put("rid", reply.getPrid()); 
-			job.put("rwriter", reply.getPrwriter()); // 인코딩 해서 제이슨 객체 안에 담는다
-			job.put("rcontent", URLEncoder.encode(reply.getPrcontent(), "utf-8"));
-			job.put("r_create_date", reply.getPr_date().toString());
-			job.put("ref_bid", reply.getRef_pid());
+			job.put("prid", reply.getPrid()); 
+			job.put("prwriter", reply.getPrwriter()); // 인코딩 해서 제이슨 객체 안에 담는다
+			job.put("prcontent", URLEncoder.encode(reply.getPrcontent(), "utf-8"));
+			job.put("pr_date", reply.getPr_date().toString());
+			job.put("ref_pid", reply.getRef_pid());
 
 			// job 를 jarr 에 저장
 			jarr.add(job);
@@ -69,19 +69,19 @@ public class PreplyController {
 	}
 	
 	@RequestMapping("prdel.do")
-	public String replyDeleteMethod(@RequestParam("rid") int rid, @RequestParam("pid") int pid, Model model) {
-		if (replyService.deleteReply(rid) > 0) {
+	public String replyDeleteMethod(@RequestParam("prid") int prid, @RequestParam("pid") int pid, Model model) {
+		if (replyService.deleteReply(prid) > 0) {
 			return "redirect:pdetail.do?pid=" + pid;
 		} else {
-			model.addAttribute("msg", rid + "번 댓글 삭제 실패.");
+			model.addAttribute("msg", prid + "번 댓글 삭제 실패.");
 			return "common/errorPage";
 		}
 	}
 	
 	@RequestMapping(value="prupdate.do", method=RequestMethod.POST)
-	public String replyUpdateMethod(P_reply reply,
-			@RequestParam("pid") int pid, Model model) {
+	public String replyUpdateMethod(P_reply reply, @RequestParam("pid") int pid, Model model) {
 		if (replyService.updateReply(reply) > 0) {
+			
 			return "redirect:pdetail.do?pid=" + pid;
 		} else {
 			model.addAttribute("msg", reply.getPrid() + "번 댓글 삭제 실패.");

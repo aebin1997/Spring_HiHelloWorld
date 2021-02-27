@@ -16,15 +16,10 @@
 
 		//jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
 		//해당 게시글의 번호를 전송함
-		var pid = $
-		{
-			pboard.pid
-		}
-		console.log(pid);
+		var pid = ${ pboard.pid };
 		; //el 의 값을 변수에 대입
-		var loginUser = "${ sessionScope.loginUser.id }"; //로그인한 회원 아이디 변수에 대입
-		$
-				.ajax({
+		var loginUser = "${ sessionScope.loginUser.nickname }"; //로그인한 회원 아이디 변수에 대입
+		$.ajax({
 					url : "${ pageContext.request.contextPath }/prlist.do",
 					type : "post",
 					data : {
@@ -38,40 +33,40 @@
 						var jsonStr = JSON.stringify(data);
 						//string ==> json 
 						var json = JSON.parse(jsonStr);
-
+						
 						var values = "";
 						for ( var i in json.list) {
 							//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
-							if (loginUser == json.list[i].rwriter) {
+							if (loginUser == json.list[i].prwriter) {
 								values += "<tr><td>"
-										+ json.list[i].rwriter
+										+ json.list[i].prwriter
 										+ "</td><td>"
-										+ json.list[i].r_create_date
+										+ json.list[i].pr_date
 										+ "</td></tr><tr><td colspan='2'>"
-										+ "<form action='rupdate.do' method='post'>"
-										+ "<input type='hidden' name='rid' value='" +  json.list[i].rid  + "'>"
+										+ "<form action='prupdate.do' method='post'>"
+										+ "<input type='hidden' name='prid' value='" +  json.list[i].prid  + "'>"
 										+ "<input type='hidden' name='pid' value='${pboard.pid}'>"
-										+ "<textarea name='rcontent'>"
+										+ "<textarea name='prcontent' rows='5' cols='50'>"
 										+ decodeURIComponent(
-												json.list[i].rcontent).replace(
+												json.list[i].prcontent).replace(
 												/\+/gi, " ")
-										+ "</textarea><input type='submit' value='수정'></form>"
+										+ "</textarea><br><input type='submit' value='수정'></form>"
 										+ "<button onclick='replyDelete("
-										+ json.list[i].rid
+										+ json.list[i].prid
 										+ ");'>삭제</button></td></tr>";
 							} else { //본인 댓글이 아닐 때
 								values += "<tr><td>"
-										+ json.list[i].rwriter
+										+ json.list[i].prwriter
 										+ "</td><td>"
-										+ json.list[i].r_create_date
+										+ json.list[i].pr_date
 										+ "</td></tr><tr><td colspan='2'>"
 										+ decodeURIComponent(
-												json.list[i].rcontent).replace(
+												json.list[i].prcontent).replace(
 												/\+/gi, " ") + "</td></tr>";
 							}
 						} //for in
 
-						$("#rlistTbl").html($("#rlistTbl").html() + values);
+						$("#prlistTbl").html($("#prlistTbl").html() + values);
 					},
 					error : function(jqXHR, textstatus, errorthrown) {
 						console.log("error : " + jqXHR + ", " + textstatus
@@ -81,9 +76,9 @@
 
 	}); //jquery document ready
 
-	function replyDelete(rid) {
-		location.href = "${ pageContext.request.contextPath }/rdel.do?rid="
-				+ rid + "&pid=${ pboard.pid}";
+	function replyDelete(prid) {
+		location.href = "${ pageContext.request.contextPath }/prdel.do?prid="
+				+ prid + "&pid=${ pboard.pid }";
 	}
 
 	function showReplyForm() {
@@ -99,10 +94,10 @@
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
-	
-		<h2 align="center">${ requestScope.pboard.pid }번 게시글 상세보기</h2>
+
+		<h2 align="center">${ requestScope.pboard.pid }번게시글 상세보기</h2>
 		<br>
-		<table align="center" cellpadding="10" cellspacing="0" border="1"
+		<table id="mainContent" align="center" cellpadding="10" cellspacing="0" border="1"
 			width="500">
 			<tr>
 				<th>제 목</th>
@@ -151,13 +146,7 @@
 				</th>
 			</tr>
 		</table>
-		<hr>
-		<%-- 댓글목록 표시 영역 --%>
-		<div id="prlistView" style="border: 1px dotted gray;">
-			<table id="prlistTbl" align="center" cellspacing="0" cellpadding="5"
-				border="1"></table>
-		</div>
-		<hr>
+		<br>
 		<%-- 댓글달기 폼 영역 --%>
 		<div id="replyDiv">
 			<form action="prinsert.do" method="post">
@@ -181,6 +170,13 @@
 				</table>
 			</form>
 		</div>
+		<br>
+		<%-- 댓글목록 표시 영역 --%>
+		<div id="prlistView">
+			<table id="prlistTbl" align="center" cellspacing="0" cellpadding="20" border="1" width="500"></table>
+		</div>
+		<br><br>
+		
 
 		<!-- 푸터 -->
 	</section>
@@ -188,8 +184,3 @@
 
 </body>
 </html>
-
-
-
-
-

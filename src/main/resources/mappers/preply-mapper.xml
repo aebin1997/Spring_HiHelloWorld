@@ -4,24 +4,24 @@
 	<resultMap type="P_reply" id="resultPreply">
 		<id column="prid" property="prid" />
 		<result column="ref_pid" property="ref_pid"/>
-		<result column="rcontent" property="rcontent" />
+		<result column="prcontent" property="prcontent" />
 		<result column="prwriter" property="prwriter" />
 		<result column="pr_date" property="pr_date" />
 		<result column="pr_modify_date" property="pr_modify_date" />
 		<result column="pr_status" property="pr_status" />
 	</resultMap>
 
+	<select id="selectList" parameterType="_int" resultMap="resultPreply">
+		select * from p_reply
+		where pr_status = 'Y' and ref_pid = #{ ref_pid } 
+		order by prid asc
+	</select>
+
 	<select id="selectPreply" parameterType="_int" resultMap="resultPreply">
 		select * from p_reply
 		where prid = #{ prid }
 	</select>
 
-	<select id="selectList" parameterType="_int" resultMap="resultPreply">
-		select * from p_reply
-		where pr_status = 'Y' and ref_pid = #{ ref_pid } 
-		order by pid asc
-	</select>
-	
 	<insert id="insertPreply" parameterType="P_reply">
 		insert into p_reply
 		values (seq_prid.nextval, #{ ref_pid }, #{ prcontent },  
