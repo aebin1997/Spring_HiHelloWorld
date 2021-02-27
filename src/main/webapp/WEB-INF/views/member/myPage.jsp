@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -274,12 +275,14 @@ function photoView(uri){
 			
                 <div class="btn_info cert">
 				∙포인트: <a href="payInfo.do" onclick="">충전</a><br>
-				∙보너스: <br>
-				∙내공: <a href="test.do" onclick="">환전</a><br>
+				∙내공: <a href="myNaegong.do" onclick="">환전</a><br>
 				</div>
 				
 				<div class="btn_info cert2">
-				<a href="myInfoUpdate.do" onclick="">내정보관리하기</a>
+				<c:url var="miu" value="/myInfoUpdate.do">
+				<c:param name="id" value="${ loginUser.id }"/> <!-- name: id = id 보내기 -->
+				</c:url>
+				<a href="${ miu }">내정보관리하기</a>
 				</div>
 			
 <script type="text/javascript" src="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/js/min/nhn.Kin.Userinfo.EditorHistory.js"></script>

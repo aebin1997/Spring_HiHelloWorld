@@ -37,7 +37,13 @@ public class MemberDao {
 	public int deleteMember(String id) {
 		return sqlSession.update("memberMapper.deleteMember", id);
 	}
+	
+	// 회원 정보 조회
+	public Member selectMember(String id) {
+		return (Member)sqlSession.selectOne("memberMapper.selectMember", id);
+	}
 
+	// 회원 정보 수정
 	public int updateMember(Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
 	}

@@ -17,6 +17,9 @@ public interface MemberService {
 
 	// 회원 정보 수정 서비스를 위한 메소드
 	int updateMember(Member m);
+	
+	// 회원 정보 조회 서비스를 위한 메소드
+	Member selectMember (String id);
 
 	// 회원 탈퇴 서비스를 위한 메소드
 	int deleteMember(String id);
@@ -32,9 +35,12 @@ public interface MemberService {
 	
 	// 아이디 중복 체크를 위한 메소드
 	int idCheck(String id);
+<<<<<<< HEAD
 	
 	// 회원정보 리스트를 위한 메소드
 	ArrayList<Member> selectAll();
 	
+=======
+>>>>>>> branch 'master' of https://github.com/Coding-Cola/HiHelloWorld.git
 
 }

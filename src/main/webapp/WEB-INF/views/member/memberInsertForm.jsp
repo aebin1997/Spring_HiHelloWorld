@@ -142,7 +142,7 @@ span.error {
 												<th>주소<span class="ico">*<span
 														class="screen_out">필수항목</span></span></th>
 												<td><input type="text" name="post" label="우편번호"
-													class="postcodify_postcode5" placeholder="우편번호를 검색해주세요">&nbsp
+													class="postcodify_postcode5" placeholder="우편번호를 검색해주세요">
 													<button type="button" id="postcodify_search_button">
 														<span id="addressNo" class="address_no" data-text="검색">검색</span>
 													</button></td>

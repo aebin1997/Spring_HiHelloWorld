@@ -26,6 +26,7 @@
       order by enrollDate desc
     </select>
 
+<<<<<<< HEAD
    <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
       <!-- 암호화 전 -->
       <!-- SELECT
@@ -121,4 +122,85 @@
    </select>
    
    
+=======
+	<insert id="insertMember" parameterType="Member">
+		INSERT 
+		  INTO MEMBER
+		VALUES ( 
+				 #{ id }
+		       , #{ pwd }
+		       , #{ name }
+		       , #{ nickname }
+		       , #{ email }
+		       , #{ sex }
+		       , #{ phone }
+		       , #{ address }
+		       , sysdate
+		       , sysdate
+		       , default
+		       , null
+		       , null
+		       , null
+		       , default
+		       , default
+      	       )
+	</insert>
+	
+	<update id="deleteMember" parameterType="Member">
+		UPDATE
+		       MEMBER
+		   SET MSTATUS='N'
+		 WHERE ID = #{ id }
+	</update>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE 
+		       MEMBER
+		   SET 
+		       PWD = #{ pwd },
+		       NICKNAME = #{ nickname },
+		       EMAIL = #{ email },
+		       SEX = #{ sex },
+		       PHONE = #{ phone },
+		       ADDRESS = #{ address },
+		       UPDATEDATE = SYSDATE,
+		       SELFINTRO_HEAD = #{ selfintro_head },
+		       SELFINTRO_CONTENT = #{ selfintro_content },
+		       PROPIC = #{ propic }
+		 WHERE ID = #{ id }  
+	</update>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="Member" resultMap="memberResultSet">
+		SELECT
+		       *
+		  FROM MEMBER
+		 WHERE NAME = #{ name }
+		   AND EMAIL = #{ email }
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPw" parameterType="Member" resultMap="memberResultSet">
+		SELECT
+		       *
+		  FROM MEMBER
+		 WHERE ID = #{ id }
+		   AND EMAIL = #{ email }
+	</select>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="setTempPw" parameterType="Member">
+		update member set pwd = #{ pwd } where id = #{ id }
+	</update>
+	
+	<select id="idCheck" parameterType="string" resultType="_int">
+		SELECT
+			COUNT(*)
+		FROM MEMBER
+		WHERE id = #{ id }
+	</select>
+	
+	
+>>>>>>> branch 'master' of https://github.com/Coding-Cola/HiHelloWorld.git
 </mapper>
