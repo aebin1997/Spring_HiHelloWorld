@@ -1,7 +1,6 @@
 package com.ict.hhw.member.controller;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -9,8 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
-import java.text.SimpleDateFormat;
-import java.util.StringTokenizer;
+import java.util.ArrayList;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,12 +32,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.ict.hhw.member.model.service.MemberService;
 import com.ict.hhw.member.model.vo.Member;
-import com.ict.hhw.qa.model.vo.Qa;
 
 @SessionAttributes("loginUser")
 
@@ -61,6 +55,20 @@ public class MemberController {
 	@RequestMapping("test.do")
 	public String test() {
 		return "member/info";
+	}
+	
+	// 회원 리스트 *** 이부분 수정하면 경필한테 알려주셈
+	@RequestMapping("mlist.do")
+	public String memberListMethod(Model model) {
+		ArrayList<Member> mlist = mService.selectAll();
+
+		if (mlist.size() > 0) {
+			model.addAttribute("mlist", mlist);
+			return "mlist";
+		} else {
+			model.addAttribute("msg", "등록된  공지사항 정보가 없습니다.");
+			return "common/errorPage";
+		}
 	}
 
 	// 로그인 페이지로 이동

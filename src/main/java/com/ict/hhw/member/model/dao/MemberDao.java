@@ -1,5 +1,8 @@
 package com.ict.hhw.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +16,15 @@ public class MemberDao {
 	// 데이터베이스 연결객체 (root-context에서 작성한 bean으로 생성되어 주입이된다.)
 	@Autowired
 	SqlSessionTemplate sqlSession;
+	
+	// 회원정보 리스트
+	public ArrayList<Member> selectList(){
+		List<Member> list = sqlSession.selectList("memberMapper.selectAll");
+	
+		return (ArrayList<Member>)list;
+	}
+	
+	
 
 	public Member loginMember(Member m) {
 		return (Member) sqlSession.selectOne("memberMapper.loginMember", m);

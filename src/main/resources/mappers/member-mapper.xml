@@ -1,118 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-	
-	<resultMap id="memberResultSet" type="Member">
-		<id property="id" column="ID"/>
-		<result property="pwd" column="PWD"/>
-		<result property="name" column="NAME"/>
-		<result property="nickname" column="NICKNAME"/>
-		<result property="email" column="EMAIL"/>
-		<result property="sex" column="SEX"/>
-		<result property="phone" column="PHONE"/>
-		<result property="address" column="ADDRESS"/>
-		<result property="enrollDate" column="ENROLLDATE"/>
-		<result property="updateDate" column="UPDATEDATE"/>
-		<result property="mstatus" column="MSTATUS"/>
-		<result property="selfintro_head" column="selfintro_head"/>
-		<result property="selfintro_content" column="selfintro_content"/>
-		<result property="propic" column="propic"/>
-		<result property="user_lv" column="user_lv"/>
-		<result property="grade" column="grade"/>
-	</resultMap>
+   
+   <resultMap id="memberResultSet" type="Member">
+      <id property="id" column="ID"/>
+      <result property="pwd" column="PWD"/>
+      <result property="name" column="NAME"/>
+      <result property="nickname" column="NICKNAME"/>
+      <result property="email" column="EMAIL"/>
+      <result property="sex" column="SEX"/>
+      <result property="phone" column="PHONE"/>
+      <result property="address" column="ADDRESS"/>
+      <result property="enrollDate" column="ENROLLDATE"/>
+      <result property="updateDate" column="UPDATEDATE"/>
+      <result property="mstatus" column="MSTATUS"/>
+      <result property="selfintro_head" column="selfintro_head"/>
+      <result property="selfintro_content" column="selfintro_content"/>
+      <result property="propic" column="propic"/>
+      <result property="user_lv" column="user_lv"/>
+      <result property="grade" column="grade"/>
+   </resultMap>
 
-	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
-		<!-- 암호화 전 -->
-		<!-- SELECT
-		       *
-		  FROM MEMBER
-		 WHERE ID = #{ id }
-		   AND PWD = #{ pwd }
-		   AND MSTATUS='Y'  -->
-		<!-- 암호화 후 -->
-		SELECT
-			   *
-	      FROM MEMBER
-	     WHERE ID = #{ id }
-	       AND MSTATUS= 'Y'
-	</select>
+    <select id="selectAll" resultMap="memberResultSet">
+      select * from member
+      order by enrollDate desc
+    </select>
 
-	<insert id="insertMember" parameterType="Member">
-		INSERT 
-		  INTO MEMBER
-		VALUES ( 
-				 #{ id }
-		       , #{ pwd }
-		       , #{ name }
-		       , #{ nickname }
-		       , #{ email }
-		       , #{ sex }
-		       , #{ phone }
-		       , #{ address }
-		       , sysdate
-		       , sysdate
-		       , default
-		       , null
-		       , null
-		       , null
-		       , default
-		       , default
-      	       )
-	</insert>
-	
-	<update id="deleteMember" parameterType="Member">
-		UPDATE
-		       MEMBER
-		   SET MSTATUS='N'
-		 WHERE ID = #{ id }
-	</update>
-	
-	<update id="updateMember" parameterType="Member">
-		UPDATE 
-		       MEMBER
-		   SET 
-		   	<if test="pwd == null">
-		       PWD = #{ pwd },
-		    </if>
-		       NAME = #{ name },
-		       NICKNAME = #{ nickname },
-		       EMAIL = #{ email },
-		       SEX = #{ sex },
-		       PHONE = #{ phone },
-		       ADDRESS = #{ address },
-		       UPDATEDATE = SYSDATE
-		 WHERE ID = #{ id }  
-	</update>
-	
-	<!-- 아이디 찾기 -->
-	<select id="findId" parameterType="Member" resultMap="memberResultSet">
-		SELECT
-		       *
-		  FROM MEMBER
-		 WHERE NAME = #{ name }
-		   AND EMAIL = #{ email }
-	</select>
-	
-	<!-- 비밀번호 찾기 -->
-	<select id="findPw" parameterType="Member" resultMap="memberResultSet">
-		SELECT
-		       *
-		  FROM MEMBER
-		 WHERE ID = #{ id }
-		   AND EMAIL = #{ email }
-	</select>
-	
-	<!-- 비밀번호 재설정 -->
-	<update id="setTempPw" parameterType="Member">
-		update member set pwd = #{ pwd } where id = #{ id }
-	</update>
-	
-	<select id="idCheck" parameterType="string" resultType="_int">
-		SELECT
-			COUNT(*)
-		FROM MEMBER
-		WHERE id = #{ id }
-	</select>
-	
-	
+   <select id="loginMember" parameterType="Member" resultMap="memberResultSet">
+      <!-- 암호화 전 -->
+      <!-- SELECT
+             *
+        FROM MEMBER
+       WHERE ID = #{ id }
+         AND PWD = #{ pwd }
+         AND MSTATUS='Y'  -->
+      <!-- 암호화 후 -->
+      SELECT
+            *
+         FROM MEMBER
+        WHERE ID = #{ id }
+          AND MSTATUS= 'Y'
+   </select>
+
+   <insert id="insertMember" parameterType="Member">
+      INSERT 
+        INTO MEMBER
+      VALUES ( 
+             #{ id }
+             , #{ pwd }
+             , #{ name }
+             , #{ nickname }
+             , #{ email }
+             , #{ sex }
+             , #{ phone }
+             , #{ address }
+             , sysdate
+             , sysdate
+             , default
+             , null
+             , null
+             , null
+             , default
+             , default
+                )
+   </insert>
+   
+   <update id="deleteMember" parameterType="Member">
+      UPDATE
+             MEMBER
+         SET MSTATUS='N'
+       WHERE ID = #{ id }
+   </update>
+   
+   <!-- 회원 정보 수정 -->
+   <update id="updateMember" parameterType="Member">
+      UPDATE 
+             MEMBER
+         SET 
+             PWD = #{ pwd },
+             NICKNAME = #{ nickname },
+             EMAIL = #{ email },
+             SEX = #{ sex },
+             PHONE = #{ phone },
+             ADDRESS = #{ address },
+             UPDATEDATE = SYSDATE,
+             SELFINTRO_HEAD = #{ selfintro_head },
+             SELFINTRO_CONTENT = #{ selfintro_content },
+             PROPIC = #{ propic }
+       WHERE ID = #{ id }  
+   </update>
+   
+   <!-- 아이디 찾기 -->
+   <select id="findId" parameterType="Member" resultMap="memberResultSet">
+      SELECT
+             *
+        FROM MEMBER
+       WHERE NAME = #{ name }
+         AND EMAIL = #{ email }
+   </select>
+   
+   <!-- 비밀번호 찾기 -->
+   <select id="findPw" parameterType="Member" resultMap="memberResultSet">
+      SELECT
+             *
+        FROM MEMBER
+       WHERE ID = #{ id }
+         AND EMAIL = #{ email }
+   </select>
+   
+   <!-- 비밀번호 재설정 -->
+   <update id="setTempPw" parameterType="Member">
+      update member set pwd = #{ pwd } where id = #{ id }
+   </update>
+   
+   <select id="idCheck" parameterType="string" resultType="_int">
+      SELECT
+         COUNT(*)
+      FROM MEMBER
+      WHERE id = #{ id }
+   </select>
+   
+   
 </mapper>

@@ -1,5 +1,7 @@
 package com.ict.hhw.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,6 +63,11 @@ public class MemerServiceImpl implements MemberService {
 	@Override
 	public int idCheck(String id) {
 		return mDao.idCheck(id);
+	}
+
+	@Override
+	public ArrayList<Member> selectAll() {
+		return mDao.selectList();
 	}
 	
 }
