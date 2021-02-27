@@ -1,12 +1,13 @@
-package com.ict.hhw.progress.model.service;
+package com.ict.hhw.pboard_reply.model.service;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ict.hhw.progress.model.dao.PreplyDao;
-import com.ict.hhw.progress.model.vo.P_reply;
+import com.ict.hhw.pboard_reply.model.dao.PreplyDao;
+import com.ict.hhw.pboard_reply.model.vo.P_reply;
+
 
 
 @Service("preplyService")

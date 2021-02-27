@@ -20,11 +20,12 @@
 		{
 			pboard.pid
 		}
+		console.log(pid);
 		; //el 의 값을 변수에 대입
 		var loginUser = "${ sessionScope.loginUser.id }"; //로그인한 회원 아이디 변수에 대입
 		$
 				.ajax({
-					url : "${ pageContext.request.contextPath }/rlist.do",
+					url : "${ pageContext.request.contextPath }/prlist.do",
 					type : "post",
 					data : {
 						ref_pid : pid

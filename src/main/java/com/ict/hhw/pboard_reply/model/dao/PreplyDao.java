@@ -1,4 +1,4 @@
-package com.ict.hhw.progress.model.dao;
+package com.ict.hhw.pboard_reply.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ict.hhw.progress.model.vo.P_reply;
+import com.ict.hhw.pboard_reply.model.vo.P_reply;
+
 
 @Repository("preplyDao")
 public class PreplyDao {

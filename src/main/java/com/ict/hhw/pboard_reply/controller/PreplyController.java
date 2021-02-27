@@ -1,4 +1,4 @@
-package com.ict.hhw.progress.controller;
+package com.ict.hhw.pboard_reply.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ict.hhw.progress.model.service.PreplyService;
-import com.ict.hhw.progress.model.vo.P_reply;
+import com.ict.hhw.pboard_reply.model.service.PreplyService;
+import com.ict.hhw.pboard_reply.model.vo.P_reply;
+
 
 
 @Controller

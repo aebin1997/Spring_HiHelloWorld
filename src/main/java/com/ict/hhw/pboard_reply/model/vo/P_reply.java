@@ -1,10 +1,10 @@
-package com.ict.hhw.progress.model.vo;
+package com.ict.hhw.pboard_reply.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 public class P_reply implements Serializable{
-	private final static long serialVersionUID = 9999L;
+	private final static long serialVersionUID = 9979L;
 	
 	private int prid;
 	private int ref_pid;
