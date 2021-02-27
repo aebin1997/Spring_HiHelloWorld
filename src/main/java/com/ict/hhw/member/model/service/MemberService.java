@@ -35,12 +35,8 @@ public interface MemberService {
 	
 	// 아이디 중복 체크를 위한 메소드
 	int idCheck(String id);
-<<<<<<< HEAD
 	
 	// 회원정보 리스트를 위한 메소드
 	ArrayList<Member> selectAll();
 	
-=======
->>>>>>> branch 'master' of https://github.com/Coding-Cola/HiHelloWorld.git
-
 }
