@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="Author" content="aebin">
-<title>캐시 관리</title>
+<title>포인트 관리</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/pay/base.css" />
@@ -52,7 +52,7 @@ function popupOpen(){ //자바스크립트
 	<div id="contents" class="contents" style="width:48%; margin-left:26%; ">
 
 		<ul class="title_wrap">
-			<li class="title_l">캐시관리</li>
+			<li class="title_l">포인트관리</li>
 			<li class="title_r">* 오늘을 포함하여 14일간의 데이터만 유지됩니다.</li>
 		</ul>
 		<table class="tab_face_b" summary="탭메뉴">
@@ -63,22 +63,16 @@ function popupOpen(){ //자바스크립트
 			</colgroup>
 			<tbody>
 				<tr>
-					<td class="on">
-						<div>캐시관리</div>
-						<div>
-							<!-- <script>
-								if (loginData.isLogin)
-									document.write("("+ util_setComma(loginData.myCash)	+ " 포인트)")
-							</script> -->
-							(0 포인트)
-						</div>
-						<div>
-							<a class="btn_s01" href="javascript:popupOpen();">충전하기</a>
-						</div>
-					</td>
-					<td onclick="location.href='myPoint.do'">
-						<div>포인트관리</div> 
-					</td>
+					<td onclick="location.href='payInfo.do'">
+				<div>캐시관리</div>
+			</td>
+						<td class="on">
+							<div>포인트관리</div>
+							<div>
+								<script>if(loginData.isLogin) document.write("("+util_setComma(loginData.myPoint)+" 포인트)")</script>
+								(0 포인트)
+							</div>
+						</td>
 					<td onclick="location.href='myNaegong.do'">
 						<div>내공관리</div>
 					</td>

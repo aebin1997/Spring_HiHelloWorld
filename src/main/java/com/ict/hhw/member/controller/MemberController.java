@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.apache.tomcat.jni.Address;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -347,23 +348,24 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	// '내정보 관리하기'로 이동
-		@RequestMapping("myInfoUpdate.do")
-		public String infoUpdateView() {
-			return "member/infoUpdate";
-		}
-		
-	// 포인트'충전'하기로 이동
+	// 포인트'충전' & '캐시관리' 로 이동
 		@RequestMapping("payInfo.do")
 		public String payInfoView() {
 			return "member/payInfo";
 		}
 		
-	// 내공 '환전'하기로 이동
+	// 내공 '내공관리' & '환전'하기로 이동
 		@RequestMapping("myNaegong.do")
 		public String myNaegongView() {
-			return "member/myNaegong";
+			return "member/naegongInfo";
 		}
+		
+	// 내공 '포인트 관리'하기로 이동
+		@RequestMapping("myPoint.do")
+		public String myPointView() {
+			return "member/pointInfo";
+		}
+				
 		
 	// '충전하기'로 이동
 		@RequestMapping("payCash.do")
@@ -393,19 +395,6 @@ public class MemberController {
 				String fileName = mfile.getOriginalFilename();
 				if (fileName != null && fileName.length() > 0) {
 					member.setPropic(fileName); //원래 파일명 vo 에 저장, set뒤에 대문자
-					
-					/*
-					 * //첨부된 파일의 파일명 바꾸기 SimpleDateFormat sdf = new
-					 * SimpleDateFormat("yyyyMMddHHmmss"); String renameFileName = sdf.format(new
-					 * java.sql.Date(System.currentTimeMillis())); renameFileName += "." +
-					 * fileName.substring(fileName.lastIndexOf(".") + 1);
-					 * 
-					 * try { mfile.transferTo(new File(savePath + "\\" + renameFileName)); } catch
-					 * (Exception e) { e.printStackTrace(); model.addAttribute("msg",
-					 * "전송 파일 저장 실패"); return "common/errorPage"; }
-					 * qa.setQa_rename_file_name(renameFileName);
-					 */
-	 
 				}
 			}
 
@@ -466,17 +455,36 @@ public class MemberController {
 			model.addAttribute("msg", "회원가입실패!");
 			return "common/errorPage";
 		}
-
+ 
 	}
-
-	// 회원가입 수정
+	
+	// '내정보 관리하기'로 이동
+			@RequestMapping("myInfoUpdate.do")
+			public String myInfoUpdateView (@RequestParam("id") String id, Model model) {
+				
+				System.out.println(id);
+				
+				// Service 호출
+				Member member = mService.selectMember(id);
+				
+				model.addAttribute("member", member);
+				return "member/infoUpdate";
+			}
+			
+			
+	// '내정보' 수정하기
 	@RequestMapping("mupdate.do")
-	public String memberUpdate(@ModelAttribute Member m, Model model, @RequestParam("post") String post,
-			@RequestParam("address1") String addr1, @RequestParam("address2") String addr2) {
+	public String memberUpdate(@ModelAttribute Member m, Model model, 
+			@RequestParam("post") String post,
+			@RequestParam("addr1") String addr1, 
+			@RequestParam("addr2") String addr2) {
+		
 		System.out.println("Member : " + m);
+		System.out.println("Address 정보 : " + post + ", " + addr1 + ", " + addr2);
+		System.out.println("암호화 처리 후 값 : " + bcryptPasswordEncoder.encode(m.getPwd()));
 
+		// 기존의 평문을 암호문으로 바꾸서 m객체에 다시 담자.
 		String encPwd = bcryptPasswordEncoder.encode(m.getPwd());
-
 		// setter를 통해서 Member객체의 pwd를 변경
 		m.setPwd(encPwd);
 
@@ -489,7 +497,7 @@ public class MemberController {
 
 		if (result > 0) {
 			model.addAttribute("loginUser", m);
-			return "redirect:home.do";
+			return "member/infoUpdate";
 		} else {
 			model.addAttribute("msg", "회원 정보 수정 실패!");
 			return "common/errorPage";

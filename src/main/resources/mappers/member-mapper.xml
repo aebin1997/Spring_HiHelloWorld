@@ -67,20 +67,21 @@
 		 WHERE ID = #{ id }
 	</update>
 	
+	<!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE 
 		       MEMBER
 		   SET 
-		   	<if test="pwd == null">
 		       PWD = #{ pwd },
-		    </if>
-		       NAME = #{ name },
 		       NICKNAME = #{ nickname },
 		       EMAIL = #{ email },
 		       SEX = #{ sex },
 		       PHONE = #{ phone },
 		       ADDRESS = #{ address },
-		       UPDATEDATE = SYSDATE
+		       UPDATEDATE = SYSDATE,
+		       SELFINTRO_HEAD = #{ selfintro_head },
+		       SELFINTRO_CONTENT = #{ selfintro_content },
+		       PROPIC = #{ propic }
 		 WHERE ID = #{ id }  
 	</update>
 	

@@ -30,7 +30,15 @@ public class MemerServiceImpl implements MemberService {
 
 		return result;
 	}
+	
+	// 회원 정보 조회
+	@Override
+	public Member selectMember(String id) {
+		Member member = mDao.selectMember(id);
+		return member;
+	}
 
+	// 회원 정보 수정 
 	@Override
 	public int updateMember(Member m) {
 		return mDao.updateMember(m);
