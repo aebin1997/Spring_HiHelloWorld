@@ -125,7 +125,7 @@
 				<h5>답변자 검색</h5>
 				<br> <input type="text" id="userId"> <input
 					type="button" id="UserSelectBtn" value="검색"> <br>
-				<button type="button" id="modal_close_btn">모달 창 닫기</button>
+				<button type="button" id="modal_close_btn">검색 완료</button>
 				<br>
 			</div>
 		</div>

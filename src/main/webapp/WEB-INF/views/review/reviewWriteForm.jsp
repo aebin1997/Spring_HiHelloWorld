@@ -60,7 +60,7 @@ table.table2 td {
 							</tr>
 							
 							<tr>
-								<td>질문 제목</td>
+								<td>답변자</td>
 								<td><input type=text value=${ qplist.pro_answerer } readonly></td>
 							</tr>
 
