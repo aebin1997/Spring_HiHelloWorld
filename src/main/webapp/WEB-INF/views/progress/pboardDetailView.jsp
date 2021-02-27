@@ -145,6 +145,7 @@
 						</c:url>
 						<a href="${ pdl }">[글삭제]</a> &nbsp; &nbsp; 
 						</c:if> <c:url var="pls" value="/plist.do">
+						<c:param name="pro_id" value="${ pboard.p_proid }" />
 					</c:url> <a href="${ pls }">[목록]</a>
 				</th>
 			</tr>
