@@ -57,9 +57,9 @@ public class PboardController {
 	@RequestMapping("review.move")
 	public String reviewMove(@RequestParam("pro_id") int pro_id, Model model) {
 		QaProgress qplist = pboardService.selectProgress(pro_id);
-		
+
 		pboardService.updateStatus(pro_id);
-		
+
 		model.addAttribute("qplist", qplist);
 		return "review/reviewWriteForm";
 	}
@@ -96,30 +96,30 @@ public class PboardController {
 		progress.setPro_id(pro_id);
 		progress.setPro_deadline(pro_deadline);
 
-		if(pboardService.updateDeadline(progress)>0){
+		if (pboardService.updateDeadline(progress) > 0) {
 
-		// 오늘 날짜 생성
-		String pattern = "yyyy-MM-dd";
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+			// 오늘 날짜 생성
+			String pattern = "yyyy-MM-dd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-		String date = simpleDateFormat.format(new java.util.Date());
-		model.addAttribute("today", date);
+			String date = simpleDateFormat.format(new java.util.Date());
+			model.addAttribute("today", date);
 
-		ArrayList<P_board> list = pboardService.selectList(pro_id);
-		ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
-		QaProgress qplist = pboardService.selectProgress(pro_id);
+			ArrayList<P_board> list = pboardService.selectList(pro_id);
+			ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
+			QaProgress qplist = pboardService.selectProgress(pro_id);
 
-		if (list.size() > 0) {
-			model.addAttribute("list", list);
-			model.addAttribute("olist", olist);
-		}
-		model.addAttribute("pro_id", pro_id);
-		model.addAttribute("qplist", qplist);
-		model.addAttribute("msg", "ok");
+			if (list.size() > 0) {
+				model.addAttribute("list", list);
+				model.addAttribute("olist", olist);
+			}
+			model.addAttribute("pro_id", pro_id);
+			model.addAttribute("qplist", qplist);
+			model.addAttribute("msg", "ok");
 
-		return "progress/progress";
-		
-		}else {
+			return "progress/progress";
+
+		} else {
 			model.addAttribute("msg", "마감기한 수정 실패");
 			return "common/errorPage";
 		}
