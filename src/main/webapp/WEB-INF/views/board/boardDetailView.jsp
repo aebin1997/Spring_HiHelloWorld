@@ -171,11 +171,7 @@
 					</c:url>
 					<button type="button" onclick="javascript:location.href='${ bdl }'">글삭제</button> &nbsp; &nbsp;
 				
-				<c:url var="boardBlame" value="/b.blame.insert.do">
-					<c:param name="page" value="${ currentPage }" />
-				</c:url>
-				<button type="button" onclick="javascript:location.href='${ boardBlame }'">신고</button> &nbsp; &nbsp;
-				
+							
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
@@ -184,7 +180,7 @@
 				</c:if> 
 				
 				<%-- 로그인한 상태이면서, 본인이 작성한 게시글이 아닐 때 --%>
-				<c:if test="${ !empty loginUser }">
+				<c:if test="${ !empty loginUser and loginUser.nickname ne board.bwriter }">
 								
 				<c:url var="boardBlame" value="/b.blame.insert.do">
 					<c:param name="page" value="${ currentPage }" />
@@ -205,6 +201,27 @@
 				</c:url>
 				<button type="button" onclick="javascript:location.href= '${ bls }';">목록</button>
 				</c:if>
+				
+				<%-- 관리자가 로그인 했을일 때  --%>
+				
+				<c:if test="${ !empty loginUser and loginUser.nickname eq 'admin' and loginUser.user_lv eq 'B' }">
+				<c:url var="buv" value="/bupview.do">
+					<c:param name="bid" value="${ board.bid }" />
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+				<button type="button" onclick="javascript:location.href='${ buv }'">수정</button> &nbsp; &nbsp;
+								 
+					<c:url var="bdl" value="/bdelete.do">
+					<c:param name="bid" value="${ board.bid }" />
+					</c:url>
+					<button type="button" onclick="javascript:location.href='${ bdl }'">글삭제</button> &nbsp; &nbsp;
+				
+				<c:url var="bls" value="/blist.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+				<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+				
+				</c:if> 
 				
 			</th>
 		</tr>
