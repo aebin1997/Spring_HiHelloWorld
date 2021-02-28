@@ -13,9 +13,26 @@
       <result column="b_create_date" property="b_create_date" />
       <result column="b_modfiy_date" property="b_modfiy_date" />
       <result column="bcount" property="bcount" />
-      <result column="b_rcount" property="b_rcount" />
+      <!-- <result column="b_rcount" property="b_rcount" /> -->
       <result column="bstatus" property="bstatus" />
+      <association column="b_rcount" property="b_rcount" javaType="com.ict.hhw.board_reply.model.vo.B_Reply" resultMap="b_reply" />  
    </resultMap>
+   
+
+    <resultMap id="b_reply" type="com.ict.hhw.board_reply.model.vo.B_Reply">
+     	
+     	<result column="b_ref_bid" property="b_ref_bid"/>
+     	<!-- 
+     	<id column="b_ref_bid" property="b_ref_bid" />
+     	<id column="b_rid" property="b_rid" />
+		<result column="b_rcontent" property="b_rcontent" />
+		<result column="b_ref_bid" property="b_ref_bid"/>
+		<result column="b_rwriter" property="b_rwriter" />
+		<result column="b_create_date" property="b_create_date" />
+		<result column="b_modify_date" property="b_modify_date" />
+		<result column="b_status" property="b_status" /> -->
+	</resultMap>
+
 
    <resultMap type="Board" id="resultTop3">
       <id column="bid" property="bid" />
@@ -30,9 +47,12 @@
       
       <!-- 댓글 추가시 카운터 증가 -->
 	<select id="addReplyCount" parameterType="_int">
-	    update board
-         set b_rcount = b_rcount + 1
-         where bid = #{ BID }		
+	    SELECT COUNT(*) as b_rcount
+         FROM B_REPLY R
+	LEFT JOIN BOARD B 
+		   ON B.B_RCOUNT = R.B_REF_BID
+		WHERE R.B_STATUS = 'Y'
+		  AND R.B_REF_BID = B.BID		
 	</select>
 
    <!-- 조회수 top3 게시글 리스팅 -->

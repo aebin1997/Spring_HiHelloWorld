@@ -147,41 +147,48 @@
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">날짜</th>
 								<th style="text-align: center;">조회수</th>
-								<th style="text-align: center;">댓글수</th>
+								<th style="text-align: center;">테스트</th>
 							</tr>
-							<c:forEach items="${ requestScope.list }" var="b" >
-							<c:forEach items="${ requestScope.mlist }" var="m" />
-								<tr>
-									<td align="center" width="100">${ b.bid }</td>
-									<td align="center" width="180">${ b.btype }</td>
-									<td align="left" ><c:url var="bdt" value="/bdetail.do">
-											<c:param name="page" value="${ currentPage }" />
-											<c:param name="bid" value="${ b.bid }" />
-										</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>
-											<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
-											<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
-									<td align="center" width="180">${ b.bwriter } &nbsp;
-										 <c:if test="${ b.bwriter and m.grade lt 0 }  "> <%-- 불량회원 --%>
-										 <img src="/hhw/resources/images/i_0.png" style="width:20px;">
-										 </c:if>
-										 <c:if test="${ b.bwriter and m.grade lt 10 } ">  <%-- 신규회원 --%>
-										 <img src="/hhw/resources/images/i_1.png" style="width:20px;">
-										 </c:if>
-										 <c:if test="${ b.bwriter and 11 lt m.grade && m.grade lt 20 }">  <%-- 우수회원 --%>
-										 <img src="/hhw/resources/images/i_2.png" style="width:20px;">
-										 </c:if>
-										 <c:if test="${ b.bwriter and 21 lt m.grade && m.grade lt 30 }">  <%-- 최우수회원 --%>
-										 <img src="/hhw/resources/images/i_3.png" style="width:20px;">
-										 </c:if>
-										 <c:if test="${ b.bwriter and m.user_lv eq 'B'} ">  <%-- 관리자 --%>
-										 <img src="/hhw/resources/images/i_admin.png" style="width:20px;">
-										 </c:if>
-										 </td>
-									<td align="center" width="130">${ b.b_create_date }</td>
-									<td align="center" width="80">${ b.bcount }</td>
-									<td align="center" width="80">${ b.b_rcount }</td>
-								</tr>
-							</c:forEach>
+						<c:forEach items="${ requestScope.list }" var="b" >
+						<c:forEach items="${ requestScope.mlist }" var="m" />
+							
+							<tr>
+								<td align="center" width="100">${ b.bid }</td>
+
+								<td align="center" width="180">${ b.btype }</td>
+
+								<td align="left" width="250"><c:url var="bdt" value="/bdetail.do">
+										<c:param name="page" value="${ currentPage }" />
+										<c:param name="bid" value="${ b.bid }" />
+									</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>
+										<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
+										<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+							
+								<td align="center" width="180">${ b.bwriter }
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}"> <%-- 불량회원 --%>
+									 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:right;">
+									 </c:if>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 신규회원 --%>
+									 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:right;">
+									 </c:if>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 우수회원 --%>
+									 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:right;">
+									 </c:if>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 최우수회원 --%>
+									 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:right;">
+									 </c:if>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 관리자 --%>
+									 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:right;">
+									 </c:if>
+									 </td>
+
+								<td align="center" width="130">${ b.b_create_date }</td>
+
+								<td align="center" width="80">${ b.bcount }</td>
+
+								<td align="center" width="80">${ b.b_rcount }</td>
+							</tr>
+						</c:forEach>
 						</table>
 					</div>
 				</div>

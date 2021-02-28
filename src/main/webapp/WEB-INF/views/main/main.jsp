@@ -84,17 +84,15 @@
 
 	<jsp:include page="../common/header.jsp" />
 
-
 	<!-- START SLIDER SECTION -->
-	<section class="slider-section">
-		<div class="home-slides-2 owl-carousel owl-theme ">
-			<div class="home-single-slide"
-				data-background="/hhw/resources/images/test1.jpg">
+	<section id="home" class="slider-section">
+		<div class="home-slides owl-carousel owl-theme ">
+			<div class="home-single-slide" data-background="/hhw/resources/images/test1.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="container">
+					<div class="auto-container">
 						<div class="row">
-							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
+							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -110,13 +108,12 @@
 				</div>
 			</div>
 			<!-- end single slider -->
-			<div class="home-single-slide"
-				data-background="/hhw/resources/images/test2.jpg">
+			<div class="home-single-slide" data-background="/hhw/resources/images/test2.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="container">
+					<div class="auto-container">
 						<div class="row">
-							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
+							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -132,13 +129,12 @@
 				</div>
 			</div>
 			<!-- end single slider -->
-			<div class="home-single-slide"
-				data-background="/hhw/resources/images/test3.jpg">
+			<div class="home-single-slide" data-background="/hhw/resources/images/test3.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="container">
+					<div class="auto-container">
 						<div class="row">
-							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
+							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -156,6 +152,7 @@
 			<!-- end single slider -->
 		</div>
 	</section>
+	<!-- END SLIDER SECTION  -->
 
 
 		<hr style="clear: both;">

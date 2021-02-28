@@ -458,7 +458,7 @@ public class MemberController {
 		int result = mService.insertMember(m);
 
 		if (result > 0) {
-			return "member/login"; // 로그인 페이지로 이동
+			return "main/main"; // 로그인 페이지로 이동
 		} else {
 			model.addAttribute("msg", "회원가입실패!");
 			return "common/errorPage";
