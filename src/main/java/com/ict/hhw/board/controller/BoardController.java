@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ict.hhw.board.model.service.BoardService;
 import com.ict.hhw.board.model.vo.Board;
+import com.ict.hhw.board.model.vo.BoardList;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 
@@ -31,6 +32,9 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	
+	
+	
 	// 글쓰기 페이지 이동 요청 처리용
 	@RequestMapping("bwmove.do")
 	public String moveBoardWriteForm() {
@@ -213,7 +217,7 @@ public class BoardController {
 	@RequestMapping("blist.do")
 	public String boardListMethod(@RequestParam("page") int currentPage, Model model) {
 		int limit = 10;
-		ArrayList<Board> list = boardService.selectList(currentPage, limit);
+		ArrayList<BoardList> list = boardService.selectBoardList(currentPage, limit);
 	
 		// 페이지 처리와 관련된 값 처리
 		// 총 페이지 계산을 위한 총 목록 갯수 조회

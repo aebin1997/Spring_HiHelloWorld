@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ict.hhw.board.model.dao.BoardDao;
 import com.ict.hhw.board.model.vo.Board;
+import com.ict.hhw.board.model.vo.BoardList;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 
@@ -15,12 +16,17 @@ public class BoardServiceImpl implements BoardService {
    @Autowired //의존성 어노테이션 
    private BoardDao boardDao;
    
-   //댓글 뷰
-   @Override
-   public int addReplyCount(int b_rcount) {
-	   return boardDao.addReplyCount(b_rcount);
+   // 보드리스트뷰 new vo
+	@Override
+	public BoardList selectBoardList(int bid) {
+		return boardDao.selectBoardList(bid);
 	}
-      
+
+	@Override
+	public ArrayList<BoardList> selectBoardList(int currentPage, int limit) {
+		return boardDao.selectBoardList(currentPage, limit);
+	}
+
    @Override
    public ArrayList<Board> selectTop3() {
       return boardDao.selectTop3();
@@ -90,5 +96,6 @@ public class BoardServiceImpl implements BoardService {
 	public int getSearchDateListCount(SearchDate dates) {
 		return boardDao.getSearchDateListListCount(dates);
 	}
+
 
 }

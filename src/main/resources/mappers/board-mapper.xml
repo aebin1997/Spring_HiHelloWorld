@@ -13,24 +13,21 @@
       <result column="b_create_date" property="b_create_date" />
       <result column="b_modfiy_date" property="b_modfiy_date" />
       <result column="bcount" property="bcount" />
-      <!-- <result column="b_rcount" property="b_rcount" /> -->
+      <result column="b_rcount" property="b_rcount" />
       <result column="bstatus" property="bstatus" />
-      <association column="b_rcount" property="b_rcount" javaType="com.ict.hhw.board_reply.model.vo.B_Reply" resultMap="b_reply" />  
    </resultMap>
    
-
-    <resultMap id="b_reply" type="com.ict.hhw.board_reply.model.vo.B_Reply">
-     	
-     	<result column="b_ref_bid" property="b_ref_bid"/>
-     	<!-- 
-     	<id column="b_ref_bid" property="b_ref_bid" />
-     	<id column="b_rid" property="b_rid" />
-		<result column="b_rcontent" property="b_rcontent" />
-		<result column="b_ref_bid" property="b_ref_bid"/>
-		<result column="b_rwriter" property="b_rwriter" />
-		<result column="b_create_date" property="b_create_date" />
-		<result column="b_modify_date" property="b_modify_date" />
-		<result column="b_status" property="b_status" /> -->
+   
+    <resultMap type="BoardList" id="resultBoardList">
+     <id column="bid" property="bid" />
+      <result column="b_ref_bid" property="b_ref_bid" />
+      <result column="btype" property="btype" />
+      <result column="bwriter" property="bwriter" />
+      <result column="btitle" property="btitle" />
+      <result column="b_original_filename" property="b_original_filename" />
+      <result column="b_rename_filename" property="b_rename_filename" />
+      <result column="b_create_date" property="b_create_date" />
+      <result column="grade" property="grade" />
 	</resultMap>
 
 
@@ -38,22 +35,38 @@
       <id column="bid" property="bid" />
       <result column="btitle" property="btitle" />
       <result column="bcount" property="bcount" />
-      <result column="b_rcount" property="b_rcount" />
    </resultMap>
 
    <!-- 비교연산자를 쿼리문에 그냥 사용하면, 마이바티스에서 태그 앨리먼트의 꺽쇠괄호(<,>,&)와 혼동하는 문제가 발생할 수 있음 
       이 문제를 미리 방지하기 위해 xml 코드 중 xml parser에 의해 해석하지 말고 문장 그대로 해석하라는 뜻으로 <![CDATA 
       쿼리문장 ]]> 사용함 -->
       
-      <!-- 댓글 추가시 카운터 증가 -->
-	<select id="addReplyCount" parameterType="_int">
-	    SELECT COUNT(*) as b_rcount
-         FROM B_REPLY R
-	LEFT JOIN BOARD B 
-		   ON B.B_RCOUNT = R.B_REF_BID
-		WHERE R.B_STATUS = 'Y'
-		  AND R.B_REF_BID = B.BID		
+   <!-- Member, Board, Reply 조인 -->
+	<select id="selectBoardList" parameterType="_int" resultMap="resultBoardList">
+		SELECT *
+		  FROM MEMBER M, BOARD B, B_REPLY R
+	     WHERE M.NICKNAME = B.BWRITER
+		   AND B.BID = R.B_REF_BID
+		   AND BID = #{ bid }
 	</select>
+	
+	<!-- Member, Board, Reply 조인 -->
+	<select id="selectNewBoardList" parameterType="_int" resultMap="resultBoardList">
+      SELECT   B.BID
+             , R.B_REF_BID
+             , B.BTYPE
+             , B.BTITLE
+             , B.BWRITER
+             , B.B_ORIGINAL_FILENAME
+             , B.B_RENAME_FILENAME
+             , B.B_CREATE_DATE
+             , M.GRADE
+        FROM MEMBER M, BOARD B, B_REPLY R
+       WHERE M.NICKNAME = B.BWRITER
+	     AND B.BID = R.B_REF_BID
+		 AND B.BID = #{ bid }
+   </select>
+	
 
    <!-- 조회수 top3 게시글 리스팅 -->
    <select id="selectTop3" resultMap="resultTop3">
@@ -62,10 +75,8 @@
         FROM (
       SELECT    ROWNUM RNUM
             , BID
-            , BTYPE
             , BTITLE
             , BCOUNT
-            , B_RCOUNT
         FROM (
       SELECT *
         FROM BOARD 

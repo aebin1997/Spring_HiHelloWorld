@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.board.model.vo.Board;
+import com.ict.hhw.board.model.vo.BoardList;
 import com.ict.hhw.board.model.vo.BoardPage;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
@@ -17,9 +18,18 @@ public class BoardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int addReplyCount(int b_rcount) {
-		return sqlSession.update("boardMapper.addReplyCount", b_rcount);
-	}	
+	public BoardList selectBoardList(int bid) {
+		return sqlSession.selectOne("boardMapper.selectBoardList", bid);
+	}
+
+	public ArrayList<BoardList> selectBoardList(int currentPage, int limit) {
+		//전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
+		int startRow = (currentPage - 1) * limit -1;
+		int endRow = startRow + limit - 1;
+		
+		List<BoardList> list = sqlSession.selectList("boardMapper.selectNewBoardList", new BoardPage(startRow, endRow));
+		return (ArrayList<BoardList>)list;
+	}
 	
 	public ArrayList<Board> selectTop3() {
 		List<Board> list = sqlSession.selectList("boardMapper.selectTop3");

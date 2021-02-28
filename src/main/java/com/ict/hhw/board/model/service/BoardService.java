@@ -3,12 +3,15 @@ package com.ict.hhw.board.model.service;
 import java.util.ArrayList;
 
 import com.ict.hhw.board.model.vo.Board;
+import com.ict.hhw.board.model.vo.BoardList;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 
 public interface BoardService {
-	//게시글 댓글수
-	int addReplyCount(int b_rcount);
+	
+	//보드리스트 vo
+	BoardList selectBoardList(int bid);
+	ArrayList<BoardList> selectBoardList(int currentPage, int limit);
 	
 	// 조회수 많은 게시글 top3
 	ArrayList<Board> selectTop3();
