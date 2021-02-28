@@ -228,7 +228,7 @@
 				<c:if test="${ requestScope.list ne null }">
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
-							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' }">
+							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' || fn:trim(p.pro_status) eq 'C' }">
 							<a href="plist.do?pro_id=${ p.pro_id }">
 							<img src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
 							<td align="center">${ p.qa_title }</td>

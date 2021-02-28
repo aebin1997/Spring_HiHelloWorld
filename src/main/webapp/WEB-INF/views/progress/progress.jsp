@@ -113,7 +113,6 @@
 		});
 		//진행도 증가(end)
 		
-		
 	});
 	
 	function showDiv() {
@@ -145,6 +144,7 @@
 			alert("마감기한을 성공적으로 변경하였습니다.");
 		};
 	}
+	
 </script>
 
 
@@ -192,7 +192,12 @@
 					<div class="vbo_wr">
 						<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
 						<ul class="sir_vbo_com">
+							<c:if test="${ qplist.pro_status eq 'Y ' }">
 							<li><a href="${ review }" class="sir_b01">마감</a></li>
+							</c:if>
+							<c:if test="${ qplist.pro_status ne 'Y ' }">
+							<li><a href="#" onClick="alert('이미 마감된 의뢰입니다.')" class="sir_b01">마감</a></li>
+							</c:if>
 						</ul>
 						</c:if>
 						<ul class="sir_vbo_com">
