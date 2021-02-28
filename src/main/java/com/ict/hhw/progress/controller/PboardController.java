@@ -113,6 +113,7 @@ public class PboardController {
 		}
 		model.addAttribute("pro_id", pro_id);
 		model.addAttribute("qplist", qplist);
+		model.addAttribute("msg", "ok");
 
 		return "progress/progress";
 		

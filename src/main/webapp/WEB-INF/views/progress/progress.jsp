@@ -27,6 +27,9 @@
 
 <script type="text/javascript">
 	$(function() {
+		
+		dlMsg();
+		
 		// 검색
 		showDiv();
 		$("#oldlist").css("display", "none");
@@ -135,6 +138,14 @@
 	
 	function showWriteForm() {
 		location.href = "${ pwf }";
+	}
+	
+	function dlMsg(){
+		var message = "${ msg }";
+		console.log(message);
+		if(message == "ok"){
+			alert("마감기한을 성공적으로 변경하였습니다.");
+		};
 	}
 </script>
 
