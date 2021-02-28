@@ -79,11 +79,11 @@ COMMENT ON COLUMN MEMBER.USER_LV IS '회원레벨';
 COMMENT ON COLUMN MEMBER.GRADE IS '회원등급';
 
 INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'n', '01011112222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '일반회원1', 'user01@ict.or.kr', 'w', '01033334444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '일반회원2',  'user02@ict.or.kr', 'w', '01055556666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '일반회원3',  'user03@ict.or.kr', 'm', '01077778888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '일반회원4',  'user04@ict.or.kr', 'w', '01099996666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
-INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '일반회원5',  'user05@ict.or.kr', 'm', '01011111234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '김우린', 'user01@ict.or.kr', 'w', '01033334444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '박예빈',  'user02@ict.or.kr', 'w', '01055556666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '이강선',  'user03@ict.or.kr', 'm', '01077778888', '인천 계양구', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '최은영',  'user04@ict.or.kr', 'w', '01099996666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
+INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '황경필',  'user05@ict.or.kr', 'm', '01011111234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
 
 ------------------------------------------------------------------------------------------------------------------- N_TYPE 생성
 CREATE TABLE N_TYPE(
