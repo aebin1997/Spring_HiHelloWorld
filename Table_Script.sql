@@ -203,8 +203,8 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(BOARD)
-INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, DEFAULT, '일반회원1', '게시판 테스트 입니다.', '게시판 테스트', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '참고글이요', '일반회원2', 'SQL 에러 확인하는 방법!', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, DEFAULT, '김우린', '게시판 테스트 입니다.', '게시판 테스트', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '참고글이요', '관리자', 'SQL 에러 확인하는 방법!', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
 INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '칭찬글이요', '일반회원3', '일반회원2 님을 칭찬합니다!!',  '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
 
 ------------------------------------------------------------------------------------------------------------------- B_REPLY(리플 테이블) 생성
@@ -497,9 +497,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PAY)
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '일반회원1', '10000', '10000', '21/01/24', NULL);
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '일반회원2', '50000', '50000', '21/01/24', NULL);
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '일반회원3', '100000',  '100000', '21/01/24', NULL);
+INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '김우린', '10000', '10000', '21/01/24', NULL);
+INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '박예빈', '50000', '50000', '21/01/24', NULL);
+INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '이강선', '100000',  '100000', '21/01/24', NULL);
 
 
 ------------------------------------------------------------------------------------------------------------------- POINT 테이블 생성
@@ -526,9 +526,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(POINT)
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '일반회원1', '21/01/24', '100', '충전포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '일반회원2', '21/01/24', '500', '이벤트 포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '일반회원3', '21/01/24', '1000',  '00포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user01', '21/01/24', '100', '충전포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user02', '21/01/24', '500', '이벤트 포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user03', '21/01/24', '1000',  '00포인트');
 
                                              
 ------------------------------------------------------------------------------------------------------------------- RE_TYPE 생성
