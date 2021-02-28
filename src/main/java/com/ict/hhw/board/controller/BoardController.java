@@ -216,9 +216,10 @@ public class BoardController {
 	// 게시글 페이지별 목록 조회 요청 처리용
 	@RequestMapping("blist.do")
 	public String boardListMethod(@RequestParam("page") int currentPage, Model model) {
+		
 		int limit = 10;
 		ArrayList<BoardList> list = boardService.selectBoardList(currentPage, limit);
-	
+		
 		// 페이지 처리와 관련된 값 처리
 		// 총 페이지 계산을 위한 총 목록 갯수 조회
 		int listCount = boardService.getListCount();

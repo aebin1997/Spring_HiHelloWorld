@@ -2,8 +2,6 @@ package com.ict.hhw.board.model.vo;
 
 import java.sql.Date;
 
-import com.ict.hhw.board_reply.model.vo.B_Reply;
-
 public class Board {
 	private final static long serialVersionUID = 3333L;
 	
@@ -20,13 +18,10 @@ public class Board {
 	private Date b_modfiy_date;
 	private String bstatus;
 	
-	private B_Reply b_reply;
-	
 	public Board() {}
 
 	public Board(int bid, String btype, String btitle, String bwriter, String bcontent, String b_original_filename,
-			String b_rename_filename, int bcount, int b_rcount, Date b_create_date, Date b_modfiy_date, String bstatus,
-			B_Reply b_reply) {
+			String b_rename_filename, int bcount, int b_rcount, Date b_create_date, Date b_modfiy_date, String bstatus) {
 		super();
 		this.bid = bid;
 		this.btype = btype;
@@ -40,7 +35,6 @@ public class Board {
 		this.b_create_date = b_create_date;
 		this.b_modfiy_date = b_modfiy_date;
 		this.bstatus = bstatus;
-		this.b_reply = b_reply;
 	}
 
 	public int getBid() {
@@ -139,13 +133,6 @@ public class Board {
 		this.bstatus = bstatus;
 	}
 
-	public B_Reply getB_reply() {
-		return b_reply;
-	}
-
-	public void setB_reply(B_Reply b_reply) {
-		this.b_reply = b_reply;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -156,7 +143,7 @@ public class Board {
 		return "Board [bid=" + bid + ", btype=" + btype + ", btitle=" + btitle + ", bwriter=" + bwriter + ", bcontent="
 				+ bcontent + ", b_original_filename=" + b_original_filename + ", b_rename_filename=" + b_rename_filename
 				+ ", bcount=" + bcount + ", b_rcount=" + b_rcount + ", b_create_date=" + b_create_date
-				+ ", b_modfiy_date=" + b_modfiy_date + ", bstatus=" + bstatus + ", b_reply=" + b_reply + "]";
+				+ ", b_modfiy_date=" + b_modfiy_date + ", bstatus=" + bstatus + "]";
 	}
 
 }

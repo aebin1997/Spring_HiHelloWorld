@@ -15,12 +15,13 @@ public class BoardList {
 	private String b_original_filename;
 	private String b_rename_filename;
 	private Date b_create_date;
+	private int bcount;
 	private String grade;
 	
 	public BoardList() {}
-	
+
 	public BoardList(int bid, int b_ref_bid, String btype, String btitle, String bwriter, String b_original_filename,
-			String b_rename_filename, Date b_create_date, String grade) {
+			String b_rename_filename, Date b_create_date, int bcount, String grade) {
 		super();
 		this.bid = bid;
 		this.b_ref_bid = b_ref_bid;
@@ -30,6 +31,7 @@ public class BoardList {
 		this.b_original_filename = b_original_filename;
 		this.b_rename_filename = b_rename_filename;
 		this.b_create_date = b_create_date;
+		this.bcount = bcount;
 		this.grade = grade;
 	}
 
@@ -97,6 +99,14 @@ public class BoardList {
 		this.b_create_date = b_create_date;
 	}
 
+	public int getBcount() {
+		return bcount;
+	}
+
+	public void setBcount(int bcount) {
+		this.bcount = bcount;
+	}
+
 	public String getGrade() {
 		return grade;
 	}
@@ -113,7 +123,8 @@ public class BoardList {
 	public String toString() {
 		return "BoardList [bid=" + bid + ", b_ref_bid=" + b_ref_bid + ", btype=" + btype + ", btitle=" + btitle
 				+ ", bwriter=" + bwriter + ", b_original_filename=" + b_original_filename + ", b_rename_filename="
-				+ b_rename_filename + ", b_create_date=" + b_create_date + ", grade=" + grade + "]";
+				+ b_rename_filename + ", b_create_date=" + b_create_date + ", bcount=" + bcount + ", grade=" + grade
+				+ "]";
 	}
 	
 	

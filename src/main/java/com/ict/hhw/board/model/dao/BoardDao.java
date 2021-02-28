@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.board.model.vo.BoardList;
+import com.ict.hhw.board.model.vo.BoardListPage;
 import com.ict.hhw.board.model.vo.BoardPage;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;

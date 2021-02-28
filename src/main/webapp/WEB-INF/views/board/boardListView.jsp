@@ -147,10 +147,10 @@
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">날짜</th>
 								<th style="text-align: center;">조회수</th>
-								<th style="text-align: center;">테스트</th>
+								<th style="text-align: center;">회원등급</th>
+								<th style="text-align: center;">댓글수</th>
 							</tr>
 						<c:forEach items="${ requestScope.list }" var="b" >
-						<c:forEach items="${ requestScope.mlist }" var="m" />
 							
 							<tr>
 								<td align="center" width="100">${ b.bid }</td>
@@ -165,19 +165,19 @@
 										<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
 							
 								<td align="center" width="180">${ b.bwriter }
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}"> <%-- 불량회원 --%>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade lt 0}"> <%-- 불량회원 --%>
 									 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:right;">
 									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 신규회원 --%>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 1  &&  b.grade lt 10}">  <%-- 신규회원 --%>
 									 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:right;">
 									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 우수회원 --%>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 11 && b.grade lt 20}">  <%-- 우수회원 --%>
 									 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:right;">
 									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 최우수회원 --%>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 21 && b.grade lt 30}">  <%-- 최우수회원 --%>
 									 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:right;">
 									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null}">  <%-- 관리자 --%>
+									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade eq 0}">  <%-- 관리자 --%>
 									 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:right;">
 									 </c:if>
 									 </td>
@@ -186,7 +186,9 @@
 
 								<td align="center" width="80">${ b.bcount }</td>
 
-								<td align="center" width="80">${ b.b_rcount }</td>
+								<td align="center" width="80">${ b.grade }</td>
+								
+								<td align="center" width="80">${ b.b_ref_bid }</td>
 							</tr>
 						</c:forEach>
 						</table>

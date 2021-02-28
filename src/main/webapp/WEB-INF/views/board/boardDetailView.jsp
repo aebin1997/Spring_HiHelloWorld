@@ -183,6 +183,20 @@
 				
 				</c:if> 
 				
+				<%-- 로그인한 상태이면서, 본인이 작성한 게시글이 아닐 때 --%>
+				<c:if test="${ !empty loginUser }">
+								
+				<c:url var="boardBlame" value="/b.blame.insert.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+				<button type="button" onclick="javascript:location.href='${ boardBlame }'">신고</button> &nbsp; &nbsp;
+				
+				<c:url var="bls" value="/blist.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+				<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+				
+				</c:if> 
 				
 				<%-- 비로그인일때 --%> 
 				<c:if test="${ empty loginUser }">  
