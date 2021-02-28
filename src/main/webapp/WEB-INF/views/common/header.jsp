@@ -168,10 +168,12 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
-									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
-									<!-- 임시 -->
 									<c:if test="${ !empty sessionScope.loginUser }">
 									<li><a class="nav-link" href="progress.move">나의 Q&A</a></li>
+									</c:if>
+									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
+									<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname eq 'admin' }">
+									<li><a class="nav-link" href="progress.move">관리자 페이지</a></li>
 									</c:if>
 								</ul>
 							</nav>
