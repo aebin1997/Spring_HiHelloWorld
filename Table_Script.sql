@@ -16,7 +16,7 @@ DROP TABLE BOARD CASCADE CONSTRAINTS;
 DROP TABLE B_REPLY CASCADE CONSTRAINTS;
 DROP TABLE BLAME CASCADE CONSTRAINTS;
 DROP TABLE QA CASCADE CONSTRAINTS;
-DROP TABLE QA_REPLY CASCADE CONSTRAINTS;
+DROP TABLE QAR CASCADE CONSTRAINTS;
 DROP TABLE PROGRESS CASCADE CONSTRAINTS;
 DROP TABLE P_BOARD CASCADE CONSTRAINTS;
 DROP TABLE P_REPLY CASCADE CONSTRAINTS;
@@ -33,7 +33,7 @@ DROP SEQUENCE SEQ_BID;
 DROP SEQUENCE SEQ_BRID;
 DROP SEQUENCE SEQ_BLID;
 DROP SEQUENCE SEQ_QA;
-DROP SEQUENCE SEQ_QARID;
+DROP SEQUENCE SEQ_QAR;
 DROP SEQUENCE SEQ_PRO;
 DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
@@ -313,41 +313,23 @@ NOCYCLE
 NOCACHE;
 
 ------------------------------------------------------------------------------------------------------------------- QA 샘플데이터
-INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '자바스크립트 질문', '김우린',
-       '클로저가 뭔가요?',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, '자바스크립트 질문', '김우린','클로저가 뭔가요?',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT);
        
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
-       INSERT INTO QA
-VALUES(SEQ_QA.NEXTVAL, '관리자 게시글', '관리자',
-       '저희 사이트를 이용해 주셔서 감사합니다.',100 , NULL, NULL, 
-       DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, '자바 질문', '김우린','상속 설명해주실 분?.',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+       
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, '스프링 에러', '김우린','404에러가 뜹니다...',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT);
+                                             
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, '자바스크립트 비동기 처리', '황경필','너무 어려워요',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT);  
+                                             
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, 'ClassNotFound Error', '황경필','BoardController 120번째 줄에서 난 에러입니다.',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT); 
+                                             
+INSERT INTO QA VALUES(SEQ_QA.NEXTVAL, '500 에러', '황경필','500번 에러 어떻게 잡죠..?',100 , NULL, NULL, DEFAULT, SYSDATE, SYSDATE, DEFAULT);
        
 ------------------------------------------------------------------------------------------------------------------- QA_REPLY 관련
  
-CREATE TABLE QAR(
+ CREATE TABLE QAR(
   QAR_ID NUMBER PRIMARY KEY,
-  QAR_CONTENT VARCHAR2(4000),
+  QAR_CONTENT VARCHAR2(4000) not null,
   REF_QA_ID NUMBER,
   QAR_WRITER VARCHAR2(15),
   QAR_CREATE_DATE DATE,
@@ -356,6 +338,8 @@ CREATE TABLE QAR(
   FOREIGN KEY (REF_QA_ID) REFERENCES QA(qa_id) ON DELETE CASCADE, 
   FOREIGN KEY (QAR_WRITER) REFERENCES MEMBER(NICKNAME) ON DELETE CASCADE 
 );
+
+------------------------------------------------------------------------------------------------------------------- QAR 컬럼명
 
 
 COMMENT ON COLUMN QAR.QAR_ID IS '댓글번호';
@@ -366,12 +350,13 @@ COMMENT ON COLUMN QAR.QAR_CREATE_DATE IS '댓글작성날짜';
 COMMENT ON COLUMN QAR.QAR_MODIFY_DATE IS '댓글수정날짜';
 COMMENT ON COLUMN QAR.QAR_STATUS IS '댓글상태값';
 
+------------------------------------------------------------------------------------------------------------------- QAR 시퀀스 생성                                            
 CREATE SEQUENCE SEQ_QAR;
-
+                                            
+------------------------------------------------------------------------------------------------------------------- QAR 데이터 삽입
+                                            
 INSERT INTO QAR
-VALUES(SEQ_QAR.NEXTVAL, SEQ_QAR.NEXTVAL,SEQ_QAR.NEXTVAL,
-            '일반회원1', SYSDATE, SYSDATE, DEFAULT);
-            
+VALUES(SEQ_QAR.NEXTVAL, SEQ_QAR.NEXTVAL,SEQ_QAR.NEXTVAL,'일반회원1', SYSDATE, SYSDATE, DEFAULT);
 
 --------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
 CREATE TABLE PROGRESS(
@@ -404,9 +389,10 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'김우린', '캣티천사', '21/03/05', default, default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '안녕녀', '캣티천사', '21/03/05', default,default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '안녕녀',  '캣티천사', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'김우린', '황경필', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '김우린', '이강선', '21/03/05', default,default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '김우린',  '최은영', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '황경필',  '김우린', '21/03/05', default, default, default);
 
 ------------------------------------------------------------------------------------------------------------------- 진행테이블()                                             
 CREATE TABLE P_BOARD(
@@ -444,9 +430,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_BOARD)
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '게시판 테스트 답변1', '게시판 테스트', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '캣티천사', '게시판 테스트 답변2', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
-INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '안녕녀', '게시판 테스트 질문1', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '자바 질문', '자꾸 NullPointException이 뜹니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '황경필', '에러 해결하는 법은', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '해결 되었습니다.', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
 CREATE TABLE P_REPLY(
   PRID                  NUMBER,
@@ -476,9 +462,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_REPLY)
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '캣티천사', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '안녕녀', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '김우린', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '황경필', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '', '21/01/24', NULL, DEFAULT);
                                              
                                              
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
