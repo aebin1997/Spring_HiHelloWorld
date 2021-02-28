@@ -54,6 +54,11 @@ public class ProgressController {
 			list = progressService.selectPlist(nickname);
 			titleList = progressService.selectQatitle(nickname);
 			requestList = progressService.selectRequest(nickname);
+			
+			//마감 지한이 지난 것들은 만료 상태로 변경
+			if(progressService.checkDeadline()>0) {
+				System.out.println("성공적으로 변경되었습니다.");
+			}
 		}
 
 		if (list.size() > 0) {

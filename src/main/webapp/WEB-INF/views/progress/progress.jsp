@@ -67,7 +67,7 @@
 					} else {
 						var val = parseInt(data);
 						alert("진행도를 성공적으로 변경하였습니다.");
-						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
+						$("#process").html("<progress id='process' value=" + val + " max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
 
@@ -96,10 +96,8 @@
 						alert("최대값은 100% 입니다.");
 					} else {
 						var val = parseInt(data);
-						console.log(val);
-						console.log(typeof(val));
 						alert("진행도를 성공적으로 변경하였습니다.");
-						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
+						$("#process").html("<progress id='process' value=" + val + " max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
 

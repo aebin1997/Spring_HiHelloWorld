@@ -107,11 +107,11 @@
 	</update>
 	
 	<update id="checkDeadline">
-	 <![CDATA[
+		 <![CDATA[
 		UPDATE PROGRESS
 		SET PRO_STATUS = 'N'
 		WHERE PRO_DEADLINE < TO_DATE(SYSDATE, 'YY/MM/DD')		
-	]]>
+		]]>
 	</update>
 
 </mapper>
