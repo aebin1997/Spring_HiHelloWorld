@@ -72,23 +72,29 @@
        WHERE ID = #{ id }
    </update>
    
-   <!-- 회원 정보 수정 -->
-   <update id="updateMember" parameterType="Member">
-      UPDATE 
-             MEMBER
-         SET 
-             PWD = #{ pwd },
-             NICKNAME = #{ nickname },
-             EMAIL = #{ email },
-             SEX = #{ sex },
-             PHONE = #{ phone },
-             ADDRESS = #{ address },
-             UPDATEDATE = SYSDATE,
-             SELFINTRO_HEAD = #{ selfintro_head },
-             SELFINTRO_CONTENT = #{ selfintro_content },
-             PROPIC = #{ propic }
-       WHERE ID = #{ id }  
-   </update>
+   <!-- 회원 정보 조회-->
+	<select id="selectMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE ID = #{ id }
+	</select>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="updateMember" parameterType="Member">
+		UPDATE 
+		       MEMBER
+		   SET 
+		       PWD = #{ pwd },
+		       NICKNAME = #{ nickname },
+		       EMAIL = #{ email },
+		       SEX = #{ sex },
+		       PHONE = #{ phone },
+		       ADDRESS = #{ address },
+		       UPDATEDATE = SYSDATE,
+		       SELFINTRO_HEAD = #{ selfintro_head },
+		       SELFINTRO_CONTENT = #{ selfintro_content },
+		       PROPIC = #{ propic }
+		 WHERE ID = #{ id }  
+	</update>
    
    <!-- 아이디 찾기 -->
    <select id="findId" parameterType="Member" resultMap="memberResultSet">

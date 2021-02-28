@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
+<%-- <%
      String name = (String)request.getParameter("name");
      String email = (String)request.getParameter("email");
      String phone = (String)request.getParameter("phone");
@@ -18,8 +18,7 @@
      System.out.println("phone: "+phone);
      System.out.println("address: "+address);
      System.out.println("totalPrice: "+totalPrice);
- 
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
