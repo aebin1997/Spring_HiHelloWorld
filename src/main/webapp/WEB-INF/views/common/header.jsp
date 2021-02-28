@@ -155,6 +155,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	<c:url var="nlist" value="nlist.do">
 		<c:param name="page" value="1" />
 	</c:url>
+	<c:url var="admin" value="admin.do">
+		<c:param name="page" value="1" />
+	</c:url>
 
 		<!-- START NAVIGATION AREA -->
 		<div class="sticky-menu">
@@ -172,8 +175,8 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="progress.move">나의 Q&A</a></li>
 									</c:if>
 									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
-									<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname eq 'admin' }">
-									<li><a class="nav-link" href="progress.move">관리자 페이지</a></li>
+									<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'B'}">
+									<li><a class="nav-link" href="admin.do">관리자 페이지</a></li>
 									</c:if>
 								</ul>
 							</nav>
