@@ -57,7 +57,9 @@ public class PboardController {
 	@RequestMapping("review.move")
 	public String reviewMove(@RequestParam("pro_id") int pro_id, Model model) {
 		QaProgress qplist = pboardService.selectProgress(pro_id);
-
+		
+		pboardService.updateStatus(pro_id);
+		
 		model.addAttribute("qplist", qplist);
 		return "review/reviewWriteForm";
 	}

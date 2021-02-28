@@ -33,5 +33,6 @@ public interface PboardService {
 	// 진행도 수정
 	int processMinus(int pro_id);
 	int processPlus(int pro_id);
+	int updateStatus(int pro_id);
 	
 }

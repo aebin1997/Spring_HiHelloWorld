@@ -246,7 +246,10 @@
 							거절됨
 							</c:if> <c:if test="${ fn:trim(p.pro_status) eq 'N' }">
 								기간 만료됨
-							</c:if></td>
+							</c:if><c:if test="${ fn:trim(p.pro_status) eq 'C' }">
+								채택 완료됨
+							</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:if>

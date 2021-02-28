@@ -181,5 +181,11 @@
 		SET PRO_PROCESS = PRO_PROCESS + 10
 		WHERE PRO_ID = #{ pro_id }
 	</update>
+	
+	<update id="updateStatus" parameterType="_int">
+		UPDATE PROGRESS
+		SET PRO_STATUS = 'C'
+		WHERE PRO_ID = #{ pro_id }
+	</update>
 
 </mapper>

@@ -107,5 +107,10 @@ public class PboardServiceImpl implements PboardService{
 		public int processPlus(int pro_id) {
 			return pboardDao.processPlus(pro_id);
 		}
+		
+		@Override
+		public int updateStatus(int pro_id) {
+			return pboardDao.updateStatus(pro_id);
+		}
 
 }

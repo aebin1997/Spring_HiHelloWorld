@@ -96,6 +96,9 @@ public class PboardDao {
 		return sqlSession.update("pboardMapper.processPlus", pro_id);
 	}
 	
+	public int updateStatus(int pro_id) {
+		return sqlSession.update("pboardMapper.updateStatus", pro_id);
+	}
 	
 	
 }
