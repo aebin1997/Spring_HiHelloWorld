@@ -193,7 +193,7 @@
 						<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
 						<ul class="sir_vbo_com">
 							<c:if test="${ qplist.pro_status eq 'Y ' }">
-							<li><a href="${ review }" class="sir_b01">마감</a></li>
+							<li><a href="${ review }" onClick="if(confirm('의뢰를 정말로 마감 하시겠습니까?')==true){return true;}else{return false;}"  class="sir_b01">마감</a></li>
 							</c:if>
 							<c:if test="${ qplist.pro_status ne 'Y ' }">
 							<li><a href="#" onClick="alert('이미 마감된 의뢰입니다.')" class="sir_b01">마감</a></li>
