@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -61,6 +63,13 @@ public class PboardController {
 	// 게시글 페이지별 목록 조회 요청 처리용 (+ 목록 페이지로 이동)
 	@RequestMapping(value = "plist.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
 	public String pboardListMethod(@RequestParam("pro_id") int pro_id, Model model) {
+		// 오늘 날짜 생성
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		String date = simpleDateFormat.format(new java.util.Date());
+		model.addAttribute("today", date);
+
 		ArrayList<P_board> list = pboardService.selectList(pro_id);
 		ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
 		QaProgress qplist = pboardService.selectProgress(pro_id);
@@ -73,6 +82,58 @@ public class PboardController {
 		model.addAttribute("qplist", qplist);
 
 		return "progress/progress";
+	}
+
+	// 마감기한 수정
+	@ResponseBody
+	@RequestMapping(value = "updateDl.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String UpdateDeadline(int pro_id, Model model) {
+
+		// pboardService.processPlus(pro_id);
+
+		return "fail";
+	}
+
+	// 진행도 감소
+	@ResponseBody
+	@RequestMapping(value = "processMinus.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String processMinus(@RequestParam("pro_id") int pro_id, Model model) {
+		int val = 0;
+		
+		QaProgress qplist = pboardService.selectProgress(pro_id);
+		
+		val = qplist.getPro_process();
+		val -= 10;
+		
+		if (val >= 0) {
+			
+			if(pboardService.processMinus(pro_id) >0) {
+			return  Integer.toString(val);
+			}
+		}
+		
+		return "404";
+		
+	}
+
+	// 진행도 증가
+	@ResponseBody
+	@RequestMapping(value = "processPlus.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public String processPlus(@RequestParam("pro_id") int pro_id, Model model) {
+		int val = 0;
+		
+		QaProgress qplist = pboardService.selectProgress(pro_id);
+		
+		val = qplist.getPro_process();
+		val += 10;
+		
+		if (val <= 100) {
+			if(pboardService.processPlus(pro_id) >0) {
+				return  Integer.toString(val);
+			}
+		}
+
+		return "404";
 	}
 
 	// 검색

@@ -163,5 +163,17 @@
 		UPDATE P_BOARD
 		SET PSTATUS = 'N', P_MODFIY_DATE = SYSDATE WHERE PID = #{ pid }
 	</update>
+	
+	<update id="processMinus" parameterType="_int">
+		UPDATE PROGRESS
+		SET PRO_PROCESS = PRO_PROCESS - 10
+		WHERE PRO_ID = #{ pro_id }
+	</update>
+	
+	<update id="processPlus" parameterType="_int">
+		UPDATE PROGRESS
+		SET PRO_PROCESS = PRO_PROCESS + 10
+		WHERE PRO_ID = #{ pro_id }
+	</update>
 
 </mapper>

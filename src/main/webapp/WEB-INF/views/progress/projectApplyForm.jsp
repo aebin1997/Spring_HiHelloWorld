@@ -155,8 +155,7 @@
 					<tr>
 						<td>마감 기한</td>
 						<td><input type="date" name="pro_deadline"
-							id="date_timepicker_end" min="${ today }"
-							data-date-format="YYYY/MM/DD" pattern="YYYY/MM/DD"
+							min="${ today }" data-date-format="YYYY/MM/DD" pattern="YYYY/MM/DD"
 							style="width: 150px;" required></td>
 						<td></td>
 					</tr>
@@ -229,8 +228,9 @@
 				<c:if test="${ requestScope.list ne null }">
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
-							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' }"><a href="plist.do?pro_id=${ p.pro_id }"><img
-									src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
+							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' }">
+							<a href="plist.do?pro_id=${ p.pro_id }">
+							<img src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
 							<td align="center">${ p.qa_title }</td>
 							<td align="center">${ p.pro_writer }</td>
 							<td align="center">${ p.pro_answerer }</td>

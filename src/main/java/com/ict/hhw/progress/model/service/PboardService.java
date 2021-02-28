@@ -27,5 +27,8 @@ public interface PboardService {
 	int getSearchTitleListCount(String keyword);
 	int getSearchWriterListCount(String keyword);
 	int getSearchDateListCount(SearchDate dates);
+	//진행도 수정
+	int processMinus(int pro_id);
+	int processPlus(int pro_id);
 	
 }

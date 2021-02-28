@@ -86,7 +86,7 @@ public class ProgressController {
 			return "fail";
 		}
 	}
-
+	
 	@RequestMapping(value = "progressInsert.do", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
 	public @ResponseBody String processInsert(@RequestParam("qa_title") String qa_title,
 			@RequestParam("pro_answerer") String pro_answerer, @RequestParam("pro_deadline") Date pro_deadline,

@@ -49,6 +49,68 @@
 		$("input[name=item]").on("change", function() { //on으로 이벤트 설정가능 "change"이벤트일때 function()을 실행해라
 			showDiv(); // = radio버튼상태가 바뀔때 showDiv를 실행해라
 		});
+		
+		//진행도 감소(start)
+		$("#minus").click(function() {
+			$.ajax({
+				url : "processMinus.do",
+				data : {
+					pro_id : $("#pro_id").val()
+				},
+				type : "post",
+				success : function(data) {
+					if (data == "404") {
+						alert("최저값은 0% 입니다.");
+					} else {
+						var val = parseInt(data);
+						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
+							+ "style='width: 730px;'></progress>");
+					}
+
+				},
+				error : function(jqxhr, textStatus, errorThrown) {
+					console.log("ajax 처리 실패");
+
+					console.log(jqxhr);
+					console.log(textStatus);
+					console.log(errorThrown);
+				}
+			});
+		});
+		//진행도 감소(end)
+		
+		//진행도 증가(start)
+		$("#plus").click(function() {
+			$.ajax({
+				url : "processPlus.do",
+				data : {
+					pro_id : $("#pro_id").val()
+				},
+				type : "post",
+				success : function(data) {
+					if (data == "404") {
+						alert("최대값은 100% 입니다.");
+					} else {
+						var val = parseInt(data);
+						console.log(val);
+						console.log(typeof(val));
+						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
+							+ "style='width: 730px;'></progress>");
+					}
+
+				},
+				error : function(jqxhr, textStatus, errorThrown) {
+					console.log("ajax 처리 실패");
+
+					console.log(jqxhr);
+					console.log(textStatus);
+					console.log(errorThrown);
+				}
+			});
+		});
+		//진행도 증가(end)
+		
+		
 	});
 	
 	function showDiv() {
@@ -73,6 +135,8 @@
 		location.href = "${ pwf }";
 	}
 </script>
+
+
 </head>
 <body>
 
@@ -80,21 +144,41 @@
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
 
-
 		<div id="wrapper" class="wrapper-pad ">
 			<!-- 콘텐츠 시작 { -->
 			<div id="bo_qa" class="container ">
 				<div id="con_lf">
-					
+					<%-- 마감일 --%>
+					<c:if test="${ qplist.pro_writer ne sessionScope.loginUser.nickname }">
 					<h1 class="pg_tit">마감일 : ${qplist.pro_deadline}</h1>
-					<progress value="${ qplist.pro_process }" max="100"
+					</c:if>
+					<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
+					<form action="updateDl.do" methd="post" style="display:inline; float:left; margin:0;">
+						<h1 class="pg_tit">마감일  </h1>
+						<input type="hidden" id="pro_id" name="pro_id" value="${ pro_id }">
+						<input type="date" name="pro_deadline" value="${qplist.pro_deadline }"
+							min="${ today }" data-date-format="YYYY/MM/DD" pattern="YYYY/MM/DD" required>
+						&nbsp;<a href="#" class="sir_b01">수정</a>
+					</form><br><br><br>
+					</c:if>
+					
+					<%-- 진행도 --%>
+					<c:if test="${ qplist.pro_writer ne sessionScope.loginUser.nickname }">
+					<div id="progressBar">
+					<progress id="process" value="${ qplist.pro_process }" max="100"
 						style="width: 730px;"></progress>
+					</div>
+					</c:if>
+					<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
+						<button id="minus" ><img src="/hhw/resources/images/icon/ico_minus.png" width="25px"></button>
+						<progress value="${ qplist.pro_process }" max="100"
+						style="width: 670px;"></progress>
+						<button id="plus"><img src="/hhw/resources/images/icon/ico_plus.png" width="25px"></button>
+						<br><br>
+					</c:if>
 					
 					<div class="vbo_wr">
 						<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
-						<ul class="sir_vbo_com">
-							<li><a href="#" class="sir_b01">수정</a></li>
-						</ul>
 						<ul class="sir_vbo_com">
 							<li><a href="${ review }" class="sir_b01">마감</a></li>
 						</ul>

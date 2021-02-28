@@ -83,4 +83,14 @@ public class PboardDao {
 		return sqlSession.selectOne("pboardMapper.getSearchDateListCount", dates);
 	}
 	
+	public int processMinus(int pro_id) {
+		return sqlSession.update("pboardMapper.processMinus", pro_id);
+	}
+	
+	public int processPlus(int pro_id) {
+		return sqlSession.update("pboardMapper.processPlus", pro_id);
+	}
+	
+	
+	
 }

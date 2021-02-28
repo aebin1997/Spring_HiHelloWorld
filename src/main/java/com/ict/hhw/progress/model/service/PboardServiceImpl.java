@@ -93,4 +93,14 @@ public class PboardServiceImpl implements PboardService{
 			return pboardDao.getSearchDateListListCount(dates);
 		}
 
+		@Override
+		public int processMinus(int pro_id) {
+			return pboardDao.processMinus(pro_id);
+		}
+
+		@Override
+		public int processPlus(int pro_id) {
+			return pboardDao.processPlus(pro_id);
+		}
+
 }
