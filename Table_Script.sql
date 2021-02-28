@@ -61,6 +61,8 @@ CREATE TABLE MEMBER (
   GRADE			VARCHAR2(50) DEFAULT '1',
   CONSTRAINT PK_NICKNAME PRIMARY KEY(NICKNAME));
 
+------------------------------------------------------------------------------------------------------------------- MEMBER 컬럼명 지정
+                                     
 COMMENT ON COLUMN MEMBER.ID IS '회원아이디';
 COMMENT ON COLUMN MEMBER.PWD IS '회원비밀번호';
 COMMENT ON COLUMN MEMBER.NAME IS '회원이름';
@@ -78,6 +80,8 @@ COMMENT ON COLUMN MEMBER.PROPIC IS '프로필사진';
 COMMENT ON COLUMN MEMBER.USER_LV IS '회원레벨';
 COMMENT ON COLUMN MEMBER.GRADE IS '회원등급';
 
+------------------------------------------------------------------------------------------------------------------- MEMBER 데이터 
+                                     
 INSERT INTO MEMBER VALUES ('admin', '1234', '관리자', '관리자', 'admin@ict.or.kr', 'n', '01011112222', '서울시 강남구', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
 INSERT INTO MEMBER VALUES ('user01', 'pass01', '김우린', '김우린', 'user01@ict.or.kr', 'w', '01033334444', '경기도 일산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
 INSERT INTO MEMBER VALUES ('user02', 'pass02', '박예빈', '박예빈',  'user02@ict.or.kr', 'w', '01055556666', '서울시 홍대', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
