@@ -1,12 +1,3 @@
-------------------------------------------------------------------------------------------------------------------- 계정 생성
---CREATE USER coca IDENTIFIED BY coca;
---GRANT CONNECT, RESOURCE TO coca;
-
-------------------------------------------------------------------------------------------------------------------- 날짜 및 시간 설정
---ALTER SESSION SET NLS_DATE_FORMAT = 'RR/MM/DD';
---ALTER SESSION SET NLS_TIMESTAMP_FORMAT = 'HH24:MI';
-
-------------------------------------------------------------------------------------------------------------------- 모든 테이블 리셋
 
 DROP TABLE MEMBER CASCADE CONSTRAINTS; 
 DROP TABLE N_TYPE CASCADE CONSTRAINTS; 
@@ -43,22 +34,22 @@ DROP SEQUENCE SEQ_POINTID;
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 
 CREATE TABLE MEMBER (
-  ID       			VARCHAR2(30) NOT NULL,
-  PWD       		 VARCHAR2(100) NOT NULL,
-  NAME       		VARCHAR2(15),
-  NICKNAME 		    VARCHAR2(30) NOT NULL,
-  EMAIL      		 VARCHAR2(100),
-  SEX 			   VARCHAR2(1) DEFAULT 'n' CHECK (SEX IN('m', 'w', 'n')),
-  PHONE    			    VARCHAR2(13),
-  ADDRESS   			  VARCHAR2(100),
-  ENROLLDATE   			  DATE DEFAULT SYSDATE,
-  UPDATEDATE    			 DATE DEFAULT SYSDATE,
-  MSTATUS VARCHAR2(1)			 DEFAULT 'Y' CHECK(MSTATUS IN('Y', 'N')),
-  SELFINTRO_HEAD 			VARCHAR2(90) NULL, 
-  SELFINTRO_CONTENT 			VARCHAR2(600) NULL,
-  PROPIC 			VARCHAR2(60) NULL,
-  USER_LV			 VARCHAR2(50) DEFAULT 'A' CHECK (user_lv IN('A', 'B')),
-  GRADE			VARCHAR2(50) DEFAULT '1',
+  ID                VARCHAR2(30) NOT NULL,
+  PWD              VARCHAR2(100) NOT NULL,
+  NAME             VARCHAR2(15),
+  NICKNAME           VARCHAR2(30) NOT NULL,
+  EMAIL             VARCHAR2(100),
+  SEX             VARCHAR2(1) DEFAULT 'n' CHECK (SEX IN('m', 'w', 'n')),
+  PHONE                 VARCHAR2(13),
+  ADDRESS              VARCHAR2(100),
+  ENROLLDATE              DATE DEFAULT SYSDATE,
+  UPDATEDATE              DATE DEFAULT SYSDATE,
+  MSTATUS VARCHAR2(1)          DEFAULT 'Y' CHECK(MSTATUS IN('Y', 'N')),
+  SELFINTRO_HEAD          VARCHAR2(90) NULL, 
+  SELFINTRO_CONTENT          VARCHAR2(600) NULL,
+  PROPIC          VARCHAR2(60) NULL,
+  USER_LV          VARCHAR2(50) DEFAULT 'A' CHECK (user_lv IN('A', 'B')),
+  GRADE         VARCHAR2(50) DEFAULT '1',
   CONSTRAINT PK_NICKNAME PRIMARY KEY(NICKNAME));
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 컬럼명 지정
@@ -205,7 +196,7 @@ INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(BOARD)
 INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, DEFAULT, '김우린', '게시판 테스트 입니다.', '게시판 테스트', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
 INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '참고글이요', '관리자', 'SQL 에러 확인하는 방법!', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
-INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '칭찬글이요', '일반회원3', '일반회원2 님을 칭찬합니다!!',  '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO BOARD VALUES(SEQ_BID.NEXTVAL, '칭찬글이요', '황경필', '황경필 님을 칭찬합니다!!',  '좋은 정보글을 남겨주셔서 감사합니다!!', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT, DEFAULT);
 
 ------------------------------------------------------------------------------------------------------------------- B_REPLY(리플 테이블) 생성
 CREATE TABLE B_REPLY(
@@ -235,9 +226,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(B_REPLY)
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 첫번째 댓글입니다.', '1', '일반회원1', '21/01/24', NULL, DEFAULT);
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 두번째 댓글입니다.', '12',  '일반회원2', '21/01/24', NULL, DEFAULT);
-INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 세번째 댓글입니다.', '12',  '일반회원3', '21/01/24', NULL, DEFAULT);
+INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 첫번째 댓글입니다.', '1', '김우린', '21/01/24', NULL, DEFAULT);
+INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 두번째 댓글입니다.', '12',  '최은영', '21/01/24', NULL, DEFAULT);
+INSERT INTO B_REPLY VALUES(SEQ_BRID.NEXTVAL, '게시판 세번째 댓글입니다.', '12',  '박예빈', '21/01/24', NULL, DEFAULT);
 
 
 ------------------------------------------------------------------------------------------------------------------- BLAME (자유게시판 신고한 내역 저장) 테이블 생성
@@ -272,9 +263,10 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(BLAME)
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '1', '1', '일반회원1', '일반회원4', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '2', '일반회원2', '일반회원5', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '3', '3', '일반회원3', '일반회원1', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '1', '1', '김우린', '박예빈', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '2', '이강선', '박예빈', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '3', '이강선', '박예빈', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
+
 
 
 ------------------------------------------------------------------------------------------------------------------- QA 생성
@@ -360,7 +352,7 @@ CREATE SEQUENCE SEQ_QAR;
 ------------------------------------------------------------------------------------------------------------------- QAR 데이터 삽입
                                             
 INSERT INTO QAR
-VALUES(SEQ_QAR.NEXTVAL, SEQ_QAR.NEXTVAL,SEQ_QAR.NEXTVAL,'일반회원1', SYSDATE, SYSDATE, DEFAULT);
+VALUES(SEQ_QAR.NEXTVAL, SEQ_QAR.NEXTVAL,SEQ_QAR.NEXTVAL,'이강선', SYSDATE, SYSDATE, DEFAULT);
 
 --------------------------------------------------------------------------------------------------------------------의뢰 테이블(PROGRESS)
 CREATE TABLE PROGRESS(
@@ -371,7 +363,7 @@ PRO_ANSWERER                     VARCHAR2(100) NOT NULL,
 PRO_DEADLINE                      DATE,
 PRO_PAY                     NUMBER DEFAULT 0,
 PRO_PROCESS                    NUMBER DEFAULT 0,
-PRO_STATUS		       CHAR(2) DEFAULT 'Y',
+PRO_STATUS             CHAR(2) DEFAULT 'Y',
 CONSTRAINT PK_PRO_ID PRIMARY KEY(PRO_ID),
 CONSTRAINT FK_QID FOREIGN KEY (PRO_QID) REFERENCES QA(QA_ID) ON DELETE SET NULL
 );
@@ -410,7 +402,7 @@ P_RFILE_NAME             VARCHAR2(50),
 P_DATE                       DATE,
 P_MODFIY_DATE           DATE,
 PCOUNT                  NUMBER DEFAULT 0,
-PSTATUS		       CHAR(2) DEFAULT 'Y',
+PSTATUS             CHAR(2) DEFAULT 'Y',
 CONSTRAINT PK_PID PRIMARY KEY(PID),
 CONSTRAINT FK_P_PROID FOREIGN KEY (P_PROID) REFERENCES PROGRESS(PRO_ID) ON DELETE SET NULL
 );
@@ -440,7 +432,7 @@ INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '해결 되었습니
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
 CREATE TABLE P_REPLY(
   PRID                  NUMBER,
-  REF_PID		 NUMBER,
+  REF_PID       NUMBER,
   PRCONTENT          VARCHAR2(400),
   PRWRITER             VARCHAR2(100) NOT NULL,
   PR_DATE               DATE,
@@ -468,17 +460,17 @@ INCREMENT BY 1;
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(P_REPLY)
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 첫번째 댓글입니다.', '김우린', '21/01/24', NULL, DEFAULT);
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓글입니다.', '황경필', '21/01/24', NULL, DEFAULT);
-INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '', '21/01/24', NULL, DEFAULT);
+INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '박예빈', '21/01/24', NULL, DEFAULT);
                                              
                                              
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
 CREATE TABLE PAY(
-PAYID   		NUMBER,
-MEMBERID	VARCHAR2(30),
-PAYPG	VARCHAR2(20),
-PAYINFO	VARCHAR2(1000),
-PAYDATE 	DATE,
-PAYIP  		VARCHAR2(20),
+PAYID         NUMBER,
+MEMBERID   VARCHAR2(30),
+PAYPG   VARCHAR2(20),
+PAYINFO   VARCHAR2(1000),
+PAYDATE    DATE,
+PAYIP        VARCHAR2(20),
  CONSTRAINT PK_PAY_ID PRIMARY KEY (PAYID),
  CONSTRAINT FK_MEMBER_ID FOREIGN KEY (MEMBERID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
 );
@@ -504,11 +496,11 @@ INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '이강선', '100000',  '100000', '21/
 
 ------------------------------------------------------------------------------------------------------------------- POINT 테이블 생성
 CREATE TABLE POINT (
-POINT_ID   	NUMBER,
-P_MEMBER_ID  	VARCHAR2(30),
+POINT_ID      NUMBER,
+P_MEMBER_ID     VARCHAR2(30),
 POINT_DATETIME   DATE,
-POINT_POINT   	NUMBER,   
-POINT_TYPE   	VARCHAR2(30),
+POINT_POINT      NUMBER,   
+POINT_TYPE      VARCHAR2(30),
  CONSTRAINT PK_POINT_ID PRIMARY KEY (POINT_ID),
  CONSTRAINT FK_P_MEMBER_ID FOREIGN KEY (P_MEMBER_ID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
 );
@@ -526,9 +518,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(POINT)
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user01', '21/01/24', '100', '충전포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user02', '21/01/24', '500', '이벤트 포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, 'user03', '21/01/24', '1000',  '00포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '박예빈', '21/01/24', '100', '충전포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '최은영', '21/01/24', '500', '이벤트 포인트');
+INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '이강선', '21/01/24', '1000',  '00포인트');
 
                                              
 ------------------------------------------------------------------------------------------------------------------- RE_TYPE 생성
@@ -591,9 +583,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(REVIEW)
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, DEFAULT, '일반회원1', '일반회원4','이분 불친절해요...', '기간도 조금 넘가가구 불친절 해요;;', NULL, NULL, '21/01/24', NULL, DEFAULT,DEFAULT, DEFAULT);
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★', '일반회원2', '일반회원3','일반회원3님 덕분에 프로젝트 완료했습니다~', '실력은 돈과 비례한다,,, 금액이 좀 부담되지만 프로젝트는 만족해서 별 4개 드립니다 ^^', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★★', '일반회원4', '일반회원5','가성비, 실력 모두 갖추신분!! 괜히 베스트가 아님!!',  '무조건 이분한테 받으세요!! 예약 ㄱㄱ 최고임', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
+INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, DEFAULT, '김우린', '황경필','이분 불친절해요...', '기간도 조금 넘가가구 불친절 해요;;', NULL, NULL, '21/01/24', NULL, DEFAULT,DEFAULT, DEFAULT);
+INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★', '박예빈', '이강선','일반회원3님 덕분에 프로젝트 완료했습니다~', '실력은 돈과 비례한다,,, 금액이 좀 부담되지만 프로젝트는 만족해서 별 4개 드립니다 ^^', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
+INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★★', '최은영', '김우린','가성비, 실력 모두 갖추신분!! 괜히 베스트가 아님!!',  '무조건 이분한테 받으세요!! 예약 ㄱㄱ 최고임', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
 
 
 ------------------------------------------------------------------------------------------------------------------- RE_REPLY(리뷰 게시판 리플 테이블) 생성
@@ -624,9 +616,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_REPLY)
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  첫번째 댓글입니다.', '1', '일반회원1', '21/01/24', NULL, DEFAULT);
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  두번째 댓글입니다.', '12',  '일반회원2', '21/01/24', NULL, DEFAULT);
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  세번째 댓글입니다.', '12',  '일반회원3', '21/01/24', NULL, DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  첫번째 댓글입니다.', '1', '김우린', '21/01/24', NULL, DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  두번째 댓글입니다.', '12',  '박예빈', '21/01/24', NULL, DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  세번째 댓글입니다.', '12',  '이강선', '21/01/24', NULL, DEFAULT);
 
 
 ------------------------------------------------------------------------------------------------------------------- RE_BLAME (리뷰게시판 신고한 내역 저장) 테이블 생성
@@ -661,9 +653,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_BLAME)
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '1', '1', '일반회원1', '일반회원4', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '2', '2', '일반회원2', '일반회원5', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '3', '3', '일반회원3', '일반회원1', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
+INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '1', '1', '김우린', '최은영', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
+INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '2', '2', '박예빈', '황경필', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
+INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '2', '3', '이강선', '김우린', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
 
                                              
                                              
@@ -671,12 +663,12 @@ INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '3', '3', '일반회원3', '일�
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER_AUTH_EMAIL 테이블 생성 예정
 --CREATE TABLE MEMBER_AUTH_EMAIL (
---MAE_ID    		 INT   PK
---MEM_ID   		 INT   이메일 인증이 필요한 회원 PK
---MAE_KEY  		 VARCHAR   이메일 인증키
---MAE_TYPE  	 	TINYINT   인증종류 1: 회원가입, 2 : 이메일변경, 3 : 패스워드 분실
+--MAE_ID           INT   PK
+--MEM_ID          INT   이메일 인증이 필요한 회원 PK
+--MAE_KEY         VARCHAR   이메일 인증키
+--MAE_TYPE         TINYINT   인증종류 1: 회원가입, 2 : 이메일변경, 3 : 패스워드 분실
 --MAE_GENERATE_DATETIME   DATE   인증키 생성 일자
---MAE_USE_DATETIME   	DATE   인증키 사용 일자
---MAE_EXPIRED   		TINYINT   인증키 파기 여부
+--MAE_USE_DATETIME      DATE   인증키 사용 일자
+--MAE_EXPIRED         TINYINT   인증키 파기 여부
 
 COMMIT;
