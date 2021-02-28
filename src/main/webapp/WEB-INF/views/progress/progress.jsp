@@ -63,6 +63,7 @@
 						alert("최저값은 0% 입니다.");
 					} else {
 						var val = parseInt(data);
+						alert("진행도를 성공적으로 변경하였습니다.");
 						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
@@ -94,6 +95,7 @@
 						var val = parseInt(data);
 						console.log(val);
 						console.log(typeof(val));
+						alert("진행도를 성공적으로 변경하였습니다.");
 						$("#progressBar").html("<progress id='process' value=" + val + " max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
@@ -153,13 +155,14 @@
 					<h1 class="pg_tit">마감일 : ${qplist.pro_deadline}</h1>
 					</c:if>
 					<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
-					<form action="updateDl.do" methd="post" style="display:inline; float:left; margin:0;">
 						<h1 class="pg_tit">마감일  </h1>
+					<form action="updateDl.do" method="get">
 						<input type="hidden" id="pro_id" name="pro_id" value="${ pro_id }">
 						<input type="date" name="pro_deadline" value="${qplist.pro_deadline }"
 							min="${ today }" data-date-format="YYYY/MM/DD" pattern="YYYY/MM/DD" required>
-						&nbsp;<a href="#" class="sir_b01">수정</a>
-					</form><br><br><br>
+						&nbsp;<input type="submit" value="수정">
+					</form> 
+					<br>
 					</c:if>
 					
 					<%-- 진행도 --%>

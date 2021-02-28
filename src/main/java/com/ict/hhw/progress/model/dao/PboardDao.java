@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Progress;
 import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
@@ -81,6 +82,10 @@ public class PboardDao {
 
 	public int getSearchDateListListCount(SearchDate dates) {
 		return sqlSession.selectOne("pboardMapper.getSearchDateListCount", dates);
+	}
+	
+	public int updateDeadline(Progress progress) {
+		return sqlSession.update("pboardMapper.updateDeadline", progress);
 	}
 	
 	public int processMinus(int pro_id) {

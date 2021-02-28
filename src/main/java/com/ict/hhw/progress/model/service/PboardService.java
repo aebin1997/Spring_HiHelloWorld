@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Progress;
 import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
@@ -27,7 +28,9 @@ public interface PboardService {
 	int getSearchTitleListCount(String keyword);
 	int getSearchWriterListCount(String keyword);
 	int getSearchDateListCount(SearchDate dates);
-	//진행도 수정
+	// 마감기한 수정
+	int updateDeadline(Progress progress);
+	// 진행도 수정
 	int processMinus(int pro_id);
 	int processPlus(int pro_id);
 	

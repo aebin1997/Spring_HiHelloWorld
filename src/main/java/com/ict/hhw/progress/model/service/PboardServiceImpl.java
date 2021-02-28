@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.dao.PboardDao;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Progress;
 import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
@@ -93,6 +93,11 @@ public class PboardServiceImpl implements PboardService{
 			return pboardDao.getSearchDateListListCount(dates);
 		}
 
+		@Override
+		public int updateDeadline(Progress progress) {
+			return pboardDao.updateDeadline(progress);
+		}
+		
 		@Override
 		public int processMinus(int pro_id) {
 			return pboardDao.processMinus(pro_id);

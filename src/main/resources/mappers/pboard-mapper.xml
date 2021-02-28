@@ -164,6 +164,12 @@
 		SET PSTATUS = 'N', P_MODFIY_DATE = SYSDATE WHERE PID = #{ pid }
 	</update>
 	
+	<update id="updateDeadline" parameterType="Progress">
+		UPDATE PROGRESS
+		SET PRO_DEADLINE = #{ pro_deadline }
+		WHERE PRO_ID = #{ pro_id }
+	</update>
+	
 	<update id="processMinus" parameterType="_int">
 		UPDATE PROGRESS
 		SET PRO_PROCESS = PRO_PROCESS - 10

@@ -1,6 +1,7 @@
 package com.ict.hhw.progress.controller;
 
 import java.io.File;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.progress.model.service.PboardService;
 import com.ict.hhw.progress.model.vo.P_board;
+import com.ict.hhw.progress.model.vo.Progress;
 import com.ict.hhw.progress.model.vo.Psearch;
 import com.ict.hhw.progress.model.vo.QaProgress;
 
@@ -85,13 +87,39 @@ public class PboardController {
 	}
 
 	// 마감기한 수정
-	@ResponseBody
-	@RequestMapping(value = "updateDl.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public String UpdateDeadline(int pro_id, Model model) {
+	@RequestMapping(value = "updateDl.do", method = RequestMethod.GET, produces = "text/html; charset=UTF-8")
+	public String UpdateDeadline(@RequestParam("pro_id") int pro_id, Date pro_deadline, Model model) {
+		Progress progress = new Progress();
 
-		// pboardService.processPlus(pro_id);
+		progress.setPro_id(pro_id);
+		progress.setPro_deadline(pro_deadline);
 
-		return "fail";
+		if(pboardService.updateDeadline(progress)>0){
+
+		// 오늘 날짜 생성
+		String pattern = "yyyy-MM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		String date = simpleDateFormat.format(new java.util.Date());
+		model.addAttribute("today", date);
+
+		ArrayList<P_board> list = pboardService.selectList(pro_id);
+		ArrayList<P_board> olist = pboardService.selectOldList(pro_id);
+		QaProgress qplist = pboardService.selectProgress(pro_id);
+
+		if (list.size() > 0) {
+			model.addAttribute("list", list);
+			model.addAttribute("olist", olist);
+		}
+		model.addAttribute("pro_id", pro_id);
+		model.addAttribute("qplist", qplist);
+
+		return "progress/progress";
+		
+		}else {
+			model.addAttribute("msg", "마감기한 수정 실패");
+			return "common/errorPage";
+		}
 	}
 
 	// 진행도 감소
@@ -99,21 +127,21 @@ public class PboardController {
 	@RequestMapping(value = "processMinus.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String processMinus(@RequestParam("pro_id") int pro_id, Model model) {
 		int val = 0;
-		
+
 		QaProgress qplist = pboardService.selectProgress(pro_id);
-		
+
 		val = qplist.getPro_process();
 		val -= 10;
-		
+
 		if (val >= 0) {
-			
-			if(pboardService.processMinus(pro_id) >0) {
-			return  Integer.toString(val);
+
+			if (pboardService.processMinus(pro_id) > 0) {
+				return Integer.toString(val);
 			}
 		}
-		
+
 		return "404";
-		
+
 	}
 
 	// 진행도 증가
@@ -121,15 +149,15 @@ public class PboardController {
 	@RequestMapping(value = "processPlus.do", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public String processPlus(@RequestParam("pro_id") int pro_id, Model model) {
 		int val = 0;
-		
+
 		QaProgress qplist = pboardService.selectProgress(pro_id);
-		
+
 		val = qplist.getPro_process();
 		val += 10;
-		
+
 		if (val <= 100) {
-			if(pboardService.processPlus(pro_id) >0) {
-				return  Integer.toString(val);
+			if (pboardService.processPlus(pro_id) > 0) {
+				return Integer.toString(val);
 			}
 		}
 
