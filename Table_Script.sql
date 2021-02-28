@@ -396,7 +396,7 @@ COMMENT ON COLUMN PROGRESS.PRO_ANSWERER IS '답변자 닉네임';
 COMMENT ON COLUMN PROGRESS.PRO_DEADLINE IS '프로젝트 마감기한';
 COMMENT ON COLUMN PROGRESS.PRO_PAY IS '프로젝트 결제금액';
 COMMENT ON COLUMN PROGRESS.PRO_PROCESS IS '프로젝트 진행도';
-COMMENT ON COLUMN PROGRESS.PRO_STATUS IS '프로젝트 상태'; -------- 'W' 수락대기중, 'Y' 진행중, 'N' 만료됨, 'D' 거절됨, 'X' 미사용
+COMMENT ON COLUMN PROGRESS.PRO_STATUS IS '프로젝트 상태'; -------- 'W' 수락대기중, 'Y' 진행중, 'C' 채택완료됨, 'N' 만료됨, 'D' 거절됨, 'X' 미사용
 
 ------------------------------------------------------------------------------------------------------------------- PROGRESS 시퀀스
 CREATE SEQUENCE SEQ_PRO 
