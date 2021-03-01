@@ -155,6 +155,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	<c:url var="nlist" value="nlist.do">
 		<c:param name="page" value="1" />
 	</c:url>
+	<c:url var="revlist" value="revlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
 	<c:url var="admin" value="admin.do">
 		<c:param name="page" value="1" />
 	</c:url>
@@ -171,7 +174,7 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 									<li><a class="nav-link" href="${ qalist }">코딩의뢰</a></li>
 									<li><a class="nav-link" href="${ blist }">자유게시판</a></li>
-									<li><a class="nav-link" href="#">리뷰게시판</a></li>
+									<li><a class="nav-link" href="${ revlist }">리뷰게시판</a></li>
 									<c:if test="${ !empty sessionScope.loginUser }">
 									<li><a class="nav-link" href="progress.move">나의 Q&A</a></li>
 									</c:if>

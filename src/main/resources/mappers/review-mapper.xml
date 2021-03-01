@@ -1,4 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reviewMapper">
+
+	<resultMap type="Review" id="resultReview">
+		<id column="rid" property="rid"/>
+		<result column="ref_proid" property="ref_proid" />
+		<result column="ref_qid" property="ref_qid" />
+		<result column="rtitle" property="rtitle" />
+		<result column="rwriter" property="rwriter" />
+		<result column="rcontent" property="rcontent" />
+		<result column="r_original_filename" property="r_original_filename" />
+		<result column="r_rename_filename" property="r_rename_filename" />
+		<result column="rcount" property="rcount" />
+		<result column="r_create_date" property="r_create_date" />
+		<result column="r_modify_date" property="r_modify_date" />
+		<result column="r_status" property="r_status" />
+	</resultMap>
+	
+	<select id="selectList" parameterType="com.ict.hhw.review.model.vo.BoardPage" resultMap="resultReview">
+		<![CDATA[
+      	SELECT *
+        FROM(SELECT ROWNUM RNUM, RID, RTITLE, RWRITER, RCONTENT,
+                  R_ORIGINAL_FILENAME, R_RENAME_FILENAME, RCOUNT,
+                 R_CREATE_DATE, R_MODIFY_DATE, R_STATUS
+               FROM (SELECT * 
+                       FROM REVIEW
+                     WHERE R_STATUS = 'Y'
+                      ORDER BY RID DESC))
+      	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
+      	]]>
+	</select>
+	
+	<select id="selectReview" parameterType="_int" resultMap="resultReview">
+		select * from review
+		where rid = #{ rid }
+	</select>
+
+	<update id="updateRCount" parameterType="_int">
+		update review
+		set rcount = rcount + 1
+		where rid = #{ rid }
+	</update>
+	
+	<select id="getListCount" resultType="_int">
+		select count(*) from review
+	</select>
+	
+	<insert id="insertReview" parameterType="Review">
+		insert into review
+		<if test="r_original_filename != null"><!-- 첨부파일이 있을 때 -->
+		values (seq_review.nextval, #{ ref_proid }, #{ref_qid }, #{ rtitle }, #{ rwriter }, #{ rcontent },
+		 		#{ r_original_filename }, #{ r_rename_filename }, 
+		 		default, sysdate, sysdate, default)
+		</if>
+		<if test="r_original_filename == null"><!-- 첨부파일이 없을 때 -->
+		values (seq_bid.nextval, #{ ref_proid }, #{ ref_qid }, #{ rtitle }, #{ rwriter }, #{ rcontent },
+		 		null, null, 
+		 		default, sysdate, sysdate, default)
+		</if>
+	</insert>
+	
+	<update id="changeRstatusN" parameterType="_int">
+		update review
+		set r_status = 'N',
+			r_modify_date = sysdate
+		where rid = #{ rid }
+	</update>
+	
+
 </mapper>

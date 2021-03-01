@@ -870,7 +870,7 @@
 			}
 		</script>
 
-		<!-- 푸터 -->
+	<!-- 푸터 -->
 	</section>
 	<jsp:include page="../common/footer.jsp" />
 

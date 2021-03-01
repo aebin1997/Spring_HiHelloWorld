@@ -23,7 +23,6 @@ table.table2 tr {
 }
 
 table.table2 td {
-	width: 200px;
 	padding: 10px;
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
@@ -36,11 +35,10 @@ table.table2 td {
 	<section style="padding: 70px 0 60px 0;">
 		
 		<br><br>
-		<form method="post" action="#">
-		<input type=hidden name="pro_id" value=${ qplist.pro_id }>
-		<input type=hidden name="pro_qid" value=${ qplist.pro_qid }>
-			<table style="padding-top: 50px" align=center width=700 border=0
-				cellpadding=2>
+		<form action="revinsert.do" method="post" >
+		<input type=hidden name="ref_proid" value=${ qplist.pro_id }>
+		<input type=hidden name="ref_qid" value=${ qplist.pro_qid }>
+			<table style="padding-top: 50px" align=center width=700 border=0 cellpadding=2>
 				<tr>
 					<td height=20 align=center bgcolor=#ccc><font color=white>
 					Approve this order</font></td>
@@ -49,13 +47,14 @@ table.table2 td {
 					<td bgcolor=white>
 						<table class="table2">
 							<tr>	
-								<td>질문 제목</td>
-								<td><input type=text value=${ qplist.qa_title } readonly></td>
+								<td width="200px">질문 제목</td>
+								<td width="500px"><input type=text value=${ qplist.qa_title } readonly></td>
+								
 							</tr>
 							
 							<tr>
 								<td>작성자</td>
-								<td><input type=text name=name size=20
+								<td><input type=text name=rwriter size=20
 									value="${ sessionScope.loginUser.nickname }" readonly>
 								</td>
 							</tr>
@@ -67,17 +66,20 @@ table.table2 td {
 
 							<tr>
 								<td>Quality of the answer</td>
-								<td><input type=range name=range size=100></td>
+								<td><input type=range name=range size=500></td>
 							</tr>
 
 							<tr>
 								<td>리뷰 제목</td>
-								<td><input type=text name=title size=60></td>
+								<td><input type=text name=rtitle size=60></td>
 							</tr>
-
+							<tr>
+								<td>파일선택</td>
+								<td><input type="file" name="upfile"></td>
+							</tr>
 							<tr>
 								<td>내용</td>
-								<td><textarea name=content cols=85 rows=15></textarea></td>
+								<td><textarea name=rcontent cols=85 rows=15></textarea></td>
 							</tr>
 
 						</table>

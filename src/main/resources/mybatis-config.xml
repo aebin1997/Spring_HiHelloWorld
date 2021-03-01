@@ -20,6 +20,7 @@
 		<typeAlias type="com.ict.hhw.blame.model.vo.Blame" alias="Blame"/>
 		<typeAlias type="com.ict.hhw.payment.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.ict.hhw.review.model.vo.Review" alias="Review"/>
+		<typeAlias type="com.ict.hhw.review_reply.model.vo.Re_reply" alias="Re_reply"/>
 	</typeAliases>
 	
 	<mappers>
