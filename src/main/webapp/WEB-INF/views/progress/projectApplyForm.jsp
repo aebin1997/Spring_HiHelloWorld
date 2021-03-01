@@ -249,7 +249,7 @@
 							<td align="center"><c:if test="${ fn:trim(p.pro_status) eq 'Y' || fn:trim(p.pro_status) eq 'N' || fn:trim(p.pro_status) eq 'C' }">
 							<a href="plist.do?pro_id=${ p.pro_id }">
 							<img src="/hhw/resources/images/icon/ico_go.png" width="15px" height="15px"></a></c:if></td>
-							<td align="center">${ p.qa_title }</td>
+							<td>${ p.qa_title }</td>
 							<td align="center">${ p.pro_writer }</td>
 							<td align="center">${ p.pro_answerer }</td>
 							<td align="center">${ p.pro_deadline }</td>
