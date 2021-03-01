@@ -16,10 +16,11 @@
 
 		//jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
 		//해당 게시글의 번호를 전송함
-		var pid = ${ pboard.pid };
-		; //el 의 값을 변수에 대입
+		var pid = ${ pboard.pid};
+		
 		var loginUser = "${ sessionScope.loginUser.nickname }"; //로그인한 회원 아이디 변수에 대입
-		$.ajax({
+		$
+				.ajax({
 					url : "${ pageContext.request.contextPath }/prlist.do",
 					type : "post",
 					data : {
@@ -33,7 +34,7 @@
 						var jsonStr = JSON.stringify(data);
 						//string ==> json 
 						var json = JSON.parse(jsonStr);
-						
+
 						var values = "";
 						for ( var i in json.list) {
 							//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
@@ -48,8 +49,8 @@
 										+ "<input type='hidden' name='pid' value='${pboard.pid}'>"
 										+ "<textarea name='prcontent' rows='5' cols='50'>"
 										+ decodeURIComponent(
-												json.list[i].prcontent).replace(
-												/\+/gi, " ")
+												json.list[i].prcontent)
+												.replace(/\+/gi, " ")
 										+ "</textarea><br><input type='submit' value='수정'></form>"
 										+ "<button onclick='replyDelete("
 										+ json.list[i].prid
@@ -61,8 +62,9 @@
 										+ json.list[i].pr_date
 										+ "</td></tr><tr><td colspan='2'>"
 										+ decodeURIComponent(
-												json.list[i].prcontent).replace(
-												/\+/gi, " ") + "</td></tr>";
+												json.list[i].prcontent)
+												.replace(/\+/gi, " ")
+										+ "</td></tr>";
 							}
 						} //for in
 
@@ -89,61 +91,98 @@
 		$("#replyDiv").css("display", "none");
 	}
 </script>
+
+<style>
+table.table2 {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.table2 tr {
+	width: 50px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.table2 td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
 </head>
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
 
-		<h2 align="center">${ requestScope.pboard.pid }번게시글 상세보기</h2>
 		<br>
-		<table id="mainContent" align="center" cellpadding="10" cellspacing="0" border="1"
-			width="500">
+		<br>
+		<br>
+		<table style="padding-top: 50px" align=center width=700 border=0
+			cellpadding=2>
 			<tr>
-				<th>제 목</th>
-				<td>${ pboard.ptitle }</td>
+				<td height=20 align=center bgcolor=#ccc><font color=white>
+						${ requestScope.pboard.pid }번게시글상세보기</font></td>
 			</tr>
+
 			<tr>
-				<th>작성자</th>
-				<td>${ pboard.pwriter }</td>
-			</tr>
-			<tr>
-				<th>내 용</th>
-				<td>${ pboard.pcontent }</td>
-			</tr>
-			<tr>
-				<th>첨부파일</th>
-				<td><c:if test="${ empty pboard.p_file_name }">
+				<td bgcolor=white>
+					<table class="table2">
+						<tr>
+							<td width="200px">제 목</td>
+							<td width="500px">${ pboard.ptitle }</td>
+						</tr>
+						<tr>
+							<td>작성자</td>
+							<td>${ pboard.pwriter }</td>
+						</tr>
+						<tr>
+							<td>내 용</td>
+							<td>${ pboard.pcontent }</td>
+						</tr>
+						<tr>
+							<td>첨부파일</td>
+							<td><c:if test="${ empty pboard.p_file_name }">
 				첨부파일 없음
 				</c:if> <c:if test="${ !empty pboard.p_file_name }">
-						<c:url var="pfd" value="/pfdown.do">
-							<c:param name="ofile" value="${ pboard.p_file_name }" />
-							<c:param name="rfile" value="${ pboard.p_rfile_name }" />
-						</c:url>
-						<a href="${ pfd }">${ pboard.p_file_name }</a>
-					</c:if></td>
-			</tr>
-			<tr align="center" valign="middle">
-				<th colspan="2">
-					<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> <c:if test="${ !empty loginUser }">
-						<button onclick="showReplyForm();">댓글달기</button>
+									<c:url var="pfd" value="/pfdown.do">
+										<c:param name="ofile" value="${ pboard.p_file_name }" />
+										<c:param name="rfile" value="${ pboard.p_rfile_name }" />
+									</c:url>
+									<a href="${ pfd }">${ pboard.p_file_name }</a>
+								</c:if></td>
+						</tr>
+					</table>
+					
+					<center>
+								<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> <c:if
+									test="${ !empty loginUser }">
+									<button onclick="showReplyForm();">댓글달기</button>
    						&nbsp; &nbsp;
 						</c:if> <%-- 로그인한 상태이면서, 본인 글일때만 보여지게 함 --%> <c:if
-						test="${ !empty loginUser and loginUser.nickname eq pboard.pwriter }">
-						<c:url var="puv" value="/pupview.do">
-							<c:param name="pid" value="${ pboard.pid }" />
-							<c:param name="pro_id" value="${ pboard.p_proid }" />
-						</c:url>
-						<a href="${ puv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
+									test="${ !empty loginUser and loginUser.nickname eq pboard.pwriter }">
+									<c:url var="puv" value="/pupview.do">
+										<c:param name="pid" value="${ pboard.pid }" />
+										<c:param name="pro_id" value="${ pboard.p_proid }" />
+									</c:url>
+									<a href="${ puv }">[수정페이지로 이동]</a> &nbsp; &nbsp; 
    						<c:url var="pdl" value="/pdelete.do">
-							<c:param name="pid" value="${ pboard.pid }" />
-							<c:param name="pro_id" value="${ pboard.p_proid }" />
-						</c:url>
-						<a href="${ pdl }">[글삭제]</a> &nbsp; &nbsp; 
+										<c:param name="pid" value="${ pboard.pid }" />
+										<c:param name="pro_id" value="${ pboard.p_proid }" />
+									</c:url>
+									<a href="${ pdl }">[글삭제]</a> &nbsp; &nbsp; 
 						</c:if> <c:url var="pls" value="/plist.do">
-						<c:param name="pro_id" value="${ pboard.p_proid }" />
-					</c:url> <a href="${ pls }">[목록]</a>
-				</th>
+									<c:param name="pro_id" value="${ pboard.p_proid }" />
+								</c:url> <a href="${ pls }">[목록]</a>
+						</center>
+				</td>
 			</tr>
 		</table>
 		<br>
@@ -171,14 +210,16 @@
 			</form>
 		</div>
 		<br>
+		
 		<%-- 댓글목록 표시 영역 --%>
 		<div id="prlistView">
-			<table id="prlistTbl" align="center" cellspacing="0" cellpadding="20" border="1" width="500"></table>
+			<table id="prlistTbl" align="center" cellspacing="0" cellpadding="20"
+				border="1" width="500"></table>
 		</div>
-		<br><br>
-		
+		<br> <br>
 
-	<!-- 푸터 -->
+
+		<!-- 푸터 -->
 	</section>
 	<jsp:include page="../common/footer.jsp" />
 

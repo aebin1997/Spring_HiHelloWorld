@@ -34,8 +34,9 @@ table.table2 td {
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
 	<section style="padding: 70px 0 60px 0;">
-
-		<form method="get" action="write_action.php">
+		
+		<br><br>
+		<form method="post" action="#">
 		<input type=hidden name="pro_id" value=${ qplist.pro_id }>
 		<input type=hidden name="pro_qid" value=${ qplist.pro_qid }>
 			<table style="padding-top: 50px" align=center width=700 border=0

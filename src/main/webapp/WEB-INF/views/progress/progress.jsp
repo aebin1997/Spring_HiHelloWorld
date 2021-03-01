@@ -273,7 +273,7 @@
 							</ul>
 						</c:if>
 						<ul class="sir_vbo_com">
-							<li><a href="#" class="sir_b01">목록</a></li>
+							<li><a href="javascript:history.go(-1);" class="sir_b01">목록</a></li>
 						</ul>
 					</div>
 
