@@ -16,11 +16,10 @@
 
 		//jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
 		//해당 게시글의 번호를 전송함
-		var pid = ${ pboard.pid};
+		var pid = ${ pboard.pid };
 		
 		var loginUser = "${ sessionScope.loginUser.nickname }"; //로그인한 회원 아이디 변수에 대입
-		$
-				.ajax({
+		$.ajax({
 					url : "${ pageContext.request.contextPath }/prlist.do",
 					type : "post",
 					data : {
