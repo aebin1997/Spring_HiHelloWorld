@@ -19,6 +19,7 @@
 		<typeAlias type="com.ict.hhw.pboard_reply.model.vo.P_reply" alias="P_reply"/>
 		<typeAlias type="com.ict.hhw.blame.model.vo.Blame" alias="Blame"/>
 		<typeAlias type="com.ict.hhw.payment.model.vo.Payment" alias="Payment"/>
+		<typeAlias type="com.ict.hhw.review.model.vo.Review" alias="Review"/>
 	</typeAliases>
 	
 	<mappers>
@@ -33,5 +34,6 @@
 		<mapper resource="mappers/preply-mapper.xml"/>
 		<mapper resource="mappers/blame-mapper.xml"/>
 		<mapper resource="mappers/payment-mapper.xml"/>
+		<mapper resource="mappers/review-mapper.xml"/>
 	</mappers>
 </configuration>

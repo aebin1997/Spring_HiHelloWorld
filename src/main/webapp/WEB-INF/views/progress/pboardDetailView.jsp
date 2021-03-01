@@ -73,7 +73,7 @@
 						console.log("error : " + jqXHR + ", " + textstatus
 								+ ", " + errorthrown);
 					}
-				}); //notice top3 ajax
+				}); 
 
 	}); //jquery document ready
 

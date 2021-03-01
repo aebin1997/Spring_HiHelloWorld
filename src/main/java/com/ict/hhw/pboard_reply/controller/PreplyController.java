@@ -33,6 +33,23 @@ public class PreplyController {
 			return "common/errorPage";
 		}
 	}
+	
+	@RequestMapping(value = "prinsert2.do", method = RequestMethod.POST)
+	public String replyInsertMethod2(@RequestParam("pro_id") int pro_id, @RequestParam("ref_pid") int ref_pid, 
+			@RequestParam("prwriter") String prwriter, @RequestParam("prcontent") String prcontent, Model model) {
+		
+		P_reply reply = new P_reply();
+		reply.setRef_pid(ref_pid);
+		reply.setPrwriter(prwriter);
+		reply.setPrcontent(prcontent);
+		
+		if (replyService.insertReply(reply) > 0) {
+			return "redirect:plist.do?pro_id=" + pro_id;
+		} else {
+			model.addAttribute("msg", reply.getRef_pid() + "번 글에 대한 댓글달기 실패.");
+			return "common/errorPage";
+		}
+	}
 
 	// ajax 원글에 대한 댓글 조회 처리용
 	@RequestMapping(value = "prlist.do", method = RequestMethod.POST)
