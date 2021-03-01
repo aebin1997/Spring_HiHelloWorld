@@ -13,9 +13,7 @@ DROP TABLE P_BOARD CASCADE CONSTRAINTS;
 DROP TABLE P_REPLY CASCADE CONSTRAINTS;
 DROP TABLE PAY CASCADE CONSTRAINTS;
 DROP TABLE POINT CASCADE CONSTRAINTS;
-DROP TABLE RE_BLAME CASCADE CONSTRAINTS;
 DROP TABLE REVIEW CASCADE CONSTRAINTS;
-DROP TABLE RE_TYPE CASCADE CONSTRAINTS;
 DROP TABLE RE_REPLY CASCADE CONSTRAINTS;
 
 ------------------------------------------------------------------------------------------------------------------- 모든 시퀀스 리셋
@@ -30,6 +28,8 @@ DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
 DROP SEQUENCE SEQ_PAYID;
 DROP SEQUENCE SEQ_POINTID;
+DROP SEQUENCE SEQ_REVIEW;
+DROP SEQUENCE SEQ_RID;
 
 ------------------------------------------------------------------------------------------------------------------- MEMBER 생성
 
@@ -385,12 +385,12 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PROGRESS)
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'김우린', '황경필', '21/03/05', default, default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '김우린', '이강선', '21/03/05', default,default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '김우린',  '최은영', '21/03/05', default, default, default);
-INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '황경필',  '김우린', '21/03/05', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 1,'김우린', '황경필', '21/03/02', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 2, '김우린', '이강선', '21/03/02', default,default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '김우린',  '최은영', '21/03/02', default, default, default);
+INSERT INTO PROGRESS VALUES(SEQ_PRO.NEXTVAL, 3, '황경필',  '김우린', '21/03/02', default, default, default);
 
-------------------------------------------------------------------------------------------------------------------- 진행테이블()                                             
+------------------------------------------------------------------------------------------------------------------- 진행테이블(P_BOARD) 생성                                             
 CREATE TABLE P_BOARD(
 PID                            NUMBER,
 P_PROID                    NUMBER,
@@ -429,6 +429,7 @@ INCREMENT BY 1;
 INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '자바 질문', '자꾸 NullPointException이 뜹니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '황경필', '에러 해결하는 법은', '일단 구글에 검색해 보시고, SQL 구문의 오류를 찾아가보면 100% 오타있습니다.', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
 INSERT INTO P_BOARD VALUES(SEQ_PID.NEXTVAL, 1, '김우린', '해결 되었습니다.', '좋은 정보글을 남겨주셔서 감다합니다!!', NULL, NULL, SYSDATE, NULL, DEFAULT, DEFAULT);
+                                            
 ------------------------------------------------------------------------------------------------------------------- 게시판 리플 테이블 P_REPLY 생성
 CREATE TABLE P_REPLY(
   PRID                  NUMBER,
@@ -522,145 +523,90 @@ INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '박예빈', '21/01/24', '100', '�
 INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '최은영', '21/01/24', '500', '이벤트 포인트');
 INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '이강선', '21/01/24', '1000',  '00포인트');
 
-                                             
-------------------------------------------------------------------------------------------------------------------- RE_TYPE 생성
-CREATE TABLE RE_TYPE(
-RE_TYPE_NO      CHAR(2),
-RE_TYPE_NAME  CHAR(50),
-CONSTRAINT PK_RE_TYPE_NAME PRIMARY KEY(RE_TYPE_NAME)
-);
-
-------------------------------------------------------------------------------------------------------------------- RE_TYPE 컬러명 지정
-COMMENT ON COLUMN RE_TYPE.RE_TYPE_NO IS '별점';
-COMMENT ON COLUMN RE_TYPE.RE_TYPE_NAME IS '별개수';
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_TYPE)
-INSERT INTO RE_TYPE VALUES('1', '★');
-INSERT INTO RE_TYPE VALUES('2', '★★');
-INSERT INTO RE_TYPE VALUES('3', '★★★');
-INSERT INTO RE_TYPE VALUES('4', '★★★★');
-INSERT INTO RE_TYPE VALUES('5', '★★★★★');
-
 ------------------------------------------------------------------------------------------------------------------- REVIEW(리뷰게시판) 생성
 CREATE TABLE REVIEW(
-REID                            NUMBER,
-RETYPE                        CHAR(50) DEFAULT '★', 
-REWRITER                     VARCHAR2(100) NOT NULL,
-RERECOMMENDER            VARCHAR2(100) NOT NULL,
-RETITLE                        VARCHAR2(500) NOT NULL,
-RECONTENT                  VARCHAR2(4000),
-RE_ORIGINAL_FILENAME    VARCHAR2(100),
-RE_RENAME_FILENAME     VARCHAR2(100),
-RE_CREATE_DATE            DATE,
-RE_MODFIY_DATE           DATE,
-RECOUNT                     NUMBER DEFAULT 0,
-RE_RCOUNT                  NUMBER DEFAULT 0,
-RESTATUS            CHAR(2) DEFAULT 'Y',
-CONSTRAINT PK_REID PRIMARY KEY(REID),
-CONSTRAINT FK_RETYPE FOREIGN KEY (RETYPE) REFERENCES RE_TYPE (RE_TYPE_NAME) ON DELETE SET NULL,
-CONSTRAINT FK_REWRITER FOREIGN KEY (REWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL,
-CONSTRAINT FK_RERECOMMENDER FOREIGN KEY (RERECOMMENDER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
-);
+  RID NUMBER PRIMARY KEY,
+  REF_PROID NUMBER,
+  REF_QID NUMBER,
+  RTITLE VARCHAR2(100) NOT NULL,
+  RWRITER VARCHAR2(15),
+  RCONTENT VARCHAR2(4000),
+  R_ORIGINAL_FILENAME VARCHAR2(100),
+  R_RENAME_FILENAME VARCHAR2(100),
+  RCOUNT NUMBER DEFAULT 0,
+  R_CREATE_DATE DATE,
+  R_MODIFY_DATE DATE,
+  R_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK (B_STATUS IN('Y', 'N')),
+  FOREIGN KEY (REF_PROID) REFERENCES PROGRESS(PRO_ID) ON DELETE CASCADE
+  FOREIGN KEY (REF_QID) REFERENCES QA(QA_ID) ON DELETE CASCADE
+  FOREIGN KEY (RWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE CASCADE
+);  
 
-------------------------------------------------------------------------------------------------------------------- REVIEW컬러명 지정
-COMMENT ON COLUMN REVIEW.REID IS '리뷰 글 번호';
-COMMENT ON COLUMN REVIEW.RETYPE IS '리뷰 글 구분(1. ★, 2. ★★, 3. ★★★, 4. ★★★★, 5. ★★★★★)';
-COMMENT ON COLUMN REVIEW.REWRITER IS '리뷰 작성자';
-COMMENT ON COLUMN REVIEW.RERECOMMENDER IS '리뷰 추천자';
-COMMENT ON COLUMN REVIEW.RETITLE IS '리뷰 제목';
-COMMENT ON COLUMN REVIEW.RECONTENT IS '리뷰 내용';
-COMMENT ON COLUMN REVIEW.RE_ORIGINAL_FILENAME IS '리뷰 원래 첨부파일 명';
-COMMENT ON COLUMN REVIEW.RE_RENAME_FILENAME IS '리뷰 바뀐 첨부파일 명';
-COMMENT ON COLUMN REVIEW.RE_CREATE_DATE IS '리뷰 날짜';
-COMMENT ON COLUMN REVIEW.RE_MODFIY_DATE IS '리뷰 수정날짜';
-COMMENT ON COLUMN REVIEW.RECOUNT IS '리뷰 조회수';
-COMMENT ON COLUMN REVIEW.RE_RCOUNT IS '리뷰 댓글 조회수';
-COMMENT ON COLUMN REVIEW.RESTATUS IS '리뷰 상태';
+------------------------------------------------------------------------------------------------------------------- REVIEW 컬럼명 지정
+COMMENT ON COLUMN REVIEW.RID IS '게시글번호';
+COMMENT ON COLUMN REVIEW.REF_PROID IS '참조 진행번호';
+COMMENT ON COLUMN REVIEW.REF_QID IS '참조 질문번호';
+COMMENT ON COLUMN REVIEW.RTITLE IS '게시글제목';
+COMMENT ON COLUMN REVIEW.RWRITER IS '게시글작성자 아이디';
+COMMENT ON COLUMN REVIEW.RCONTENT IS '게시글내용';
+COMMENT ON COLUMN REVIEW.R_ORIGINAL_FILENAME IS '첨부파일원래이름';
+COMMENT ON COLUMN REVIEW.R_RENAME_FILENAME IS '첨부파일변경이름';
+COMMENT ON COLUMN REVIEW.RCOUNT IS '게시글조회수';
+COMMENT ON COLUMN REVIEW.R_CREATE_DATE IS '게시글올린날짜';
+COMMENT ON COLUMN REVIEW.R_MODIFY_DATE IS '게시글수정한날짜';
+COMMENT ON COLUMN REVIEW.R_STATUS IS '게시글상태값';
 
-------------------------------------------------------------------------------------------------------------------- REVIEW시퀀스
-CREATE SEQUENCE SEQ_REID 
+------------------------------------------------------------------------------------------------------------------- REVIEW 시퀀스
+CREATE SEQUENCE SEQ_REVIEW
 START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(REVIEW)
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, DEFAULT, '김우린', '황경필','이분 불친절해요...', '기간도 조금 넘가가구 불친절 해요;;', NULL, NULL, '21/01/24', NULL, DEFAULT,DEFAULT, DEFAULT);
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★', '박예빈', '이강선','일반회원3님 덕분에 프로젝트 완료했습니다~', '실력은 돈과 비례한다,,, 금액이 좀 부담되지만 프로젝트는 만족해서 별 4개 드립니다 ^^', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
-INSERT INTO REVIEW VALUES(SEQ_REID.NEXTVAL, '★★★★★', '최은영', '김우린','가성비, 실력 모두 갖추신분!! 괜히 베스트가 아님!!',  '무조건 이분한테 받으세요!! 예약 ㄱㄱ 최고임', NULL, NULL, '21/01/24', NULL, DEFAULT, DEFAULT,DEFAULT);
-
-
-------------------------------------------------------------------------------------------------------------------- RE_REPLY(리뷰 게시판 리플 테이블) 생성
+INSERT INTO REVIEW VALUES(SEQ_REVIEW.NEXTVAL, 1, 1, '첫번째 리뷰', '김우린', '친절하셨어요.', NULL, NULL, DEFAULT, '2020-03-02', '2020-03-02', DEFAULT);
+INSERT INTO REVIEW VALUES(SEQ_REVIEW.NEXTVAL, 2, 2, '두번째 리뷰', '김우린', '답변이 빨라요.', NULL, NULL, DEFAULT, '2020-03-02', '2020-03-02', DEFAULT);
+INSERT INTO REVIEW VALUES(SEQ_REVIEW.NEXTVAL, 3, 3, '세번째 리뷰', '김우린', '답변이 느려요', NULL, NULL, DEFAULT, '2020-03-02', '2020-03-02', DEFAULT);
+                                          
+------------------------------------------------------------------------------------------------------------------- RE_REPLY(리뷰게시판 댓글) 생성
 CREATE TABLE RE_REPLY(
-  RE_REID                   NUMBER,
-  RE_RCONTENT          VARCHAR2(400),
-  RE_REF_REID       NUMBER,
-  RE_REWRITER             VARCHAR2(100) NOT NULL,
-  RE_CREATE_DATE   DATE,
-  RE_MODIFY_DATE   DATE,
-  RE_STATUS            CHAR(1) DEFAULT 'Y',
-  CONSTRAINT PK_RE_REID PRIMARY KEY(RE_REID),
-  CONSTRAINT FK_RE_REWRITER FOREIGN KEY (RE_REWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL
-);
-
-------------------------------------------------------------------------------------------------------------------- RE_REPLY컬러명 지정
-COMMENT ON COLUMN RE_REPLY.RE_REID IS '리뷰글 글 번호';
-COMMENT ON COLUMN RE_REPLY.RE_RCONTENT IS '리뷰글  댓글 내용';
-COMMENT ON COLUMN RE_REPLY.RE_REF_REID IS '참조 리뷰글  번호';
-COMMENT ON COLUMN RE_REPLY.RE_REWRITER IS '리뷰글  댓글 작성자';
-COMMENT ON COLUMN RE_REPLY.RE_CREATE_DATE IS '리뷰글  댓글 작성 일자';
-COMMENT ON COLUMN RE_REPLY.RE_MODIFY_DATE IS '리뷰글  댓글 수정 일자';
-COMMENT ON COLUMN RE_REPLY.RE_STATUS IS '리뷰글 댓글 상태';
-
-------------------------------------------------------------------------------------------------------------------- RE_REPLY시퀀스
-CREATE SEQUENCE SEQ_RREID 
+  RID NUMBER PRIMARY KEY,
+  REF_RID NUMBER,
+  RCONTENT VARCHAR2(400),
+  RWRITER VARCHAR2(15),
+  R_CREATE_DATE DATE,
+  R_MODIFY_DATE DATE,
+  R_STATUS VARCHAR2(1) DEFAULT 'Y' CHECK (R_STATUS IN ('Y', 'N')),
+  FOREIGN KEY (REF_RID) REFERENCES REVIEW(RID) ON DELETE CASCADE, 
+  FOREIGN KEY (RWRITER) REFERENCES MEMBER(NICKNAME) ON DELETE CASCADE 
+);                                          
+                                          
+------------------------------------------------------------------------------------------------------------------- RE_REPLY 컬럼명 지정
+COMMENT ON COLUMN RE_REPLY.RID IS '댓글번호';
+COMMENT ON COLUMN RE_REPLY.REF_RID IS '참조게시글번호';
+COMMENT ON COLUMN RE_REPLY.RCONTENT IS '댓글내용';
+COMMENT ON COLUMN RE_REPLY.RWRITER IS '댓글작성자아이디';
+COMMENT ON COLUMN RE_REPLY.R_CREATE_DATE IS '댓글작성날짜';
+COMMENT ON COLUMN RE_REPLY.R_MODIFY_DATE IS '댓글수정날짜';
+COMMENT ON COLUMN RE_REPLY.R_STATUS IS '댓글상태값';                                 
+                                          
+------------------------------------------------------------------------------------------------------------------- RE_REPLY 시퀀스 
+CREATE SEQUENCE SEQ_RID
 START WITH 1
-INCREMENT BY 1;
-
+INCREMENT BY 1;;
+                                          
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_REPLY)
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  첫번째 댓글입니다.', '1', '김우린', '21/01/24', NULL, DEFAULT);
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  두번째 댓글입니다.', '12',  '박예빈', '21/01/24', NULL, DEFAULT);
-INSERT INTO RE_REPLY VALUES(SEQ_RREID.NEXTVAL, '리뷰글  세번째 댓글입니다.', '12',  '이강선', '21/01/24', NULL, DEFAULT);
 
+INSERT INTO RE_REPLY
+VALUES(SEQ_RID.NEXTVAL,  1, '첫번째 댓글입니다.', '김우린', '2020-03-02', '2020-03-02', DEFAULT);
 
-------------------------------------------------------------------------------------------------------------------- RE_BLAME (리뷰게시판 신고한 내역 저장) 테이블 생성
-CREATE TABLE RE_BLAME(
-RE_BLAME_NO       NUMBER,
-RE_BLAME_BID       NUMBER,   
-RE_BLAME_TYPE       CHAR(50) DEFAULT '부적절', 
-RE_MM_NICKNAME   VARCHAR2(20),
-RE_TARGET_NICKNAME   VARCHAR2(20),
-RE_BLAME_DATE       DATE,
-RE_BLAME_CONTENT    VARCHAR2(2000),
-RE_BLAME_IP       VARCHAR2(50),
-CONSTRAINT PK_RE_BLAME_NO PRIMARY KEY(RE_BLAME_NO),
-CONSTRAINT FK_RE_MM_NICKNAME FOREIGN KEY (RE_MM_NICKNAME) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL,
-CONSTRAINT FK_RE_TARGET_NICKNAME FOREIGN KEY (RE_TARGET_NICKNAME) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL,
-CONSTRAINT FK_RE_BLAME_BID FOREIGN KEY (RE_BLAME_BID) REFERENCES BOARD(BID) ON DELETE SET NULL
-);
+INSERT INTO RE_REPLY
+VALUES(SEQ_RID.NEXTVAL, 1, '첫번째 댓글입니다.',  '김우린', '2020-03-02', '2020-03-02', DEFAULT);
 
-------------------------------------------------------------------------------------------------------------------- RE_BLAME(신고한 내역이 저장) 컬럼명 생성
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_NO IS '신고번호';
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_BID IS '신고 게시물의 번호';
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_TYPE IS '신고 글 구분(1. 부적절, 2. 욕설, 3. 사기, 4. 음란물)';
-COMMENT ON COLUMN RE_BLAME.RE_MM_NICKNAME IS '신고한 회원';
-COMMENT ON COLUMN RE_BLAME.RE_TARGET_NICKNAME IS '신고당한 회원';
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_DATE IS '신고 일시';
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_CONTENT IS '신고 내용';
-COMMENT ON COLUMN RE_BLAME.RE_BLAME_IP IS '신고자 IP';
+INSERT INTO RE_REPLY
+VALUES(SEQ_RID.NEXTVAL, 2, '두번째 댓글입니다.',  '황경필', '2020-03-02', '2020-03-02', DEFAULT);
 
-------------------------------------------------------------------------------------------------------------------- RE_BLAME시퀀스
-CREATE SEQUENCE SEQ_REBLID
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_BLAME)
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '1', '1', '김우린', '최은영', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '2', '2', '박예빈', '황경필', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
-INSERT INTO RE_BLAME VALUES(SEQ_REBLID.NEXTVAL, '2', '3', '이강선', '김우린', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
-
+INSERT INTO RE_REPLY
+VALUES(SEQ_RID.NEXTVAL, 2, '마지막 댓글입니다.',  '최은영', '2020-03-02', '2020-03-02', DEFAULT);                              
                                              
-                                             
-                                             
-
 ------------------------------------------------------------------------------------------------------------------- MEMBER_AUTH_EMAIL 테이블 생성 예정
 --CREATE TABLE MEMBER_AUTH_EMAIL (
 --MAE_ID           INT   PK
