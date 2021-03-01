@@ -42,15 +42,16 @@
       이 문제를 미리 방지하기 위해 xml 코드 중 xml parser에 의해 해석하지 말고 문장 그대로 해석하라는 뜻으로 <![CDATA 
       쿼리문장 ]]> 사용함 -->
       
-   <!-- Member, Board, Reply 조인
-	<select id="selectBoardList" parameterType="_int" resultMap="resultBoardList">
-		SELECT *
-		  FROM MEMBER M, BOARD B, B_REPLY R
-	     WHERE M.NICKNAME = B.BWRITER
-		   AND B.BID = R.B_REF_BID
-		   AND BID = #{ bid }
-	</select> -->
-	
+  <!--  
+    <update id="addInsertReply" parameterType="_int">
+      UPDATE BOARD
+		 SET B_RCOUNT = (SELECT COUNT(*) 
+                           FROM B_REPLY R 
+                       GROUP BY R.B_REF_BID 
+                         HAVING R.B_REF_BID = ${ bid })
+   </update> -->
+   
+   
 	<!-- Member, Board, Reply 조인 -->
 	<select id="selectNewBoardList" parameterType="com.ict.hhw.board.model.vo.BoardPage" resultMap="resultBoardList">
       <![CDATA[
@@ -93,7 +94,7 @@
     <![CDATA[
       SELECT *
         FROM (
-      SELECT    ROWNUM RNUM
+      SELECT  ROWNUM RNUM
             , BID
             , BTITLE
             , BCOUNT
@@ -125,40 +126,6 @@
         from board
    </select>
 
-   <select id="selectList" parameterType="com.ict.hhw.board.model.vo.BoardPage" resultMap="resultBoard">
-      <![CDATA[
-        SELECT *
-          FROM  (
-                 SELECT ROWNUM RNUM
-               , BID
-               , B_REF_BID
-                , BTYPE
-                , BTITLE
-                , BWRITER
-                , B_ORIGINAL_FILENAME
-                , B_RENAME_FILENAME
-                , B_CREATE_DATE
-                , GRADE
-          FROM  ( 
-                    SELECT
-                    B.BID,
-                      (SELECT COUNT(*) FROM B_REPLY R LEFT JOIN BOARD B ON B.BID= R.B_REF_BID WHERE R.B_STATUS = 'Y') AS B_REF_BID
-                , B.BTYPE
-                , B.BTITLE
-                , B.BWRITER
-                , B.B_ORIGINAL_FILENAME
-                , B.B_RENAME_FILENAME
-                , B.B_CREATE_DATE
-                , M.GRADE
-           FROM BOARD B
-           LEFT JOIN B_REPLY R ON B.B_RCOUNT = R.B_REF_BID
-           LEFT JOIN MEMBER M ON B.BWRITER = M.NICKNAME
-           WHERE B.BSTATUS = 'Y'
-          ORDER BY BID DESC))
-          WHERE RNUM >= #{ startRow }
-          AND RNUM <= #{ endRow }
-                ]]>
-   </select>
    
    <insert id="insertBoard" parameterType="Board">
       
@@ -215,6 +182,7 @@
        where bid = #{ bid }
    </update>
    
+   
    <update id="changeBstatusN" parameterType="_int">
       update board
          set   bstatus = 'N'
@@ -222,90 +190,113 @@
        where bid = #{ bid }
    </update>
    
-   <select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoard">
+   
+   <select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoardList">
          <![CDATA[
-         SELECT *
-          FROM (
-        SELECT    ROWNUM RNUM
+        SELECT *
+          FROM  (
+                 SELECT ROWNUM RNUM
                , BID
+               , B_REF_BID
                , BTYPE
                , BTITLE
                , BWRITER
-               , BCONTENT
                , B_ORIGINAL_FILENAME
                , B_RENAME_FILENAME
-               , BCOUNT
                , B_CREATE_DATE
-               , B_MODFIY_DATE
-               , B_RCOUNT
-               , BSTATUS
-          FROM (
-        SELECT * 
-          FROM BOARD
-         WHERE BSTATUS = 'Y'
-           AND btitle like '%' || #{ keyword } || '%'
-         ORDER BY BID DESC
-               ))
-         WHERE RNUM >= #{ startRow }
-           AND RNUM <= #{ endRow }
+               , BCOUNT
+               , GRADE
+          FROM  ( SELECT B.BID
+                        ,(SELECT COUNT(*) FROM B_REPLY R LEFT JOIN BOARD B ON B.BID = R.B_REF_BID WHERE R.B_STATUS = 'Y') AS B_REF_BID
+                		, B.BTYPE
+                		, B.BTITLE
+                		, B.BWRITER
+                		, B.B_ORIGINAL_FILENAME
+                		, B.B_RENAME_FILENAME
+                		, B.B_CREATE_DATE
+                		, B.BCOUNT
+                		, M.GRADE
+           FROM BOARD B
+           LEFT JOIN B_REPLY R ON B.B_RCOUNT = R.B_REF_BID
+           LEFT JOIN MEMBER M ON B.BWRITER = M.NICKNAME
+           WHERE B.BSTATUS = 'Y'
+           AND BTITLE LIKE '%' || #{ keyword } || '%'
+          ORDER BY B.BID DESC))
+          WHERE RNUM >=  #{ startRow }
+          AND RNUM <= #{ endRow }
          ]]>
    </select>
    
-   <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoard">
+   <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoardList">
          <![CDATA[
-         SELECT *
-          FROM (
-        SELECT   ROWNUM RNUM
-              , BID
-              , BTYPE
-              , BTITLE
-              , BWRITER
-              , BCONTENT
-              , B_ORIGINAL_FILENAME
-              , B_RENAME_FILENAME
-              , BCOUNT
-              , B_CREATE_DATE
-              , B_MODFIY_DATE
-              , B_RCOUNT
-              , BSTATUS
-          FROM (
-        SELECT * 
-          FROM BOARD
-         WHERE BSTATUS = 'Y'
-           AND bwriter like '%' || #{ keyword } || '%'
-      ORDER BY BID DESC))
-         WHERE RNUM >= #{ startRow }
-           AND RNUM <= #{ endRow }
+		SELECT *
+          FROM  (
+                 SELECT ROWNUM RNUM
+               , BID
+               , B_REF_BID
+               , BTYPE
+               , BTITLE
+               , BWRITER
+               , B_ORIGINAL_FILENAME
+               , B_RENAME_FILENAME
+               , B_CREATE_DATE
+               , BCOUNT
+               , GRADE
+          FROM  ( SELECT B.BID
+                        ,(SELECT COUNT(*) FROM B_REPLY R LEFT JOIN BOARD B ON B.BID = R.B_REF_BID WHERE R.B_STATUS = 'Y') AS B_REF_BID
+                		, B.BTYPE
+                		, B.BTITLE
+                		, B.BWRITER
+                		, B.B_ORIGINAL_FILENAME
+                		, B.B_RENAME_FILENAME
+                		, B.B_CREATE_DATE
+                		, B.BCOUNT
+                		, M.GRADE
+           FROM BOARD B
+           LEFT JOIN B_REPLY R ON B.B_RCOUNT = R.B_REF_BID
+           LEFT JOIN MEMBER M ON B.BWRITER = M.NICKNAME
+           WHERE B.BSTATUS = 'Y'
+             AND B.BWRITER LIKE '%' || #{ keyword } || '%'
+          ORDER BY B.BID DESC))
+          WHERE RNUM >=  #{ startRow }
+          AND RNUM <= #{ endRow }
                 ]]>
    </select>
    
-   <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoard">
+   <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultBoardList">
          <![CDATA[
          SELECT *
-          FROM (
-        SELECT ROWNUM RNUM
-              , BID
-              , BTYPE
-              , BTITLE
-              , BWRITER
-              , BCONTENT
-              , B_ORIGINAL_FILENAME
-              , B_RENAME_FILENAME
-              , BCOUNT
-              , B_CREATE_DATE
-              , B_MODFIY_DATE
-              , B_RCOUNT
-              , BSTATUS
-          FROM (
-        SELECT * 
-          FROM BOARD
-         WHERE BSTATUS = 'Y'
-           AND B_CREATE_DATE BETWEEN #{ begin }
-           AND #{ end }
-      ORDER BY BID DESC
-               ))
-          WHERE RNUM >= #{ startRow }
-            AND RNUM <= #{ endRow }
+          FROM  (
+                 SELECT ROWNUM RNUM
+               , BID
+               , B_REF_BID
+               , BTYPE
+               , BTITLE
+               , BWRITER
+               , B_ORIGINAL_FILENAME
+               , B_RENAME_FILENAME
+               , B_CREATE_DATE
+               , BCOUNT
+               , GRADE
+          FROM  ( SELECT B.BID
+                        ,(SELECT COUNT(*) FROM B_REPLY R LEFT JOIN BOARD B ON B.BID = R.B_REF_BID WHERE R.B_STATUS = 'Y') AS B_REF_BID
+                		, B.BTYPE
+                		, B.BTITLE
+                		, B.BWRITER
+                		, B.B_ORIGINAL_FILENAME
+                		, B.B_RENAME_FILENAME
+                		, B.B_CREATE_DATE
+                		, B.BCOUNT
+                		, M.GRADE
+           FROM BOARD B
+           LEFT JOIN B_REPLY R ON B.B_RCOUNT = R.B_REF_BID
+           LEFT JOIN MEMBER M ON B.BWRITER = M.NICKNAME
+           WHERE B.BSTATUS = 'Y'
+	         AND B.B_CREATE_DATE BETWEEN #{ begin }
+             AND #{ end }
+          ORDER BY B.BID DESC))
+          WHERE RNUM >=  #{ startRow }
+          AND RNUM <= #{ endRow }
                ]]>
    </select>
 

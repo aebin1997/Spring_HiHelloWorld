@@ -13,6 +13,9 @@ public interface BoardService {
 	BoardList selectBoardList(int bid);
 	ArrayList<BoardList> selectBoardList(int currentPage, int limit);
 	
+	// 댓글 업데이트
+	/* int addInsertReply(int bid); */
+	
 	// 조회수 많은 게시글 top3
 	ArrayList<Board> selectTop3();
 	int getListCount();

@@ -139,56 +139,51 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="800"
-							cellspacing="0" align="center" border="1" style="width:1500px; text-align: center;">
+							cellspacing="0" align="center" border="1" style="width:1200px; text-align: center;">
 							<tr style="background-color: orange;">
-								<th style="text-align: center;">번호</th>
+								<th style="text-align: center;">번 호</th>
 								<th style="text-align: center;">말머리</th>
-								<th style="text-align: center;">제목</th>
+								<th style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
 								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">날짜</th>
+								<th style="text-align: center;">날  짜</th>
 								<th style="text-align: center;">조회수</th>
-								<th style="text-align: center;">회원등급</th>
-								<th style="text-align: center;">댓글수</th>
 							</tr>
 						<c:forEach items="${ requestScope.list }" var="b" >
 							
 							<tr>
-								<td align="center" width="100">${ b.bid }</td>
+								<td align="center" width="80">${ b.bid }</td>
 
-								<td align="center" width="180">${ b.btype }</td>
+								<td align="center" width="150">${ b.btype }</td>
 
-								<td align="left" width="250"><c:url var="bdt" value="/bdetail.do">
+								<td align="left" width="550"><c:url var="bdt" value="/bdetail.do">
 										<c:param name="page" value="${ currentPage }" />
 										<c:param name="bid" value="${ b.bid }" />
-									</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>
+									</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>&nbsp;[${ b.b_ref_bid }]
 										<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
 										<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
 							
-								<td align="center" width="180">${ b.bwriter }
+								<td align="center" width="150">
 									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade lt 0}"> <%-- 불량회원 --%>
-									 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:right;">
+									 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:left;">
 									 </c:if>
 									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 1  &&  b.grade lt 10}">  <%-- 신규회원 --%>
-									 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:right;">
+									 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:left;">
 									 </c:if>
 									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 11 && b.grade lt 20}">  <%-- 우수회원 --%>
-									 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:right;">
+									 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:left;">
 									 </c:if>
 									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 21 && b.grade lt 30}">  <%-- 최우수회원 --%>
-									 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:right;">
+									 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:left;">
 									 </c:if>
 									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade eq 0}">  <%-- 관리자 --%>
-									 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:right;">
-									 </c:if>
+									 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:left;">
+									 </c:if>${ b.bwriter }
 									 </td>
 
 								<td align="center" width="130">${ b.b_create_date }</td>
 
 								<td align="center" width="80">${ b.bcount }</td>
 
-								<td align="center" width="80">${ b.grade }</td>
-								
-								<td align="center" width="80">${ b.b_ref_bid }</td>
 							</tr>
 						</c:forEach>
 						</table>
@@ -198,50 +193,57 @@
 		</main>
 	</div>
 
-	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-	<c:if test="${ !empty sessionScope.loginUser }">
-		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
-			<button onclick="testBlame();" class="btn btn-warning btn-round" style="color: #fff;">관리자 신고자 목록 확인 이동</button>
-		</div>
-	</c:if>
-	
-	<c:if test="${ empty sessionScope.loginUser }">
-		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button class="btn btn-warning btn-round"
-				style="color: #fff;" data-toggle="modal" data-target="#Medium-modal">글쓰기</button>
-			<div class="col-md-4 col-sm-12 mb-30">
-						<div class="pd-20 card-box height-100-p">
-							<div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" id="myLargeModalLabel">게시판 글쓰기 이용 안내</h4>
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-										</div>
-										<div class="modal-body">
-											<h6>자유게시판 이용은 로그인 후 글쓰기가 가능합니다</h6>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>&nbsp;
-											<button type="button" class="btn btn-primary" onclick="login();">Login</button>
+		<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
+		<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'A' }">
+			<div style="text-align: right; padding-right: 550px; margin-top: -20px">
+				<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
+			</div>
+		</c:if>
+		
+		<%-- 관리자가 로그인 했을 때 --%>
+		<c:if test="${  !empty sessionScope.loginUser and loginUser.user_lv eq 'B' }">
+			<div style="text-align: right; padding-right: 250px; margin-top: -20px">
+				<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
+				<button onclick="testBlame();" class="btn btn-warning btn-round" style="color: #fff;">관리자 신고자 목록 확인 이동</button>
+			</div>
+		</c:if>
+		
+		<%-- 로그인 안한 사람이 글쓰기 할 때 --%>
+		<c:if test="${ empty sessionScope.loginUser }">
+			<div style="text-align: right; padding-right: 550px; margin-top: -20px">
+				<button class="btn btn-warning btn-round"
+					style="color: #fff;" data-toggle="modal" data-target="#Medium-modal">글쓰기</button>
+				<div class="col-md-4 col-sm-12 mb-30">
+							<div class="pd-20 card-box height-100-p">
+								<div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">게시판 글쓰기 이용 안내</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+											</div>
+											<div class="modal-body">
+												<h6 style="text-align: center;">자유게시판 이용은 로그인 후 글쓰기가 가능합니다</h6>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>&nbsp;
+												<button type="button" class="btn btn-primary" onclick="login();">Login</button>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-		</div>
-	</c:if>
-	<br>
-
+				</div>
+			</div>
+		</c:if>
+	
 	<br>
 	
 
 	<%-- 현재 페이지가 1이 아니면 링크설정, 현재 1페이지이면 링크없음 --%>
 	<c:if test="${ empty action}">
 		<%-- 페이징 처리  [맨처음][이전] 숫자...........  [다음][맨끝] --%>
-		<div style="text-align: center; margin-bottom: 50px; margin-top: -80px">
+		<div style="text-align: center; margin-bottom: 50px; margin-top: -50px">
 			<c:if test="${ currentPage <= 1}">
             [맨처음]
          </c:if>

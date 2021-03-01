@@ -63,7 +63,7 @@
 			<th style="text-align: right;" colspan="2">
 			
 			<%-- 로그인한 상태이면서, 본인이 작성한 게시글 일 때 --%>
-			<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
+			<c:if test="${ !empty loginUser and sessionScope.loginUser.nickname eq board.bwriter }">
 				<c:url var="buv" value="/bupview.do">
 					<c:param name="bid" value="${ board.bid }" />
 					<c:param name="page" value="${ currentPage }" />

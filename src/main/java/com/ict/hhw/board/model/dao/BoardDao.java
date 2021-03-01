@@ -32,6 +32,12 @@ public class BoardDao {
 		return (ArrayList<BoardList>)list;
 	}
 	
+	/*
+	 * public int addInsertReply(int bid) { return
+	 * sqlSession.update("boardMapper.addInsertReply", bid); }
+	 */
+	
+	
 	public ArrayList<Board> selectTop3() {
 		List<Board> list = sqlSession.selectList("boardMapper.selectTop3");
 		return (ArrayList<Board>)list;

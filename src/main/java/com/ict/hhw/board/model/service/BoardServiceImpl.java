@@ -22,6 +22,14 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardList(bid);
 	}
 
+	/*
+	 * // 댓글 업데이트
+	 * 
+	 * @Override public int addInsertReply(int bid) { return
+	 * boardDao.addInsertReply(bid); }
+	 */
+
+
 	@Override
 	public ArrayList<BoardList> selectBoardList(int currentPage, int limit) {
 		return boardDao.selectBoardList(currentPage, limit);
@@ -97,5 +105,6 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getSearchDateListListCount(dates);
 	}
 
+	
 
 }

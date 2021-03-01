@@ -126,6 +126,7 @@ public class BoardList {
 				+ b_rename_filename + ", b_create_date=" + b_create_date + ", bcount=" + bcount + ", grade=" + grade
 				+ "]";
 	}
-	
+
+
 	
 }

@@ -49,10 +49,10 @@
 							+ "<form action='rupdate.do' method='post'>"
 							+ "<input type='hidden' name='b_rid' value='" +  json.list[i].b_rid  + "'>"
 							+ "<input type='hidden' name='bid' value='${board.bid}'>"
-							+ "<textarea name='b_rcontent'>"
+							+ "<textarea name='b_rcontent' rows='2' cols='70'>"
 							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ")
-							+ "</textarea><input type='submit' value='수정'></form>"
-							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");'>삭제</button></td></tr>";
+							+ "</textarea><br><input type='submit' value='수정' style='width:50px;float:right;'></form>"
+							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");' style='width:50px;float:right;margin-right:10px'>삭제 </button></td></tr>";
 				} else { //본인 댓글이 아닐 때
 /* 					values += "<tr><td><name='b_rwriter' value='${b_rwriter}'> 님 댓글</td><td>"+ json.list[i].b_create_date
 							+ "</td></tr><tr><td colspan='2'>"
@@ -118,119 +118,113 @@
 
 	<div style="text-align: center; padding-top: 90px;">
 		<div>
-			<h2 style="margin: 20px 0 10px 0;">${ requestScope.board.bid }번게시글 상세보기</h2>
+			<h4 style="margin: 20px 0 10px 0;">${ board.btitle }</h4>
 		</div>
 	</div>
 
 	<br>
 
 	<table align="center" cellpadding="10" cellspacing="0" border="1" width="500">
-		<tr>
-			<th>제 목</th>
-			<td>${ board.btitle }</td>
-		</tr>
-	
-		<tr>
-			<th>작성자</th>
-			<td>${ board.bwriter }</td>
-		</tr>
-		
-		<tr>
-			<th>내 용</th>
-			<td>${ board.bcontent }</td>
-		</tr>
-	
-		<tr>
-			<th>첨부파일</th>
-			<td>
-				<c:if test="${ empty board.b_original_filename }">첨부파일 없음</c:if>
-				<c:if test="${ !empty board.b_original_filename }">
+			
+		<thead>
+			<tr>
+				<th style="text-align: center;" width="80">작성자</th>
+				<th style="text-align: center;">${ board.bwriter } 님</th>
+				<th style="text-align: center;" width="80">첨부파일</th>
+				<th>
+					<c:if test="${ empty board.b_original_filename }">첨부파일 없음</c:if>
+					<c:if test="${ !empty board.b_original_filename }">
 					<c:url var="bfd" value="/bfdown.do">
 						<c:param name="ofile" value="${ board.b_original_filename }" />
 						<c:param name="rfile" value="${ board.b_rename_filename }" />
 					</c:url>
 					<a href="${ bfd }">${ board.b_original_filename }</a>
-				</c:if>
-			</td>
-		</tr>
-		
-		
-		<tr valign="middle">
-			<th style="text-align: right;" colspan="2">
-			
-			<%-- 로그인한 상태이면서, 본인이 작성한 게시글 일 때 --%>
-			<c:if test="${ !empty loginUser and loginUser.nickname eq board.bwriter }">
+					</c:if></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+          		<th style="text-align: center;">내 용</th>
+          		<td colspan="4" height="200">${ board.bcontent }</td>
+        	</tr>
+		</tbody>
+
+		<tfoot>
+          <td colspan="4" style="text-align: right;">
+          	<%-- 로그인한 상태이면서, 본인이 작성한 게시글 일 때 --%>
+			<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname eq board.bwriter }">
 				<c:url var="buv" value="/bupview.do">
 					<c:param name="bid" value="${ board.bid }" />
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ buv }'">수정</button> &nbsp; &nbsp;
-								 
-					<c:url var="bdl" value="/bdelete.do">
+			<button type="button" onclick="javascript:location.href='${ buv }'" style='float:center'>수정</button>
+							 
+				<c:url var="bdl" value="/bdelete.do">
 					<c:param name="bid" value="${ board.bid }" />
-					</c:url>
-					<button type="button" onclick="javascript:location.href='${ bdl }'">글삭제</button> &nbsp; &nbsp;
-				
-							
+				</c:url>
+			<button type="button" onclick="javascript:location.href='${ bdl }'" style='float:center'>글삭제</button>
+			
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
-				
-				</c:if> 
-				
-				<%-- 로그인한 상태이면서, 본인이 작성한 게시글이 아닐 때 --%>
-				<c:if test="${ !empty loginUser and loginUser.nickname ne board.bwriter }">
-								
+			<button type="button" onclick="javascript:location.href='${ bls }'" style='float:center'>목록</button>
+			
+			</c:if> 
+			
+			<%-- 로그인한 상태이면서, 본인이 작성한 게시글이 아닐 때 --%>
+			<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname ne board.bwriter and loginUser.user_lv eq 'A' }">
+							
 				<c:url var="boardBlame" value="/b.blame.insert.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ boardBlame }'">신고</button> &nbsp; &nbsp;
-				
+			<button type="button" onclick="javascript:location.href='#'">신고</button> &nbsp; &nbsp;
+			
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
-				
-				</c:if> 
-				
-				<%-- 비로그인일때 --%> 
-				<c:if test="${ empty loginUser }">  
-				<c:url var="bls" value="/blist.do">
-					<c:param name="page" value="${ currentPage }" />
-				</c:url>
-				<button type="button" onclick="javascript:location.href= '${ bls }';">목록</button>
-				</c:if>
-				
-				<%-- 관리자가 로그인 했을일 때  --%>
-				
-				<c:if test="${ !empty loginUser and loginUser.nickname eq 'admin' and loginUser.user_lv eq 'B' }">
+			<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+			</c:if> 
+			
+			
+			<%-- 관리자가 로그인 했을일 때  --%>
+			
+			<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname ne board.bwriter and loginUser.user_lv eq 'B' }">
 				<c:url var="buv" value="/bupview.do">
 					<c:param name="bid" value="${ board.bid }" />
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ buv }'">수정</button> &nbsp; &nbsp;
-								 
-					<c:url var="bdl" value="/bdelete.do">
+			<button type="button" onclick="javascript:location.href='${ buv }'">수정</button> &nbsp; &nbsp;
+							 
+				<c:url var="bdl" value="/bdelete.do">
 					<c:param name="bid" value="${ board.bid }" />
-					</c:url>
-					<button type="button" onclick="javascript:location.href='${ bdl }'">글삭제</button> &nbsp; &nbsp;
-				
+				</c:url>
+			<button type="button" onclick="javascript:location.href='${ bdl }'">글삭제</button> &nbsp; &nbsp;
+			
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-				<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+			<button type="button" onclick="javascript:location.href='${ bls }'">목록</button> &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;
+			</c:if> 
+			
+			<%-- 비로그인일때 --%> 
+			<c:if test="${ empty sessionScope.loginUser }">  
+				<c:url var="bls" value="/blist.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+			<button type="button" onclick="javascript:location.href= '${ bls }';">목록</button>
+			</c:if>
 				
-				</c:if> 
-				
-			</th>
-		</tr>
+			</td>
+		</tfoot>
 	</table>
+		
 	
 	<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> 
 			<c:if test="${ !empty loginUser }">
 			
 				<%-- 댓글달기 폼 영역 --%>
+				<br>
 				<div id="replyDiv" style="padding-bottom: 30px;">
 					<form action="rinsert.do" method="post">
 						<input type="hidden" name="b_ref_bid" value="${ board.bid }">
@@ -238,13 +232,17 @@
 						
 						
 							<tr>
-								<th>작성자</th>
+								<th colspan="2" style="text-align: center;">댓글작성</th>
+							</tr>
+							
+							<tr>
+								<th style="text-align: center;" width="80">작성자</th>
 								<td><input type="text" name="b_rwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
 							</tr>
 							
 							<tr>
-								<th>내 용</th>
-								<td><textarea name="b_rcontent" rows="5" cols="50"></textarea></td>
+								<th style="text-align: center;">내 용</th>
+								<td><textarea name="b_rcontent" rows="5" cols="60"></textarea></td>
 							</tr>
 							
 							<tr>
