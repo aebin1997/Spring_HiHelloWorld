@@ -21,10 +21,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
-
 <script type="text/javascript"
 	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
-
+	
 <script type="text/javascript">
 	$(function() {
 		
@@ -146,6 +145,11 @@
 	}
 	
 </script>
+
+<!-- 테이블 -->
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+
 
 <style type="text/css">
 	#messageWindow {
@@ -640,16 +644,28 @@
 								전체 목록 보기</button>
 						</div>
 						<br>
+						<div class="my_info_area" align="center">
 						<c:if test="${ requestScope.list ne null }">
-							<table align="center" border="1" width="700" cellspacing="0">
+							<table class="boardtype2 th_border my_table" width="700" cellspacing="0">
+							<colgroup>
+								<col width="100">
+								<col width="1000">
+								<col width="100">
+								<col width="100">
+								<col width="100">
+								<col width="100">
+							</colgroup>
+							<thead>
 								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>작성자</th>
-									<th>날짜</th>
-									<th>첨부파일</th>
-									<th>조회수</th>
+									<th scope="col" class="title">번호</th>
+									<th scope="col" class="title">제목</th>
+									<th scope="col" class="title">작성자</th>
+									<th scope="col" class="title">날짜</th>
+									<th scope="col" class="title">첨부파일</th>
+									<th scope="col" class="title">조회수</th>
 								</tr>
+							</thead>
+							<tbody>
 								<c:forEach items="${ requestScope.list }" var="p">
 									<tr>
 										<td align="center">${ p.pid }</td>
@@ -666,8 +682,10 @@
 										<td align="center">${ p.pcount }</td>
 									</tr>
 								</c:forEach>
+							</tbody>
 							</table>
 						</c:if>
+						</div>
 						<br>
 						<%-- 리스트 출력(}) --%>
 
@@ -738,7 +756,7 @@
 				*/	
 				webSocket = new WebSocket(
 						"ws://localhost:8888/" +
-						"<${ request.getContextPath() }/chat");
+						"<${ request.getContextPath() }");
 			
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){

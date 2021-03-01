@@ -8,6 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="Author" content="kimwoolina">
+<!-- 테이블 -->
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+
+
 <style>
 #apply {
 	border: 1px solid #444444;
@@ -68,6 +73,7 @@
 	float: center;
 }
 </style>
+
 <script type="text/javascript"
 	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
@@ -112,6 +118,7 @@
 		});
 	});
 </script>
+
 </head>
 <body>
 
@@ -208,23 +215,34 @@
 			</c:forEach>
 		</c:if>
 
-		<div align="center">
+		<div class="my_info_area" align="center">
 			<h4>나의 Q&A</h4>
-
-			<%-- 목록 출력 --%>
 			<br>
-			<table border="1" width="700" cellspacing="0"
-				style="text-align: center;">
+			<%-- 목록 출력 --%>
+			<table class="boardtype2 th_border my_table" width="1000" cellspacing="0">
+			<colgroup>
+				<col width="100">
+				<col width="1000">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+			</colgroup>
+			<thead>
 				<tr>
-					<th align="center">바로가기</th>
-					<th align="center">제목</th>
-					<th align="center">질문자</th>
-					<th align="center">답변자</th>
-					<th align="center">마감기한</th>
-					<th align="center">금액</th>
-					<th align="center">진행도</th>
-					<th align="center">상태</th>
+					<th scope="col" class="title">바로가기</th>
+					<th scope="col" class="title">제목</th>
+					<th scope="col" class="title">질문자</th>
+					<th scope="col" class="title">답변자</th>
+					<th scope="col" class="title">마감기한</th>
+					<th scope="col" class="title">금액</th>
+					<th scope="col" class="title">진행도</th>
+					<th scope="col" class="title">상태</th>
 				</tr>
+			</thead>
+			<tbody>
 				<c:if test="${ requestScope.list ne null }">
 					<c:forEach items="${ requestScope.list }" var="p">
 						<tr>
@@ -253,6 +271,7 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				</tbody>
 			</table>
 		</div>
 		<br>
