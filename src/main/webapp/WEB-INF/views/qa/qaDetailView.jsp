@@ -39,10 +39,12 @@
 	
 		<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/kin-web-pc/20210209173414/css/min/powerlink.css"/>
 	
-
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/railscasts.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <script>
-	
 	var pcDomain = "kin.naver.com";
 	var pcDomainWithProtocol = "https://kin.naver.com";
 	var pcKinServiceProtocol = "https";
@@ -395,10 +397,6 @@ function hideReplyForm(){
 		   <div class="se-component-content">                        
 		   <div class="se-section se-section-text se-l-default">                            
 		   <div class="se-module se-module-text">                                    <!-- SE-TEXT { -->
-		   
-		   
-		                              
-		   
 		   </div>                        
 		   </div>                    
 		   </div>                
@@ -411,12 +409,21 @@ function hideReplyForm(){
 		    <a href="#" class="se-module-image-link __se_image_link __se_link" style="" onclick="return false;" data-linktype="img" data-linkdata='{"id" : "SE-a48780b4-c628-455a-ba57-e71252dfb83a", "src" : "https://kin-phinf.pstatic.net/20210207_77/16126801519567gfaG_JPEG/20210207_154226.jpg", "linkUse" : "false", "link" : ""}'>                                        
 		    <img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;">             
 		     </a>                               
-		     <br>
-		     ${ qa.qa_content }
-		      </div>         
+		     <br><br><br><br><br><br>
+		     <div id="bo_v_con">[code]<pre><code>${ qa.qa_content }</code></pre>[/code]</div>
+		     
+		      </div>    
+		       <pre  id="bo_v_con"><code>${ qa.qa_content }</code></pre>     
 		      </div>               
-		                  
-	        
+		                  <pre class="brush: js"  id="bo_v_con"><code>${ qa.qa_content }</code></pre>
+		                  <pre><code>${ qa.qa_content }</code></pre>
+		                  <pre><code class="java">${ qa.qa_content }</pre></code>
+
+	
+	
+
+
+
 		      
 <div align="right">
 <br><br><%-- 로그인한 상태일때 댓글 달기 사용하게 함 --%>
