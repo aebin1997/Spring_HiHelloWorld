@@ -64,7 +64,7 @@ table.table2 td {
 							</tr>
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="pcontent" rows="5" cols="50"></textarea></td>
+								<td><textarea name="pcontent" rows="15" cols="70"></textarea></td>
 							</tr>
 						</table>
 					</td>
