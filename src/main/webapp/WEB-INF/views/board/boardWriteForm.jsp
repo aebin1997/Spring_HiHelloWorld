@@ -26,7 +26,7 @@
 	
 	<div style="text-align: center; padding-top: 90px;">
 		<div>
-			<h2 style="margin: 20px 0 10px 0;">게시글 등록</h2>
+			<h3 style="margin: 20px 0 10px 0;">게시글 등록</h3>
 		</div>
 	</div>
 	
@@ -37,7 +37,7 @@
 		<table align="center" width="500" border="1" cellspacing="0"
 			cellpadding="5">
 			<tr>
-				<th>말머리</th>
+				<th style="text-align: center;">말머리</th>
 				<td><select type="test" name="btype">
 					<option value="질문이요">질문이요</option>
 					<option value="일상글이요">일상글이요</option>
@@ -46,41 +46,32 @@
 				</select></td>
 			</tr>
 			<tr>
-				<th>제 목</th>
+				<th style="text-align: center;">제 목</th>
 				<td><input type="text" name="btitle"></td>
 			</tr>
 			<tr>
-				<th>작성자</th>
+				<th style="text-align: center;">작성자</th>
 				<td><input type="text" name="bwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
 			</tr>
 			<tr>
-				<th>파일선택</th>
+				<th style="text-align: center;">파일선택</th>
 				<td><input type="file" name="upfile"></td>
 			</tr>
 			<tr>
-				<th>내 용</th>
-				<td><textarea name="bcontent" rows="5" cols="50" id="summernote"></textarea></td>
+				<th style="text-align: center;">내 용</th>
+				<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
 			</tr>
 			<tr>
-				<th colspan="2"><input type="submit" value="등록하기">
-					&nbsp; <input type="reset" value="작성취소"> &nbsp;
-					<button onclick="javascript:history.go(-1); return false;">목록</button></th>
+				<th colspan="2" style="text-align: right;">
+				<input type="submit" value="등록하기">&nbsp; 
+				<input type="reset" value="작성취소"> &nbsp;
+				<button onclick="javascript:history.go(-1); return false;">목록</button>
+				</th>
 			</tr>
 		</table>
 	</form>
-
-
-<div class="container">
-  <textarea class="summernote" name="editordata"></textarea>    
-</div>
-<script>
-
-$('.summernote').summernote({
-	  height: 150,
-	  lang: "ko-KR"
-	});
-</script>
  
+ <br>
 
 	<jsp:include page="../common/footer.jsp" />
 </body>
