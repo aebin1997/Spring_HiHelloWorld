@@ -20,8 +20,10 @@
 	$(function() {
 		
 		/* hideReplyForm(); */  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
-		hideBlameForm();  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
-
+		hideBlameForm1();  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
+		hideBlameForm2();  //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
+		
+		
 		//jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
 		//해당 게시글의 번호를 전송함
 		var bid = ${ board.bid };//el 의 값을 변수에 대입
@@ -33,12 +35,10 @@
 		dataType : "json",
 		success : function(data) {
 			console.log("success : " + data);
-
 			//object ==> string
 			var jsonStr = JSON.stringify(data);
 			//string ==> json 
 			var json = JSON.parse(jsonStr);
-
 			var values = "";
 			for ( var i in json.list) {
 				//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
@@ -62,10 +62,9 @@
 							+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
 							+ "</td></tr><tr><td colspan='2'>"
 							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
-							+ "<button onclick='showBlamForm();' style='float:right'>신고</button></td></tr>";
+							+ "<button onclick='showBlamForm2();' style='float:right'>신고</button></td></tr>";
 				}
 			} //for in
-
 			$("#rlistTbl").html($("#rlistTbl").html() + values);
 			
 		}, // success
@@ -75,15 +74,11 @@
 		} // 에러
 		
 	}); //notice top3 ajax
-
 }); //jquery document ready
-
-
 	function replyDelete(b_rid) {
 		location.href = "${ pageContext.request.contextPath }/rdel.do?b_rid="
 				+ b_rid + "&bid=${ board.bid }";
 	}
-
 	function showReplyForm() {
 		$("#replyDiv").css("display", "block");
 	}
@@ -91,26 +86,22 @@
 	function hideReplyForm() {
 		$("#replyDiv").css("display", "none");
 	} 
-
-	function showBlamForm() {
-		$("#blameDiv").css("display", "block");
+	function showBlamForm1() {
+		$("#blameDiv1").css("display", "block");
 	}
 	
-	function hideBlameForm() {
-		$("#blameDiv").css("display", "none");
+	function hideBlameForm1() {
+		$("#blameDiv1").css("display", "none");
+	}
+	function showBlamForm2() {
+		$("#blameDiv2").css("display", "block");
 	}
 	
-
+	function hideBlameForm2() {
+		$("#blameDiv2").css("display", "none");
+	}
+	
 </script>
-
-
-<script language="javascript">
-  function showPopup() {
-	  $("#blameDiv").css("display", "block");
-	  window.open("width=400, height=300, left=100, top=50"); }
-  </script>
-
-
 </head>
 <body>
 	
@@ -121,7 +112,7 @@
 			<h4 style="margin: 20px 0 10px 0;">${ board.btitle }</h4>
 		</div>
 	</div>
-
+				
 	<br>
 
 	<table align="center" cellpadding="10" cellspacing="0" border="1" width="500">
@@ -178,7 +169,7 @@
 				<c:url var="boardBlame" value="/b.blame.insert.do">
 					<c:param name="page" value="${ currentPage }" />
 				</c:url>
-			<button type="button" onclick="javascript:location.href='#'">신고</button> &nbsp; &nbsp;
+			<button type="button" onclick="showBlamForm1();">신고</button> &nbsp; &nbsp;
 			
 				<c:url var="bls" value="/blist.do">
 					<c:param name="page" value="${ currentPage }" />
@@ -218,7 +209,46 @@
 			</td>
 		</tfoot>
 	</table>
-		
+
+		<%-- 게시글 신고하기 폼 영역  --%>
+			<div id="blameDiv1" style="padding-bottom: 30px;">
+				<form action="b.blame.insert.do" method="post">
+					<input type="hidden" name="blame_bid" value="${ board.bid }">
+					<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
+					
+						<tr>
+							<th>신고유형</th>
+							<td><select type="test" name="blame_type">
+								<option value="부적절">부적절</option>
+								<option value="욕설">욕설</option>
+								<option value="사기">사기</option>
+								<option value="음란물">음란물</option>
+								</select></td>
+						</tr>
+					
+						<tr>
+							<th>작성자</th>
+							<td><input type="text" name="mm_nickname" readonly value="${ sessionScope.loginUser.nickname }"></td>
+						</tr>
+						
+						<tr>
+							<th>신고대상</th>
+							<td><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
+						</tr>
+						
+						<tr>
+							<th>내 용</th>
+							<td><textarea name="blame_content" rows="5" cols="50"></textarea></td>
+						</tr>
+						
+						<tr>
+							<th colspan="2">
+							<input type="submit" value="신고">&nbsp;
+							<input type="reset" value="신고취소"  onclick="hideBlameForm(); return false;"></th>
+						</tr>
+					</table>
+				</form>
+			</div>		
 	
 	<%-- 로그인한 상태일 때 댓글달기 사용하게 함 --%> 
 			<c:if test="${ !empty loginUser }">
@@ -258,10 +288,8 @@
 	
 			
 		
-		<%-- 신고하기 폼 영역  --%>
-		<%-- <c:if test="${ !empty loginUser }"> --%>
-		<%-- <c:if test="${ !empty loginUser and loginUser.nickname ne B_Reply.b_rwriter }"> --%>
-			<div id="blameDiv" style="padding-bottom: 30px;">
+		<%-- 댓글 신고하기 폼 영역  --%>
+			<div id="blameDiv2" style="padding-bottom: 30px;">
 				<form action="b.blame.insert.do" method="post">
 					<input type="hidden" name="blame_bid" value="${ board.bid }">
 					<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
@@ -283,7 +311,7 @@
 						
 						<tr>
 							<th>신고대상</th>
-							<td><input type="text" name="target_nickname" readonly value=" ${ b_reply.b_rwriter } "></td>
+							<td><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
 						</tr>
 						
 						<tr>
@@ -299,8 +327,6 @@
 					</table>
 				</form>
 			</div>
-			<!-- <button onclick="showBlameForm()">신고</button> -->
- 		<%-- </c:if> --%>
  
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="padding-bottom: 30px;">
@@ -313,8 +339,3 @@
 
 </body>
 </html>
-
-
-
-
-

@@ -29,6 +29,8 @@ public class BlameController {
 	public String BlameInsertMethod(Blame Blame, HttpServletRequest request,
 			@RequestParam(name = "upfile", required = false) MultipartFile mfile,  Model model) {
 
+		System.out.println(Blame);
+
 		if (BlameService.insertBlame(Blame) > 0) {
 			return "redirect:blist.do?page=1";
 		} else {
