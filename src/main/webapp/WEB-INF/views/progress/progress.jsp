@@ -17,7 +17,7 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-<head>
+<head>	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
@@ -27,13 +27,9 @@
 <script type="text/javascript">
 	$(function() {
 		
-		dlMsg();
+		dlMsg(); //마감기한 변경 알림
 		
-		// 검색
-		showDiv();
 		$("#oldlist").css("display", "none");
-		
-		// 정렬 방식 선택
 		$("#qa_sort").on("change", function(){
 	    	var option = $("#qa_sort option:selected").val();
 	    	console.log(option);
@@ -46,6 +42,12 @@
 	        	$("#oldlist").css("display", "block");
 	        }
 	    })
+		
+		hideReplyForm(); //뷰 페이지 처음 실행시에는 댓글달기 폼이 안 보이게 함
+		
+		// 검색
+		showDiv();
+		
 		
 	    // 검색
 		$("input[name=item]").on("change", function() { //on으로 이벤트 설정가능 "change"이벤트일때 function()을 실행해라
@@ -112,7 +114,65 @@
 		});
 		//진행도 증가(end)
 		
-	});
+		// jquery ajax 로 해당 게시글에 대한 댓글 조회 요청
+		var pid = ${ p.pid };
+		$.ajax({
+			url : "${ pageContext.request.contextPath }/prlist.do",
+			type : "post",
+			data : {
+				ref_pid : pid
+			}, //전송값에 변수 사용
+			dataType : "json",
+			success : function(data) {
+				console.log("success : " + data);
+
+				//object ==> string
+				var jsonStr = JSON.stringify(data);
+				//string ==> json 
+				var json = JSON.parse(jsonStr);
+
+				var values = "";
+				for ( var i in json.list) {
+					//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
+					if (loginUser == json.list[i].prwriter) {
+						values += "<tr><td>"
+								+ json.list[i].prwriter
+								+ "</td><td>"
+								+ json.list[i].pr_date
+								+ "</td></tr><tr><td colspan='2'>"
+								+ "<form action='prupdate.do' method='post'>"
+								+ "<input type='hidden' name='prid' value='" +  json.list[i].prid  + "'>"
+								+ "<input type='hidden' name='pid' value='${pboard.pid}'>"
+								+ "<textarea name='prcontent' rows='5' cols='50'>"
+								+ decodeURIComponent(
+										json.list[i].prcontent)
+										.replace(/\+/gi, " ")
+								+ "</textarea><br><input type='submit' value='수정'></form>"
+								+ "<button onclick='replyDelete("
+								+ json.list[i].prid
+								+ ");'>삭제</button></td></tr>";
+					} else { //본인 댓글이 아닐 때
+						values += "<tr><td>"
+								+ json.list[i].prwriter
+								+ "</td><td>"
+								+ json.list[i].pr_date
+								+ "</td></tr><tr><td colspan='2'>"
+								+ decodeURIComponent(
+										json.list[i].prcontent)
+										.replace(/\+/gi, " ")
+								+ "</td></tr>";
+					}
+				} //for in
+
+				$("#prlistTbl").html($("#prlistTbl").html() + values);
+			},
+			error : function(jqXHR, textstatus, errorthrown) {
+				console.log("error : " + jqXHR + ", " + textstatus
+						+ ", " + errorthrown);
+			}
+		}); //댓글
+		
+	}); // jquery document ready
 	
 	function showDiv() {
 		if ($("input[name=item]").eq(0).is(":checked")) { //첫번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
@@ -142,6 +202,14 @@
 		if(message == "ok"){
 			alert("마감기한을 성공적으로 변경하였습니다.");
 		};
+	}
+	
+	function showReplyForm() {
+		$("#replyWriteForm").css("display", "block");
+	}
+	
+	function hideReplyForm() {
+		$("#replyWriteForm").css("display", "none");
 	}
 	
 </script>
@@ -327,8 +395,7 @@
 									<c:forEach items="${ requestScope.list }" var="p">
 										<section class="qa-answerList">
 											<!-- 답변 아이템 반복  -->
-											<c:if
-												test="${ p.pwriter eq sessionScope.loginUser.nickname }">
+											<c:if test="${ p.pwriter eq sessionScope.loginUser.nickname }">
 												<a id="answer_400521"></a>
 												<article class="answer-item answer-item-select">
 													<div class="answer-header">
@@ -351,7 +418,7 @@
 															<!-- 댓글 쓰기 및 갯수 -->
 															<button title="댓글쓰기" class="answer-main-btn-left"
 																data-wr_id="400521" data-w="c" data-check="active"
-																onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400521&#39;)">
+																onclick="showReplyForm();">
 																<span class="des-left">댓글쓰기</span>
 															</button>
 														</div>
@@ -360,11 +427,89 @@
 													<section class="answer-replyList">
 														<!-- 댓글 입력창 -->
 														<section class="answer-reply-write">
-															<div id="c400632" class="alist_wcmt wcmt"
-																style="display: block;">
+															<div id="replyWriteForm" class="alist_wcmt wcmt">
+																<div id="vbo_wcmt" class="answer-reply-modify">
+																	<form id="fcomment" name="fcomment" method="post" action="prinsert2.do">
+																		<input type="hidden" name="pro_id" value="${ pro_id }">
+																		<input type="hidden" name="ref_pid" value="${ p.pid }">
+																		<input type="hidden" name="prwriter" value="${ sessionScope.loginUser.nickname }">
+																		<div id="wcmt_content">
+																			<div class="sir_ta reply-write-text">
+																				<label for="prcontent" class="sir_sr">댓글내용</label>
+																				<textarea name="prcontent" id="wr_content"
+																					required maxlength="5000" cols="30" rows="1"
+																					title="댓글 내용 입력" style="height: 70px;"></textarea>
+																			</div>
+																		</div>
+
+																		<div id="wcmt_btn" class="reply-write-submit">
+																			<input type="reset" id="wcmt_btn_cancel" value="취소"
+																				title="댓글 취소"> <input type="submit"
+																				id="wcmt_btn_submit" value="등록" accesskey="s"
+																				title="댓글 등록">
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</section>
+														<!-- 답변 아래 리플 반복 -->
+														<br>
+														<article class="answer-reply vcmt">
+															<div class="answer-reply-header">
+																<h5>
+																	<img
+																		src="/hhw/resources/images/icon/ico_reply_arrow.PNG">
+																	<span class="sv_wrap"> <span class="member">댓글작성자닉네임</span>
+																	</span>
+																</h5>
+																<span class="reply-date"><time>댓글작성시간</time></span>
+															</div>
+															<div class="answer-reply-content ">
+																<!-- 답변 댓글 내용 -->
+																<p>댓글 내용</p>
+															</div>
+														</article>
+														<!-- // 리플 end -->
+													</section>
+												</article>
+											</c:if>
+											<!-- // 답변 end -->
+											
+											
+											<c:if test="${ p.pwriter ne sessionScope.loginUser.nickname }">
+												<article class="answer-item">
+													<div class="answer-header">
+														<div class="answer-header-profile">
+															<h4>
+																<span class="member">${ p.ptitle }</span>
+															</h4>
+															<div class="answer-date">
+																<time>${ p.p_date }</time>
+															</div>
+														</div>
+														<div class="answer-header-btn"></div>
+													</div>
+													<div class="answer-main">
+														<div class="answer-main-content">
+															<!-- 답변 본문 내용 -->
+															<p>${ p.pcontent }</p>
+															<div style="clear: both;"></div>
+														</div>
+														<div class="answer-main-btn">
+															<!-- 댓글 쓰기 및 갯수 -->
+															<button id="replyWrite" title="댓글쓰기" class="answer-main-btn-left"
+																data-wr_id="400518" data-w="c" data-check="active"
+																onclick="showReplyForm();">
+																<span class="des-left">댓글쓰기</span>
+															</button>
+														</div>
+													</div>
+														<!-- 댓글 입력창 -->
+														<section class="answer-reply-write">
+															<div class="alist_wcmt wcmt">
 																<div id="vbo_wcmt" class="answer-reply-modify">
 																	<form id="fcomment" name="fcomment" method="post"
-																		action="//sir.kr/qa/write_comment_update.php"
+																		action="#"
 																		onsubmit="return fcomment_submit(this);"
 																		autocomplete="off">
 
@@ -388,64 +533,6 @@
 																</div>
 															</div>
 														</section>
-														<!-- 답변 아래 리플 반복 -->
-														<a id="c_400535"></a>
-														<article class="answer-reply vcmt">
-															<div class="answer-reply-header">
-																<h5>
-																	<img
-																		src="/hhw/resources/images/icon/ico_reply_arrow.PNG">
-																	<span class="sv_wrap"> <span class="member">댓글작성자닉네임</span>
-																	</span>
-																</h5>
-																<span class="reply-date"><time>댓글작성시간</time></span>
-															</div>
-															<div class="answer-reply-content ">
-																<!-- 답변 댓글 내용 -->
-																<p>댓글 내용</p>
-															</div>
-														</article>
-														<!-- // 리플 end -->
-													</section>
-												</article>
-											</c:if>
-											<!-- // 답변 end -->
-											<c:if
-												test="${ p.pwriter ne sessionScope.loginUser.nickname }">
-												<article class="answer-item">
-													<div class="answer-header">
-														<div class="answer-header-profile">
-															<h4>
-																<span class="member">${ p.ptitle }</span>
-															</h4>
-															<div class="answer-date">
-																<time>${ p.p_date }</time>
-															</div>
-														</div>
-														<div class="answer-header-btn"></div>
-													</div>
-													<div class="answer-main">
-														<div class="answer-main-content">
-															<!-- 답변 본문 내용 -->
-															<p>${ p.pcontent }</p>
-															<div style="clear: both;"></div>
-														</div>
-														<div class="answer-main-btn">
-															<!-- 댓글 쓰기 및 갯수 -->
-															<button title="댓글쓰기" class="answer-main-btn-left"
-																data-wr_id="400518" data-w="c" data-check="active"
-																onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400518&#39;)">
-																<span class="des-left">댓글쓰기</span>
-															</button>
-														</div>
-													</div>
-													<section class="answer-replyList">
-														<!-- 댓글 입력창 -->
-														<section class="answer-reply-write">
-															<div id="c400518" class="alist_wcmt wcmt"
-																style="display: none;"></div>
-														</section>
-													</section>
 													<br> <br>
 												</article>
 											</c:if>
@@ -488,7 +575,7 @@
 															<!-- 댓글 쓰기 및 갯수 -->
 															<button title="댓글쓰기" class="answer-main-btn-left"
 																data-wr_id="400521" data-w="c" data-check="active"
-																onclick="return q2a_votes.comment_write(&#39;vbo_wcmt&#39;, this, &#39;c400521&#39;)">
+																onclick="showWriteForm();">
 																<span class="des-left">댓글쓰기</span>
 															</button>
 														</div>
@@ -497,11 +584,11 @@
 													<section class="answer-replyList">
 														<!-- 댓글 입력창 -->
 														<section class="answer-reply-write">
-															<div id="c400632" class="alist_wcmt wcmt"
+															<div class="alist_wcmt wcmt"
 																style="display: block;">
 																<div id="vbo_wcmt" class="answer-reply-modify">
 																	<form id="fcomment" name="fcomment" method="post"
-																		action="//sir.kr/qa/write_comment_update.php"
+																		action="#"
 																		onsubmit="return fcomment_submit(this);"
 																		autocomplete="off">
 
