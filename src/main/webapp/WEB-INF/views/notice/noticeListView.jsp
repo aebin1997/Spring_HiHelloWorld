@@ -17,37 +17,43 @@
 <meta charset="UTF-8">
 <title>공지사항</title>
 
+
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/other.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.2">
+
+
 <script type="text/javascript"
 	src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 	
 <script type="text/javascript">
-	$(function() {
+	 $(function() {
 		showDiv();
 
-		$("input[name=item]").on("change", function() {
-			showDiv();
+		$("input[name=item]").on("change", function() { //on으로 이벤트 설정가능 "change"이벤트일때 function()을 실행해라
+			showDiv(); // = radio버튼상태가 바뀔때 showDiv를 실행해라
 		});
 	});
-
 	function showDiv() {
-		if ($("input[name=item]").eq(0).is(":checked")) {
+		if ($("input[name=item]").eq(0).is(":checked")) { //첫번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
 			$("#titleDiv").css("display", "block");
 			$("#writerDiv").css("display", "none");
 			$("#dateDiv").css("display", "none");
 		}
-
-		if ($("input[name=item]").eq(1).is(":checked")) {
+		if ($("input[name=item]").eq(1).is(":checked")) { //두번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
 			$("#titleDiv").css("display", "none");
 			$("#writerDiv").css("display", "block");
 			$("#dateDiv").css("display", "none");
 		}
-
-		if ($("input[name=item]").eq(2).is(":checked")) {
+		if ($("input[name=item]").eq(2).is(":checked")) { //세번째가 선택 되어 있느냐, 그러면 이 함수를 실행해라~! 라는 뜻
 			$("#titleDiv").css("display", "none");
 			$("#writerDiv").css("display", "none");
 			$("#dateDiv").css("display", "block");
 		}
 	}
+	
 	
 	function showWriteForm() {
 		location.href = "${ nwf }";
@@ -85,7 +91,14 @@
 		</div>
 	</section>
 	
-	<%-- 검색 기능 --%>
+	
+	<div style="text-align: center; padding-top: 30px;">
+		<div>
+			<h3 style="margin: 10px 0 10px 0;">공지사항</h3>
+		</div>
+	</div>
+	
+	<%-- 검색기능 --%>
 	<div>
 		<div style="text-align: left; padding-left: 550px;">
 			<div>
@@ -95,13 +108,12 @@
 					<option id="item" value="writer">작성자</option>
 					<option id="item" value="date">게시날짜</option>
 				</select>
-			
-					<input type="radio" name="item" value="title" checked> 제목 &nbsp; &nbsp; &nbsp;
-					<input type="radio" name="item" value="writer">작성자 &nbsp; &nbsp; &nbsp; 
-					<input type="radio" name="item" value="date"> 날짜
+	
+				<input type="radio" name="item" value="title" checked> 제목&nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="writer">	 작성자 &nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="date"> 날짜
 			</div>
-		
-				
+	
 			<div id="titleDiv">
 				<form action="nsearchTitle.do" method="post">
 					<input type="search" name="keyword">
@@ -138,49 +150,69 @@
 				</form>
 			</div>
 		</div>
+		
+		<%-- 관리자가 로그인 했을 때 --%>
+		<c:if test="${  !empty sessionScope.loginUser and loginUser.user_lv eq 'B' }">
+			<div style="text-align: right; padding-right: 550px; margin-top: -20px">
+				<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
+			</div>
+		</c:if>
+		
 	</div>
-
-	<c:if test="${ !empty sessionScope.loginUser }">
-		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button onclick="showWriteForm();" class="btn btn-warning btn-round"
-				style="color: #fff;">글쓰기</button>
-		</div>
-	</c:if>
 	
-	<div id="layoutSidenav_content">
-		<main>
-			<div class="container-fluid">
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="800"
-							cellspacing="0" align="center" border="1" style="width:1500px; text-align: center;">
-							<tr style="background-color: orange;">
-								<th style="text-align: center;">번호</th>
-								<th style="text-align: center;">말머리</th>
-								<th style="text-align: center;">제목</th>
-								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">첨부파일</th>
-								<th style="text-align: center;">날짜</th>
-							</tr>
-							<c:forEach items="${ requestScope.list}" var="n">
-								<tr>
-									<td align="center" width="100">${ n.nid }</td>
-									<td align="center" width="180">${ n.ntype }</td>
-										<c:url value="/ndetail.do" var="und">
-											<c:param name="nid" value="${ n.nid }" />
-										</c:url>
-									<td align="center"><a href="${und}">${n.ntitle}</a></td>
-									<td align="center">${n.nwriter}</td>
-									<td align="center">
-										<c:if test="${!empty n.n_file_name }">◎</c:if>
-										<c:if test="${empty n.n_file_name }">&nbsp;</c:if>
-										</td>
-									<td align="center"><fmt:formatDate value="${n.n_date}" pattern="yyyy-MM-dd"/></td>
-								</tr>
-							</c:forEach>
-						</table>
-
-
+	
+	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+			<colgroup>
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+			</colgroup>
+			<thead>
+				<tr>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">말머리</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성날짜</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">조회수</th>
+				</tr>
+				
+				<tr>
+					<td colspan="7" class="blank2">&nbsp;
+			    </tr>
+            </thead>
+            <tbody>
+                <tr>
+                	<c:forEach items="${ requestScope.list}" var="n">
+	                <tr>
+						<td align="center" width="80" style="font-size:15px;">${ n.nid }</td>
+	
+						<td align="center" width="150" style="font-size:15px;">${ n.ntype }</td>
+	
+						<td align="left" width="550" style="font-size:15px;">
+							<c:url value="/ndetail.do" var="und">
+								<c:param name="nid" value="${ n.nid }" />
+							</c:url>
+							<a href="${und}">${n.ntitle}</a>
+								<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:20px;"> </c:if>
+								<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+					
+						<td align="center" width="150" style="font-size:15px;">${n.nwriter}</td>
+	
+						<td align="center" width="130" style="font-size:15px;"><fmt:formatDate value="${n.n_date}" pattern="yyyy-MM-dd"/></td>
+	
+						<td align="center" width="80" style="font-size:15px;">${ n.ncount }</td>
+						
+					</tr>
+					</c:forEach>
+            </tbody>
+        </table>
+    </div>
+	
 	<jsp:include page="../common/footer.jsp" />
 
 </body>

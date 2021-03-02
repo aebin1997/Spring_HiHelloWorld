@@ -23,10 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ict.hhw.board.model.vo.Board;
+import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.member.model.vo.Member;
 import com.ict.hhw.notice.model.service.NoticeService;
 import com.ict.hhw.notice.model.vo.Notice;
-import com.ict.hhw.common.SearchDate;
 
 
 @Controller
@@ -88,38 +89,54 @@ public class NoticeController {
 
 		// 공지사항 전체 목록보기 요청 처리용
 		@RequestMapping("nlist.do")
-		public String noticeListMethod(Model model) {
-			ArrayList<Notice> list = noticeService.selectAll();
+		public String NoticeListMethod(@RequestParam("page") int currentPage, Model model) {
+			
+			int limit = 10;
+			ArrayList<Notice> list = noticeService.selectNoticeList(currentPage, limit);
+			
+			// 페이지 처리와 관련된 값 처리
+			// 총 페이지 계산을 위한 총 목록 갯수 조회
+			int listCount = noticeService.getListCount();
+			int maxPage = (int) ((double) listCount / limit + 0.9);
+			// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
+			// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
+			int startPage = ((int) (double) currentPage / 10) * 10 + 1;
+			int endPage = startPage + 9;
+
+			if (maxPage < endPage)
+				endPage = maxPage;
 
 			if (list.size() > 0) {
 				model.addAttribute("list", list);
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("maxPage", maxPage);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+
 				return "notice/noticeListView";
 			} else {
-				model.addAttribute("msg", "등록된  공지사항 정보가 없습니다.");
+				model.addAttribute("msg", currentPage + "페이지 출력 목록 조회 실패.");
 				return "common/errorPage";
 			}
 		}
 
 		// 공지글 상세보기 요청 처리용
 		@RequestMapping("ndetail.do")
-		public String noticeDetailMethod(@RequestParam("nid") int nid, Model model, HttpSession session) {
+		public String noticeDetailViewMethod(
+				@RequestParam(value="nid", required=false) int nid,
+				@RequestParam(name = "page", required = false, defaultValue = "1") int currentPage, Model model) {
 			Notice notice = noticeService.selectnotice(nid);
+			int result = noticeService.addNoticeCount(nid); // 조회수 1증가 처리
 
-			if (notice != null) {
+			if (notice != null && result > 0) {
+				model.addAttribute("page", currentPage);
 				model.addAttribute("notice", notice);
-				// 관리자가 상세보기 요청했을 때
-				Member loginUser = (Member) session.getAttribute("loginUser");
-				if (loginUser != null && loginUser.getId().equals("admin123")) {
-					return "notice/noticeAdminDetailView";
-
-				} else {
-					// 관리자가 아닌 고객이 상세보기 요청했을
-					return "notice/noticeDetailView";
-				}
+				return "notice/noticeDetailView";
 			} else {
-				model.addAttribute("msg", nid + "번 공지 상세보기 실패");
-				return "common/errorPage";
+				model.addAttribute("msg", nid + "번 게시글 조회 실패");
+				return "common/erroPage";
 			}
+
 		}
 
 		// 공지글 등록 페이지 요청 처리용

@@ -60,4 +60,19 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.selectSearchDate(dates);
 	}
 
+	@Override
+	public ArrayList<Notice> selectNoticeList(int currentPage, int limit) {
+		return noticeDao.selectNoticeList(currentPage, limit);
+	}
+
+	@Override
+	public int addNoticeCount(int nid) {
+	     return noticeDao.addNoticeCount(nid);
+	}
+
+	@Override
+	public int getListCount() {
+		return noticeDao.getListCount();
+	}
+
 }

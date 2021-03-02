@@ -19,6 +19,12 @@
 <meta charset="UTF-8">
 <title>관리자 신고회원 관리페이지</title>
 
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/other.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.2">
+
 <script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
@@ -158,46 +164,55 @@
 	</div>
 
 	
-	<div id="layoutSidenav_content">
-		<main>
-			<div class="container-fluid">
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="800"
-							cellspacing="0" align="center" border="1" style="width:1200px; text-align: center;">
-							<tr style="background-color: orange;">
-								<th style="text-align: center;" width="50">번호</th>
-								<th style="text-align: center;" width="80">게시글 번호</th>
-								<th style="text-align: center;" width="80">신고유형</th>
-								<th style="text-align: center;" width="80">신고자</th>
-								<th style="text-align: center;" width="80">불량회원</th>
-								<th style="text-align: center;" width="150">신고내용</th>
-								<th style="text-align: center;" width="50">신고접수일</th>
-							</tr>
-							<c:forEach items="${ requestScope.list }" var="b" >
-								<tr>
-									<td align="center">${ b.blame_no }</td>
-									
-									<td align="center">${ b.blame_bid }</td>
-									
-									<td align="center">${ b.blame_type }</td>
-									
-									<td align="center">${ b.mm_nickname }</td>
-									
-									<td align="center">${ b.target_nickname }</td>
-									
-									<td align="left">${ b.blame_content }</td>
-										
-									<td align="center">${ b.blame_date }</td>
-									
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
+	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+			<colgroup>
+				<col width="50">
+				<col width="80">
+				<col width="80">
+				<col width="80">
+				<col width="350">
+				<col width="80">
+			</colgroup>
+			<thead>
+				<tr>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번 호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">게시글 번호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고유형</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">불량회원</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고내용</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고접수일</th>
+				</tr>
+				
+				<tr>
+					<td colspan="7" class="blank2">&nbsp;
+			    </tr>
+            </thead>
+            <tbody>
+                <tr>
+            	    <c:forEach items="${ requestScope.list }" var="b" >
+	                <tr>
+						<td align="center" width="80"  style="font-size:15px;">${ b.blame_no }</td>
+	
+						<td align="center" width="80"  style="font-size:15px;">${ b.blame_bid }</td>
+						
+						<td align="center" width="80"  style="font-size:15px;">${ b.blame_type }</td>
+						
+						<td align="center" width="80"  style="font-size:15px;">${ b.mm_nickname }</td>
+	
+						<td align="center" width="80"  style="font-size:15px;">${ b.target_nickname }</td>
+	
+						<td align="center" width="350" style="font-size:15px;">${ b.blame_content }</td>
+						
+						<td align="center" width="80" style="font-size:15px;">${ b.blame_date }</td>
+						
+					</tr>
+					</c:forEach>
+            </tbody>
+        </table>
+    </div>
+	
 
 	<br>
 	<br>

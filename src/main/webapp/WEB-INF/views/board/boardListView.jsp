@@ -153,8 +153,9 @@
 	
 	
 	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
-		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1000" >
 			<colgroup>
+				<col width="100">
 				<col width="100">
 				<col width="100">
 				<col width="100">

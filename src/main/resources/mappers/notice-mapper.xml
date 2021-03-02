@@ -22,6 +22,46 @@
       <result property="n_date" column="n_date"/>
    </resultMap>
    
+   <select id="selectNewNoticeList" parameterType="com.ict.hhw.notice.model.vo.NoticePage" resultMap="noticeResultSet">
+      <![CDATA[
+        SELECT *
+          FROM (
+                 SELECT ROWNUM RNUM
+               , NID
+               , NTYPE
+               , NWRITER
+               , NTITLE
+               , NCONTENT
+               , N_FILE_NAME
+               , N_RFILE_NAME
+               , N_DATE
+               , N_MODFIY_DATE
+               , NCOUNT
+               , NSTATUS
+           FROM (
+           SELECT *
+           FROM NOTICE
+           WHERE NSTATUS = 'Y'
+          ORDER BY NID DESC))
+          WHERE RNUM >= #{ startRow }
+          AND RNUM <= #{ endRow }
+                ]]>
+   </select>
+   
+   
+   <select id="getListCount" resultType="_int">
+      select count(*)
+        from notice
+   </select>
+   
+   
+  <update id="updateNCount" parameterType="_int">
+      update notice
+         set ncount = ncount + 1
+         where nid = #{ NID }
+   </update>
+   
+   
    <select id="selectAll" resultMap="noticeResultSet">
       select * from notice
       order by nid desc

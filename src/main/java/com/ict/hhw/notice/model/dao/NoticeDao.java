@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ict.hhw.common.SearchDate;
 import com.ict.hhw.notice.model.vo.Notice;
+import com.ict.hhw.notice.model.vo.NoticePage;
 
 @Repository("noticeDao")
 public class NoticeDao {
@@ -17,6 +18,23 @@ public class NoticeDao {
 	private SqlSessionTemplate sqlSession;
 	
 	public NoticeDao() {}
+	
+	public int getListCount() {
+		return sqlSession.selectOne("noticeMapper.getListCount");
+	}
+	
+	public int addNoticeCount(int nid) {
+		return sqlSession.update("noticeMapper.updateNCount", nid);
+	}
+	
+	public ArrayList<Notice> selectNoticeList(int currentPage, int limit) {
+		//전달된 값을 이용해서 출력할 시작행과 끝행을 계산함
+		int startRow = (currentPage - 1) * limit -1;
+		int endRow = startRow + limit - 1;
+		
+		List<Notice> list = sqlSession.selectList("noticeMapper.selectNewNoticeList", new NoticePage(startRow, endRow));
+		return (ArrayList<Notice>)list;
+	}
 	
 	public ArrayList<Notice> selectList(){
 		List<Notice> list = sqlSession.selectList("noticeMapper.selectAll");
