@@ -21,6 +21,13 @@
 <meta charset="UTF-8">
 <title>자유게시판</title>
 
+<link rel="stylesheet" type="text/css"  href="${pageContext.request.contextPath}/resources/css/myPage/common.css" />
+<link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.kin/static/pc/20210209151259/css/min/components.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/other.css" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/myPage/profile.css" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.2">
+
+
 <script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 
 <script type="text/javascript">
@@ -68,9 +75,9 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 	
-	<div style="text-align: center; padding-top: 90px;">
+	<div style="text-align: center; padding-top: 100px;">
 		<div>
-			<h2 style="margin: 20px 0 10px 0;">자유게시판</h2>
+			<h3 style="margin: 10px 0 10px 0;">자유게시판</h3>
 		</div>
 	</div>
 	
@@ -100,7 +107,7 @@
 					<c:url var="blist" value="/blist.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 	
@@ -113,7 +120,7 @@
 					<c:url var="blist" value="/blist.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 	
@@ -126,87 +133,100 @@
 					<c:url var="blist" value="/blist.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 		</div>
-	</div>
-
-	
-	<div id="layoutSidenav_content">
-		<main>
-			<div class="container-fluid">
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-bordered" id="dataTable" width="800"
-							cellspacing="0" align="center" border="1" style="width:1200px; text-align: center;">
-							<tr style="background-color: orange;">
-								<th style="text-align: center;">번 호</th>
-								<th style="text-align: center;">말머리</th>
-								<th style="text-align: center;">제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-								<th style="text-align: center;">작성자</th>
-								<th style="text-align: center;">날  짜</th>
-								<th style="text-align: center;">조회수</th>
-							</tr>
-						<c:forEach items="${ requestScope.list }" var="b" >
-							
-							<tr>
-								<td align="center" width="80">${ b.bid }</td>
-
-								<td align="center" width="150">${ b.btype }</td>
-
-								<td align="left" width="550"><c:url var="bdt" value="/bdetail.do">
-										<c:param name="page" value="${ currentPage }" />
-										<c:param name="bid" value="${ b.bid }" />
-									</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>&nbsp;[${ b.b_ref_bid }]
-										<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:30px; float:right;"> </c:if>
-										<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
-							
-								<td align="center" width="150">
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade lt 0}"> <%-- 불량회원 --%>
-									 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:left;">
-									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 1  &&  b.grade lt 10}">  <%-- 신규회원 --%>
-									 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:left;">
-									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 11 && b.grade lt 20}">  <%-- 우수회원 --%>
-									 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:left;">
-									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 21 && b.grade lt 30}">  <%-- 최우수회원 --%>
-									 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:left;">
-									 </c:if>
-									 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade eq 0}">  <%-- 관리자 --%>
-									 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:left;">
-									 </c:if>${ b.bwriter }
-									 </td>
-
-								<td align="center" width="130">${ b.b_create_date }</td>
-
-								<td align="center" width="80">${ b.bcount }</td>
-
-							</tr>
-						</c:forEach>
-						</table>
-					</div>
-				</div>
+		
+				
+		<%-- 관리자가 로그인 했을 때 --%>
+		<c:if test="${  !empty sessionScope.loginUser and loginUser.user_lv eq 'B' }">
+			<div style="text-align: right; padding-right: 550px; margin-top: -40px;">
+					<c:url var="blame" value="/b.blame.list.do">
+						<c:param name="page" value="1" />
+					</c:url>
+				<button onclick="javascript:location.href='${ blame }';" class="btn btn-warning btn-round" style="color: #fff;">신고자 현황</button>
 			</div>
-		</main>
+		</c:if>
+		
 	</div>
+	
+	
+	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+			<colgroup>
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+				<col width="100">
+			</colgroup>
+			<thead>
+				<tr>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번 호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">말머리</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성날짜</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">조회수</th>
+				</tr>
+				
+				<tr>
+					<td colspan="6" class="blank2">&nbsp;
+			    </tr>
+            </thead>
+            <tbody>
+                <tr>
+                	<c:forEach items="${ requestScope.list }" var="b" >
+	                <tr>
+						<td align="center" width="80" style="font-size:15px;">${ b.bid }</td>
+	
+						<td align="center" width="150" style="font-size:15px;">${ b.btype }</td>
+	
+						<td align="left" width="550" style="font-size:15px;"><c:url var="bdt" value="/bdetail.do">
+								<c:param name="page" value="${ currentPage }" />
+								<c:param name="bid" value="${ b.bid }" />
+							</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>&nbsp;[${ b.b_ref_bid }]
+								<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:20px;"> </c:if>
+								<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+					
+						<td align="center" width="150" style="font-size:15px;">${ b.bwriter }
+							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade lt 0}"> <%-- 불량회원 --%>
+							 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:left;">
+							 </c:if>
+							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 1  &&  b.grade lt 10}">  <%-- 신규회원 --%>
+							 <img src="/hhw/resources/images/i_1.png" style="width:20px; float:left;">
+							 </c:if>
+							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 11 && b.grade lt 20}">  <%-- 우수회원 --%>
+							 <img src="/hhw/resources/images/i_2.png" style="width:20px; float:left;">
+							 </c:if>
+							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade ge 21 && b.grade lt 30}">  <%-- 최우수회원 --%>
+							 <img src="/hhw/resources/images/i_3.png" style="width:20px; float:left;">
+							 </c:if>
+							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade eq 0}">  <%-- 관리자 --%>
+							 <img src="/hhw/resources/images/i_admin.png" style="width:20px; float:left;">
+							 </c:if>
+							 </td>
+	
+						<td align="center" width="130" style="font-size:15px;">${ b.b_create_date }</td>
+	
+						<td align="center" width="80" style="font-size:15px;">${ b.bcount }</td>
+						
+					</tr>
+					</c:forEach>
+				</tr>
+            </tbody>
+        </table>
+    </div>
+
 
 		<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-		<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'A' }">
-			<div style="text-align: right; padding-right: 550px; margin-top: -20px">
+		<c:if test="${ !empty sessionScope.loginUser }">
+			<div style="text-align: right; padding-right: 550px;">
 				<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
 			</div>
 		</c:if>
 		
-		<%-- 관리자가 로그인 했을 때 --%>
-		<c:if test="${  !empty sessionScope.loginUser and loginUser.user_lv eq 'B' }">
-			<div style="text-align: right; padding-right: 250px; margin-top: -20px">
-				<button onclick="showWriteForm();" class="btn btn-warning btn-round" style="color: #fff;">글쓰기</button>
-				<button onclick="testBlame();" class="btn btn-warning btn-round" style="color: #fff;">관리자 신고자 목록 확인 이동</button>
-			</div>
-		</c:if>
 		
 		<%-- 로그인 안한 사람이 글쓰기 할 때 --%>
 		<c:if test="${ empty sessionScope.loginUser }">

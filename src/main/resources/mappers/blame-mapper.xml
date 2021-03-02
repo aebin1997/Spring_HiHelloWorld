@@ -44,11 +44,12 @@
          SELECT *
           FROM  (
                  SELECT ROWNUM RNUM
+      			, blame_no
       			, blame_bid
       			, blame_type
       			, mm_nickname
       			, target_nickname
-      			, sysdate
+      			, blame_date
       			, blame_content
       			, blame_ip
           FROM  (
@@ -66,11 +67,12 @@
          SELECT *
           FROM (
         SELECT    ROWNUM RNUM
+      			, blame_no
       			, blame_bid
       			, blame_type
       			, mm_nickname
       			, target_nickname
-      			, sysdate
+      			, blame_date
       			, blame_content
       			, blame_ip
           FROM (
@@ -89,11 +91,12 @@
          SELECT *
           FROM (
         SELECT   ROWNUM RNUM
+      			, blame_no
       			, blame_bid
       			, blame_type
       			, mm_nickname
       			, target_nickname
-      			, sysdate
+      			, blame_date
       			, blame_content
       			, blame_ip
           FROM (
@@ -111,11 +114,12 @@
          SELECT *
           FROM (
         SELECT ROWNUM RNUM
+      			, blame_no
       			, blame_bid
       			, blame_type
       			, mm_nickname
       			, target_nickname
-      			, sysdate
+      			, blame_date
       			, blame_content
       			, blame_ip
           FROM (

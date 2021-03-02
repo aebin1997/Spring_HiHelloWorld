@@ -42,27 +42,57 @@
 			var values = "";
 			for ( var i in json.list) {
 				//본인이 등록한 댓글일 때는 수정/삭제 가능하게 함
-				if (loginUser == json.list[i].b_rwriter) {
-					values += "<tr><td><"+ json.list[i].b_rwriter
-							+ "> 님 댓글</td><td>"	+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
+/* 				if (loginUser == json.list[i].b_rwriter) {
+					values += "<table align='center' width='700' border='0' cellpadding='2'>"
+							+ "<tr>"
+							+ "<td bgcolor='white'>"
+							+ "<table class='table2'>"
+							+ "<tr>"
+							+ "<td width='200px'><"+ json.list[i].b_rwriter"> 님 댓글</td>"
+							+ "<td width='500px'>"	+ json.list[i].b_create_date "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td colspan='2' width='200px'>"
 							+ "<form action='rupdate.do' method='post'>"
 							+ "<input type='hidden' name='b_rid' value='" +  json.list[i].b_rid  + "'>"
 							+ "<input type='hidden' name='bid' value='${board.bid}'>"
 							+ "<textarea name='b_rcontent' rows='2' cols='70'>"
-							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ")
-							+ "</textarea><br><input type='submit' value='수정' style='width:50px;float:right;'></form>"
-							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");' style='width:50px;float:right;margin-right:10px'>삭제 </button></td></tr>";
+							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") "</textarea><br>"
+							+ "<input type='submit' value='수정' style='width:50px;float:right;'></form>"
+							+ "</tr>"
+							+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");' style='width:50px;float:right;margin-right:10px'>삭제</button>"
+							+ "</table></td></tr></table>";
 				} else { //본인 댓글이 아닐 때
-/* 					values += "<tr><td><name='b_rwriter' value='${b_rwriter}'> 님 댓글</td><td>"+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
+ 					values += "<table align='center' width='700' border='0' cellpadding='2'>"
+ 							+ "<tr>"
+							+ "<td bgcolor='white'>"
+							+ "<table class='table2'>"
+							+ "<tr>"
+							+ "<td width='200px'><"+ json.list[i].b_rwriter"> 님 댓글</td>"
+							+ "<td width='500px'>"	+ json.list[i].b_create_date "</td>"
+							+ "</tr>"
+							+ "<tr>"
+							+ "<td colspan='2' width='200px'>"
 							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
-							+ "<button onclick='showBlamForm();' style='float:right'>신고</button></td></tr>"; */
- 					values += "<tr><td><"+ json.list[i].b_rwriter
-							+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
-							+ "</td></tr><tr><td colspan='2'>"
-							+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
-							+ "<button onclick='showBlamForm2();' style='float:right'>신고</button></td></tr>";
+							+ "<button onclick='showBlamForm2();' style='float:right'>신고</button>"
+							+ "</td></tr></table></td></tr></table>"; */
+							if (loginUser == json.list[i].b_rwriter) {
+								values += "<tr><td><"+ json.list[i].b_rwriter
+										+ "> 님 댓글</td><td>"	+ json.list[i].b_create_date
+										+ "</td></tr><tr><td colspan='2'>"
+										+ "<form action='rupdate.do' method='post'>"
+										+ "<input type='hidden' name='b_rid' value='" +  json.list[i].b_rid  + "'>"
+										+ "<input type='hidden' name='bid' value='${board.bid}'>"
+										+ "<textarea name='b_rcontent' rows='2' cols='70'>"
+										+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ")
+										+ "</textarea><br><input type='submit' value='수정' style='width:50px;float:right;'></form>"
+										+ "<button onclick='replyDelete("+ json.list[i].b_rid+ ");' style='width:50px;float:right;margin-right:10px'>삭제 </button></td></tr>";
+							} else { 
+			 					values += "<tr><td><"+ json.list[i].b_rwriter
+										+ "> 님 댓글</td><td>"+ json.list[i].b_create_date
+										+ "</td></tr><tr><td colspan='2'>"
+										+ decodeURIComponent(json.list[i].b_rcontent).replace(/\+/gi, " ") 
+										+ "<button onclick='showBlamForm2();' style='float:right'>신고</button></td></tr>";
 				}
 			} //for in
 			$("#rlistTbl").html($("#rlistTbl").html() + values);
@@ -102,12 +132,39 @@
 	}
 	
 </script>
+
+<style>
+table.table2 {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.table2 tr {
+	width: 50px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.table2 td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
+
+
 </head>
 <body>
 	
 	<c:import url="../common/header.jsp" />
 
-	<div style="text-align: center; padding-top: 90px;">
+	<div style="text-align: center; padding-top: 120px;">
 		<div>
 			<h4 style="margin: 20px 0 10px 0;">${ board.btitle }</h4>
 		</div>
@@ -115,31 +172,34 @@
 				
 	<br>
 
-	<table align="center" cellpadding="10" cellspacing="0" border="1" width="500">
-			
-		<thead>
-			<tr>
-				<th style="text-align: center;" width="80">작성자</th>
-				<th style="text-align: center;">${ board.bwriter } 님</th>
-				<th style="text-align: center;" width="80">첨부파일</th>
-				<th>
-					<c:if test="${ empty board.b_original_filename }">첨부파일 없음</c:if>
-					<c:if test="${ !empty board.b_original_filename }">
-					<c:url var="bfd" value="/bfdown.do">
-						<c:param name="ofile" value="${ board.b_original_filename }" />
-						<c:param name="rfile" value="${ board.b_rename_filename }" />
-					</c:url>
-					<a href="${ bfd }">${ board.b_original_filename }</a>
-					</c:if></th>
-			</tr>
-		</thead>
-
-		<tbody>
-			<tr>
-          		<th style="text-align: center;">내 용</th>
-          		<td colspan="4" height="200">${ board.bcontent }</td>
-        	</tr>
-		</tbody>
+	<table align="center" cellpadding="2" cellspacing="0" width="700">
+		<tr>
+			<td bgcolor=white>
+				<table class="table2">
+					<tr>
+						<td width="200px">작성자</td>
+						<td width="500px">${ board.bwriter } 님</td>
+					</tr>
+					<tr>
+						<td width="200px">첨부파일</td>
+						<td width="500px">
+							<c:if test="${ empty board.b_original_filename }">첨부파일 없음</c:if>
+							<c:if test="${ !empty board.b_original_filename }">
+								<c:url var="bfd" value="/bfdown.do">
+									<c:param name="ofile" value="${ board.b_original_filename }" />
+									<c:param name="rfile" value="${ board.b_rename_filename }" />
+								</c:url>
+							<a href="${ bfd }">${ board.b_original_filename }</a>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td width="200px">내 용</td>
+						<td width="500px" height="200">${ board.bcontent }</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
 
 		<tfoot>
           <td colspan="4" style="text-align: right;">
@@ -211,40 +271,50 @@
 	</table>
 
 		<%-- 게시글 신고하기 폼 영역  --%>
-			<div id="blameDiv1" style="padding-bottom: 30px;">
+			<div id="blameDiv1" style="padding-bottom: 30px; padding-top: 20px;">
 				<form action="b.blame.insert.do" method="post">
 					<input type="hidden" name="blame_bid" value="${ board.bid }">
-					<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
+					<table align=center width=700 border=0 cellpadding=2>
 					
 						<tr>
-							<th>신고유형</th>
-							<td><select type="test" name="blame_type">
-								<option value="부적절">부적절</option>
-								<option value="욕설">욕설</option>
-								<option value="사기">사기</option>
-								<option value="음란물">음란물</option>
-								</select></td>
+							<td height="20" align="center" bgcolor="#ccc"><font color=white>게시글 신고</font></td>
 						</tr>
 					
 						<tr>
-							<th>작성자</th>
-							<td><input type="text" name="mm_nickname" readonly value="${ sessionScope.loginUser.nickname }"></td>
-						</tr>
-						
-						<tr>
-							<th>신고대상</th>
-							<td><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
-						</tr>
-						
-						<tr>
-							<th>내 용</th>
-							<td><textarea name="blame_content" rows="5" cols="50"></textarea></td>
-						</tr>
-						
-						<tr>
-							<th colspan="2">
-							<input type="submit" value="신고">&nbsp;
-							<input type="reset" value="신고취소"  onclick="hideBlameForm(); return false;"></th>
+							<td bgcolor=white>
+								<table class="table2">
+									<tr>
+										<td width="200px">신고유형</td>
+										<td width="500px"><select type="test" name="blame_type">
+														  <option value="부적절">부적절</option>
+														  <option value="욕설">욕설</option>
+														  <option value="사기">사기</option>
+														  <option value="음란물">음란물</option>
+														  </select></td>
+									</tr>
+								
+									<tr>
+										<td width="200px">작성자</td>
+										<td width="500px"><input type="text" name="mm_nickname" readonly value="${ sessionScope.loginUser.nickname }"></td>
+									</tr>
+									
+									<tr>
+										<td width="200px">신고대상</td>
+										<td width="500px"><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
+									</tr>
+									
+									<tr>
+										<td width="200px">내 용</td>
+										<td width="500px"><textarea name="blame_content" rows="5" cols="50"></textarea></td>
+									</tr>
+									
+									<tr>
+										<th colspan="2" style="text-align: right;">
+										<input type="submit" value="신고">&nbsp;
+										<input type="reset" value="신고취소"  onclick="hideBlameForm1(); return false;"></th>
+									</tr>
+								</table>
+							</td>
 						</tr>
 					</table>
 				</form>
@@ -255,78 +325,92 @@
 			
 				<%-- 댓글달기 폼 영역 --%>
 				<br>
-				<div id="replyDiv" style="padding-bottom: 30px;">
+				<div id="replyDiv" style="padding-bottom: 30px;  padding-top: 20px;">
 					<form action="rinsert.do" method="post">
 						<input type="hidden" name="b_ref_bid" value="${ board.bid }">
-						<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
+						<table align="center" width="700" border="0" cellpadding="2">
+						
+						<tr>
+							<td height="20" align="center" bgcolor="#ccc"><font color="white">댓글작성</font></td>
+						</tr>
 						
 						
 							<tr>
-								<th colspan="2" style="text-align: center;">댓글작성</th>
-							</tr>
-							
-							<tr>
-								<th style="text-align: center;" width="80">작성자</th>
-								<td><input type="text" name="b_rwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
-							</tr>
-							
-							<tr>
-								<th style="text-align: center;">내 용</th>
-								<td><textarea name="b_rcontent" rows="5" cols="60"></textarea></td>
-							</tr>
-							
-							<tr>
-								<th colspan="2"  style="text-align: right;">
-								<input type="submit" value="댓글등록">&nbsp;
+								<td bgcolor=white>
+									<table class="table2">
+										
+										<tr>
+											<td width="200px">작성자</td>
+											<td width="500px"><input type="text" name="b_rwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
+										</tr>
+										
+										<tr>
+											<td width="200px">내 용</td>
+											<td width="500px"><textarea name="b_rcontent" rows="5" cols="60"></textarea></td>
+										</tr>
+										
+										<tr>
+											<td colspan="2"  style="text-align: right;">
+											<input type="submit" value="댓글등록">&nbsp;
+										</tr>
+									</table>
+								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
 			</c:if> 
 			
-	
-	
-			
-		
-		<%-- 댓글 신고하기 폼 영역  --%>
+		<%-- 게시글 신고하기 폼 영역  --%>
 			<div id="blameDiv2" style="padding-bottom: 30px;">
 				<form action="b.blame.insert.do" method="post">
 					<input type="hidden" name="blame_bid" value="${ board.bid }">
-					<table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
+					<table align="center" width="700" border="0" cellpadding="2">
 					
 						<tr>
-							<th>신고유형</th>
-							<td><select type="test" name="blame_type">
-								<option value="부적절">부적절</option>
-								<option value="욕설">욕설</option>
-								<option value="사기">사기</option>
-								<option value="음란물">음란물</option>
-								</select></td>
+							<td height="20" align="center" bgcolor="#ccc"><font color=white>댓글 신고</font></td>
 						</tr>
 					
 						<tr>
-							<th>작성자</th>
-							<td><input type="text" name="mm_nickname" readonly value="${ sessionScope.loginUser.nickname }"></td>
-						</tr>
-						
-						<tr>
-							<th>신고대상</th>
-							<td><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
-						</tr>
-						
-						<tr>
-							<th>내 용</th>
-							<td><textarea name="blame_content" rows="5" cols="50"></textarea></td>
-						</tr>
-						
-						<tr>
-							<th colspan="2">
-							<input type="submit" value="신고">&nbsp;
-							<input type="reset" value="신고취소"  onclick="hideBlameForm(); return false;"></th>
+							<td bgcolor=white>
+								<table class="table2">
+									<tr>
+										<td width="200px">신고유형</td>
+										<td width="500px"><select type="test" name="blame_type">
+														  <option value="부적절">부적절</option>
+														  <option value="욕설">욕설</option>
+														  <option value="사기">사기</option>
+														  <option value="음란물">음란물</option>
+														  </select></td>
+									</tr>
+								
+									<tr>
+										<td width="200px">작성자</td>
+										<td width="500px"><input type="text" name="mm_nickname" readonly value="${ sessionScope.loginUser.nickname }"></td>
+									</tr>
+									
+									<tr>
+										<td width="200px">신고대상</td>
+										<td width="500px"><input type="text" name="target_nickname" readonly value="${ board.bwriter }"></td>
+									</tr>
+									
+									<tr>
+										<td width="200px">내 용</td>
+										<td width="500px"><textarea name="blame_content" rows="5" cols="50"></textarea></td>
+									</tr>
+									
+									<tr>
+										<th colspan="2" style="text-align: right; padding-top: 20px;">
+										<input type="submit" value="신고">&nbsp;
+										<input type="reset" value="신고취소"  onclick="hideBlameForm2(); return false;"></th>
+									</tr>
+								</table>
+							</td>
 						</tr>
 					</table>
 				</form>
-			</div>
+			</div>		
+			
  
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="rlistView" style="padding-bottom: 30px;">

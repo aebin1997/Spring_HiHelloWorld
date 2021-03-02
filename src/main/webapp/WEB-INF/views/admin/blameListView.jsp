@@ -55,7 +55,34 @@
 <body>
 	<jsp:include page="../common/header.jsp" />
 	
-	<div style="text-align: center; padding-top: 90px;">
+	
+	
+<%-- 	<c:url var="nlist" value="nlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="about" value="aboutUs.do">
+		<c:param name="page" value="1" />
+	</c:url>--%>
+	<c:url var="blame" value="blamelist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+ 
+	<section class="breadcrumbs-custom-inset">
+		<div class="breadcrumbs-custom context-dark bg-overlay-46">
+			<div class="container">
+				<h2 class="breadcrumbs-custom-title">관리자 페이지</h2>
+				<ul class="breadcrumbs-custom-path">
+					<li><a class="nav-link" href="#">회원리스트</a></li>
+					<li><a class="nav-link" href="${ blame }">신고회원 리스트</a></li>
+					<li><a class="nav-link" href="#">??????</a></li>
+				</ul>
+			</div>
+			<div class="box-position-1"
+				style="background-image: url(/hhw/resources/images/notice_board.jpg);"></div>
+		</div>
+	</section>
+	
+	<div style="text-align: center; padding-top: 30px;">
 		<div>
 			<h2 style="margin: 20px 0 10px 0;">신고회원 관리페이지</h2>
 		</div>
@@ -64,43 +91,43 @@
 	
 	<%-- 검색기능 --%>
 	<div>
-		<div style="text-align: left; padding-left: 550px;">
+		<div style="text-align: left; padding-left: 550px; padding-top: 10px;">
 			<div>
 				<select name="blame" id="item">
 					<option id="item" value="">검색 항목 선택</option>
-					<option id="item" value="target_nickname">신고회원</option>
+					<option id="item" value="target_nickname">불량회원</option>
 					<option id="item" value="blame_type">신고유형</option>
 					<option id="item" value="blame_date">신고날짜</option>
 				</select>
 	
-				<input type="radio" name="item" value="target_nickname" checked> 신고회원&nbsp; &nbsp; &nbsp; 
-				<input type="radio" name="item" value="blame_type">	신고회원&nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="target_nickname" checked> 불량회원&nbsp; &nbsp; &nbsp; 
+				<input type="radio" name="item" value="blame_type">	신고유형&nbsp; &nbsp; &nbsp; 
 				<input type="radio" name="item" value="blame_date"> 신고날짜
 			</div>
 	
 			<div id="target_nickname">
 				<form action="b.blame.searchWriter.do" method="post">
 					<input type="hidden" name="page" value="1">
-					<input type="search" name="keyword" placeholder="신고회원">
+					<input type="search" name="keyword" placeholder="불량회원 이름으로 검색">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
 					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 	
 			<div id="blame_type">
 				<form action="b.blame.searchTitle.do" method="post">
 					<input type="hidden" name="page" value="1">
-					<input type="search" name="keyword" placeholder="신고유형">
+					<input type="search" name="keyword" placeholder="신고유형으로 검색">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
 					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 	
@@ -113,10 +140,21 @@
 					<c:url var="blamelist" value="/b.blame.list.do">
 						<c:param name="page" value="1" />
 					</c:url>
-					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록 보기</button>
+					<button onclick="javascript:location.href='${ blamelist }';" class="btn btn-warning btn-round" style="color: #fff;">전체 목록</button>
 				</form>
 			</div>
 		</div>
+		
+		<%-- 관리자가 로그인 했을 때 --%>
+		<c:if test="${  !empty sessionScope.loginUser and loginUser.user_lv eq 'B' }">
+			<div style="text-align: right; padding-right: 550px; margin-top: -40px;">
+					<c:url var="blist" value="/blist.do">
+						<c:param name="page" value="1" />
+					</c:url>
+				<button onclick="javascript:location.href='${ blist }';" class="btn btn-warning btn-round" style="color: #fff;">자유게시판 이동</button>
+			</div>
+		</c:if>
+		
 	</div>
 
 	
@@ -126,27 +164,32 @@
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-bordered" id="dataTable" width="800"
-							cellspacing="0" align="center" border="1" style="width:1500px; text-align: center;">
+							cellspacing="0" align="center" border="1" style="width:1200px; text-align: center;">
 							<tr style="background-color: orange;">
-								<th style="text-align: center;">번호</th>
-								<th style="text-align: center;">게시글 번호</th>
-								<th style="text-align: center;">신고유형</th>
-								<th style="text-align: center;">신고자</th>
-								<th style="text-align: center;">신고접수자</th>
-								<th style="text-align: center;">신고접수일</th>
+								<th style="text-align: center;" width="50">번호</th>
+								<th style="text-align: center;" width="80">게시글 번호</th>
+								<th style="text-align: center;" width="80">신고유형</th>
+								<th style="text-align: center;" width="80">신고자</th>
+								<th style="text-align: center;" width="80">불량회원</th>
+								<th style="text-align: center;" width="150">신고내용</th>
+								<th style="text-align: center;" width="50">신고접수일</th>
 							</tr>
 							<c:forEach items="${ requestScope.list }" var="b" >
 								<tr>
-									<td align="center" width="100">${ b.blame_no }</td>
-									<td align="center" width="180">${ b.blame_bid }</td>
-									<td align="left" >
-										<c:url var="boardblamelist" value="/b.blame.list.do">
-												<c:param name="page" value="${ currentPage }" />
-												<c:param name="blame_no" value="${ b.blame_no }" />
-										</c:url> <a href="${ boardblamelist }" style="color: black;">${ b.blame_type }</a></td>
-									<td align="center" width="180">${ b.mm_nickname } &nbsp; <img src="/hhw/resources/images/good.png" style="width:20px;"></td>
-									<td align="center" width="130">${ b.target_nickname }</td>
-									<td align="center" width="80">${ b.blame_date }</td>
+									<td align="center">${ b.blame_no }</td>
+									
+									<td align="center">${ b.blame_bid }</td>
+									
+									<td align="center">${ b.blame_type }</td>
+									
+									<td align="center">${ b.mm_nickname }</td>
+									
+									<td align="center">${ b.target_nickname }</td>
+									
+									<td align="left">${ b.blame_content }</td>
+										
+									<td align="center">${ b.blame_date }</td>
+									
 								</tr>
 							</c:forEach>
 						</table>
@@ -156,43 +199,8 @@
 		</main>
 	</div>
 
-	<%-- 로그인한 사용자만 글쓰기 기능 사용할 수 있게 함 --%>
-	<c:if test="${ !empty sessionScope.loginUser  }">   <%-- 나중에 추가 and sessionScope.loginUser.id eq 'admin123' --%>
-		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button onclick="showWriteForm();" class="btn btn-warning btn-round"
-				style="color: #fff;">글쓰기</button>
-		</div>
-	</c:if>
-	
-	<c:if test="${ empty sessionScope.loginUser }">
-		<div style="text-align: right; padding-right: 550px; margin-top: -20px">
-			<button class="btn btn-warning btn-round"
-				style="color: #fff;" data-toggle="modal" data-target="#Medium-modal">글쓰기</button>
-			<div class="col-md-4 col-sm-12 mb-30">
-						<div class="pd-20 card-box height-100-p">
-							<div class="modal fade" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-								<div class="modal-dialog modal-dialog-centered">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h4 class="modal-title" id="myLargeModalLabel">게시판 글쓰기 이용 안내</h4>
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-										</div>
-										<div class="modal-body">
-											<h6>자유게시판 이용은 로그인 후 글쓰기가 가능합니다</h6>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>&nbsp;
-											<button type="button" class="btn btn-primary" onclick="login();">Login</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-		</div>
-	</c:if>
 	<br>
-
+	<br>
 	<br>
 	
 

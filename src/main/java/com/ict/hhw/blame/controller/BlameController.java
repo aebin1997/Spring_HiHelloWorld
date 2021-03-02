@@ -16,7 +16,6 @@ import com.ict.hhw.blame.model.service.BlameService;
 import com.ict.hhw.blame.model.vo.Blame;
 import com.ict.hhw.common.SearchAndPage;
 import com.ict.hhw.common.SearchDate;
-import com.ict.hhw.notice.model.vo.Notice;
 
 @Controller
 public class BlameController {
@@ -50,7 +49,7 @@ public class BlameController {
 		if (Blame != null && result > 0) {
 			model.addAttribute("page", currentPage);
 			model.addAttribute("Blame", Blame);
-			return "admin_blame/blameDetailView";
+			return "admin/blameDetailView";
 		} else {
 			model.addAttribute("msg", blame_no + "번 게시글 조회 실패");
 			return "common/erroPage";
@@ -58,20 +57,40 @@ public class BlameController {
 
 	}
 
-	// 관리자 신고글 페이지별 목록 조회 요청 처리용
-	@RequestMapping("b.blame.list.do")
-	public String BlameListMethod(Model model) {
-
-		ArrayList<Blame> list = BlameService.selectList();
 	
+	// 게시글 페이지별 목록 조회 요청 처리용
+	@RequestMapping("b.blame.list.do")
+	public String blameListMethod(@RequestParam("page") int currentPage, Model model) {
+		
+		int limit = 10;
+		ArrayList<Blame> list = BlameService.selectList(currentPage, limit);
+		
+		// 페이지 처리와 관련된 값 처리
+		// 총 페이지 계산을 위한 총 목록 갯수 조회
+		int listCount = BlameService.getListCount();
+		int maxPage = (int) ((double) listCount / limit + 0.9);
+		// 현재 페이지가 속한 페이지그룹의 시작페이지 값 설정
+		// 예 : 현재 페이지가 35이면, 시작페이지를 31로 지정(페이지 갯수를 10개 표시할 경우)
+		int startPage = ((int) (double) currentPage / 10) * 10 + 1;
+		int endPage = startPage + 9;
+
+		if (maxPage < endPage)
+			endPage = maxPage;
+
 		if (list.size() > 0) {
 			model.addAttribute("list", list);
-			return "admin_blame/blameListView";
+			model.addAttribute("currentPage", currentPage);
+			model.addAttribute("maxPage", maxPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+
+			return "admin/blameListView";
 		} else {
-			model.addAttribute("msg", "등록된  공지사항 정보가 없습니다.");
+			model.addAttribute("msg", currentPage + "페이지 출력 목록 조회 실패.");
 			return "common/errorPage";
 		}
 	}
+	
 	
 	// 검색
 	@RequestMapping(value = "b.blame.searchTitle.do", method = RequestMethod.POST)
@@ -110,7 +129,7 @@ public class BlameController {
 			model.addAttribute("action", "b.blame.searchTitle.do");
 			model.addAttribute("keyword", keyword);
 
-			return "admin_blame/blameListView";
+			return "admin/blameListView";
 		} else {
 			model.addAttribute("msg", keyword + "로 검색된 게시글 정보가 없습니다.");
 			return "common/errorPage";
@@ -153,7 +172,7 @@ public class BlameController {
 			model.addAttribute("action", "b.blame.searchWriter.do");
 			model.addAttribute("keyword", keyword);
 			
-			return "admin_blame/blameListView";
+			return "admin/blameListView";
 		} else {
 			model.addAttribute("msg", keyword + "로 검색된 게시글 정보가 없습니다.");
 			return "common/errorPage";
@@ -197,7 +216,7 @@ public class BlameController {
 			model.addAttribute("begin", dates.getBegin());
 			model.addAttribute("end", dates.getEnd());
 
-			return "admin_blame/blameListView";
+			return "admin/blameListView";
 		} else {
 			model.addAttribute("msg", dates.getBegin() + "~" + dates.getEnd() + 
 					"날짜로 검색된 게시글 정보가 없습니다.");

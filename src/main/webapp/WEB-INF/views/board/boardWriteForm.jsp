@@ -17,61 +17,96 @@
   <script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 
+<style>
+table.table2 {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.table2 tr {
+	width: 50px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.table2 td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
 
 </head>
 <body>
 	<c:import url="../common/header.jsp" />
 	<hr>
 	
+ 	<section style="padding: 70px 0 60px 0;">
+		
+		<br><br>
+		<form action="binsert.do" method="post" enctype="multipart/form-data">
+			<table style="padding-top: 50px" align="center" width="700" border="0" cellpadding="2">
+				<tr>
+					<td height="30" align="center" bgcolor="#ccc"><font color="white">게시글 등록</font></td>
+				</tr>
+				<tr>
+					<td bgcolor=white>
+						<table class="table2">
+						
+							<tr>	
+								<td width="200px">말머리</td>
+								<td width="500px"><select type="test" name="btype">
+	    											  <option value="질문이요">질문이요</option>
+													  <option value="일상글이요">일상글이요</option>
+													  <option value="칭찬글이요">칭찬글이요</option>
+													  <option value="참고글이요">참고글이요</option>
+												  </select></td>
+								
+							</tr>
+							
+							<tr>
+								<td>제 목</td>
+								<td><input type="text" name="btitle"></td>
+							</tr>
+							
+							<tr>
+								<td>작성자</td>
+								<td><input type="text" name="bwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
+							</tr>
 	
-	<div style="text-align: center; padding-top: 90px;">
-		<div>
-			<h3 style="margin: 20px 0 10px 0;">게시글 등록</h3>
-		</div>
-	</div>
+							<tr>
+								<td>파일선택</td>
+								<td><input type="file" name="upfile"></td>
+							</tr>
 	
-	<br>
-	<%--form에서 입력값들과 파일을 같이 전송하려면, 반드시 enctype="multipart/form-data"속성 추가해야 함 --%>
-	<form action="binsert.do" method="post" enctype="multipart/form-data">
-	
-		<table align="center" width="500" border="1" cellspacing="0"
-			cellpadding="5">
-			<tr>
-				<th style="text-align: center;">말머리</th>
-				<td><select type="test" name="btype">
-					<option value="질문이요">질문이요</option>
-					<option value="일상글이요">일상글이요</option>
-					<option value="칭찬글이요">칭찬글이요</option>
-					<option value="참고글이요">참고글이요</option>
-				</select></td>
-			</tr>
-			<tr>
-				<th style="text-align: center;">제 목</th>
-				<td><input type="text" name="btitle"></td>
-			</tr>
-			<tr>
-				<th style="text-align: center;">작성자</th>
-				<td><input type="text" name="bwriter" readonly value="${ sessionScope.loginUser.nickname }"></td>
-			</tr>
-			<tr>
-				<th style="text-align: center;">파일선택</th>
-				<td><input type="file" name="upfile"></td>
-			</tr>
-			<tr>
-				<th style="text-align: center;">내 용</th>
-				<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
-			</tr>
-			<tr>
-				<th colspan="2" style="text-align: right;">
-				<input type="submit" value="등록하기">&nbsp; 
-				<input type="reset" value="작성취소"> &nbsp;
-				<button onclick="javascript:history.go(-1); return false;">목록</button>
-				</th>
-			</tr>
-		</table>
-	</form>
+							<tr>
+								<td>내 용</td>
+								<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
+							</tr>
+							
+							<tr>
+								<th colspan="2" style="text-align: right; padding-top: 20px">
+									<input type="submit" value="등록하기">&nbsp; 
+									<input type="reset" value="작성취소"> &nbsp;
+									<button onclick="javascript:history.go(-1); return false;">목록</button>
+								</th>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</section>
  
- <br>
+ 
+ 
+ 
 
 	<jsp:include page="../common/footer.jsp" />
 </body>

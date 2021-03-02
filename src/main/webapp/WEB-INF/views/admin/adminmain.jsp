@@ -31,7 +31,7 @@
 	<c:url var="about" value="aboutUs.do">
 		<c:param name="page" value="1" />
 	</c:url>--%>
-	<c:url var="blame" value="blamelist.do">
+	<c:url var="blame" value="b.blame.list.do">
 		<c:param name="page" value="1" />
 	</c:url>
  
