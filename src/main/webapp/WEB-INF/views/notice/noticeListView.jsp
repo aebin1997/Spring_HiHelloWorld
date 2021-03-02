@@ -162,7 +162,7 @@
 	
 	
 	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
-		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1000" >
 			<colgroup>
 				<col width="100">
 				<col width="100">
@@ -173,12 +173,12 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번호</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">말머리</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성자</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성날짜</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">조회수</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col" class="title">번호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">말머리</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">작성자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">작성날짜</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">조회수</th>
 				</tr>
 				
 				<tr>
@@ -189,23 +189,23 @@
                 <tr>
                 	<c:forEach items="${ requestScope.list}" var="n">
 	                <tr>
-						<td align="center" width="80" style="font-size:15px;">${ n.nid }</td>
+						<td align="center" width="80" style="font-size:15px; color: black;">${ n.nid }</td>
 	
-						<td align="center" width="150" style="font-size:15px;">${ n.ntype }</td>
+						<td align="center" width="150" style="font-size:15px; color: black;">${ n.ntype }</td>
 	
 						<td align="left" width="550" style="font-size:15px;">
 							<c:url value="/ndetail.do" var="und">
 								<c:param name="nid" value="${ n.nid }" />
 							</c:url>
-							<a href="${und}">${n.ntitle}</a>
-								<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:20px;"> </c:if>
-								<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
+							<a href="${und}" style="color: black;">${n.ntitle}</a>
+								<c:if test="${ !empty n.n_file_name }"><img src="/hhw/resources/images/file.png" style="width:20px;"> </c:if>
+								<c:if test="${ empty n.n_file_name }"> &nbsp; </c:if></td>
 					
-						<td align="center" width="150" style="font-size:15px;">${n.nwriter}</td>
+						<td align="center" width="150" style="font-size:15px; color: black;">${n.nwriter}</td>
 	
-						<td align="center" width="130" style="font-size:15px;"><fmt:formatDate value="${n.n_date}" pattern="yyyy-MM-dd"/></td>
+						<td align="center" width="130" style="font-size:15px; color: black;"><fmt:formatDate value="${n.n_date}" pattern="yyyy-MM-dd"/></td>
 	
-						<td align="center" width="80" style="font-size:15px;">${ n.ncount }</td>
+						<td align="center" width="80" style="font-size:15px; color: black;">${ n.ncount }</td>
 						
 					</tr>
 					</c:forEach>

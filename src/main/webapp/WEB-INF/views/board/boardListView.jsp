@@ -164,12 +164,12 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번 호</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">말머리</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성자</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">작성날짜</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">조회수</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col" class="title">번 호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">말머리</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">제&nbsp;&nbsp;&nbsp;&nbsp;목</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">작성자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">작성날짜</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">조회수</th>
 				</tr>
 				
 				<tr>
@@ -180,18 +180,18 @@
                 <tr>
                 	<c:forEach items="${ requestScope.list }" var="b" >
 	                <tr>
-						<td align="center" width="80" style="font-size:15px;">${ b.bid }</td>
+						<td align="center" width="80" style="font-size:15px; color: black;">${ b.bid }</td>
 	
-						<td align="center" width="150" style="font-size:15px;">${ b.btype }</td>
+						<td align="center" width="150" style="font-size:15px; color: black;">${ b.btype }</td>
 	
-						<td align="left" width="550" style="font-size:15px;"><c:url var="bdt" value="/bdetail.do">
+						<td align="left" width="550" style="font-size:15px; color: black;"><c:url var="bdt" value="/bdetail.do">
 								<c:param name="page" value="${ currentPage }" />
 								<c:param name="bid" value="${ b.bid }" />
 							</c:url> <a href="${ bdt }" style="color: black;">${ b.btitle }</a>&nbsp;[${ b.b_ref_bid }]
 								<c:if test="${ !empty b.b_original_filename }"><img src="/hhw/resources/images/file.png" style="width:20px;"> </c:if>
 								<c:if test="${ empty b.b_original_filename }"> &nbsp; </c:if></td>
 					
-						<td align="center" width="150" style="font-size:15px;">${ b.bwriter }
+						<td align="center" width="150" style="font-size:15px; color: black;">${ b.bwriter }
 							 <c:if test="${ b.bwriter ne '' and b.bwriter ne null and b.grade lt 0}"> <%-- 불량회원 --%>
 							 <img src="/hhw/resources/images/i_0.png" style="width:20px; float:left;">
 							 </c:if>
@@ -209,9 +209,9 @@
 							 </c:if>
 							 </td>
 	
-						<td align="center" width="130" style="font-size:15px;">${ b.b_create_date }</td>
+						<td align="center" width="130" style="font-size:15px; color: black;">${ b.b_create_date }</td>
 	
-						<td align="center" width="80" style="font-size:15px;">${ b.bcount }</td>
+						<td align="center" width="80" style="font-size:15px; color: black;">${ b.bcount }</td>
 						
 					</tr>
 					</c:forEach>

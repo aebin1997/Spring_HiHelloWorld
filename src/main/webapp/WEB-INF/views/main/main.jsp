@@ -45,7 +45,8 @@
 					}
 				});
 	});
-
+	
+	$(function() {
 	//조회수 많은 인기 게시글출력되게 함
 	$.ajax({
 				url : "${ pageContext.request.contextPath }/btop3.do", /* 절대경로 */
@@ -61,12 +62,12 @@
 					for ( var i in json.list) {
 						values += "<tr><td>"
 								+ json.list[i].bid
-								+ "</td><td><a href='${ pageContext.request.contextPath }/bdetail.do?bid="
+								+ "</td><td>" + json.list[i].btype + "</td><td><a href='${ pageContext.request.contextPath }/bdetail.do?bid="
 								+ json.list[i].bid
 								+ "'>"
 								+ decodeURIComponent(json.list[i].btitle)
 										.replace(/\+/gi, " ") /* 디코딩하면 공백이 +로 되기때문에  " " 공백으로 바꿔준다*/
-								+ "</a></td><td>" + json.list[i].bcount
+								+ "</a></td><td>" + json.list[i].bwriter + "</td><td>" + json.list[i].b_create_date + "</td><td>" + json.list[i].bcount
 								+ "</td></tr>";
 					} //for in
 					$("#top_board").html($("#top_board").html() + values);
@@ -76,6 +77,8 @@
 							+ errorthrown);
 				}
 			});
+	});
+	
 </script>
 
 </head>
@@ -183,12 +186,15 @@
 
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
 			<div
-				style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
+				style="float: left; bord: 1px solid olive; padding: 5px; margin: 5px;">
 				<h4>인기 게시글</h4>
 				<table id="top_board" border="1" cellspacing="0">
 					<tr>
 						<th>번호</th>
+						<th>말머리</th>
+						<th>작성자</th>
 						<th>제목</th>
+						<th>작성일</th>
 						<th>조회수</th>
 					</tr>
 				</table>

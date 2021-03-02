@@ -26,10 +26,10 @@
 			<tr>
 				<th>말머리</th>
 				<td><select type="test" name="ntype">
-					<option value="1">공지사항</option>
-					<option value="2">이벤트</option>
-					<option value="3">긴급</option>
-					<option value="4">필독</option>
+					<option value="공지사항">공지사항</option>
+					<option value="이벤트">이벤트</option>
+					<option value="긴급">긴급</option>
+					<option value="필독">필독</option>
 				</select></td>
 			</tr>
 			<tr>

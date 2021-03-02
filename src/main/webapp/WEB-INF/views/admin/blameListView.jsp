@@ -165,7 +165,7 @@
 
 	
 	<div class="my_info_area" align="center" style="padding-top:30px; padding-bottom:30px ">
-		<table cellspacing="0" class="boardtype2 th_border my_table" width="1200" >
+		<table cellspacing="0" class="boardtype2 th_border my_table" width="1000" >
 			<colgroup>
 				<col width="50">
 				<col width="80">
@@ -176,13 +176,13 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col" class="title">번 호</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">게시글 번호</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고유형</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고자</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">불량회원</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고내용</th>
-					<th style="text-align:center; font-size:15px; font-family:sans-serif;" scope="col">신고접수일</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col" class="title">번 호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">게시글 번호</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">신고유형</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">신고자</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">불량회원</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">신고내용</th>
+					<th style="text-align:center; font-size:15px; font-family:sans-serif; color: black;" scope="col">신고접수일</th>
 				</tr>
 				
 				<tr>
@@ -193,19 +193,19 @@
                 <tr>
             	    <c:forEach items="${ requestScope.list }" var="b" >
 	                <tr>
-						<td align="center" width="80"  style="font-size:15px;">${ b.blame_no }</td>
+						<td align="center" width="80"  style="font-size:15px; color: black;">${ b.blame_no }</td>
 	
-						<td align="center" width="80"  style="font-size:15px;">${ b.blame_bid }</td>
+						<td align="center" width="100"  style="font-size:15px; color: black;">${ b.blame_bid }</td>
 						
-						<td align="center" width="80"  style="font-size:15px;">${ b.blame_type }</td>
+						<td align="center" width="80"  style="font-size:15px; color: black;">${ b.blame_type }</td>
 						
-						<td align="center" width="80"  style="font-size:15px;">${ b.mm_nickname }</td>
+						<td align="center" width="100"  style="font-size:15px; color: black;">${ b.mm_nickname }</td>
 	
-						<td align="center" width="80"  style="font-size:15px;">${ b.target_nickname }</td>
+						<td align="center" width="100"  style="font-size:15px; color: black;">${ b.target_nickname }</td>
 	
-						<td align="center" width="350" style="font-size:15px;">${ b.blame_content }</td>
+						<td align="center" width="350" style="font-size:15px; color: black;">${ b.blame_content }</td>
 						
-						<td align="center" width="80" style="font-size:15px;">${ b.blame_date }</td>
+						<td align="center" width="100" style="font-size:15px; color: black;">${ b.blame_date }</td>
 						
 					</tr>
 					</c:forEach>

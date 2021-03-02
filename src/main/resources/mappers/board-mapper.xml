@@ -34,7 +34,10 @@
 
    <resultMap type="Board" id="resultTop3">
       <id column="bid" property="bid" />
+      <result column="btype" property="btype" />
+      <result column="bwriter" property="bwriter" />
       <result column="btitle" property="btitle" />
+      <result column="b_create_date" property="b_create_date" />
       <result column="bcount" property="bcount" />
    </resultMap>
 
@@ -90,13 +93,16 @@
 	
 
    <!-- 조회수 top3 게시글 리스팅 -->
-   <select id="selectTop3" resultMap="resultTop3">
+   <select id="selectTop3" resultMap="resultBoard">
     <![CDATA[
       SELECT *
         FROM (
       SELECT  ROWNUM RNUM
             , BID
+            , BTYPE
             , BTITLE
+            , BWRITER
+            , B_CREATE_DATE
             , BCOUNT
         FROM (
       SELECT *

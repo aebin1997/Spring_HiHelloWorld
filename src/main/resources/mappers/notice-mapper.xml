@@ -85,11 +85,30 @@
    <insert id="insertNotice" parameterType="Notice">
       insert into notice
       <if test="n_file_name != null">
-      values (seq_nid.nextval, #{ntype}, #{nwriter}, #{ntitle}, #{ncontent}, #{n_file_name}, #{n_rfile_name}, default, default, default, default)
+      values (seq_nid.nextval
+      		, #{ ntype }
+      		, #{ nwriter }
+      		, #{ ntitle }
+      		, #{ ncontent }
+      		, #{ n_file_name }
+      		, #{ n_rfile_name }
+      		, sysdate
+      		, sysdate
+      		, default
+      		, default)
       </if>
       <if test="n_file_name == null">
-      <!-- (nid, ntype, nwriter, ntitle, ncontent, n_date, n_modfiy_date, ncount, nstatus) -->
-      values (seq_nid.nextval, #{ntype}, #{nwriter}, #{ntitle}, #{ncontent}, null, null, default, default, default)
+      values (seq_nid.nextval
+      		, #{ ntype }
+      		, #{ nwriter }
+      		, #{ ntitle }
+      		, #{ ncontent }
+      		, null
+      		, null
+      		, sysdate
+      		, sysdate
+      		, default
+      		, default)
       </if>
    </insert>
    

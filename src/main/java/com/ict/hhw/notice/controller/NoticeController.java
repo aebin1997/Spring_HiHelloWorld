@@ -182,7 +182,7 @@ public class NoticeController {
 			}
 
 			if (noticeService.insertNotice(notice) > 0) {
-				return "redirect:nlist.do";
+				return "redirect:nlist.do?page=1";
 			} else {
 				model.addAttribute("msg", "공지글 등록 실패.");
 				return "common/errorPage";
