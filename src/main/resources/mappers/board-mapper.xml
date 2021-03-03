@@ -110,7 +110,7 @@
        ORDER BY BCOUNT DESC
               ))
        WHERE RNUM >= 1 
-         AND RNUM <= 3
+         AND RNUM <= 5
             ]]>
    </select>
 

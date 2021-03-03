@@ -185,6 +185,8 @@ public class QaController {
 			job.put("qa_id", qa.getQa_id());
 			job.put("qa_title", URLEncoder.encode(qa.getQa_title(), "utf-8"));
 			job.put("qa_readcount", qa.getQa_readcount());
+			job.put("qa_writer", qa.getQa_writer());
+			job.put("qa_create_date", qa.getQa_create_date().toString());
 			
 			jarr.add(job);
 		}

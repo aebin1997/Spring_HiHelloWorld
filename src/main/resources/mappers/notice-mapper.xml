@@ -18,8 +18,10 @@
    
    <resultMap id="noticeTop3ResultSet" type="Notice">
       <id property="nid" column="nid"/>
+      <result property="ntype" column="ntype"/>
       <result property="ntitle" column="ntitle"/>
       <result property="n_date" column="n_date"/>
+      <result property="ncount" column="ncount"/>
    </resultMap>
    
    <select id="selectNewNoticeList" parameterType="com.ict.hhw.notice.model.vo.NoticePage" resultMap="noticeResultSet">
@@ -75,10 +77,15 @@
    <select id="selectNewTop3" resultMap="noticeTop3ResultSet">
    		<![CDATA[
    		select *
-   		from (select rownum rnum, nid, ntitle, n_Date
+   		from (select rownum rnum
+   			, nid
+   			, ntype
+   			, ntitle
+   			, n_Date
+   			, ncount
    			from (select * from notice 
    				  order by nid desc))
-   		where rnum >= 1 and rnum <= 3
+   		where rnum >= 1 and rnum <= 5
    		]]>
    </select>
    

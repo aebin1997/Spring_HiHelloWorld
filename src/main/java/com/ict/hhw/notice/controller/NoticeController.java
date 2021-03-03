@@ -69,8 +69,11 @@ public class NoticeController {
 				JSONObject job = new JSONObject();
 
 				job.put("nid", notice.getNid());
+				job.put("ntype", notice.getNtype());
 				job.put("ntitle", URLEncoder.encode(notice.getNtitle(), "utf-8"));
 				job.put("n_create_date", notice.getN_date().toString()); // 날짜형은 반! 드! 시! String으로 변환해줘야함
+				job.put("ncount", notice.getNcount());
+
 
 				// job를 jarr에 저장
 				jarr.add(job);

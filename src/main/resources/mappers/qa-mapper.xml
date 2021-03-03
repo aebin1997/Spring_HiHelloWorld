@@ -19,17 +19,19 @@
 <resultMap type="Qa" id="qresultTop3">
 	<id column="qa_id" property="qa_id"/>
 	<result column="qa_title" property="qa_title"/>
+	<result column="qa_writer" property="qa_writer"/>
+	<result column="qa_create_date" property="qa_create_date"/>
 	<result column="qa_readcount" property="qa_readcount"/>
 </resultMap>
 
 <select id="selectTop3" resultMap="qresultTop3">
 	<![CDATA[
 	select *
-	from(select rownum rnum, qa_id, qa_title, qa_readcount
+	from(select rownum rnum, qa_id, qa_title, qa_writer, qa_create_date, qa_readcount
         	from(select * from qa 
         	where qa_status = 'Y'
         	order by QA_READCOUNT desc))
-	where rnum >= 1 and rnum <=3
+	where rnum >= 1 and rnum <=5
 	]]>
 </select>
 

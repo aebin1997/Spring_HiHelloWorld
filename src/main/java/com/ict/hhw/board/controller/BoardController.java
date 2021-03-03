@@ -180,7 +180,7 @@ public class BoardController {
             job.put("btype", board.getBtype());
 			job.put("btitle", URLEncoder.encode(board.getBtitle(), "utf-8")); // 인코딩 해서 제이슨 객체 안에 담는다
 			job.put("bwriter", board.getBwriter());
-			job.put("b_create_date", board.getB_create_date());
+			job.put("b_create_date", board.getB_create_date().toString());
 			job.put("bcount", board.getBcount());
 			// 날짜형식의 데이터를 json객체에 담을 때 주의사항, 뷰쪽에서 꺼낼 때 에러가나서, string형으로 바꿔서 json에 담아줘야한다.
 
