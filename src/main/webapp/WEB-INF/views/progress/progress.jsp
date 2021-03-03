@@ -22,7 +22,6 @@
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
 <script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
-<script type="text/javascript" src="/hhw/resources/js/socketConnect.js"></script>
 	
 <script type="text/javascript">
 	$(function() {
@@ -757,9 +756,7 @@
 				객체 생성시에 서버와 자동 연결됨.
 				사용되는 프로토콜은 ws:// 임.
 				*/	
-				webSocket = new WebSocket(
-						"ws://localhost:8888/" +
-						"<${ request.getContextPath() }>");
+				webSocket = new WebSocket("ws://localhost:8888/hhw/");
 			
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){

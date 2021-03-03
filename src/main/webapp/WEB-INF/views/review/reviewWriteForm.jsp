@@ -4,6 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="/hhw/resources/writerform/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
+
+<script async
+	src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag('js', new Date());
+	gtag('config', 'UA-119386393-1');
+</script>
+
 <style>
 table.table2 {
 	border-collapse: separate;
@@ -32,23 +49,23 @@ table.table2 td {
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
-	<section style="padding: 70px 0 60px 0;">
+	<section style="padding: 70px 0 60px 0;  margin-left: 400px;">
 		
 		<br><br>
 		<form action="revinsert.do" method="post" >
 		<input type=hidden name="ref_proid" value=${ qplist.pro_id }>
 		<input type=hidden name="ref_qid" value=${ qplist.pro_qid }>
-			<table style="padding-top: 50px" align=center width=700 border=0 cellpadding=2>
+			<table style="padding-top: 50px; float:center; text-align: center;" align=center width=1100 border="0" cellpadding="2">
 				<tr>
 					<td height=20 align=center bgcolor=#ccc><font color=white>
 					Approve this order</font></td>
 				</tr>
 				<tr>
 					<td bgcolor=white>
-						<table class="table2">
+						<table class="table2" align=center width=1100 border="0" cellpadding="2">
 							<tr>	
-								<td width="200px">질문 제목</td>
-								<td width="500px"><input type=text value=${ qplist.qa_title } readonly></td>
+								<td width="150px">질문 제목</td>
+								<td width="950px"><input type=text value=${ qplist.qa_title } readonly></td>
 								
 							</tr>
 							
@@ -66,7 +83,7 @@ table.table2 td {
 
 							<tr>
 								<td>Quality of the answer</td>
-								<td><input type=range name=range size=500></td>
+								<td><input type=range name=range size=100 style="width:447px;"></td>
 							</tr>
 
 							<tr>
@@ -79,19 +96,25 @@ table.table2 td {
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td><textarea name=rcontent cols=85 rows=15></textarea></td>
+								<td><textarea name=rcontent class="textarea_editor form-control border-radius-0" rows="15" cols="50"></textarea></td>
 							</tr>
 
 						</table>
 
 						<center>
-							<input type="submit" value="Approve & Release final payment">
+							<input type="submit" value=" Approve & Release final payment ">
 						</center>
 					</td>
 				</tr>
 			</table>
 		</form>
 
+
+<script src="/hhw/resources/writerform/js/core.js"></script>
+<script src="/hhw/resources/writerform/js/js.js"></script>
+<script src="/hhw/resources/writerform/js/layout-settings.js"></script>
+<script src="/hhw/resources/writerform/js/process.js"></script>
+<script src="/hhw/resources/writerform/js/script.min.js"></script>
 
 		<!-- 푸터 -->
 	</section>

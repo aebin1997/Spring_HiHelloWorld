@@ -33,12 +33,12 @@ public class ProgressController {
 	}
 	
 	// 실시간 채팅 기능
-//	@RequestMapping("/chatting.do")
-//	public String chatting(Model model, HttpServletRequest req) {
-//		// 접속한 ip주소를 확인하여 차후 사용자 비교에 사용하기 
-//		model.addAttribute("host", req.getRemoteAddr());
-//		return "progress/chatting";
-//	}
+	@RequestMapping("/chatting.do")
+	public String chatting(Model model, HttpServletRequest req) {
+		// 접속한 ip주소를 확인하여 차후 사용자 비교에 사용하기 
+		model.addAttribute("host", req.getRemoteAddr());
+		return "progress/progress";
+	}
 	
 
 	@RequestMapping("progress.move")
