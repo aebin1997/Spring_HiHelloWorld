@@ -192,24 +192,17 @@ public class NoticeController {
 		// 첨부파일 다운로드 요청 처리용
 		// return Type : 파일명 스트립 타입 , ModelAndView, void // 저장폴더에 대한 지정도 있어야 된다}
 		@RequestMapping("nfdown.do")
-		public ModelAndView fileDownMethod(HttpServletRequest request, @RequestParam("file_path") String fileName) {
-			String savePath = request.getSession().getServletContext().getRealPath("resources/notice_file");
-			File downFile = new File(savePath + "\\" + fileName);
+		public ModelAndView fileDownMethod(@RequestParam("ofile") String originalFilename,
+				@RequestParam("rfile") String renameFilename, HttpServletRequest request, Model model) {
 
-			/*
-			 * ModelAndView(String viewName, String modelName, Object modelObject) <- 뷰이름,
-			 * model , model객체 : 생성자, 매개변수 Model 클래스 객체 = request + response viewName == 내보낼
-			 * view파일명 modelName == 이름, modelObject == 객체 request.setAttribute("이름", 객체) 와
-			 * 같은 의미임
-			 */
+			String savePath = request.getSession().getServletContext().getRealPath("resources/notice_files");
+			File renameFile = new File(savePath + "\\" + renameFilename);
 
-			/*
-			 * 스프링에서는 파일다운하려면, 스프링이 제공하는 View 클래스를 상속받은 파일다운처리용 뷰클래스를 별도로 작성하고,
-			 * DispatcherServlet(==Servlet-context.xml 총괄배치 구도 )에 파일다운로드용 뷰클래스를 실행시키는 뷰리졸버를
-			 * 등록해야 함
-			 */
-			return new ModelAndView("filedown", "downFile", downFile);
+			model.addAttribute("renameFile", renameFile);
+			model.addAttribute("originalFilename", originalFilename);
+			return new ModelAndView("filedown2", "downFile", model);
 		}
+		
 
 		// 공지글 삭제 요청 처리용
 		// 삭제하면 목록보기로 가야되서 return type : string
@@ -223,7 +216,7 @@ public class NoticeController {
 					new File(request.getSession().getServletContext().getRealPath("resources/notice_files") + "\\"
 							+ fileName).delete();
 				}
-				return "redirect:nlist.do";
+				return "redirect:nlist.do?page=1";
 			} else {
 				model.addAttribute("msg", "번 공지글 삭제 실패");
 				return "common/errorPage";
@@ -262,7 +255,7 @@ public class NoticeController {
 			}
 
 			if (noticeService.updateNotice(notice) > 0) {
-				return "redirect:nlist.do";
+				return "redirect:nlist.do?page=1";
 			} else {
 				model.addAttribute("msg", notice.getNid() + "번 공지글 수정 실패.");
 				return "common/errorPage";

@@ -11,51 +11,122 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 열람 페이지</title>
+
+
+<style>
+table.table2 {
+	border-collapse: separate;
+	border-spacing: 1px;
+	text-align: left;
+	line-height: 1.5;
+	border-top: 1px solid #ccc;
+	margin: 20px 10px;
+}
+
+table.table2 tr {
+	width: 50px;
+	padding: 10px;
+	font-weight: bold;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+
+table.table2 td {
+	padding: 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #ccc;
+}
+</style>
+
 </head>
 <body>
 	
 	<jsp:include page="../common/header.jsp" />
 	
-	<div style="text-align: center; padding-top: 90px;">
+	
+	<div style="text-align: center; padding-top: 120px;">
 		<div>
-			<h2 style="margin: 20px 0 10px 0;">${notice.nid}번 공지상세보기</h2>
+			<h4 style="margin: 20px 0 10px 0;">${ notice.ntitle }</h4>
 		</div>
 	</div>
 	
 	<br>
-	<table align="center" cellpadding="10" cellspacing="0" border="1" width="500">
+	
+	<table align="center" cellpadding="2" cellspacing="0" width="700" style="margin-bottom:30px">
 		<tr>
-			<th>제 목</th>
-			<td>${ notice.ntitle }</td>
+			<td bgcolor=white>
+				<table class="table2">
+					<tr>
+						<td width="200px">작성자</td>
+						<td width="500px">${ notice.nwriter } 님</td>
+					</tr>
+					<tr>
+						<td width="200px">첨부파일</td>
+						<td width="500px">
+							<c:if test="${ empty notice.n_file_name }">첨부파일 없음</c:if>
+							<c:if test="${ !empty notice.n_file_name }">
+								<c:url var="nfd" value="/nfdown.do">
+									<c:param name="ofile" value="${ notice.n_file_name }" />
+									<c:param name="rfile" value="${ notice.n_rfile_name }" />
+								</c:url>
+							<a href="${ nfd }">${ notice.n_file_name }</a>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td width="200px">내 용</td>
+						<td width="500px" height="200">${ notice.ncontent }</td>
+					</tr>
+				</table>
+			</td>
 		</tr>
-		<tr>
-			<th>작성자</th>
-			<td>${ notice.nwriter }</td>
-		</tr>
-		<tr>
-			<th>날 짜</th>
-			<td><fmt:formatDate value="${notice.n_date}"
-					pattern="yyyy-MM-dd" /></td>
-		</tr>
-		<tr>
-			<th>첨부파일</th>
-			<td><c:if test="${ !empty notice.n_file_name }">
-					<%-- 첨부파일이 있다면 다운로드 설정함 --%>
-					<c:url var="unf" value="/nfdown.do">
-						<c:param name="file_path" value="${notice.n_file_name}" />
+
+		<tfoot>
+          <td colspan="4" style="text-align: right; margin-bottom:30px">
+          	<%-- 관리자가 접속했을 때 --%>
+			<c:if test="${ !empty sessionScope.loginUser and loginUser.nickname eq notice.nwriter and loginUser.user_lv eq 'B' }">
+				<c:url var="nuv" value="/upmove.do">
+					<c:param name="nid" value="${ notice.nid }" />
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+			<button type="button" onclick="javascript:location.href='${ nuv }'" style='float:center'>수정</button>
+							 
+				<c:url var="ndl" value="/ndel.do">
+					<c:param name="nid" value="${ notice.nid }" />
+				</c:url>
+			<button type="button" onclick="javascript:location.href='${ ndl }'" style='float:center'>글삭제</button>
+			
+				<c:url var="nls" value="/nlist.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+			<button type="button" onclick="javascript:location.href='${ nls }'" style='float:center'>목록</button>
+			
+			</c:if> 
+			
+			<%-- 로그인한 유저라면 --%>
+			<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'A' }">
+							
+				<c:url var="nls" value="/nlist.do">
+						<c:param name="page" value="${ currentPage }" />
 					</c:url>
-					<a href="${unf}">${notice.n_file_name}</a>
-				</c:if> <c:if test="${empty notice.n_file_name }">&nbsp;</c:if></td>
-		</tr>
-		<tr>
-			<th>내 용</th>
-			<td>${ notice.ncontent }</td>
-		</tr>
-		<tr>
-			<th colspan="2"><button onclick="javascript:history.go(-1);">목록</button></th>
-		</tr>
+				<button type="button" onclick="javascript:location.href='${ nls }'" style='float:right'>목록</button>
+			</c:if> 
+			
+			
+			<%-- 비로그인일때 --%> 
+			<c:if test="${ empty sessionScope.loginUser }">  
+				<c:url var="nls" value="/nlist.do">
+					<c:param name="page" value="${ currentPage }" />
+				</c:url>
+			<button type="button" onclick="javascript:location.href= '${ nls }';">목록</button>
+			</c:if>
+				
+			</td>
+		</tfoot>
+		
 	</table>
 
 	<jsp:include page="../common/footer.jsp" />
+	
 </body>
 </html>
