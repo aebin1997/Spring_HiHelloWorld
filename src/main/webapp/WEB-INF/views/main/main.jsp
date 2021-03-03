@@ -283,14 +283,15 @@ table.table2 td {
 	<jsp:include page="../common/header.jsp" />
 
 	<!-- START SLIDER SECTION -->
-	<section id="home" class="slider-section">
-		<div class="home-slides owl-carousel owl-theme ">
-			<div class="home-single-slide" data-background="/hhw/resources/images/test1.jpg">
+	<section class="slider-section">
+		<div class="home-slides-2 owl-carousel owl-theme ">
+			<div class="home-single-slide"
+				data-background="/hhw/resources/images/test1.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="auto-container">
+					<div class="container">
 						<div class="row">
-							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
+							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -306,12 +307,13 @@ table.table2 td {
 				</div>
 			</div>
 			<!-- end single slider -->
-			<div class="home-single-slide" data-background="/hhw/resources/images/test2.jpg">
+			<div class="home-single-slide"
+				data-background="/hhw/resources/images/test2.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="auto-container">
+					<div class="container">
 						<div class="row">
-							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
+							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -327,12 +329,13 @@ table.table2 td {
 				</div>
 			</div>
 			<!-- end single slider -->
-			<div class="home-single-slide" data-background="/hhw/resources/images/test3.jpg">
+			<div class="home-single-slide"
+				data-background="/hhw/resources/images/test3.jpg">
 				<div class="home-slide-overlay"></div>
 				<div class="home-single-slide-inner">
-					<div class="auto-container">
+					<div class="container">
 						<div class="row">
-							<div class="col-lg-6 col-md-8 col-sm-8 col-12 mx-auto text-center">
+							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 								<div class="home-single-slide-dec">
 									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
@@ -350,74 +353,70 @@ table.table2 td {
 			<!-- end single slider -->
 		</div>
 	</section>
-	<!-- END SLIDER SECTION  -->
 
+	
+	<hr style="clear: both;">
+	<!-- float되있는거 해제 -->
+	<section style="margin-left: 600px; margin-top: 50px; float: center;">
+		
+		<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
+	      <div style="width: 800px; height: 280px; float: left; border: 1px solid navy; disply: block;">
+	         <h3 style="text-align: left; margin-bottom:15px; margin-top:20px;">새로운 공지글</h3>
+	         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="750" style="text-align: center; color:black; font-size:15px;">
+	            <tr >
+	            	<th style="text-align: center;" width="50px">번호</th>
+	            	<th style="text-align: center;" width="80px">말머리</th>
+	            	<th style="text-align: center;" width="350px">제           목</th>
+	            	<th style="text-align: center;" width="80px">날짜</th>	
+	            	<th style="text-align: center;" width="80px">조회수</th>	
+	            </tr>
+	         </table>
+	      </div>
+			
+		<hr style="clear: both;">	
+		<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
+		<div style="float: left; border: 1px solid navy; padding: 10px; margin: 10px;">
+			<h4>자주 묻는 코딩</h4>
+			<table id="top_qa" border="1" cellspacing="0">
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+					<th>조회수</th>
+				</tr>
+			</table>
+		</div>
+	
+	    <hr style="clear: both;">
+		<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
+		<div style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
+			<h4>인기 게시글</h4>
+			<table id="top_board" border="1" cellspacing="0">
+				<tr>
+					<th>번호</th>
+					<th>말머리</th>
+					<th>작성자</th>
+					<th>제목</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</table>
+		</div>
+	</section>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+		
 
 		<hr style="clear: both;">
 		<!-- float되있는거 해제 -->
-		
-		<hr style="clear: both;">
-		<!-- float되있는거 해제 -->
-		<section style="margin-left: 600px; margin-top: 50px; float: center;">
-			<article>
-			<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
-		      <div style="width: 800px; height: 280px; float: left; border: 1px solid navy; disply: block;">
-		         <h3 style="text-align: left; margin-bottom:15px; margin-top:20px;">새로운 공지글</h3>
-		         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="750" style="text-align: center; color:black; font-size:15px;">
-		            <tr >
-		            	<th style="text-align: center;" width="50px">번호</th>
-		            	<th style="text-align: center;" width="80px">말머리</th>
-		            	<th style="text-align: center;" width="350px">제           목</th>
-		            	<th style="text-align: center;" width="80px">날짜</th>	
-		            	<th style="text-align: center;" width="80px">조회수</th>	
-		            </tr>
-		         </table>
-		      </div>
-				
-		
-			<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
-			<div style="float: left; border: 1px solid navy; padding: 10px; margin: 10px;">
-				<h4>자주 묻는 코딩</h4>
-				<table id="top_qa" border="1" cellspacing="0">
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-				</table>
-			</div>
-			</article>
-		
-			<article>
-			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
-			<div style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
-				<h4>인기 게시글</h4>
-				<table id="top_board" border="1" cellspacing="0">
-					<tr>
-						<th>번호</th>
-						<th>말머리</th>
-						<th>작성자</th>
-						<th>제목</th>
-						<th>작성일</th>
-						<th>조회수</th>
-					</tr>
-				</table>
-			</div>
-			</article>
-		</section>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-		
-
 
 
 

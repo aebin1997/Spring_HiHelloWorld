@@ -9,6 +9,12 @@
 <title>게시글 수정</title>
 
 
+<link rel="stylesheet" href="/hhw/resources/writerform/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
+
+
 <style>
 table.table2 {
 	border-collapse: separate;
@@ -88,7 +94,10 @@ table.table2 td {
 	
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="bcontent" rows="5" cols="50">${ board.bcontent }</textarea></td>
+								<td>
+								<%-- <textarea name="bcontent" rows="5" cols="50">${ board.bcontent }</textarea> --%>
+								<textarea class="textarea_editor form-control border-radius-0" name="bcontent" rows="10" cols="100">${ board.bcontent }</textarea>
+								</td>
 							</tr>
 							
 							<tr>
@@ -107,6 +116,15 @@ table.table2 td {
 			</table>
 		</form>
 	</section>
+	
+	
+	
+<script src="/hhw/resources/writerform/js/core.js"></script>
+<script src="/hhw/resources/writerform/js/js.js"></script>
+<script src="/hhw/resources/writerform/js/layout-settings.js"></script>
+<script src="/hhw/resources/writerform/js/process.js"></script>
+<script src="/hhw/resources/writerform/js/script.min.js"></script>
+ 
 	
 	<jsp:include page="../common/footer.jsp" />
 	

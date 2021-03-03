@@ -49,7 +49,7 @@ table.table2 td {
 	<c:import url="../common/header.jsp" />
 	<hr>
 	
- 	<section style="padding: 70px 0 60px 0; margin-left: 700px;">
+ 	<section style="padding: 70px 0 60px 0; margin-left: 200px;">
 		
 		<br>
 		<br>

@@ -30,6 +30,8 @@ font-family: 'Nanum Gothic', sans-serif;
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|PT+Serif:400,400i,700,700i" />
 <!-- icofont icon -->
 <link rel="stylesheet" href="/hhw/resources/css/icofont.css" />
+<!-- icofont icon -->
+<link rel="stylesheet" href="/hhw/resources/css/icofont.min.css" />
 <!-- font awesome icon -->
 <link rel="stylesheet" href="/hhw/resources/css/fontawesome-all.min.css" />
 <!-- animate CSS -->
