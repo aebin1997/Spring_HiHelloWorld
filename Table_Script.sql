@@ -80,6 +80,9 @@ INSERT INTO MEMBER VALUES ('user03', 'pass04', '이강선', '이강선',  'user0
 INSERT INTO MEMBER VALUES ('user05', 'pass05', '최은영', '최은영',  'user04@ict.or.kr', 'w', '01099996666', '경기도 부천', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
 INSERT INTO MEMBER VALUES ('user06', 'pass06', '황경필', '황경필',  'user05@ict.or.kr', 'm', '01011111234', '경기도 안산', '21/01/24', DEFAULT, DEFAULT, null, null, null, DEFAULT, DEFAULT);
 
+-- 비밀번호 암호화 처리로 회원가입 새로 해야 로그인 가능하다
+-- 관리자는 oracle에서 update member set user_lv = 'B' where id = '관리자아이디'; 로 유저레벨을 변경해준다.
+                         
 ------------------------------------------------------------------------------------------------------------------- N_TYPE 생성
 CREATE TABLE N_TYPE(
 TYPE_NO      CHAR(2),
