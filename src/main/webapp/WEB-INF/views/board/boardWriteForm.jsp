@@ -8,14 +8,27 @@
 <title>게시글 작성</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  
-  <!-- 서머노트를 위해 추가해야할 부분 -->
-  <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="/hhw/resources/writerform/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
+
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-119386393-1');
+	</script>
+
+
+
 
 <style>
 table.table2 {
@@ -47,11 +60,12 @@ table.table2 td {
 	<c:import url="../common/header.jsp" />
 	<hr>
 	
- 	<section style="padding: 70px 0 60px 0;">
+ 	<section style="padding: 70px 0 60px 0; margin-left: 700px;">
 		
-		<br><br>
+		<br>
+		<br>
 		<form action="binsert.do" method="post" enctype="multipart/form-data">
-			<table style="padding-top: 50px" align="center" width="700" border="0" cellpadding="2">
+			<table style="padding-top: 50px; float:center; text-align: center;" align="center" width="1100" border="0" cellpadding="2">
 				<tr>
 					<td height="30" align="center" bgcolor="#ccc"><font color="white">게시글 등록</font></td>
 				</tr>
@@ -60,8 +74,8 @@ table.table2 td {
 						<table class="table2">
 						
 							<tr>	
-								<td width="200px">말머리</td>
-								<td width="500px"><select type="test" name="btype">
+								<td width="150px">말머리</td>
+								<td width="900px"><select type="test" name="btype">
 	    											  <option value="질문이요">질문이요</option>
 													  <option value="일상글이요">일상글이요</option>
 													  <option value="칭찬글이요">칭찬글이요</option>
@@ -87,7 +101,10 @@ table.table2 td {
 	
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="bcontent" rows="5" cols="50"></textarea></td>
+								<td>
+								<!-- <textarea name="bcontent" rows="5" cols="50"></textarea> -->
+								<textarea class="textarea_editor form-control border-radius-0" name="bcontent" rows="5" cols="50"></textarea>
+								</td>
 							</tr>
 							
 							<tr>
@@ -104,8 +121,8 @@ table.table2 td {
 		</form>
 	</section>
  
- 
- <div class="main-container">
+ <!-- 
+ <div class="main-container" style="float: center;">
 		<div class="pd-ltr-20 xs-pd-20-10">
 			<div class="min-height-200px">
 				<div class="page-header">
@@ -147,8 +164,18 @@ table.table2 td {
 			</div>
 		</div>
 	</div>
+  -->
+ 
+ 
+<script src="/hhw/resources/writerform/js/core.js"></script>
+<script src="/hhw/resources/writerform/js/js.js"></script>
+<script src="/hhw/resources/writerform/js/layout-settings.js"></script>
+<script src="/hhw/resources/writerform/js/process.js"></script>
+<script src="/hhw/resources/writerform/js/script.min.js"></script>
  
 
 	<jsp:include page="../common/footer.jsp" />
+	
+	
 </body>
 </html>
