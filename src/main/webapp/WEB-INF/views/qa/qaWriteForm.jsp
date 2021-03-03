@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 
+<link rel="stylesheet" href="/hhw/resources/writerform/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
+
+
 <style>
 table.table2 {
 	border-collapse: separate;
@@ -35,12 +41,12 @@ table.table2 td {
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../common/header.jsp" />
-	<section style="padding: 70px 0 60px 0;">
+	<section style="padding: 70px 0 60px 0; margin-left: 700px;">
 		
 		<br><br>
 		<%--form에서 입력값들과 파일을 같이 전송하려면, 반드시 enctype="multipart/form-data"속성 추가해야 함 --%>
 		<form action="qainsert.do" method="post" enctype="multipart/form-data">
-			<table style="padding-top: 50px" align=center width=700 border=0 cellpadding=2>
+			<table style="padding-top: 50px" align=center width=1100 border=0 cellpadding=2>
 				<tr>
 					<td height=20 align=center bgcolor=#ccc><font color=white>
 					새 의뢰 등록 페이지</font></td>
@@ -50,7 +56,7 @@ table.table2 td {
 						<table class="table2">
 							<tr>
 								<td width="150px">제 목</td>
-								<td width="550px">
+								<td width="960px">
 								<input type="text" name="qa_title"></td>
 							</tr>
 							<tr>
@@ -68,7 +74,9 @@ table.table2 td {
 							</tr>
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="qa_content" rows="15" cols="70"></textarea></td>
+								<td><!-- <textarea name="qa_content" rows="15" cols="70"></textarea> -->
+								<textarea class="textarea_editor form-control border-radius-0" name="qa_content" rows="10" cols="100"></textarea>
+								</td>
 							</tr>
 						</table>
 					</td>
@@ -84,6 +92,16 @@ table.table2 td {
 
 		<!-- 푸터 -->
 	</section>
+	
+	
+ 
+<script src="/hhw/resources/writerform/js/core.js"></script>
+<script src="/hhw/resources/writerform/js/js.js"></script>
+<script src="/hhw/resources/writerform/js/layout-settings.js"></script>
+<script src="/hhw/resources/writerform/js/process.js"></script>
+<script src="/hhw/resources/writerform/js/script.min.js"></script>
+ 
+	
 	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>

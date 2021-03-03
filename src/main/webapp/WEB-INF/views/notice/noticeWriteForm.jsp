@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>공지글 작성</title>
 
+<link rel="stylesheet" href="/hhw/resources/writerform/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -44,11 +48,11 @@ table.table2 td {
 	<jsp:include page="../common/header.jsp" />
 	<hr>
 	
-	<section style="padding: 70px 0 60px 0;">
+	<section style="padding: 70px 0 60px 0; margin-left: 700px;">
 		
 		<br><br>
 		<form action="ninsert.do" method="post" enctype="multipart/form-data">
-			<table style="padding-top: 50px" align="center" width="700" border="0" cellpadding="2">
+			<table style="padding-top: 50px" align="center" width="1100" border="0" cellpadding="2">
 				<tr>
 					<td height="30" align="center" bgcolor="#ccc"><font color="white">공지사항 등록</font></td>
 				</tr>
@@ -56,8 +60,8 @@ table.table2 td {
 					<td bgcolor=white>
 						<table class="table2">
 							<tr>
-								<td width="200px">말머리</td>
-								<td width="500px"><select type="test" name="ntype">
+								<td width="150px">말머리</td>
+								<td width="960px"><select type="test" name="ntype">
 	    											  <option value="공지사항">공지사항</option>
 													  <option value="이벤트">이벤트</option>
 													  <option value="긴급">긴급</option>
@@ -83,7 +87,9 @@ table.table2 td {
 	
 							<tr>
 								<td>내 용</td>
-								<td><textarea name="ncontent" rows="5" cols="50"></textarea></td>
+								<td><!-- <textarea name="ncontent" rows="5" cols="50"></textarea> -->
+								<textarea class="textarea_editor form-control border-radius-0" name="ncontent" rows="10" cols="100"></textarea>
+								</td>
 							</tr>
 							
 							<tr>
@@ -100,6 +106,15 @@ table.table2 td {
 		</form>
 	</section>
 
+
+
+ 
+<script src="/hhw/resources/writerform/js/core.js"></script>
+<script src="/hhw/resources/writerform/js/js.js"></script>
+<script src="/hhw/resources/writerform/js/layout-settings.js"></script>
+<script src="/hhw/resources/writerform/js/process.js"></script>
+<script src="/hhw/resources/writerform/js/script.min.js"></script>
+ 
 
 	<jsp:include page="../common/footer.jsp" />
 	

@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="kr">
 <head>
 <meta charset="UTF-8">
 <title>게시글 작성</title>
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,18 +17,6 @@
 <link rel="stylesheet" href="/hhw/resources/writerform/css/css2.css" />
 <link rel="stylesheet" href="/hhw/resources/writerform/css/icon-font.min.css" />
 <link rel="stylesheet" href="/hhw/resources/writerform/css/style.css" />
-
-
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-119386393-1');
-	</script>
-
-
 
 
 <style>
@@ -75,7 +64,7 @@ table.table2 td {
 						
 							<tr>	
 								<td width="150px">말머리</td>
-								<td width="900px"><select type="test" name="btype">
+								<td width="960px"><select type="test" name="btype">
 	    											  <option value="질문이요">질문이요</option>
 													  <option value="일상글이요">일상글이요</option>
 													  <option value="칭찬글이요">칭찬글이요</option>
@@ -103,7 +92,7 @@ table.table2 td {
 								<td>내 용</td>
 								<td>
 								<!-- <textarea name="bcontent" rows="5" cols="50"></textarea> -->
-								<textarea class="textarea_editor form-control border-radius-0" name="bcontent" rows="5" cols="50"></textarea>
+								<textarea class="textarea_editor form-control border-radius-0" name="bcontent" rows="10" cols="100"></textarea>
 								</td>
 							</tr>
 							
@@ -120,52 +109,6 @@ table.table2 td {
 			</table>
 		</form>
 	</section>
- 
- <!-- 
- <div class="main-container" style="float: center;">
-		<div class="pd-ltr-20 xs-pd-20-10">
-			<div class="min-height-200px">
-				<div class="page-header">
-					<div class="row">
-						<div class="col-md-6 col-sm-12">
-							<div class="title">
-								<h4>Form</h4>
-							</div>
-							<nav aria-label="breadcrumb" role="navigation">
-								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Form</li>
-								</ol>
-							</nav>
-						</div>
-						<div class="col-md-6 col-sm-12 text-right">
-							<div class="dropdown">
-								<a class="btn btn-primary dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-									January 2018
-								</a>
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Export List</a>
-									<a class="dropdown-item" href="#">Policies</a>
-									<a class="dropdown-item" href="#">View Assets</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="html-editor pd-20 card-box mb-30">
-					<h4 class="h4 text-blue">bootstrap wysihtml5</h4>
-					<p>Simple, beautiful wysiwyg editors</p>
-					<textarea class="textarea_editor form-control border-radius-0" placeholder="Enter text ..."></textarea>
-				</div>
-			</div>
-			<div class="footer-wrap pd-20 mb-20 card-box">
-				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
-			</div>
-		</div>
-	</div>
-  -->
- 
  
 <script src="/hhw/resources/writerform/js/core.js"></script>
 <script src="/hhw/resources/writerform/js/js.js"></script>

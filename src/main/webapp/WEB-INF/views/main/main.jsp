@@ -492,6 +492,8 @@ table.table2 td {
 		</div>
 	</section>
 
+
+
 		<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
