@@ -21,8 +21,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="Author" content="kimwoolina">
 <link rel="stylesheet" href="/hhw/resources/css/default.css">
-<script type="text/javascript"
-	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/hhw/resources/js/socketConnect.js"></script>
 	
 <script type="text/javascript">
 	$(function() {
@@ -66,7 +66,7 @@
 					} else {
 						var val = parseInt(data);
 						alert("진행도를 성공적으로 변경하였습니다.");
-						$("#process").html("<progress id='process' value=" + val + " max='100' "
+						$("#process").html("<progress id='process' value=\"" + val + "\" max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
 
@@ -96,7 +96,8 @@
 					} else {
 						var val = parseInt(data);
 						alert("진행도를 성공적으로 변경하였습니다.");
-						$("#process").html("<progress id='process' value=" + val + " max='100' "
+						//$('#process').val(val);
+						$("#progressBar").html("<progress id='process' value=\"" + val + "\" max='100' "
 							+ "style='width: 730px;'></progress>");
 					}
 
@@ -152,6 +153,8 @@
 
 
 <style type="text/css">
+	#process { transition: width 0.25s ease-in-out; }
+
 	#messageWindow {
 		background: LightSkyBlue;
 		height: 300px;
@@ -756,7 +759,7 @@
 				*/	
 				webSocket = new WebSocket(
 						"ws://localhost:8888/" +
-						"<${ request.getContextPath() }");
+						"<${ request.getContextPath() }>");
 			
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){

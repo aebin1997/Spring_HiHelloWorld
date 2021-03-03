@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,15 @@ public class ProgressController {
 	public String contact() {
 		return "contact/contact";
 	}
+	
+	// 실시간 채팅 기능
+//	@RequestMapping("/chatting.do")
+//	public String chatting(Model model, HttpServletRequest req) {
+//		// 접속한 ip주소를 확인하여 차후 사용자 비교에 사용하기 
+//		model.addAttribute("host", req.getRemoteAddr());
+//		return "progress/chatting";
+//	}
+	
 
 	@RequestMapping("progress.move")
 	public String pboardListMethod(HttpSession session, Model model) {

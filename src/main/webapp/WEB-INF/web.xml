@@ -89,5 +89,13 @@
 		<async-supported>true</async-supported>
 	</filter>
 	
+	<!-- 기본 에러 페이지는 우리가 원치않는 정보도 노출할 수 있기 떄문에,
+		공용 에러페이지를 등록하여 서비스 에러 시에 수행할 내용도 핸들링하자! -->
+	<!-- 공용 에러 페이지 등록하기!! -->
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/WEB-INF/views/common/errorPage.jsp</location>
+	</error-page>
+	
 
 </web-app>
