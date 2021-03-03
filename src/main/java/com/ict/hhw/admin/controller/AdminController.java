@@ -14,10 +14,6 @@ public class AdminController {
 		return "admin/adminmain";
 	}
 
-	// 신고회원리스트 페이지로 이동
-		@RequestMapping("blamelist.do")
-		public String blame() {
-			return "admin/adminmain";
-		}
+	
 
 }

@@ -55,7 +55,7 @@
           FROM  (
         SELECT * 
           FROM  Blame
-          ORDER BY blame_bid DESC))
+          ORDER BY blame_no DESC))
           WHERE RNUM >= #{ startRow }
           AND RNUM <= #{ endRow }
                 ]]>

@@ -69,7 +69,7 @@
 	<c:url var="about" value="aboutUs.do">
 		<c:param name="page" value="1" />
 	</c:url>--%>
-	<c:url var="blame" value="blamelist.do">
+	<c:url var="blame" value="b.blame.list.do">
 		<c:param name="page" value="1" />
 	</c:url>
  
@@ -78,9 +78,9 @@
 			<div class="container">
 				<h2 class="breadcrumbs-custom-title">관리자 페이지</h2>
 				<ul class="breadcrumbs-custom-path">
-					<li><a class="nav-link" href="#">회원리스트</a></li>
+					<!-- <li><a class="nav-link" href="#">회원리스트</a></li> -->
 					<li><a class="nav-link" href="${ blame }">신고회원 리스트</a></li>
-					<li><a class="nav-link" href="#">??????</a></li>
+					<!-- <li><a class="nav-link" href="#">??????</a></li> -->
 				</ul>
 			</div>
 			<div class="box-position-1"

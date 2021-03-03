@@ -161,6 +161,9 @@ font-family: 'Nanum Gothic', sans-serif;
 	<c:url var="admin" value="admin.do">
 		<c:param name="page" value="1" />
 	</c:url>
+	<c:url var="blame" value="b.blame.list.do">
+		<c:param name="page" value="1" />
+	</c:url>
 
 		<!-- START NAVIGATION AREA -->
 		<div class="sticky-menu">
@@ -180,7 +183,7 @@ font-family: 'Nanum Gothic', sans-serif;
 									</c:if>
 									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
 									<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'B'}">
-									<li><a class="nav-link" href="admin.do">관리자 페이지</a></li>
+									<li><a class="nav-link" href="${ blame }">관리자 페이지</a></li>
 									</c:if>
 								</ul>
 							</nav>
