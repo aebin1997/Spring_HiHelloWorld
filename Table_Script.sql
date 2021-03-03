@@ -266,11 +266,9 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(BLAME)
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '1', '1', '김우린', '박예빈', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '2', '이강선', '박예빈', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
-INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '3', '이강선', '박예빈', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
-
-
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '1', '부적절', '김우린', '박예빈', '21/01/24', '광고성 홍보글을 올리고 있어요', NULL);
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '욕설', '이강선', '박예빈', '21/01/24', '코딩 못 한다고 욕하네요;;',  NULL);
+INSERT INTO BLAME VALUES(SEQ_BLID.NEXTVAL, '2', '사기', '이강선', '박예빈', '21/01/24', '의뢰내용 완료했는데 돈을 안주네요;;',  NULL);
 
 ------------------------------------------------------------------------------------------------------------------- QA 생성
 CREATE TABLE QA(
@@ -598,17 +596,13 @@ INCREMENT BY 1;;
                                           
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(RE_REPLY)
 
-INSERT INTO RE_REPLY
-VALUES(SEQ_RID.NEXTVAL,  1, '첫번째 댓글입니다.', '김우린', '2020-03-02', '2020-03-02', DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RID.NEXTVAL,  1, '첫번째 댓글입니다.', '김우린', '2020-03-02', '2020-03-02', DEFAULT);
 
-INSERT INTO RE_REPLY
-VALUES(SEQ_RID.NEXTVAL, 1, '첫번째 댓글입니다.',  '김우린', '2020-03-02', '2020-03-02', DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RID.NEXTVAL, 1, '첫번째 댓글입니다.',  '김우린', '2020-03-02', '2020-03-02', DEFAULT);
 
-INSERT INTO RE_REPLY
-VALUES(SEQ_RID.NEXTVAL, 2, '두번째 댓글입니다.',  '황경필', '2020-03-02', '2020-03-02', DEFAULT);
+INSERT INTO RE_REPLY VALUES(SEQ_RID.NEXTVAL, 2, '두번째 댓글입니다.',  '황경필', '2020-03-02', '2020-03-02', DEFAULT);
 
-INSERT INTO RE_REPLY
-VALUES(SEQ_RID.NEXTVAL, 2, '마지막 댓글입니다.',  '최은영', '2020-03-02', '2020-03-02', DEFAULT);                              
+INSERT INTO RE_REPLY VALUES(SEQ_RID.NEXTVAL, 2, '마지막 댓글입니다.',  '최은영', '2020-03-02', '2020-03-02', DEFAULT);                              
                                              
 ------------------------------------------------------------------------------------------------------------------- MEMBER_AUTH_EMAIL 테이블 생성 예정
 --CREATE TABLE MEMBER_AUTH_EMAIL (
