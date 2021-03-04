@@ -1,5 +1,5 @@
 $(".dial1").knob();
-$({animatedVal: 0}).animate({animatedVal: 66}, {
+$({animatedVal: 0}).animate({animatedVal: 95}, {
 	duration: 3000,
 	easing: "swing",
 	step: function() {
@@ -7,7 +7,7 @@ $({animatedVal: 0}).animate({animatedVal: 66}, {
 	}
 });
 $(".dial2").knob();
-$({animatedVal: 0}).animate({animatedVal: 75}, {
+$({animatedVal: 0}).animate({animatedVal: 85}, {
 	duration: 3000,
 	easing: "swing",
 	step: function() {
@@ -23,7 +23,7 @@ $({animatedVal: 0}).animate({animatedVal: 90}, {
 	}
 });
 $(".dial4").knob();
-$({animatedVal: 0}).animate({animatedVal: 35}, {
+$({animatedVal: 0}).animate({animatedVal: 90}, {
 	duration: 3000,
 	easing: "swing",
 	step: function() {

@@ -290,7 +290,7 @@ table.table2 td {
 	<jsp:include page="../common/header.jsp" />
 
 
-	<div id="carouselExampleCaptions" class="carousel slide pointer-event" data-ride="carousel">
+	<div id="carouselExampleCaptions" class="carousel slide pointer-event" data-ride="carousel" style="margin-bottom:-250px;">
 		<ol class="carousel-indicators">
 			<li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
 			<li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -348,103 +348,110 @@ table.table2 td {
 	</div>
 
 	
-	<hr style="clear: both;">
-	<!-- float되있는거 해제 -->
-	<section style="margin: 250px; margin-top: 40px; float: center; color:#fff;">
-		
-		<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
-	      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
-	         <h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">새로운 공지글</h4>
-	         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-	            <tr >
-	            	<th style="text-align: center;" width="50px">번호</th>
-	            	<th style="text-align: center;" width="80px">말머리</th>
-	            	<th style="text-align: center;" width="300px">제           목</th>
-	            	<th style="text-align: center;" width="90px">날짜</th>	
-	            	<th style="text-align: center;" width="60px">조회수</th>	
-	            </tr>
-	         </table>
-	      </div>
-			
-		<!-- <hr style="clear: both; color:#fff; opacity:0;">	 -->
-		<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
-		<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
-			<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
-			<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-				<tr>
-					<th style="text-align: center;" >번호</th>
-					<th style="text-align: center;" >제목</th>
-					<th style="text-align: center;" >작성자</th>
-					<th style="text-align: center;" >날짜</th>
-					<th style="text-align: center;" >조회수</th>
-				</tr>
-			</table>
-		</div>
+<!-- 	<hr style="clear: both;">
+ -->	<!-- float되있는거 해제 -->
 	
-	    <hr style="clear: both; color:#fff; opacity:0;">
-		<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
-		<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
-			<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
-			<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-				<tr>
-					<th style="text-align: center;" >번호</th>
-					<th style="text-align: center;" >말머리</th>
-					<th style="text-align: center;">작성자</th>
-					<th style="text-align: center;">제목</th>
-					<th style="text-align: center;">작성일</th>
-					<th style="text-align: center;">조회수</th>
-				</tr>
-			</table>
-		</div>
-	</section>
+		<section style="margin: 250px; padding-top: 40px; float: center; color:#fff;">
+			
+			<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
+		      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
+		         <h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">새로운 공지글</h4>
+		         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+		            <tr >
+		            	<th style="text-align: center;" width="50px">번호</th>
+		            	<th style="text-align: center;" width="80px">말머리</th>
+		            	<th style="text-align: center;" width="300px">제           목</th>
+		            	<th style="text-align: center;" width="90px">날짜</th>	
+		            	<th style="text-align: center;" width="60px">조회수</th>	
+		            </tr>
+		         </table>
+		      </div>
+				
+			<!-- <hr style="clear: both; color:#fff; opacity:0;">	 -->
+			<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
+			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
+				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
+				<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+					<tr>
+						<th style="text-align: center;" >번호</th>
+						<th style="text-align: center;" >제목</th>
+						<th style="text-align: center;" >작성자</th>
+						<th style="text-align: center;" >날짜</th>
+						<th style="text-align: center;" >조회수</th>
+					</tr>
+				</table>
+			</div>
+		
+		    <hr style="clear: both; opacity:0;">
+			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
+			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
+				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
+				<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+					<tr>
+						<th style="text-align: center;" >번호</th>
+						<th style="text-align: center;" >말머리</th>
+						<th style="text-align: center;">작성자</th>
+						<th style="text-align: center;">제목</th>
+						<th style="text-align: center;">작성일</th>
+						<th style="text-align: center;">조회수</th>
+					</tr>
+				</table>
+			</div>
+		</section>
 
 <br>
 <br>
-		<hr style="clear: both; margin-top:20px;">
-		<!-- float되있는거 해제 -->
-
+		<!-- <hr style="clear: both; margin-top:20px;">
+		float되있는거 해제
+ -->
 
 			<!-- 사이트 정보 퍼센트로 나타내보앗음 -->
-			<section>
-				<div class="row clearfix progress-box">
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+			<section style="background-color:#f2f0f0; padding-top:30px; padding-bottom:50px;">
+				<div class="row" style="margin-top:30px; margin-bottom:-100px;">
+		            <div class="col-xl-6 mx-auto text-center" style="margin-bottom:-20px;">
+		               <div class="section-title mb-100">
+		                  <p>Hi Hello World</p>
+		                  <h4>사이트 이용자 만족도 조사</h4>
+		               </div>
+		            </div>
+	         	</div>
+	         	<div style="width:1200px; margin-top:50px; margin-left:400px;">
+					<div class="row clearfix progress-box">
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
 							<div class="card-box pd-30 height-100-p">
 								<div class="progress-box text-center">
-									 <input type="text" class="knob dial1" value="95" data-width="240" data-height="240" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#1b00ff" data-angleOffset="180" readonly>
-									<h3 class="text-blue padding-top-10 h3">코딩의뢰 답변률 <i class="fa fa-line-chart text-blue"></i></h3>
-									<span class="d-block">95% Average </span>
+									 <input type="text" class="knob dial1" value="95" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#1b00ff" data-angleOffset="180" readonly style="color:#f2e9e9;">
+									<h3 class="text-blue padding-top-10 h3" style="margin-top:20px;">코딩의뢰 답변률</h3>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
 							<div class="card-box pd-30 height-100-p">
 								<div class="progress-box text-center">
-									 <input type="text" class="knob dial2" value="70" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#00e091" data-angleOffset="180" readonly>
-									<h5 class="text-light-green padding-top-10 h5">프로젝트 매칭률</h5>
-									<span class="d-block">85% Average <i class="fa text-light-green fa-line-chart"></i></span>
+									 <input type="text" class="knob dial2" value="70" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#00e091" data-angleOffset="180" readonly>
+									<h3 class="text-light-green padding-top-10 h3" style="margin-top:20px;">프로젝트 매칭률</h3>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
 							<div class="card-box pd-30 height-100-p">
 								<div class="progress-box text-center">
-									 <input type="text" class="knob dial3" value="90" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#f56767" data-angleOffset="180" readonly>
-									<h5 class="text-light-orange padding-top-10 h5">프로젝트 성공률</h5>
-									<span class="d-block">90% Average <i class="fa text-light-orange fa-line-chart"></i></span>
+									 <input type="text" class="knob dial3" value="90" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#f56767" data-angleOffset="180" readonly>
+									<h3 class="text-light-orange padding-top-10 h3" style="margin-top:20px;">프로젝트 성공률</h3>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30">
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
 							<div class="card-box pd-30 height-100-p">
 								<div class="progress-box text-center">
-									 <input type="text" class="knob dial4" value="65" data-width="120" data-height="120" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#a683eb" data-angleOffset="180" readonly>
-									<h5 class="text-light-purple padding-top-10 h5">만족도</h5>
-									<span class="d-block">90% Average <i class="fa text-light-purple fa-line-chart"></i></span>
+									 <input type="text" class="knob dial4" value="65" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#a683eb" data-angleOffset="180" readonly>
+									<h3 class="text-light-purple padding-top-10 h3" style="margin-top:20px;">만족도</h3>
 								</div>
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 
 
 
@@ -977,117 +984,128 @@ table.table2 td {
   
   
   
-  	<section class="our-webcoderskull padding-lg">
-				<div class="container">
-					<div class="row heading heading-icon">
-						<h2>MEET OUR TEAM</h2>
+  <!-- START TEAM SECTION -->
+    <section id="team" class="section-padding bg-gray">
+        <div class="container">
+			<div class="row" style="margin-bottom:-100px;">
+				<div class="col-12 text-center">
+					<div class="section-title">
+						<h5>our masters</h5>
+						<h3>TEAM <span>COCA</span></h3>
 					</div>
-					<ul class="row">
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="/hhw/resources/images/profile/kimwoolina.jpg"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="http://www.webcoderskull.com/">LINA</a>
-								</h3>
-								<p>Lead Developer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="https://www.instagram.com/kimwoolina/"><i class="fa fa-instagram"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://github.com/kimwoolina"><i class="fa fa-github"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://www.linkedin.com/in/lina-kim-3ba138198/"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="/hhw/resources/images/profile/hwangkyungpil.jpg"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="#">PHILIP</a>
-								</h3>
-								<p>UI/UX Developer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="https://www.instagram.com/hellokovi_koviin/"><i class="fa fa-instagram"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://github.com/powrober"><i class="fa fa-github"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="/hhw/resources/images/profile/choieunyoung.jpg"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="#">ELLA</a>
-								</h3>
-								<p>Markup Engineer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="https://www.instagram.com/eun_0_99/"><i class="fa fa-instagram"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://github.com/eunyoung2054"><i class="fa fa-github"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-
-						</li>
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="/hhw/resources/images/profile/kangseonlee.jpg"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="http://www.webcoderskull.com/">JAMES</a>
-								</h3>
-								<p>Software Engineer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="https://www.instagram.com/rkdtjs4954/"><i class="fa fa-instagram"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://github.com/leekangseon4954"><i class="fa fa-github"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</li>
-						<li class="col-12 col-md-6 col-lg-3">
-							<div class="cnt-block equal-hight" style="height: 349px;">
-								<figure>
-									<img src="/hhw/resources/images/profile/aebinpark.jpg"
-										class="img-responsive" alt="">
-								</figure>
-								<h3>
-									<a href="http://www.webcoderskull.com/">AEBIN</a>
-								</h3>
-								<p>Software Engineer</p>
-								<ul class="follow-us clearfix">
-									<li><a href="https://www.instagram.com/aebin.park/"><i class="fa fa-instagram"
-											aria-hidden="true"></i></a></li>
-									<li><a href="https://github.com/aebin"><i class="fa fa-github"
-											aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-linkedin"
-											aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
-						</li>
-					</ul>
 				</div>
-			</section>
-
+			</div>
+			<!-- end section title -->	 
+			<div class="row text-center">
+				<div class="team-slider owl-carousel owl-theme">
+					<div class="single-team-wrapper">
+						<div class="single-team">
+							<div class="single-team-img">
+								<img class="img-fluid" src="/hhw/resources/images/profile/kimwoolina.jpg" alt="">
+								<div class="single-team-social">
+									<ul>
+									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="#"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="single-team-meta">
+								<h4>LINA</h4>
+								<span>Lead Developer</span>
+								<p>회원가입, 로그인, 로그아웃, 마이페이지,<br> 아이디찾기, 비밀번호 찾기(임시 비밀번호<br> 생성, 임시 비밀번호 메일로 전송),<br> 소셜 계정으로 로그인, 진행 페이지, <br>리뷰게시판, 실시간 채팅, 팀 로고 디자인</p>
+							</div>	
+						</div>							
+					</div>
+					<!-- end col -->
+					<div class="single-team-wrapper">
+						<div class="single-team">
+							<div class="single-team-img">
+								<img class="img-fluid" src="/hhw/resources/images/profile/hwangkyungpil.jpg" alt="">
+								<div class="single-team-social">
+									<ul>
+									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
+									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="single-team-meta">
+								<h4>PHILIP</h4>
+								<span>UI/UX Developer</span>
+								<p>메인페이지, 신고 기능, 공지사항,<br> 자유게시판, CSS</p>
+							</div>	
+						</div>							
+					</div>
+					<!-- end col -->
+					<div class="single-team-wrapper">
+						<div class="single-team">
+							<div class="single-team-img">
+								<img class="img-fluid" src="/hhw/resources/images/profile/choieunyoung.jpg" alt="">
+								<div class="single-team-social">
+									<ul>
+									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
+									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="single-team-meta">
+								<h4>ELLA</h4>
+								<span>Markup Engineer</span>
+								<p>메인페이지, about us, 사이트 사용법,<br> 에러페이지, 사이트 로고 디자인</p>
+							</div>	
+						</div>							
+					</div>
+					<!-- end col -->
+					<div class="single-team-wrapper">
+						<div class="single-team">
+							<div class="single-team-img">
+								<img class="img-fluid" src="/hhw/resources/images/profile/kangseonlee.jpg" alt="">
+								<div class="single-team-social">
+									<ul>
+									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
+									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="single-team-meta">
+								<h4>JAMES</h4>
+								<span>Software Engineer</span>
+								<p>의뢰페이지, FAQ, contact페이지</p>
+							</div>	
+						</div>							
+					</div>
+					<!-- end col -->
+					<div class="single-team-wrapper">
+						<div class="single-team">
+							<div class="single-team-img">
+								<img class="img-fluid" src="/hhw/resources/images/profile/aebinpark.jpg" alt="">
+								<div class="single-team-social">
+									<ul>
+									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
+									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="single-team-meta">
+								<h4>AEBIN</h4>
+								<span>Software Engineer</span>
+								<p>마이페이지, 결제 , 포인트 관리</p>
+							</div>	
+						</div>							
+					</div>
+					<!-- end col -->	
+				</div>
+			</div>
+			<!-- end row -->
+        </div>
+        <!--- END CONTAINER -->
+    </section>
+    <!-- END TEAM SECTION -->
+  
 
 
 <script src="/hhw/resources/main/core.js"></script>
