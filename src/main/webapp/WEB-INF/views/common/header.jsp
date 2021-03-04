@@ -181,9 +181,7 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="progress.move">나의 Q&A</a></li>
 									</c:if>
 									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
-									<c:if test="${ !empty sessionScope.loginUser and loginUser.user_lv eq 'B'}">
-									<li><a class="nav-link" href="${ blame }">관리자 페이지</a></li>
-									</c:if>
+							
 								</ul>
 							</nav>
 						</div>
