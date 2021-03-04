@@ -762,6 +762,11 @@
 				객체 생성시에 서버와 자동 연결됨.
 				사용되는 프로토콜은 ws:// 임.
 				*/	
+				if(webSocket != undefined && webSocket.readyState !== WebSocket.CLOSED){
+					writeResponse("WebSocket is already opened.");
+					return;
+				}
+				
 				webSocket = new WebSocket("ws://localhost:8888/${pageContext.request.contextPath}/ws/websocketendpoint");
 				
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성

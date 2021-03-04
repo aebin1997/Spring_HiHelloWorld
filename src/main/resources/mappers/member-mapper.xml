@@ -23,7 +23,7 @@
 
 	<resultMap id="memberTop3" type="Member">
       <id property="id" column="ID"/>
-      <result property="nickname" column="NICKNAME"/>
+      <result property="nickname" column="nickname"/>
       <result property="propic" column="propic"/>
       <result property="grade" column="grade"/>
    </resultMap>
