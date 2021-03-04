@@ -965,39 +965,39 @@ table.table2 td {
 			  <div class="timeline">
 			    <div class="swiper-container">
 			      <div class="swiper-wrapper" >
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=11" data-year="2021">
-			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
-			            <h4 class="timeline-title">프로젝트 기획</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=11" data-year="2021-01">
+			          <div class="swiper-slide-content"><span class="timeline-year">1.11. ~ 1.15.</span>
+			            <h4 class="timeline-title">프로젝트 기획 회의</h4>
 			            <p class="timeline-text">프로젝트 기획 했다</p>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=12" data-year="2021">
-			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
-			            <h4 class="timeline-title">UI 설계</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=12" data-year="2021-01">
+			          <div class="swiper-slide-content"><span class="timeline-year">1.18. ~ 1.11.</span>
+			            <h4 class="timeline-title">UI 설계 기간</h4>
 			            <p class="timeline-text">UI설계 했다</p>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=13" data-year="2021">
-			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
-			            <h4 class="timeline-title">DB 설계</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=13" data-year="2021-01">
+			          <div class="swiper-slide-content"><span class="timeline-year">1.25. ~ 1.29.</span>
+			            <h4 class="timeline-title">DB 설계 기간</h4>
 			            <p class="timeline-text">DB 설계 했다</p>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=14" data-year="2021">
-			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
-			            <h4 class="timeline-title">클래스 패키지</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=14" data-year="2021-02">
+			          <div class="swiper-slide-content"><span class="timeline-year">2. 1. ~ 2. 5.</span>
+			            <h4 class="timeline-title">클래스 설계 기간</h4>
 			            <p class="timeline-text">패키지 처리 했다</p>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=15" data-year="2021">
-			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
-			            <h4 class="timeline-title">기능구현 시작</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=15" data-year="2021-03">
+			          <div class="swiper-slide-content"><span class="timeline-year">2. 8. ~ 3. 4.</span>
+			            <h4 class="timeline-title">프로젝트 구현 및 디버깅 기간</h4>
 			            <p class="timeline-text">기능구현 했다</p>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=16" data-year="2016">
-			          <div class="swiper-slide-content"><span class="timeline-year">2016</span>
-			            <h4 class="timeline-title">제작완료</h4>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=16" data-year="2021-03">
+			          <div class="swiper-slide-content"><span class="timeline-year">3. 5.</span>
+			            <h4 class="timeline-title">프로젝트 발표</h4>
 			            <p class="timeline-text">제작완료용</p>
 			          </div>
 			        </div>
