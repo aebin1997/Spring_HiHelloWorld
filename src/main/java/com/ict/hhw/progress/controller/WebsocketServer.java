@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 public class WebsocketServer {
 	
 	@OnOpen
-    public void onOpen(){
+    public void onOpen(Session session){
         System.out.println("Open Connection ...");
     }
      

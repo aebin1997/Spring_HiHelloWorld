@@ -145,7 +145,7 @@
 				<table id="apply" width="280" height="160">
 					<tr>
 						<td>답변자 선택</td>
-						<td><input type="text" name="pro_answerer" id="selectQue"
+						<td><input type="text" name="pro_answerer" id="selectUser"
 							value="" required readonly style="width: 150px;"></td>
 						<td><button type="button" id="modal_open_btn">찾기</button></td>
 					</tr>
