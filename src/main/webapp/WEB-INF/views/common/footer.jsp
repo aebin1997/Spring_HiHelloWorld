@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,36 +18,14 @@
 					<div
 						class="col-lg-3 col-md-6 col-sm-12 col-12 mb-lg-0 mb-md-5 mb-5 footer-widget">
 						<div class="footer-logo col-12 p-0">
-							<a href="index.html">
-								<div class="footer-logo-icon">
-									<i class="fab fa-gg-circle"></i>
-								</div>
 								<div class="footer-logo-text">
-									<h3>Bitland</h3>
-									<p>Bitcoin Trading Template</p>
+									<h3>Hi Hello World!</h3>
+									<p>Developer Community</p>
 								</div>
 							</a>
 						</div>
 						<div class="about mb-2">
-							<p>Lorem ipsum dolor sit ametconsect etur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labo reetdolor emagna
-								aliqua. Ut enim ad minimv eniam, quis nostrud exerc itationul
-								amco laboris nisi ut aliquip exeallg commodo consequat.</p>
-						</div>
-						<div class="footer-news">
-							<form action="#">
-								<div class="row">
-									<div
-										class="form-group col-lg-9 col-md-9 col-8 pr-lg-0 pr-md-0 pr-2">
-										<input name="semail" class="form-control"
-											placeholder="Email Address" type="email">
-									</div>
-									<button type="submit"
-										class="col-lg-3 col-md-2 col-2 p-0 fnews-btn">
-										<i class="fa fa-paper-plane"></i>
-									</button>
-								</div>
-							</form>
+							<p>개발자 또는 개발에 관심이 있는<br> 사람들이 의견을 주고 받는<br> 커뮤니티 사이트</p>
 						</div>
 					</div>
 					<!-- End Widget -->
@@ -56,20 +35,44 @@
 							<h3>Quick Links</h3>
 						</div>
 						<!-- END SECTION TITLE -->
+						
+						
+	<c:url var="qalist" value="qalist.do">
+		<c:param name="page" value="1"/>
+	</c:url>
+	<c:url var="blist" value="blist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="nlist" value="nlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="revlist" value="revlist.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="admin" value="admin.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="blame" value="b.blame.list.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="about" value="aboutUs.do">
+		<c:param name="page" value="1" />
+	</c:url>
+						
 						<div class="col-12 footer-widget-inner">
 							<ul class="quick-link-list">
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Home Page</a></li>
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Our Members</a></li>
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Client feedback</a></li>
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Buy & Sell</a></li>
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Bitcoin Trade</a></li>
-								<li><a href="#"><i class="fa fa-chevron-circle-right"></i>
-										Market Price </a></li>
+								<li><a href="${ nlist }"><i class="fa fa-chevron-circle-right"></i>
+										공지사항</a></li>
+								<li><a href="${ blist }"><i class="fa fa-chevron-circle-right"></i>
+										자유게시판</a></li>
+								<li><a href="${ revlist }"><i class="fa fa-chevron-circle-right"></i>
+										리뷰게시판</a></li>
+								<li><a href="${ qalist }"><i class="fa fa-chevron-circle-right"></i>
+										코딩의뢰</a></li>
+								<li><a href="${ about }"><i class="fa fa-chevron-circle-right"></i>
+										About Us</a></li>
+								<li><a href="contact.move"><i class="fa fa-chevron-circle-right"></i>
+										CONTACT </a></li>
 							</ul>
 						</div>
 					</div>

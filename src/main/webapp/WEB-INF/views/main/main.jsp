@@ -1004,9 +1004,9 @@ table.table2 td {
 								<img class="img-fluid" src="/hhw/resources/images/profile/kimwoolina.jpg" alt="">
 								<div class="single-team-social">
 									<ul>
-									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
-									   <li><a class="sicon2" href="#"><i class="fa fa-github"></i></a></li>
-									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									   <li><a class="sicon1" href="https://www.instagram.com/kimwoolina/"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="https://github.com/kimwoolina"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="fa fa-facebook-official"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -1024,9 +1024,9 @@ table.table2 td {
 								<img class="img-fluid" src="/hhw/resources/images/profile/hwangkyungpil.jpg" alt="">
 								<div class="single-team-social">
 									<ul>
-									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
-									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
-									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="https://github.com/powrober"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="fa fa-facebook-official"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -1044,9 +1044,9 @@ table.table2 td {
 								<img class="img-fluid" src="/hhw/resources/images/profile/choieunyoung.jpg" alt="">
 								<div class="single-team-social">
 									<ul>
-									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
-									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
-									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="https://github.com/eunyoung2054"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="fa fa-facebook-official"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -1064,9 +1064,9 @@ table.table2 td {
 								<img class="img-fluid" src="/hhw/resources/images/profile/kangseonlee.jpg" alt="">
 								<div class="single-team-social">
 									<ul>
-									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
-									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
-									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="https://github.com/leekangseon4954"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="fa fa-facebook-official"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -1084,9 +1084,9 @@ table.table2 td {
 								<img class="img-fluid" src="/hhw/resources/images/profile/aebinpark.jpg" alt="">
 								<div class="single-team-social">
 									<ul>
-									   <li><a class="sicon1" href="#"><i class="icofont icofont-social-facebook"></i></a></li>
-									   <li><a class="sicon2" href="#"><i class="icofont icofont-social-twitter"></i></a></li>
-									   <li><a class="sicon3" href="#"><i class="icofont icofont-social-youtube-play"></i></a></li>
+									   <li><a class="sicon1" href="#"><i class="fa fa-instagram"></i></a></li>
+									   <li><a class="sicon2" href="https://github.com/aebin"><i class="fa fa-github"></i></a></li>
+									   <li><a class="sicon3" href="#"><i class="fa fa-facebook-official"></i></a></li>
 									</ul>
 								</div>
 							</div>
