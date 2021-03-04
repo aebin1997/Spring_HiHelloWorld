@@ -292,8 +292,8 @@ table.table2 td {
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
-								<div class="home-single-slide-dec">
-									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
+								<div class="home-single-slide-dec" style="width:800px; top:-60px;">
+									<h3 style="color:#fff;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
 										있습니다.</p>
 									<div class="home-single-slide-button">
@@ -314,13 +314,15 @@ table.table2 td {
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
-								<div class="home-single-slide-dec">
-									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
-									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
-										있습니다.</p>
-									<div class="home-single-slide-button">
-										<a href="#" class="btn-style btn-filled">코딩의뢰 하기</a> <a
-											href="#" class="btn-style btn-border">포인트 충전하기</a>
+								<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
+									<div class="home-single-slide-dec" style="width:800px; top:-60px;">
+										<h3 style="color:#fff;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
+										<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
+											있습니다.</p>
+										<div class="home-single-slide-button">
+											<a href="#" class="btn-style btn-filled">코딩의뢰 하기</a> <a
+												href="#" class="btn-style btn-border">포인트 충전하기</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -336,8 +338,8 @@ table.table2 td {
 					<div class="container">
 						<div class="row">
 							<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
-								<div class="home-single-slide-dec">
-									<h2>Hi Hello World에 방문해주셔서 감사드립니다!</h2>
+								<div class="home-single-slide-dec" style="width:800px; top:-60px;">
+									<h3 style="color:#fff;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
 									<p class="text-capitalize">저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수
 										있습니다.</p>
 									<div class="home-single-slide-button">
@@ -357,49 +359,49 @@ table.table2 td {
 	
 	<hr style="clear: both;">
 	<!-- float되있는거 해제 -->
-	<section style="margin-left: 600px; margin-top: 50px; float: center;">
+	<section style="margin: 250px; margin-top: 40px; float: center; color:#fff;">
 		
 		<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
-	      <div style="width: 800px; height: 280px; float: left; border: 1px solid navy; disply: block;">
-	         <h3 style="text-align: left; margin-bottom:15px; margin-top:20px;">새로운 공지글</h3>
-	         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="750" style="text-align: center; color:black; font-size:15px;">
+	      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
+	         <h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">새로운 공지글</h4>
+	         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
 	            <tr >
 	            	<th style="text-align: center;" width="50px">번호</th>
 	            	<th style="text-align: center;" width="80px">말머리</th>
-	            	<th style="text-align: center;" width="350px">제           목</th>
-	            	<th style="text-align: center;" width="80px">날짜</th>	
-	            	<th style="text-align: center;" width="80px">조회수</th>	
+	            	<th style="text-align: center;" width="300px">제           목</th>
+	            	<th style="text-align: center;" width="90px">날짜</th>	
+	            	<th style="text-align: center;" width="60px">조회수</th>	
 	            </tr>
 	         </table>
 	      </div>
 			
-		<hr style="clear: both;">	
+		<!-- <hr style="clear: both; color:#fff; opacity:0;">	 -->
 		<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
-		<div style="float: left; border: 1px solid navy; padding: 10px; margin: 10px;">
-			<h4>자주 묻는 코딩</h4>
-			<table id="top_qa" border="1" cellspacing="0">
+		<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
+			<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
+			<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
 				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-					<th>조회수</th>
+					<th style="text-align: center;" >번호</th>
+					<th style="text-align: center;" >제목</th>
+					<th style="text-align: center;" >작성자</th>
+					<th style="text-align: center;" >날짜</th>
+					<th style="text-align: center;" >조회수</th>
 				</tr>
 			</table>
 		</div>
 	
-	    <hr style="clear: both;">
+	    <hr style="clear: both; color:#fff; opacity:0;">
 		<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
-		<div style="float: left; border: 1px solid navy; padding: 5px; margin: 5px;">
-			<h4>인기 게시글</h4>
-			<table id="top_board" border="1" cellspacing="0">
+		<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
+			<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
+			<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
 				<tr>
-					<th>번호</th>
-					<th>말머리</th>
-					<th>작성자</th>
-					<th>제목</th>
-					<th>작성일</th>
-					<th>조회수</th>
+					<th style="text-align: center;" >번호</th>
+					<th style="text-align: center;" >말머리</th>
+					<th style="text-align: center;">작성자</th>
+					<th style="text-align: center;">제목</th>
+					<th style="text-align: center;">작성일</th>
+					<th style="text-align: center;">조회수</th>
 				</tr>
 			</table>
 		</div>
@@ -407,15 +409,7 @@ table.table2 td {
 
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-		
-
-		<hr style="clear: both;">
+		<hr style="clear: both; margin-top:20px;">
 		<!-- float되있는거 해제 -->
 
 

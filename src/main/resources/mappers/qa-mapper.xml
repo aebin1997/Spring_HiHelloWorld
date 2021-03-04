@@ -31,7 +31,7 @@
         	from(select * from qa 
         	where qa_status = 'Y'
         	order by QA_READCOUNT desc))
-	where rnum >= 1 and rnum <=5
+	where rnum >= 1 and rnum <=3
 	]]>
 </select>
 

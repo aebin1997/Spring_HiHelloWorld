@@ -85,7 +85,7 @@
    			, ncount
    			from (select * from notice 
    				  order by nid desc))
-   		where rnum >= 1 and rnum <= 5
+   		where rnum >= 1 and rnum <= 3
    		]]>
    </select>
    
