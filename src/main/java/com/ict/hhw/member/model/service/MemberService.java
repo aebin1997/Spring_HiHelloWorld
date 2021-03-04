@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.member.model.vo.Member;
 import com.ict.hhw.notice.model.vo.Notice;
 
@@ -38,5 +39,8 @@ public interface MemberService {
 	
 	// 회원정보 리스트를 위한 메소드
 	ArrayList<Member> selectAll();
+	
+	// 랭킹 높은 수
+	ArrayList<Member> selectTop3();
 	
 }

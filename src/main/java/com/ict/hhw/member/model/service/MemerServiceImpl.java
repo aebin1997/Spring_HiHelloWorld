@@ -77,5 +77,10 @@ public class MemerServiceImpl implements MemberService {
 	public ArrayList<Member> selectAll() {
 		return mDao.selectList();
 	}
+
+	@Override
+	public ArrayList<Member> selectTop3() {
+		return mDao.selectTop3();
+		}
 	
 }

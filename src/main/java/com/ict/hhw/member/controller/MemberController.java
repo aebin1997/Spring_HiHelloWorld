@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.tomcat.jni.Address;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ict.hhw.board.model.vo.Board;
 import com.ict.hhw.member.model.service.MemberService;
 import com.ict.hhw.member.model.vo.Member;
 
@@ -623,4 +625,37 @@ public class MemberController {
 			return "ok";
 		}
 	}
+	
+	@RequestMapping(value = "mtop3.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String selectTop3Method(HttpServletResponse response) throws UnsupportedEncodingException {
+		// 최신 공지글 3개 조회해 옴
+		ArrayList<Member> list = mService.selectTop3(); // 결과를 받아줌
+
+		// 전송용 json 객체 준비
+		JSONObject sendJson = new JSONObject();
+		// list 옮길 json 배열 준비
+		JSONArray jarr = new JSONArray();
+
+		// list 를 jarr 로 옮기기(복사)
+		for (Member member : list) {
+			// notice 필드값 저장할 json 객체 생성
+			JSONObject job = new JSONObject();
+			
+			job.put("nickname", member.getNickname()); // map이랑 같다
+            job.put("propic", member.getPropic());
+			job.put("grade", member.getGrade());
+			// 날짜형식의 데이터를 json객체에 담을 때 주의사항, 뷰쪽에서 꺼낼 때 에러가나서, string형으로 바꿔서 json에 담아줘야한다.
+
+			// job 를 jarr 에 저장
+			jarr.add(job);
+		}
+
+		// 전송용 json 객체에 jarr 담음
+		sendJson.put("list", jarr);
+
+		return sendJson.toJSONString(); // jsonView 가 리턴됨
+
+	}
+
 }

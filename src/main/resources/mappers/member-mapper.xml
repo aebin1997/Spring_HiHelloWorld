@@ -21,6 +21,34 @@
       <result property="grade" column="grade"/>
    </resultMap>
 
+	<resultMap id="memberTop3" type="Member">
+      <id property="id" column="ID"/>
+      <result property="nickname" column="NICKNAME"/>
+      <result property="propic" column="propic"/>
+      <result property="grade" column="grade"/>
+   </resultMap>
+
+	<!-- 조회수 top3 게시글 리스팅 -->
+   <select id="selectTop3" resultMap="memberResultSet">
+    <![CDATA[
+      SELECT *
+        FROM (
+      SELECT  ROWNUM RNUM
+            , ID
+            , NICKNAME
+            , PROPIC
+            , GRADE
+        FROM (
+      SELECT *
+        FROM MEMBER 
+       ORDER BY GRADE DESC
+              ))
+       WHERE RNUM >= 1 
+         AND RNUM <= 5
+            ]]>
+   </select>
+	
+
     <select id="selectAll" resultMap="memberResultSet">
       select * from member
       order by enrollDate desc
