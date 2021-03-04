@@ -77,6 +77,7 @@
 <script type="text/javascript"
 	src="/hhw/resources/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+
 	$(function() {
 
 		$("#modal_open_btn").click(function() {
@@ -116,6 +117,7 @@
 				}
 			});
 		});
+		
 	});
 </script>
 
@@ -143,13 +145,13 @@
 				<table id="apply" width="280" height="160">
 					<tr>
 						<td>답변자 선택</td>
-						<td><input type="text" name="pro_answerer" id="selectUser"
+						<td><input type="text" name="pro_answerer" id="selectQue"
 							value="" required readonly style="width: 150px;"></td>
 						<td><button type="button" id="modal_open_btn">찾기</button></td>
 					</tr>
 					<tr>
 						<td>질문 선택</td>
-						<td><select name="qa_title" style="width: 150px;" required>
+						<td><select name="qa_title" id="selectQa" style="width: 150px;" required>
 								<option value="" selected>질문 선택</option>
 								<c:if test="${ requestScope.tlist != null }">
 									<c:forEach items="${ requestScope.tlist }" var="t">
@@ -168,7 +170,7 @@
 					</tr>
 					<tr>
 						<td>금액</td>
-						<td><input type="number" name="pro_pay" min="1000"
+						<td><input id="pro_pay" type="number" name="pro_pay" min="1000"
 							step="1000" style="width: 150px;" required></td>
 						<td><button>결제</button></td>
 					</tr>

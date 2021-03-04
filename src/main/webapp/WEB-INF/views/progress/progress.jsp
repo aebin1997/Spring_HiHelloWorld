@@ -137,9 +137,8 @@
 	}
 	
 	function dlMsg(){
-		var message = "${ msg }";
-		console.log(message);
-		if(message == "ok"){
+		var dlMessage = "${ msg }";
+		if(dlMessage == "ok"){
 			alert("마감기한을 성공적으로 변경하였습니다.");
 		};
 	}
@@ -738,6 +737,7 @@
 		
 		
 		<script type="text/javascript">
+			
 			//상대방과 연결할 웹소켓 객체 준비
 			var webSocket = null;
 			//채팅창 앨리먼트 변수
@@ -763,7 +763,7 @@
 				사용되는 프로토콜은 ws:// 임.
 				*/	
 				webSocket = new WebSocket("ws://localhost:8888/${pageContext.request.contextPath}/ws/websocketendpoint");
-			
+				
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){
 					$textarea.html("<p class='chat_content'>"
@@ -808,24 +808,24 @@
 				$textarea.scrollTop($textarea.height());
 			}  //send()
 			
+			
 			//웹소켓 이벤트핸들러에 의해 실행되는 함수 작성
 			function onMessage(event){
 				//서버로 부터 데이터를 받았을 때 작동되는 함수임
-				console.log(event);
 				var message = event.data.split("|");
-				console.log(message);
+				
 				//보낸사람 아이디
 				var receiverID = message[0];
 				
 				//전송온 메세지
 				var content = message[1];
-				console.log(content);
+				
 				//전송온 메세지가 비었거나, 보낸사람이 내가 연결한
 				//사람이 아닐 경우 아무 내용도 실행하지 않는다.
 				if(content == "" || 
 						!receiverID.match($('#receiver').val())){
 					//비워 놓음
-				}else{
+				 }else{
 					$textarea.html($textarea.html() +
 							"<p class='chat_content other-side'>"
 							+ receiverID + " : " + content 

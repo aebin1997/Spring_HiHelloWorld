@@ -4,7 +4,10 @@ import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+
+import org.springframework.ui.Model;
 
 @ServerEndpoint("/ws/websocketendpoint")
 public class WebsocketServer {
@@ -25,7 +28,7 @@ public class WebsocketServer {
         //String echoMsg = "Echo from the server : " + message;
         return message;
     }
- 
+    
     @OnError
     public void onError(Throwable e){
         e.printStackTrace();

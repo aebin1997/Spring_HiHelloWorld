@@ -30,6 +30,7 @@
 		<result column="qa_status" property="qa_status" />
 	</resultMap>
 
+
 	<select id="selectPlist" parameterType="string" resultMap="resultQaPro">
 		SELECT PRO_ID, PRO_QID, QA_TITLE, PRO_WRITER, PRO_ANSWERER,
 		PRO_DEADLINE, PRO_PAY, PRO_PROCESS, PRO_STATUS
