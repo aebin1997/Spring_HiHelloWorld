@@ -119,8 +119,10 @@
 					<input type="search" name="keyword">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="nlist" value="/nlist.do"/>
-					<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					<div style="align: center; padding-left: 400px">
+						<c:url var="nlist" value="/nlist.do"/>
+						<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					</div>
 				</form>
 			</div>
 			
@@ -129,8 +131,10 @@
 					<input type="search"name="keyword">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="nlist" value="/nlist.do"/>
-					<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					<div style="align: center; padding-left: 400px">
+						<c:url var="nlist" value="/nlist.do"/>
+						<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					</div>
 				</form>
 			</div>
 				
@@ -139,8 +143,10 @@
 					<input type="date" name="begin"> ~ <input type="date" name="end">
 					<input type="submit" value="검색" class="btn btn-warning btn-round" style="color: #fff;">
 					<%-- 목록 출력 --%>
-					<c:url var="nlist" value="/nlist.do"/>
-					<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					<div style="align: center; padding-left: 400px">
+						<c:url var="nlist" value="/nlist.do"/>
+						<button onclick="javascript:location.href='${ nlist }';" class="btn btn-warning btn-round" style="color: #fff;">전체목록 보기</button>
+					</div>
 				</form>
 			</div>
 		</div>

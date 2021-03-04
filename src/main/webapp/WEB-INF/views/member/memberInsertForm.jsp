@@ -118,10 +118,6 @@ span.error {
 												<td><input type="text" name="nickname" label="닉네임"
 													placeholder="닉네임을 입력해주세요" required></td>
 											</tr>
-											<!-- <tr>
-												<th>프로필 사진</th>
-												<td><input type="file" name="upfile"></td>
-											</tr> -->
 											<tr>
 												<th>이메일<span class="ico">*<span
 														class="screen_out">필수항목</span></span></th>
