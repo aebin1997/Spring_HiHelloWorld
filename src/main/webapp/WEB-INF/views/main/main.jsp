@@ -10,7 +10,254 @@
 <!-- 많이 묻는 질문 -->
 <script type="text/javascript"
 	src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
-	
+
+<style>
+
+.container11 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  flex-direction: column;
+}
+
+.title11 {
+  font-size: 38px;
+  color: #616161;
+  font-style: italic;
+  font-weight: 800;
+}
+
+.timeline {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 5px 25px 5px rgba(0, 0, 0, 0.2);
+}
+.timeline .swiper-container {
+  height: 600px;
+  width: 100%;
+  position: relative;
+}
+.timeline .swiper-wrapper {
+  transition: 2s cubic-bezier(0.68, -0.4, 0.27, 1.34) 0.2s;
+}
+.timeline .swiper-slide {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.timeline .swiper-slide::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: -115%;
+  bottom: -10%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: -230px 0 150px 60vw rgba(0, 0, 0, 0.7);
+  border-radius: 100%;
+}
+.timeline .swiper-slide-content {
+  position: absolute;
+  text-align: center;
+  width: 80%;
+  max-width: 310px;
+  right: 50%;
+  top: 13%;
+  transform: translate(50%, 0);
+  font-size: 12px;
+  z-index: 2;
+}
+.timeline .swiper-slide .timeline-year {
+  display: block;
+  font-style: italic;
+  font-size: 42px;
+  margin-bottom: 50px;
+  transform: translate3d(20px, 0, 0);
+  color: #d4a024;
+  font-weight: 300;
+  opacity: 0;
+  transition: 0.2s ease 0.4s;
+}
+.timeline .swiper-slide .timeline-title {
+  font-weight: 800;
+  font-size: 34px;
+  margin: 0 0 30px;
+  opacity: 0;
+  transform: translate3d(20px, 0, 0);
+  transition: 0.2s ease 0.5s;
+}
+.timeline .swiper-slide .timeline-text {
+  line-height: 1.5;
+  opacity: 0;
+  transform: translate3d(20px, 0, 0);
+  transition: 0.2s ease 0.6s;
+}
+.timeline .swiper-slide-active .timeline-year {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: 0.4s ease 1.6s;
+}
+.timeline .swiper-slide-active .timeline-title {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: 0.4s ease 1.7s;
+}
+.timeline .swiper-slide-active .timeline-text {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: 0.4s ease 1.8s;
+}
+.timeline .swiper-pagination {
+  right: 15% !important;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 18px;
+  z-index: 1;
+}
+.timeline .swiper-pagination::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 0;
+  height: 100%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.timeline .swiper-pagination-bullet {
+  width: auto;
+  height: auto;
+  text-align: center;
+  opacity: 1;
+  background: transparent;
+  color: #d4a024;
+  margin: 15px 0 !important;
+  position: relative;
+}
+.timeline .swiper-pagination-bullet::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: -32.5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background-color: #d4a024;
+  transform: scale(0);
+  transition: 0.2s;
+}
+.timeline .swiper-pagination-bullet-active {
+  color: #d4a024;
+}
+.timeline .swiper-pagination-bullet-active::before {
+  transform: scale(1);
+}
+.timeline .swiper-button-next,
+.timeline .swiper-button-prev {
+  background-size: 20px 20px;
+  top: 15%;
+  width: 20px;
+  height: 20px;
+  margin-top: 0;
+  z-index: 2;
+  transition: 0.2s;
+}
+.timeline .swiper-button-prev {
+  left: 10%;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23d4a024'%2F%3E%3C%2Fsvg%3E");
+}
+.timeline .swiper-button-prev:hover {
+  transform: translateX(-10px);
+}
+.timeline .swiper-button-next {
+  right: 10%;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23d4a024'%2F%3E%3C%2Fsvg%3E");
+}
+.timeline .swiper-button-next:hover {
+  transform: translateX(5px);
+}
+@media screen and (min-width: 768px) {
+  .timeline .swiper-slide::after {
+    right: -30%;
+    bottom: -8%;
+    width: 240px;
+    height: 50%;
+    box-shadow: -230px 0 150px 50vw rgba(0, 0, 0, 0.7);
+  }
+  .timeline .swiper-slide-content {
+    right: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 310px;
+    font-size: 11px;
+    text-align: right;
+  }
+  .timeline .swiper-slide .timeline-year {
+    margin-bottom: 0;
+    font-size: 32px;
+  }
+  .timeline .swiper-slide .timeline-title {
+    font-size: 46px;
+    margin: 0;
+  }
+  .timeline .swiper-pagination {
+    display: flex;
+  }
+  .timeline .swiper-button-prev {
+    top: 15%;
+    left: auto;
+    right: 15%;
+    transform: rotate(90deg) translate(0, 10px);
+  }
+  .timeline .swiper-button-prev:hover {
+    transform: rotate(90deg) translate(-3px, 10px);
+  }
+  .timeline .swiper-button-next {
+    top: auto;
+    bottom: 15%;
+    right: 15%;
+    transform: rotate(90deg) translate(0, 10px);
+  }
+  .timeline .swiper-button-next:hover {
+    transform: rotate(90deg) translate(3px, 10px);
+  }
+}
+@media screen and (min-width: 1024px) {
+  .timeline .swiper-slide::after {
+    right: -20%;
+    bottom: -12%;
+    width: 240px;
+    height: 50%;
+    box-shadow: -230px 0 150px 39vw rgba(0, 0, 0, 0.7);
+  }
+  .timeline .swiper-slide-content {
+    right: 25%;
+  }
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+
 <style>
 /* our services */
 .section-title {
@@ -142,12 +389,10 @@
                dataType : "json",
                success : function(data) {
                   console.log("success : " + data);
-
                   // object ==> string
                   var jsonStr = JSON.stringify(data);
                   // string ==> json
                   var json = JSON.parse(jsonStr);
-
                   var values = "";
                   for ( var i in json.list) {
                      values += "<tr><td>"
@@ -160,7 +405,6 @@
                            + "</a></td><td> "+ json.list[i].qa_writer +" </td><td> "+ json.list[i].qa_create_date +" </td><td>"
                            + json.list[i].qa_readcount + "</td></tr>";
                   } //for in
-
                   $("#top_qa").html($("#top_qa").html() + values);
                },
                error : function(jqXHR, textstatus, errorthrown) {
@@ -181,12 +425,10 @@
                dataType : "json",
                success : function(data) {
                   console.log("success : " + data);
-
                   // object ==> string
                   var jsonStr = JSON.stringify(data);
                   // string ==> json
                   var json = JSON.parse(jsonStr);
-
                   var values = "";
                   for ( var i in json.list) {
                      values += "<tr><td>"
@@ -199,7 +441,6 @@
                            + "</a></td><td>"
                            + json.list[i].n_create_date + "</td><td> "+ json.list[i].ncount +" </td></tr>";
                   } //for in
-
                   $("#new_notice").html($("#new_notice").html() + values);
                },
                error : function(jqXHR, textstatus, errorthrown) {
@@ -208,21 +449,17 @@
                }
             });
    }); // jquery document ready
-
    //조회수 많은 인기 게시글출력되게 함
-
          $.ajax({
             url : "${ pageContext.request.contextPath }/btop3.do", /* 절대경로 */
             type : "post",
             dataType : "json",
             success : function(data) {
                console.log("success : " + data);
-
                // object ==> string
                var jsonStr = JSON.stringify(data);
                // string ==> json
                var json = JSON.parse(jsonStr);
-
                var values = "";
                for ( var i in json.list) {
                   values += "<tr><td>"
@@ -240,7 +477,6 @@
                         + "</td><td>" + json.list[i].bcount
                         + "</td></tr>";
                } //for in
-
                $("#top_board").html($("#top_board").html() + values);
             },
             error : function(jqXHR, textstatus, errorthrown) {
@@ -260,7 +496,6 @@ table.table2 {
 	border-top: 1px solid #ccc;
 	margin: 20px 10px;
 }
-
 table.table2 tr {
 	width: 50px;
 	padding: 10px;
@@ -268,7 +503,6 @@ table.table2 tr {
 	vertical-align: top;
 	border-bottom: 1px solid #ccc;
 }
-
 table.table2 td {
 	padding: 10px;
 	vertical-align: top;
@@ -277,10 +511,15 @@ table.table2 td {
 </style>
 
 
-<link rel="stylesheet" href="/hhw/resources/main/css/core.css" />
-<link rel="stylesheet" href="/hhw/resources/main/css/icon-font.min.css" />
-<link rel="stylesheet" href="/hhw/resources/main/css/style.css" />
+<link rel="stylesheet" href="/hhw/resources/main/core.css" />
+<link rel="stylesheet" href="/hhw/resources/main/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/main/style.css" />
 
+<link rel="stylesheet" href="/hhw/resources/main/normalize.min.css" />
+<link rel="stylesheet" href="/hhw/resources/main/swiper.min.css" />
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
 
 
 </head>
@@ -404,56 +643,8 @@ table.table2 td {
 		<!-- <hr style="clear: both; margin-top:20px;">
 		float되있는거 해제
  -->
-
-			<!-- 사이트 정보 퍼센트로 나타내보앗음 -->
-			<section style="background-color:#f2f0f0; padding-top:30px; padding-bottom:50px;">
-				<div class="row" style="margin-top:30px; margin-bottom:-100px;">
-		            <div class="col-xl-6 mx-auto text-center" style="margin-bottom:-20px;">
-		               <div class="section-title mb-100">
-		                  <p>Hi Hello World</p>
-		                  <h4>사이트 이용자 만족도 조사</h4>
-		               </div>
-		            </div>
-	         	</div>
-	         	<div style="width:1200px; margin-top:50px; margin-left:400px;">
-					<div class="row clearfix progress-box">
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
-							<div class="card-box pd-30 height-100-p">
-								<div class="progress-box text-center">
-									 <input type="text" class="knob dial1" value="95" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#1b00ff" data-angleOffset="180" readonly style="color:#f2e9e9;">
-									<h3 class="text-blue padding-top-10 h3" style="margin-top:20px;">코딩의뢰 답변률</h3>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
-							<div class="card-box pd-30 height-100-p">
-								<div class="progress-box text-center">
-									 <input type="text" class="knob dial2" value="70" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#00e091" data-angleOffset="180" readonly>
-									<h3 class="text-light-green padding-top-10 h3" style="margin-top:20px;">프로젝트 매칭률</h3>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
-							<div class="card-box pd-30 height-100-p">
-								<div class="progress-box text-center">
-									 <input type="text" class="knob dial3" value="90" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#f56767" data-angleOffset="180" readonly>
-									<h3 class="text-light-orange padding-top-10 h3" style="margin-top:20px;">프로젝트 성공률</h3>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
-							<div class="card-box pd-30 height-100-p">
-								<div class="progress-box text-center">
-									 <input type="text" class="knob dial4" value="65" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#a683eb" data-angleOffset="180" readonly>
-									<h3 class="text-light-purple padding-top-10 h3" style="margin-top:20px;">만족도</h3>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-
+ 
+ 
 
 
 <style>
@@ -719,269 +910,105 @@ table.table2 td {
       </div>
    </section>
 
-<style>
-
-/*===== Vertical Timeline =====*/
-#conference-timeline {
-  position: relative;
-  max-width: 920px;
-  width: 100%;
-  margin: 0 auto;
-}
-#conference-timeline .timeline-start,
-#conference-timeline .timeline-end {
-  display: table;
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 900;
-  text-transform: uppercase;
-  background: #f7921a;
-  padding: 15px 23px;
-  color: #fff;
-  max-width: 5%;
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-}
-#conference-timeline .conference-center-line {
-  position: absolute;
-  width: 3px;
-  height: 100%;
-  top: 0;
-  left: 50%;
-  margin-left: -2px;
-  background: #f7921a;
-  z-index: -1;
-}
-#conference-timeline .conference-timeline-content {
-  padding-top: 67px;
-  padding-bottom: 67px;
-}
-.timeline-article {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  margin: 20px 0;
-}
-.timeline-article .content-left-container,
-.timeline-article .content-right-container {
-  max-width: 44%;
-  width: 100%;
-}
-.timeline-article .timeline-author {
-  display: block;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  color: #242424;
-  text-align: right;
-}
-.timeline-article .content-left,
-.timeline-article .content-right {
-  position: relative;
-  width: auto;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.03);
-  padding: 27px 25px;
-}
-.timeline-article p {
-  margin: 0 0 0 60px;
-  padding: 0;
-  font-weight: 400;
-  color: #242424;
-  font-size: 14px;
-  line-height: 24px;
-  position: relative;
-}
-.timeline-article p span.article-number {
-  position: absolute;
-  font-weight: 300;
-  font-size: 44px;
-  top: 10px;
-  left: -60px;
-  color: #f7921a;
-}
-.timeline-article .content-left-container {
-  float: left;
-}
-.timeline-article .content-right-container {
-  float: right;
-}
-.timeline-article .content-left:before,
-.timeline-article .content-right:before{
-  position: absolute;
-  top: 20px;
-  font-size: 23px;
-  font-family: "FontAwesome";
-  color: #fff;
-}
-.timeline-article .content-left:before {
-  content: "\f0da";
-  right: -8px;
-}
-.timeline-article .content-right:before {
-  content: "\f0d9";
-  left: -8px;
-}
-.timeline-article .meta-date {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 62px;
-  height: 62px;
-  margin-left: -31px;
-  color: #fff;
-  border-radius: 100%;
-  background: #f7921a;
-}
-.timeline-article .meta-date .date,
-.timeline-article .meta-date .month {
-  display: block;
-  text-align: center;
-  font-weight: 900;
-}
-.timeline-article .meta-date .date {
-  font-size: 30px;
-  line-height: 40px;
-}
-.timeline-article .meta-date .month {
-  font-size: 18px;
-  line-height: 10px;
-}
-/*===== // Vertical Timeline =====*/
-
-/*===== Resonsive Vertical Timeline =====*/
-@media only screen and (max-width: 830px) {
-  #conference-timeline .timeline-start,
-  #conference-timeline .timeline-end {
-    margin: 0;
-  }
-  #conference-timeline .conference-center-line {
-    margin-left: 0;
-    left: 50px;
-  }
-  .timeline-article .meta-date {
-    margin-left: 0;
-    left: 20px;
-  }
-  .timeline-article .content-left-container,
-  .timeline-article .content-right-container {
-    max-width: 100%;
-    width: auto;
-    float: none;
-    margin-left: 110px;
-    min-height: 53px;
-  }
-  .timeline-article .content-left-container {
-    margin-bottom: 20px;
-  }
-  .timeline-article .content-left,
-  .timeline-article .content-right {
-    padding: 10px 25px;
-    min-height: 65px;
-  }
-  .timeline-article .content-left:before {
-    content: "\f0d9";
-    right: auto;
-    left: -8px;
-  }
-  .timeline-article .content-right:before {
-    display: none;
-  }
-}
-@media only screen and (max-width: 400px) {
-  .timeline-article p {
-    margin: 0;
-  }
-  .timeline-article p span.article-number {
-    display: none;
-  }
-  
-}
-/*===== // Resonsive Vertical Timeline =====*/
-</style>
- <!-- Vertical Timeline -->
-  <br>
-  <section id="conference-timeline">
-    <div class="timeline-start">START</div>
-     <div class="conference-center-line"></div>
-    <div class="conference-timeline-content">
-      <!-- Article -->
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">
-            <p>수정이 필요한 코딩 또는 원하는 프로젝트, 목표기한, 임무 완료시 제공할 금액을 명시<span class="article-number">01</span></p>
-          </div>
-          <br><br><br>
-        </div>
-        <br>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>의뢰인의 글을 확인하고 목표기한 내 기능을 구현할 수 있으면 댓글로 의사를 표현<span class="article-number">02</span></p>
-          </div>               
-        </div>
-         <br>
-        <div class="meta-date">
-        <br>
-          <span class="date"></span>
-          <span class="month"></span>
-        </div>
-      </div>
-      <!-- // Article -->
-      
-      <!-- Article -->
-      
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">          
-            <p> 댓글을 작성한 답변자의 개인 스펙(평점)을 확인하고 1 : 1 대화를 보낼 수 있어요 <span class="article-number">03</span></p>
-          </div>   
-           <br><br><br>       
-        </div>
-        <br>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>1 : 1 대화를 통해서 구체적인 구현 기능과 목표 기한, 금액을 의논하고 진행합니다.<span class="article-number">04</span></p>
-          </div>         
-        </div>
-        <br>
-        <div class="meta-date">
-        <br>
-          <span class="date"></span>
-          <span class="month"></span>
-        </div>
-      </div>
-      <!-- // Article -->
-      
-      <!-- Article -->
-      <div class="timeline-article">
-        <div class="content-left-container">
-          <div class="content-left">
-            <p>진행사항을 수시로 확인하며 수정사항을 최소화 하세요.<span class="article-number">05</span></p>
-          </div>  
-           <br><br><br>        
-        </div>
-        <br>
-        <div class="content-right-container">
-          <div class="content-right">
-            <p>목표기한에 원하는 기능이 구현되었으면, 결제를 통해 답변자에게 포인트가 지급되며, 평점을 작성해주세요<span class="article-number">06</span></p>
-          </div>          
-        </div>
-        <br>   
-        <div class="meta-date">        
-          <span class="date"></span>
-          <span class="month"></span>
-        </div>
-      </div>
-      <!-- // Article -->
-    </div>
-    <div class="timeline-end">End</div>
-  </section>
-  
-  <hr style="clear: both; margin-top:20px;">
-  
+			<!-- 사이트 정보 퍼센트로 나타내보앗음 -->
+			<section style="background-color:#f2f0f0; padding-top:30px; padding-bottom:50px;">
+				<div class="row" style="margin-top:30px; margin-bottom:-100px;">
+		            <div class="col-xl-6 mx-auto text-center" style="margin-bottom:-20px;">
+		               <div class="section-title mb-100">
+		                  <p>Hi Hello World</p>
+		                  <h4>사이트 이용자 만족도 조사</h4>
+		               </div>
+		            </div>
+	         	</div>
+	         	<div style="width:1200px; margin-top:50px; margin-left:400px;">
+					<div class="row clearfix progress-box">
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
+							<div class="card-box pd-30 height-100-p">
+								<div class="progress-box text-center">
+									 <input type="text" class="knob dial1" value="95" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#1b00ff" data-angleOffset="180" readonly style="color:#f2e9e9;">
+									<h3 class="text-blue padding-top-10 h3" style="margin-top:20px;">코딩의뢰 답변률</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
+							<div class="card-box pd-30 height-100-p">
+								<div class="progress-box text-center">
+									 <input type="text" class="knob dial2" value="70" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#00e091" data-angleOffset="180" readonly>
+									<h3 class="text-light-green padding-top-10 h3" style="margin-top:20px;">프로젝트 매칭률</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
+							<div class="card-box pd-30 height-100-p">
+								<div class="progress-box text-center">
+									 <input type="text" class="knob dial3" value="90" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#f56767" data-angleOffset="180" readonly>
+									<h3 class="text-light-orange padding-top-10 h3" style="margin-top:20px;">프로젝트 성공률</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6 col-sm-12 mb-30" style="float:left;">
+							<div class="card-box pd-30 height-100-p">
+								<div class="progress-box text-center">
+									 <input type="text" class="knob dial4" value="65" data-width="200" data-height="200" data-linecap="round" data-thickness="0.12" data-bgColor="#fff" data-fgColor="#a683eb" data-angleOffset="180" readonly>
+									<h3 class="text-light-purple padding-top-10 h3" style="margin-top:20px;">만족도</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+						
+			<div style="padding-top:30px;padding-bottom:30px; width:100%;">
+			  <div class="container11" >
+			  <h1 class="title11" style="padding-bottom:30px;">Our Team Project Timeline</h1>
+			  <div class="timeline">
+			    <div class="swiper-container">
+			      <div class="swiper-wrapper" >
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=11" data-year="2021">
+			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
+			            <h4 class="timeline-title">프로젝트 기획</h4>
+			            <p class="timeline-text">프로젝트 기획 했다</p>
+			          </div>
+			        </div>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=12" data-year="2021">
+			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
+			            <h4 class="timeline-title">UI 설계</h4>
+			            <p class="timeline-text">UI설계 했다</p>
+			          </div>
+			        </div>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=13" data-year="2021">
+			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
+			            <h4 class="timeline-title">DB 설계</h4>
+			            <p class="timeline-text">DB 설계 했다</p>
+			          </div>
+			        </div>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=14" data-year="2021">
+			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
+			            <h4 class="timeline-title">클래스 패키지</h4>
+			            <p class="timeline-text">패키지 처리 했다</p>
+			          </div>
+			        </div>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=15" data-year="2021">
+			          <div class="swiper-slide-content"><span class="timeline-year">00.00</span>
+			            <h4 class="timeline-title">기능구현 시작</h4>
+			            <p class="timeline-text">기능구현 했다</p>
+			          </div>
+			        </div>
+			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=16" data-year="2016">
+			          <div class="swiper-slide-content"><span class="timeline-year">2016</span>
+			            <h4 class="timeline-title">제작완료</h4>
+			            <p class="timeline-text">제작완료용</p>
+			          </div>
+			        </div>
+			      </div>
+			      <div class="swiper-button-prev"></div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-pagination"></div>
+			    </div>
+			  </div>
+			</div>
+			</div>
   
   
   <!-- START TEAM SECTION -->
@@ -1114,6 +1141,28 @@ table.table2 td {
 <script src="/hhw/resources/main/script.min.js"></script>
 <script src="/hhw/resources/main/jquery.knob.min.js"></script>
 <script src="/hhw/resources/main/knob-chart-setting.js"></script>
+
+<script src="/hhw/resources/main/swiper.min.js"></script>
+<script src="/hhw/resources/main/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+   <script id="rendered-js" >
+var timelineSwiper = new Swiper('.timeline .swiper-container', {
+  direction: 'vertical',
+  loop: false,
+  speed: 1600,
+  pagination: '.swiper-pagination',
+  paginationBulletRender: function (swiper, index, className) {
+    var year = document.querySelectorAll('.swiper-slide')[index].getAttribute('data-year');
+    return '<span class="' + className + '">' + year + '</span>';
+  },
+  paginationClickable: true,
+  nextButton: '.swiper-button-next',
+  prevButton: '.swiper-button-prev',
+  breakpoints: {
+    768: {
+      direction: 'horizontal' } } });
+//# sourceURL=pen.js
+    </script>
 
 		<jsp:include page="../common/footer.jsp" />
 </body>
