@@ -22,7 +22,6 @@
 									<h3>Hi Hello World!</h3>
 									<p>Developer Community</p>
 								</div>
-							</a>
 						</div>
 						<div class="about mb-2">
 							<p>개발자 또는 개발에 관심이 있는<br> 사람들이 의견을 주고 받는<br> 커뮤니티 사이트</p>
@@ -35,30 +34,30 @@
 							<h3>Quick Links</h3>
 						</div>
 						<!-- END SECTION TITLE -->
-						
-						
-	<c:url var="qalist" value="qalist.do">
-		<c:param name="page" value="1"/>
-	</c:url>
-	<c:url var="blist" value="blist.do">
-		<c:param name="page" value="1" />
-	</c:url>
-	<c:url var="nlist" value="nlist.do">
-		<c:param name="page" value="1" />
-	</c:url>
-	<c:url var="revlist" value="revlist.do">
-		<c:param name="page" value="1" />
-	</c:url>
-	<c:url var="admin" value="admin.do">
-		<c:param name="page" value="1" />
-	</c:url>
-	<c:url var="blame" value="b.blame.list.do">
-		<c:param name="page" value="1" />
-	</c:url>
-	<c:url var="about" value="aboutUs.do">
-		<c:param name="page" value="1" />
-	</c:url>
-						
+																	
+																	
+												<c:url var="qalist" value="qalist.do">
+													<c:param name="page" value="1"/>
+												</c:url>
+												<c:url var="blist" value="blist.do">
+													<c:param name="page" value="1" />
+												</c:url>
+												<c:url var="nlist" value="nlist.do">
+													<c:param name="page" value="1" />
+												</c:url>
+												<c:url var="revlist" value="revlist.do">
+													<c:param name="page" value="1" />
+												</c:url>
+												<c:url var="admin" value="admin.do">
+													<c:param name="page" value="1" />
+												</c:url>
+												<c:url var="blame" value="b.blame.list.do">
+													<c:param name="page" value="1" />
+												</c:url>
+												<c:url var="about" value="aboutUs.do">
+													<c:param name="page" value="1" />
+												</c:url>
+		
 						<div class="col-12 footer-widget-inner">
 							<ul class="quick-link-list">
 								<li><a href="${ nlist }"><i class="fa fa-chevron-circle-right"></i>
@@ -77,36 +76,7 @@
 						</div>
 					</div>
 					<!-- End Widget -->
-					<div
-						class="col-lg-3 col-md-6 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-5 footer-widget">
-						<div class="footer-section-title col-12 no-padding">
-							<h3>latest Post</h3>
-						</div>
-						<!-- END SECTION TITLE -->
-						<div class="col-12 footer-widget-inner recentPost">
-							<div class="singleRecpost">
-								<img src="#" alt="" class="img-fluid">
-								<h6 class="recTitle">
-									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
-								</h6>
-								<p class="posted-on">3 DEC 2018</p>
-							</div>
-							<div class="singleRecpost">
-								<img src="#" alt="" class="img-fluid">
-								<h6 class="recTitle">
-									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
-								</h6>
-								<p class="posted-on">4 DEC 2018</p>
-							</div>
-							<div class="singleRecpost">
-								<img src="#" alt="" class="img-fluid">
-								<h6 class="recTitle">
-									<a href="#">Lorem ipsum dolor sit amet, consectetuer.</a>
-								</h6>
-								<p class="posted-on">5 DEC 2018</p>
-							</div>
-						</div>
-					</div>
+					<br><br><br><br><br>
 					<!-- End Widget -->
 					<div class="col-lg-3 col-md-6 col-sm-12 col-12 mb-0 footer-widget">
 						<div class="footer-section-title col-12 no-padding">
@@ -120,7 +90,7 @@
 								</div>
 								<div class="single-fcontact-des">
 									<h6>Compnay Name:</h6>
-									<p>10004, Battery Park, New York, USA</p>
+									<p>서울시 마포구 양화로 127, 첨단빌딩 7층 </p>
 								</div>
 							</div>
 							<div class="single-fcontact mb-2">
@@ -146,13 +116,11 @@
 							<div class="footer-social">
 								<ul>
 									<li><a href="#"><i
-											class="icofont icofont-social-facebook"></i></a></li>
+											class="fa fa-youtube-play"></i></a></li>
 									<li><a href="#"><i
-											class="icofont icofont-social-twitter"></i></a></li>
+											class="fa fa-github"></i></a></li>
 									<li><a href="#"><i
-											class="icofont icofont-social-youtube"></i></a></li>
-									<li><a href="#"><i
-											class="icofont icofont-social-google-plus"></i></a></li>
+											class="fa fa-facebook-official"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -166,23 +134,10 @@
 		<div class="copyright">
 			<div class="auto-container">
 				<div class="row">
-					<div
-						class="col-lg-6 col-md-6 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-4 footer-menu text-center text-lg-left text-md-left">
-						<ul>
-							<li><a href="#">Company Profile</a></li>
-							<li><a href="#">Terms & Condition</a></li>
-							<li><a href="#">Refund Policy</a></li>
-						</ul>
-					</div>
-					<div
-						class="col-lg-6 col-md-6 col-sm-12 col-12 copyright-text text-center text-lg-right text-md-right">
-						<p>
-							Copyright &copy; 2018 <a href=""> Bitland </a> | All Rights
-							Reserved
-						</p>
-					</div>
+					
 				</div>
 			</div>
+		</div>
 		</div>
 	</footer>
 
