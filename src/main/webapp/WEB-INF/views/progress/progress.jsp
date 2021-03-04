@@ -762,7 +762,7 @@
 				객체 생성시에 서버와 자동 연결됨.
 				사용되는 프로토콜은 ws:// 임.
 				*/	
-				webSocket = new WebSocket("ws://3.129.113.243:8080/ws/websocketendpoint");
+				webSocket = new WebSocket("ws://localhost:8888/${pageContext.request.contextPath}/ws/websocketendpoint");
 			
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){
@@ -811,12 +811,15 @@
 			//웹소켓 이벤트핸들러에 의해 실행되는 함수 작성
 			function onMessage(event){
 				//서버로 부터 데이터를 받았을 때 작동되는 함수임
+				console.log(event);
 				var message = event.data.split("|");
+				console.log(message);
 				//보낸사람 아이디
 				var receiverID = message[0];
+				
 				//전송온 메세지
 				var content = message[1];
-				
+				console.log(content);
 				//전송온 메세지가 비었거나, 보낸사람이 내가 연결한
 				//사람이 아닐 경우 아무 내용도 실행하지 않는다.
 				if(content == "" || 
@@ -838,7 +841,7 @@
 			}
 			
 			function onClose(event){
-				alert(event);
+				alert($('#sender').val() + "님이 퇴장하셨습니다.");
 			}
 			
 			//'채팅하기' 버튼 클릭시, 서버와 연결되고 

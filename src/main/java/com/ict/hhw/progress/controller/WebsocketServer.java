@@ -22,8 +22,8 @@ public class WebsocketServer {
     @OnMessage
     public String onMessage(String message){
         System.out.println("Message from the client: " + message);
-        String echoMsg = "Echo from the server : " + message;
-        return echoMsg;
+        //String echoMsg = "Echo from the server : " + message;
+        return message;
     }
  
     @OnError
