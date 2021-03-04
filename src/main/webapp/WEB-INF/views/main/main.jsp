@@ -359,7 +359,7 @@ table.table2 td {
 	
 	<hr style="clear: both;">
 	<!-- float되있는거 해제 -->
-	<section style="margin: 250px; margin-top: 40px; float: center; color:#fff;">
+	<section style="margin-left: 350px; margin-top: 40px; float: center; color:#fff;">
 		
 		<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
 	      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
@@ -615,10 +615,10 @@ table.table2 td {
 	<!-- our services -->
    <section class="services pt-100 pb-50" id="services">
       <div class="container">
-         <div class="row">
-            <div class="col-xl-6 mx-auto text-center">
+         <div class="row" style="margin-bottom:-20px;">
+            <div class="col-xl-6 mx-auto text-center" style="margin-bottom:-20px;">
                <div class="section-title mb-100">
-                  <p>what i can do</p>
+                  <p>Hi Hello World</p>
                   <h4>OUR SERVICES</h4>
                </div>
             </div>
@@ -627,61 +627,431 @@ table.table2 td {
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-laptop"></i>
-                  <h4>Practical Design</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa fa-question"></i>
+                  <h4>커뮤니티에 질문하세요!</h4>
+                  <p>수정이 필요한 코드 또는 만들고 싶은 프로젝트를 게시하세요!</p>
                </div>
             </div>
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-gears"></i>
-                  <h4>Web Development</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa-handshake-o"></i>
+                  <h4>질문에 답하고 point 얻자!</h4>
+                  <p>의뢰인의 게시글을 확인하고 목표기한과 금액을 확인하고 컨텍하세요!</p>
                </div>
             </div>
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-mobile"></i>
-                  <h4>Responsive Design</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa-commenting-o"></i>
+                  <h4>의뢰자는 답변자의 경력 확인!</h4>
+                  <p>의뢰자는 요청이 온 답변자의 정보를 확인하고 1:1 대화를 보내세요!</p>
                </div>
             </div>
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-magic"></i>
-                  <h4>Graphic Design</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa-users"></i>
+                  <h4>구체적인 토의를 통해 목표 설정!</h4>
+                  <p>의뢰자와 답변자는 목표기한과 기능, 포인트를 구체적으로 상의하세요!</p>
                </div>
             </div>
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-pencil"></i>
-                  <h4>Creative Design</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa-weixin"></i>
+                  <h4>진행사항을 수시로 확인하고 검토!</h4>
+                  <p>답변자는 수시로 진행사항을 요구자에게 알려주며 수정사항을 최소화 하세요!</p>
                </div>
             </div>
             <div class="col-lg-4 col-md-6">
                <!-- Single Service -->
                <div class="single-service">
-                  <i class="fa fa-fa fa-lightbulb-o"></i>
-                  <h4>Branding</h4>
-                  <p>Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry typesetting industry</p>
+                  <i class="fa fa-thumbs-o-up"></i>
+                  <h4>답변자의 평점을 작성하세요!</h4>
+                  <p>의뢰자는 답변자의 평점과 만족도를 점수를 주어 답변자의 경력을 올려주세요!</p>
                </div>
             </div>
          </div>
       </div>
    </section>
 
+<style>
+
+/*===== Vertical Timeline =====*/
+#conference-timeline {
+  position: relative;
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+}
+#conference-timeline .timeline-start,
+#conference-timeline .timeline-end {
+  display: table;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #f7921a;
+  padding: 15px 23px;
+  color: #fff;
+  max-width: 5%;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+#conference-timeline .conference-center-line {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  margin-left: -2px;
+  background: #f7921a;
+  z-index: -1;
+}
+#conference-timeline .conference-timeline-content {
+  padding-top: 67px;
+  padding-bottom: 67px;
+}
+.timeline-article {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.timeline-article .content-left-container,
+.timeline-article .content-right-container {
+  max-width: 44%;
+  width: 100%;
+}
+.timeline-article .timeline-author {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #242424;
+  text-align: right;
+}
+.timeline-article .content-left,
+.timeline-article .content-right {
+  position: relative;
+  width: auto;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.03);
+  padding: 27px 25px;
+}
+.timeline-article p {
+  margin: 0 0 0 60px;
+  padding: 0;
+  font-weight: 400;
+  color: #242424;
+  font-size: 14px;
+  line-height: 24px;
+  position: relative;
+}
+.timeline-article p span.article-number {
+  position: absolute;
+  font-weight: 300;
+  font-size: 44px;
+  top: 10px;
+  left: -60px;
+  color: #f7921a;
+}
+.timeline-article .content-left-container {
+  float: left;
+}
+.timeline-article .content-right-container {
+  float: right;
+}
+.timeline-article .content-left:before,
+.timeline-article .content-right:before{
+  position: absolute;
+  top: 20px;
+  font-size: 23px;
+  font-family: "FontAwesome";
+  color: #fff;
+}
+.timeline-article .content-left:before {
+  content: "\f0da";
+  right: -8px;
+}
+.timeline-article .content-right:before {
+  content: "\f0d9";
+  left: -8px;
+}
+.timeline-article .meta-date {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 62px;
+  height: 62px;
+  margin-left: -31px;
+  color: #fff;
+  border-radius: 100%;
+  background: #f7921a;
+}
+.timeline-article .meta-date .date,
+.timeline-article .meta-date .month {
+  display: block;
+  text-align: center;
+  font-weight: 900;
+}
+.timeline-article .meta-date .date {
+  font-size: 30px;
+  line-height: 40px;
+}
+.timeline-article .meta-date .month {
+  font-size: 18px;
+  line-height: 10px;
+}
+/*===== // Vertical Timeline =====*/
+
+/*===== Resonsive Vertical Timeline =====*/
+@media only screen and (max-width: 830px) {
+  #conference-timeline .timeline-start,
+  #conference-timeline .timeline-end {
+    margin: 0;
+  }
+  #conference-timeline .conference-center-line {
+    margin-left: 0;
+    left: 50px;
+  }
+  .timeline-article .meta-date {
+    margin-left: 0;
+    left: 20px;
+  }
+  .timeline-article .content-left-container,
+  .timeline-article .content-right-container {
+    max-width: 100%;
+    width: auto;
+    float: none;
+    margin-left: 110px;
+    min-height: 53px;
+  }
+  .timeline-article .content-left-container {
+    margin-bottom: 20px;
+  }
+  .timeline-article .content-left,
+  .timeline-article .content-right {
+    padding: 10px 25px;
+    min-height: 65px;
+  }
+  .timeline-article .content-left:before {
+    content: "\f0d9";
+    right: auto;
+    left: -8px;
+  }
+  .timeline-article .content-right:before {
+    display: none;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .timeline-article p {
+    margin: 0;
+  }
+  .timeline-article p span.article-number {
+    display: none;
+  }
+  
+}
+/*===== // Resonsive Vertical Timeline =====*/
+</style>
+ <!-- Vertical Timeline -->
+  <br>
+  <section id="conference-timeline">
+    <div class="timeline-start">START</div>
+     <div class="conference-center-line"></div>
+    <div class="conference-timeline-content">
+      <!-- Article -->
+      <div class="timeline-article">
+        <div class="content-left-container">
+          <div class="content-left">
+            <p>수정이 필요한 코딩 또는 원하는 프로젝트, 목표기한, 임무 완료시 제공할 금액을 명시<span class="article-number">01</span></p>
+          </div>
+          <br><br><br>
+        </div>
+        <br>
+        <div class="content-right-container">
+          <div class="content-right">
+            <p>의뢰인의 글을 확인하고 목표기한 내 기능을 구현할 수 있으면 댓글로 의사를 표현<span class="article-number">02</span></p>
+          </div>               
+        </div>
+         <br>
+        <div class="meta-date">
+        <br>
+          <span class="date"></span>
+          <span class="month"></span>
+        </div>
+      </div>
+      <!-- // Article -->
+      
+      <!-- Article -->
+      
+      <div class="timeline-article">
+        <div class="content-left-container">
+          <div class="content-left">          
+            <p> 댓글을 작성한 답변자의 개인 스펙(평점)을 확인하고 1 : 1 대화를 보낼 수 있어요 <span class="article-number">03</span></p>
+          </div>   
+           <br><br><br>       
+        </div>
+        <br>
+        <div class="content-right-container">
+          <div class="content-right">
+            <p>1 : 1 대화를 통해서 구체적인 구현 기능과 목표 기한, 금액을 의논하고 진행합니다.<span class="article-number">04</span></p>
+          </div>         
+        </div>
+        <br>
+        <div class="meta-date">
+        <br>
+          <span class="date"></span>
+          <span class="month"></span>
+        </div>
+      </div>
+      <!-- // Article -->
+      
+      <!-- Article -->
+      <div class="timeline-article">
+        <div class="content-left-container">
+          <div class="content-left">
+            <p>진행사항을 수시로 확인하며 수정사항을 최소화 하세요.<span class="article-number">05</span></p>
+          </div>  
+           <br><br><br>        
+        </div>
+        <br>
+        <div class="content-right-container">
+          <div class="content-right">
+            <p>목표기한에 원하는 기능이 구현되었으면, 결제를 통해 답변자에게 포인트가 지급되며, 평점을 작성해주세요<span class="article-number">06</span></p>
+          </div>          
+        </div>
+        <br>   
+        <div class="meta-date">        
+          <span class="date"></span>
+          <span class="month"></span>
+        </div>
+      </div>
+      <!-- // Article -->
+    </div>
+    <div class="timeline-end">End</div>
+  </section>
+  
+  <hr style="clear: both; margin-top:20px;">
+  
+  
+  
+  	<section class="our-webcoderskull padding-lg">
+				<div class="container">
+					<div class="row heading heading-icon">
+						<h2>MEET OUR TEAM</h2>
+					</div>
+					<ul class="row">
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="/hhw/resources/images/profile/kimwoolina.jpg"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="http://www.webcoderskull.com/">LINA</a>
+								</h3>
+								<p>Lead Developer</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/kimwoolina/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/kimwoolina"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://www.linkedin.com/in/lina-kim-3ba138198/"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="/hhw/resources/images/profile/hwangkyungpil.jpg"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="#">PHILIP</a>
+								</h3>
+								<p>UI/UX Developer</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/hellokovi_koviin/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/powrober"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="/hhw/resources/images/profile/choieunyoung.jpg"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="#">ELLA</a>
+								</h3>
+								<p>Markup Engineer</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/eun_0_99/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/eunyoung2054"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+
+						</li>
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="/hhw/resources/images/profile/kangseonlee.jpg"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="http://www.webcoderskull.com/">JAMES</a>
+								</h3>
+								<p>Software Engineer</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/rkdtjs4954/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/leekangseon4954"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="col-12 col-md-6 col-lg-3">
+							<div class="cnt-block equal-hight" style="height: 349px;">
+								<figure>
+									<img src="/hhw/resources/images/profile/aebinpark.jpg"
+										class="img-responsive" alt="">
+								</figure>
+								<h3>
+									<a href="http://www.webcoderskull.com/">AEBIN</a>
+								</h3>
+								<p>Software Engineer</p>
+								<ul class="follow-us clearfix">
+									<li><a href="https://www.instagram.com/aebin.park/"><i class="fa fa-instagram"
+											aria-hidden="true"></i></a></li>
+									<li><a href="https://github.com/aebin"><i class="fa fa-github"
+											aria-hidden="true"></i></a></li>
+									<li><a href="#"><i class="fa fa-linkedin"
+											aria-hidden="true"></i></a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+	</section>
 
 
 		<jsp:include page="../common/footer.jsp" />

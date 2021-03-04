@@ -221,7 +221,7 @@
 
 											<tr>
 												<th>프로필 사진</th>
-												<td><input multiple="multiple" type="file" name="upfile"
+												<td><input multiple="multiple" type="file" name="propic"
 													value="${ member.propic }"></td>
 											</tr>
 											<tr>
