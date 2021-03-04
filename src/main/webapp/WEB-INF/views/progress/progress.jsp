@@ -707,7 +707,13 @@
 									상대방과 실시간 채팅으로 대화해보세요.<br>
 								
 								<input type="hidden" id="sender" size="10" value="${ sessionScope.loginUser.nickname }">
-								<input type="hidden" id="receiver" size="10" value="${ qplist.pro_answerer }"><br>
+								<c:if test="${ qplist.pro_writer eq sessionScope.loginUser.nickname }">
+								<input type="hidden" id="receiver" size="10" value="${ qplist.pro_answerer }">
+								</c:if>
+								<c:if test="${ qplist.pro_writer ne sessionScope.loginUser.nickname }">
+								<input type="hidden" id="receiver" size="10" value="${ qplist.pro_writer }">
+								</c:if>
+								<br>
 								<button id="start" style="float:right;"><img src="/hhw/resources/images/icon/ico_chat.jpg" width="30px">
 								채팅방 입장</button><br>
 								
@@ -756,7 +762,7 @@
 				객체 생성시에 서버와 자동 연결됨.
 				사용되는 프로토콜은 ws:// 임.
 				*/	
-				webSocket = new WebSocket("ws://localhost:8888/hhw/");
+				webSocket = new WebSocket("ws://3.129.113.243:8080/ws/websocketendpoint");
 			
 				//웹소켓을 통해서 연결이 될 때 동작할 이벤트핸들러 작성
 				webSocket.onopen = function(event){
