@@ -11,8 +11,8 @@ DROP TABLE QAR CASCADE CONSTRAINTS;
 DROP TABLE PROGRESS CASCADE CONSTRAINTS;
 DROP TABLE P_BOARD CASCADE CONSTRAINTS;
 DROP TABLE P_REPLY CASCADE CONSTRAINTS;
-DROP TABLE PAY CASCADE CONSTRAINTS;
-DROP TABLE POINT CASCADE CONSTRAINTS;
+DROP TABLE PAYMENT CASCADE CONSTRAINTS;
+DROP TABLE NAEGONG CASCADE CONSTRAINTS;
 DROP TABLE REVIEW CASCADE CONSTRAINTS;
 DROP TABLE RE_REPLY CASCADE CONSTRAINTS;
 
@@ -27,7 +27,7 @@ DROP SEQUENCE SEQ_PRO;
 DROP SEQUENCE SEQ_PID;
 DROP SEQUENCE SEQ_PRID;
 DROP SEQUENCE SEQ_PAYID;
-DROP SEQUENCE SEQ_POINTID;
+DROP SEQUENCE SEQ_NAEGONGID;
 DROP SEQUENCE SEQ_REVIEW;
 DROP SEQUENCE SEQ_RID;
 
@@ -465,25 +465,26 @@ INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 1, '진행게시판 두번째 댓�
 INSERT INTO P_REPLY VALUES(SEQ_PRID.NEXTVAL, 2, '진행게시판 세번째 댓글입니다.', '박예빈', '21/01/24', NULL, DEFAULT);
                                              
                                              
+
 ------------------------------------------------------------------------------------------------------------------- PAY 테이블 생성
-CREATE TABLE PAY(
+CREATE TABLE PAYMENT(
 PAYID         NUMBER,
-MEMBERID   VARCHAR2(30),
-PAYPG   VARCHAR2(20),
-PAYINFO   VARCHAR2(1000),
-PAYDATE    DATE,
-PAYIP        VARCHAR2(20),
+MEMBER   VARCHAR2(30),
+SORT VARCHAR2(6),
+PRICE   VARCHAR2(1000),
+PAYPG   VARCHAR2(20) DEFAULT '카카오페이',
+PAYDATE    TIMESTAMP,
  CONSTRAINT PK_PAY_ID PRIMARY KEY (PAYID),
- CONSTRAINT FK_MEMBER_ID FOREIGN KEY (MEMBERID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
+ CONSTRAINT FK_MEMBER FOREIGN KEY (MEMBER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
 );
 
 ------------------------------------------------------------------------------------------------------------------- PAY 컬러명 지정
-COMMENT ON COLUMN PAY.PAYID IS '결제 번호';
-COMMENT ON COLUMN PAY.MEMBERID IS '결제 회원';
-COMMENT ON COLUMN PAY.PAYPG IS 'PG사';
-COMMENT ON COLUMN PAY.PAYINFO IS '결제 내용';
-COMMENT ON COLUMN PAY.PAYDATE IS '결제 일시';
-COMMENT ON COLUMN PAY.PAYIP IS '결제 IP';
+COMMENT ON COLUMN PAYMENT.PAYID IS '결제 번호';
+COMMENT ON COLUMN PAYMENT.MEMBER IS '결제 회원';
+COMMENT ON COLUMN PAYMENT.SORT IS '구분(충전/사용)';
+COMMENT ON COLUMN PAYMENT.PRICE IS '가격';
+COMMENT ON COLUMN PAYMENT.PAYPG IS '카카오페이';
+COMMENT ON COLUMN PAYMENT.PAYDATE IS '결제일시';
 
 ------------------------------------------------------------------------------------------------------------------- PAY 시퀀스
 CREATE SEQUENCE SEQ_PAYID
@@ -491,38 +492,32 @@ START WITH 1
 INCREMENT BY 1;
 
 ------------------------------------------------------------------------------------------------------------------- 샘플데이터(PAY)
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '김우린', '10000', '10000', '21/01/24', NULL);
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '박예빈', '50000', '50000', '21/01/24', NULL);
-INSERT INTO PAY VALUES(SEQ_PAYID.NEXTVAL, '이강선', '100000',  '100000', '21/01/24', NULL);
+INSERT INTO PAYMENT VALUES(SEQ_PAYID.NEXTVAL, '김우린', '충전', '10000', DEFAULT, SYSDATE);
+INSERT INTO PAYMENT VALUES(SEQ_PAYID.NEXTVAL, '김우린', '사용', '-1000', DEFAULT, SYSDATE);COMMIT;
 
 
-------------------------------------------------------------------------------------------------------------------- POINT 테이블 생성
-CREATE TABLE POINT (
-POINT_ID      NUMBER,
-P_MEMBER_ID     VARCHAR2(30),
-POINT_DATETIME   DATE,
-POINT_POINT      NUMBER,   
-POINT_TYPE      VARCHAR2(30),
- CONSTRAINT PK_POINT_ID PRIMARY KEY (POINT_ID),
- CONSTRAINT FK_P_MEMBER_ID FOREIGN KEY (P_MEMBER_ID) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
+------------------------------------------------------------------------------------------------------------------- NAEGONG  테이블 생성
+CREATE TABLE NAEGONG(
+NID  NUMBER,
+MEMBER   VARCHAR2(30),
+SORT VARCHAR2(6),
+PRICE   VARCHAR2(1000),
+REF_QA_ID   NUMBER NULL,
+NAEGONGDATE    TIMESTAMP,
+ CONSTRAINT PK_N_ID PRIMARY KEY (NID),
+ CONSTRAINT FK_MEMBER_N FOREIGN KEY (MEMBER) REFERENCES MEMBER(NICKNAME) ON DELETE SET NULL  ----------- 우선 유저 닉네임으로 했음
 );
 
-------------------------------------------------------------------------------------------------------------------- POINT 컬럼명 지정
-COMMENT ON COLUMN POINT.POINT_ID IS '포인트 번호';
-COMMENT ON COLUMN POINT.P_MEMBER_ID IS '회원 아이디';
-COMMENT ON COLUMN POINT.POINT_DATETIME IS '포인트 발행 일시';
-COMMENT ON COLUMN POINT.POINT_POINT IS '포인트 점수';
-COMMENT ON COLUMN POINT.POINT_TYPE IS '포인트 종류';
-
-------------------------------------------------------------------------------------------------------------------- POINT 시퀀스
-CREATE SEQUENCE SEQ_POINTID
-START WITH 1
-INCREMENT BY 1;
-
-------------------------------------------------------------------------------------------------------------------- 샘플데이터(POINT)
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '박예빈', '21/01/24', '100', '충전포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '최은영', '21/01/24', '500', '이벤트 포인트');
-INSERT INTO POINT VALUES(SEQ_POINTID.NEXTVAL, '이강선', '21/01/24', '1000',  '00포인트');
+------------------------------------------------------------------------------------------------------------------- NAEGONG  컬러명 지정
+COMMENT ON COLUMN NAEGONG.NID IS '내공 번호';
+COMMENT ON COLUMN NAEGONG.MEMBER IS '회원 닉네임';
+COMMENT ON COLUMN NAEGONG.SORT IS '구분(출금/획득)';
+COMMENT ON COLUMN NAEGONG.PRICE IS '가격';
+COMMENT ON COLUMN NAEGONG.REF_QA_ID  IS '내공받은 질문 번호';
+COMMENT ON COLUMN NAEGONG.NAEGONGDATE IS '결제일시';
+    
+INSERT INTO NAEGONG VALUES(SEQ_NID.NEXTVAL, '김우린', '획득', '10000', 1, SYSDATE);
+INSERT INTO NAEGONG VALUES(SEQ_NID.NEXTVAL, '김우린', '출금', '-1000', NULL, SYSDATE);
 
 ------------------------------------------------------------------------------------------------------------------- REVIEW(리뷰게시판) 생성
 CREATE TABLE REVIEW(
