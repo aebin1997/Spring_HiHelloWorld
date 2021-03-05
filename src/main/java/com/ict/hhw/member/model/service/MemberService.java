@@ -19,9 +19,6 @@ public interface MemberService {
 	// 회원 정보 수정 서비스를 위한 메소드
 	int updateMember(Member m);
 	
-	// 회원 정보 조회 서비스를 위한 메소드
-	Member selectMember (String id);
-
 	// 회원 탈퇴 서비스를 위한 메소드
 	int deleteMember(String id);
 
@@ -42,5 +39,8 @@ public interface MemberService {
 	
 	// 랭킹 높은 수
 	ArrayList<Member> selectTop3();
+
+	// '내정보 관리하기'로 이동
+	Member selectMember(String id);
 	
 }

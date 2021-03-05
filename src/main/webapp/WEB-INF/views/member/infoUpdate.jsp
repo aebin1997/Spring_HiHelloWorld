@@ -70,7 +70,7 @@
 								type="hidden" name="passwordSkin" value="Y"> <input
 								type="hidden" name="m_id" value="dlsdk54">
 
-							<table class="tbl_comm" border="1">
+							<table class="tbl_comm">
 								<tr class="fst">
 									<th>*아이디<span class="ico">*<span class="screen_out">필수항목</span></span></th>
 									<td><input type="text" value="${ member.id }"

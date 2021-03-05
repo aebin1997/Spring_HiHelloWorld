@@ -22,4 +22,6 @@ public interface QaService {
 	int getSearchTitleListCount(String keyword);
 	int getSearchWriterListCount(String keyword);
 	int getSearchDateListCount(SearchDate dates);
+	ArrayList<Qa> selectListMQ(String writer);
+	ArrayList<Integer> selectListMQR(String writer);
 }

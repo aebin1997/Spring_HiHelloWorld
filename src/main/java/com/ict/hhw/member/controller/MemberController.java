@@ -53,13 +53,13 @@ public class MemberController {
 
 	// 로깅시 추가
 	private Logger logger = LoggerFactory.getLogger(MemberController.class);
-	
+
 	// 내정보 테스트 페이지로 이동 -- 임시 --나중에지움
 	@RequestMapping("test.do")
 	public String test() {
 		return "member/info";
 	}
-	
+
 	// 회원 리스트 *** 이부분 수정하면 경필한테 알려주셈
 	@RequestMapping("mlist.do")
 	public String memberListMethod(Model model) {
@@ -127,10 +127,10 @@ public class MemberController {
 		/* 네이버 아이디로 로그인 (끝) */
 
 		/* 카카오 아이디로 로그인 (시작) */
-		//String kakaoUrl = KakaoController.getAuthorizationUrl(session);
+		// String kakaoUrl = KakaoController.getAuthorizationUrl(session);
 
 		// 생성한 인증 URL을 View로 전달
-		//model.addAttribute("kakao_url", kakaoUrl);
+		// model.addAttribute("kakao_url", kakaoUrl);
 		/* 카카오 아이디로 로그인 (끝) */
 
 		return "member/login";
@@ -315,18 +315,18 @@ public class MemberController {
 		}
 	}
 
-	
 	// 카카오 아이디로 로그인 페이지로 이동(redirect)
 	@RequestMapping("kakaoLogin.move")
 	public String kakaoLogin() {
 		return "member/kakaoLogin";
 	}
-	
+
 	// 카카오 아이디로 로그인
 	@RequestMapping(value = "kakaoLogin.do", method = RequestMethod.POST)
-	public String kakaoLoginView(@RequestParam("kid") String kid, @RequestParam("kname") String kname, @RequestParam("kemail") String kemail, HttpSession session) {
+	public String kakaoLoginView(@RequestParam("kid") String kid, @RequestParam("kname") String kname,
+			@RequestParam("kemail") String kemail, HttpSession session) {
 		Member loginMember = new Member();
-		
+
 		loginMember.setId(kid);
 		loginMember.setName(kname);
 		loginMember.setNickname(kname);
@@ -336,10 +336,9 @@ public class MemberController {
 
 		// 카카오 아이디로 임시 로그인
 		session.setAttribute("loginUser", loginMember);
-		
+
 		return "redirect:home.do";
 	}
-	
 
 	// 로그아웃
 	@RequestMapping("logout.do")
@@ -352,70 +351,67 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 
-	// 마이페이지로 이동
-	@RequestMapping("myInfo.do")
-	public String myInfoView() {
-		return "member/myPage";
-	}
-	
-	// 포인트'충전' & '캐시관리' 로 이동
-		@RequestMapping("payInfo.do")
-		public String payInfoView() {
-			return "member/payInfo";
-		}
-		
 	// 내공 '내공관리' & '환전'하기로 이동
-		@RequestMapping("myNaegong.do")
-		public String myNaegongView() {
-			return "member/naegongInfo";
-		}
-		
-	// 내공 '포인트 관리'하기로 이동
-		@RequestMapping("myPoint.do")
-		public String myPointView() {
-			return "member/pointInfo";
-		}
-				
-		
-	// '충전하기'로 이동
-		@RequestMapping("payCash.do")
-		public String payCashView() {
-			return "member/payCash";
-		}
+	@RequestMapping("myNaegong.do")
+	public String myNaegongView() {
+		return "member/naegongInfo";
+	}
 
+	// 내공 '포인트 관리'하기로 이동
+	@RequestMapping("myPoint.do")
+	public String myPointView() {
+		return "member/pointInfo";
+	}
+
+	// '충전하기'로 이동
+	@RequestMapping("payCash.do")
+	public String payCashView() {
+		return "member/payCash";
+	}
+
+	// '내정보 관리하기'로 이동
+	@RequestMapping("myInfoUpdate.do")
+	public String myInfoUpdateView(@RequestParam("id") String id, Model model) {
+
+		System.out.println(id);
+
+		// Service 호출
+		Member member = mService.selectMember(id);
+
+		model.addAttribute("member", member);
+		return "member/infoUpdate";
+	}
 
 	// 프로필 수정페이지로 이동
 	@RequestMapping("myProfile.do")
 	public String profileView() {
 		return "member/profile";
 	}
-	
+
 	// '프로필 사진' 업로드
-		@RequestMapping(value = "propic.do", method = RequestMethod.POST)
-		public String propicInsertMethod(Member member,
-				HttpServletRequest request, Model model,
-				@RequestParam(name = "upfile", required = false) MultipartFile mfile) {
-			// 업로드된 파일 저장 폴더 지정하기
-			String savePath = request.getSession().getServletContext()
-					.getRealPath("resources/propic");
+	@RequestMapping(value = "propic.do", method = RequestMethod.POST)
+	public String propicInsertMethod(Member member, HttpServletRequest request, Model model,
+			@RequestParam(name = "upfile", required = false) MultipartFile mfile) {
+		// 업로드된 파일 저장 폴더 지정하기
+		String savePath = request.getSession().getServletContext().getRealPath("resources/propic");
 
-			// 첨부파일이 있을때 업로드된 파일을 지정 폴더로 옮기기
-			// 단 첨부된 파일의 이름이 yyyyMMddHHmmss.확장자 형식으로 바뀌어 저장함
-			if (mfile != null) {
-				String fileName = mfile.getOriginalFilename();
-				if (fileName != null && fileName.length() > 0) {
-					member.setPropic(fileName); //원래 파일명 vo 에 저장, set뒤에 대문자
-				}
-			}
-
-			if (mService.insertMember(member) > 0) {
-				return "redirect:myProfile.do";
-			} else {
-				model.addAttribute("msg", "의뢰 등록 실패.");
-				return "common/errorPage";
+		// 첨부파일이 있을때 업로드된 파일을 지정 폴더로 옮기기
+		// 단 첨부된 파일의 이름이 yyyyMMddHHmmss.확장자 형식으로 바뀌어 저장함
+		if (mfile != null) {
+			String fileName = mfile.getOriginalFilename();
+			if (fileName != null && fileName.length() > 0) {
+				member.setPropic(fileName); // 원래 파일명 vo 에 저장, set뒤에 대문자
 			}
 		}
-		
+
+		if (mService.insertMember(member) > 0) {
+			return "redirect:myProfile.do";
+		} else {
+			model.addAttribute("msg", "의뢰 등록 실패.");
+			return "common/errorPage";
+		}
+	}
+
 	// 회원가입
 	@RequestMapping("minsert.do")
 	public String insertMember(@ModelAttribute Member m, Model model, @RequestParam("post") String post,
@@ -465,30 +461,14 @@ public class MemberController {
 			model.addAttribute("msg", "회원가입실패!");
 			return "common/errorPage";
 		}
- 
+
 	}
-	
-	// '내정보 관리하기'로 이동
-			@RequestMapping("myInfoUpdate.do")
-			public String myInfoUpdateView (@RequestParam("id") String id, Model model) {
-				
-				System.out.println(id);
-				
-				// Service 호출
-				Member member = mService.selectMember(id);
-				
-				model.addAttribute("member", member);
-				return "member/infoUpdate";
-			}
-			
-			
+
 	// '내정보' 수정하기
 	@RequestMapping("mupdate.do")
-	public String memberUpdate(@ModelAttribute Member m, Model model, 
-			@RequestParam("post") String post,
-			@RequestParam("addr1") String addr1, 
-			@RequestParam("addr2") String addr2) {
-		
+	public String memberUpdate(@ModelAttribute Member m, Model model, @RequestParam("post") String post,
+			@RequestParam("addr1") String addr1, @RequestParam("addr2") String addr2) {
+
 		System.out.println("Member : " + m);
 		System.out.println("Address 정보 : " + post + ", " + addr1 + ", " + addr2);
 		System.out.println("암호화 처리 후 값 : " + bcryptPasswordEncoder.encode(m.getPwd()));
@@ -625,7 +605,7 @@ public class MemberController {
 			return "ok";
 		}
 	}
-	
+
 	@RequestMapping(value = "mtop3.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String selectTop3Method(HttpServletResponse response) throws UnsupportedEncodingException {
@@ -641,9 +621,9 @@ public class MemberController {
 		for (Member member : list) {
 			// notice 필드값 저장할 json 객체 생성
 			JSONObject job = new JSONObject();
-			
+
 			job.put("nickname", member.getNickname()); // map이랑 같다
-            job.put("propic", member.getPropic());
+			job.put("propic", member.getPropic());
 			job.put("grade", member.getGrade());
 			// 날짜형식의 데이터를 json객체에 담을 때 주의사항, 뷰쪽에서 꺼낼 때 에러가나서, string형으로 바꿔서 json에 담아줘야한다.
 

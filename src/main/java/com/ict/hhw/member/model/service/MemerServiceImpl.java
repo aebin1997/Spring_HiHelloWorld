@@ -33,13 +33,6 @@ public class MemerServiceImpl implements MemberService {
 		return result;
 	}
 	
-	// 회원 정보 조회
-	@Override
-	public Member selectMember(String id) {
-		Member member = mDao.selectMember(id);
-		return member;
-	}
-
 	// 회원 정보 수정 
 	@Override
 	public int updateMember(Member m) {
@@ -82,5 +75,11 @@ public class MemerServiceImpl implements MemberService {
 	public ArrayList<Member> selectTop3() {
 		return mDao.selectTop3();
 		}
+
+	// '내정보 관리하기'로 이동
+	@Override
+	public Member selectMember(String id) {
+		return mDao.selectMember(id);
+	}
 	
 }

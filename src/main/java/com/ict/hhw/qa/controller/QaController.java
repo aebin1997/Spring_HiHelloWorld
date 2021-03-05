@@ -390,6 +390,27 @@ public class QaController {
 		}
 	}
 	
+	// 마이페이지로 이동 - aebin
+			@RequestMapping("myInfo.do")
+			public String qaListMethodMQ(@RequestParam("writer") String writer, Model model) {
+				
+				System.out.println("myInfo.do" + writer);
+				ArrayList<Qa> list = qaService.selectListMQ(writer);
+				ArrayList<Integer> listR = qaService.selectListMQR(writer);
+
+				System.out.println(list.size());
+				System.out.println(listR.size());
+				
+				if(list.size() > 0 && listR.size() > 0) {
+					model.addAttribute("list", list);
+					model.addAttribute("listR", listR );
+					return "member/myPage";
+				}else {
+					model.addAttribute("msg" + "페이지 출력 목록 조회 실패.");
+					return "common/errorPage";
+				}
+			}
+	
 }
 
 

@@ -36,7 +36,7 @@ public class QaDao {
 				new QaPage(startRow, endRow));
 		return (ArrayList<Qa>)list;
 	}
-
+	
 	
 	public Qa selectQa(int qa_id) {
 		return sqlSession.selectOne("qaMapper.selectQa", qa_id);
@@ -91,5 +91,17 @@ public class QaDao {
 		return sqlSession.selectOne("qaMapper.getSearchDateListCount", dates);
 	}
 
+	public ArrayList<Qa> selectListMQ(String writer) {
+			List<Qa> list = sqlSession.selectList("qaMapper.selectListMQ", writer);
+			System.out.println("writer d "+writer);
+			System.out.println(list.size());
+			return (ArrayList<Qa>)list;
+		}
+
+
+	public ArrayList<Integer> selectListMQR(String writer) {
+		List<Integer> listR = sqlSession.selectList("qaMapper.selectListMQR", writer);
+		return (ArrayList<Integer>)listR;
+	}
 
 }

@@ -1,24 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%
-     String name = (String)request.getParameter("name");
-     String email = (String)request.getParameter("email");
-     String phone = (String)request.getParameter("phone");
-     String address = (String)request.getParameter("address");
-     int totalPrice = Integer.parseInt(stotalPrice);
-     
-     String name = (String)request.getAttribute("name");
-     String email = (String)request.getAttribute("email");
-     String phone = (String)request.getAttribute("phone");
-     String address = (String)request.getAttribute("address");
-     int totalPrice = (int)request.getAttribute("totalPrice");    
-    
-     System.out.println("name: "+name);
-     System.out.println("email: "+email);
-     System.out.println("phone: "+phone);
-     System.out.println("address: "+address);
-     System.out.println("totalPrice: "+totalPrice);
-%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,12 +20,12 @@
             pg : 'kakaopay',
             pay_method : '',
             merchant_uid : 'merchant_' + new Date().getTime(),
-            name : '포인트 충전',
-            amount : '<%=totalPrice%>',
-            buyer_email : '<%=email%>',
-            buyer_name : '<%=name%>',
-            buyer_tel : '<%=phone%>',
-            buyer_addr : '<%=address%>',
+            name : '${ price }'+'포인트',
+            amount : '${ price }',
+            buyer_email : '',
+            buyer_name : '${ loginUser.nickname }',
+            buyer_tel : '',
+            buyer_addr : '',
             buyer_postcode : '123-456',
             m_redirect_url : 'http://www.iamport.kr/mobile/landing' // 결제 완료 후 보낼 컨트롤러의 메소드명 
         }, function(rsp) {
@@ -55,7 +36,8 @@
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        imp_uid : rsp.imp_uid
+                        imp_uid : rsp.imp_uid,
+                        amount: rsp.paid_amount
                         //기타 필요한 데이터가 있으면 추가 전달
                     }
                 }).done(function(data) {
@@ -68,13 +50,14 @@
                         msg += '카드 승인번호 : ' + rsp.apply_num;
                         
                         alert(msg);
+                        location.href="<%=request.getContextPath()%>/pSuccess.do?price=${price}&member=${sessionScope.loginUser.nickname}";
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
                 });
                 //성공시 이동할 페이지
-               <%--  location.href='<%=request.getContextPath()%>/order/paySuccess?msg='+msg; --%>
+               location.href="<%=request.getContextPath()%>/pSuccess.do?price=${price}&member=${sessionScope.loginUser.nickname}";
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
@@ -91,3 +74,6 @@
 
 </body>
 </html>
+
+
+
