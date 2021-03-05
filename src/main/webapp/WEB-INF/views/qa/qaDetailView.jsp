@@ -48,10 +48,7 @@ $(function(){
                  + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ")
                  + "</textarea><input type='submit' value='수정'></form>"
                  + "<button onclick='replyDelete(" + json.list[i].qar_id + ");'>삭제</button></td></tr>"
-                 + "<c:url var='qalist1' value='/qalist.do'>"
-	             + "<c:param name='page' value='1'/>"
-	             + "</c:url>"
-	             + "<td><a href='${ qalist1 }'>[list]</a></td><br>"
+	             + "<td><a href='progress.move'>[list]</a></td><br>"
            }else{
                  values += "<tr><td>" + json.list[i].qar_writer
                  + "</td><td>" + json.list[i].qar_create_date 
