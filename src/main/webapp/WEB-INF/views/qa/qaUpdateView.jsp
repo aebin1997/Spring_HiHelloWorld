@@ -67,7 +67,8 @@ table.table2 td {
 									value="${ qa.qa_writer }"></td>
 							</tr>
 							<tr><td>포인트</td>
-							<td><input type="text" name="qa_point"  value="${ qa.qa_point }"></td></tr>
+							<td><input type="text" name="qa_point"  value="${ qa.qa_point }"></td>
+							</tr>
 							<tr>
 								<td>첨부파일</td>
 								<td>

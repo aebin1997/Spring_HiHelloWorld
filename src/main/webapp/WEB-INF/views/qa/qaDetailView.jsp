@@ -15,6 +15,11 @@
 	src="${ pageContext.request.contextPath }/resources/js/jquery-3.5.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-latest.js"></script> 
 
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/railscasts.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 
 <script type="text/javascript">
 $(function(){
@@ -46,9 +51,10 @@ $(function(){
                  + "<input type='hidden' name='qa_id' value='${qa.qa_id}'>"
                  + "<textarea cols='100' rows='4' name='qar_content'>"
                  + decodeURIComponent(json.list[i].qar_content).replace(/\+/gi, " ")
-                 + "</textarea><input type='submit' value='수정'></form>"
-                 + "<button onclick='replyDelete(" + json.list[i].qar_id + ");'>삭제</button></td></tr>"
-	             + "<td><a href='progress.move'>[list]</a></td><br>"
+                 + "</textarea>"
+                 + "<input type='submit' value='수정'><button onclick='replyDelete(" + json.list[i].qar_id + ");'>삭제</button>"
+                 + "<button><a href='progress.move'>[contact]</a></button></td></tr></form>"
+	             + "<br>"
            }else{
                  values += "<tr><td>" + json.list[i].qar_writer
                  + "</td><td>" + json.list[i].qar_create_date 
@@ -125,17 +131,21 @@ table.table2 td {
 				
 	<br>
 
-	<table align="center" cellpadding="2" cellspacing="0" width="700">
+	<table align="center" cellpadding="2" cellspacing="0" width="1000" style="margin-right: 250px;">
 		<tr>
 			<td bgcolor=white>
 				<table class="table2">
 					<tr>
-						<td width="200px">작성자</td>
-						<td width="500px">${ qa.qa_writer } 님</td>
+						<td width="100px">작성자</td>
+						<td width="900px">${ qa.qa_writer } 님
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
+						작성일&nbsp;${ qa.qa_create_date }</td>
 					</tr>
 					<tr>
 						<td width="200px">포인트</td>
 						<td><img src="/hhw/resources/images/point.png" style="width:20px;"><font color="red">${ qa.qa_point }</font>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
 						<img src="/hhw/resources/images/eye.jfif" style="width:20px;">&nbsp;${ qa.qa_readcount }</td>
 					</tr>
@@ -157,7 +167,7 @@ table.table2 td {
 					</tr>
 					<tr>
 						<td width="200px">내 용</td>
-						<td width="500px" height="200"><img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;"> ${ qa.qa_content }</td>
+						<td width="500px" height="200"><img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;"><br>${ qa.qa_content }</td>
 					</tr>
 				</table>
 			</td>
@@ -174,7 +184,7 @@ table.table2 td {
 			<button type="button" onclick="javascript:location.href='${ qauv }'" style='float:center'>수정</button>
 							 
 				<c:url var="qadl" value="/qadelete.do">
-					<c:param name="qaid" value="${ qa.qa_id }" />
+					<c:param name="qadelete" value="${ qa.qa_id }" />
 				</c:url>
 			<button type="button" onclick="javascript:location.href='${ qadl }'" style='float:center'>글삭제</button>
 			
@@ -212,7 +222,7 @@ table.table2 td {
 				<div id="replyDiv" style="padding-bottom: 30px;  padding-top: 20px;">
 					<form action="qarinsert.do" method="post">
 						<input type="hidden" name="ref_qa_id" value="${ qa.qa_id }">
-						<table align="center" width="700" border="0" cellpadding="2">
+						<table align="center" width="700" border="0"  cellpadding="2">
 						
 						<tr>
 							<td height="20" align="center" bgcolor="#ccc"><font color="white">댓글작성</font></td>
@@ -250,7 +260,7 @@ table.table2 td {
  
 	<%-- 댓글목록 표시 영역 --%>
 	<div id="qarlistView" style="padding-bottom: 30px;">
-		<table id="qarlistTbl" align="center" cellspacing="0" cellpadding="20" border="1" width="500"></table>
+		<table id="qarlistTbl" align="center" cellspacing="0" cellpadding="0" border="1" width="500"></table>
 	</div>
 
 

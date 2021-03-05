@@ -66,10 +66,6 @@ table.table2 td {
 								<td>파일선택</td>
 								<td><input type="file" name="upfile"></td>
 							</tr>
-							<tr>
-								<td>코드변환</td>
-								<td><button type="button" onclick="location.href='https://colorscripter.com/' ">코드변환</button></td>
-							</tr>
 							<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto">
 							<tr>
 								<td>내 용</td>
