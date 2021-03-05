@@ -511,12 +511,13 @@ table.table2 td {
 </style>
 
 
-<link rel="stylesheet" href="/hhw/resources/main/core.css" />
-<link rel="stylesheet" href="/hhw/resources/main/icon-font.min.css" />
-<link rel="stylesheet" href="/hhw/resources/main/style.css" />
+<link rel="stylesheet" href="/hhw/resources/main/css/core.css" />
+<link rel="stylesheet" href="/hhw/resources/main/css/icon-font.min.css" />
+<link rel="stylesheet" href="/hhw/resources/main/css/style.css" />
 
 <link rel="stylesheet" href="/hhw/resources/main/normalize.min.css" />
 <link rel="stylesheet" href="/hhw/resources/main/swiper.min.css" />
+
 <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
 <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
 <link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
@@ -610,7 +611,7 @@ table.table2 td {
 			<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
 			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
 				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
-				<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+				<table id="top_qa" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
 					<tr>
 						<th style="text-align: center;" >번호</th>
 						<th style="text-align: center;" >제목</th>
@@ -625,7 +626,7 @@ table.table2 td {
 			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
 			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
 				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
-				<table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+				<table id="top_board" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
 					<tr>
 						<th style="text-align: center;" >번호</th>
 						<th style="text-align: center;" >말머리</th>
@@ -965,40 +966,34 @@ table.table2 td {
 			  <div class="timeline">
 			    <div class="swiper-container">
 			      <div class="swiper-wrapper" >
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=11" data-year="2021-01">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-1.jpg); background-size:contain;" data-year="2021-01">
 			          <div class="swiper-slide-content"><span class="timeline-year">1.11. ~ 1.15.</span>
-			            <h4 class="timeline-title">프로젝트 기획 회의</h4>
-			            <p class="timeline-text">프로젝트 기획 했다</p>
+			            <h4 class="timeline-title" style="color:#fff;">프로젝트 기획 회의</h4>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=12" data-year="2021-01">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-2.jpg);background-size:contain;" data-year="2021-01">
 			          <div class="swiper-slide-content"><span class="timeline-year">1.18. ~ 1.11.</span>
-			            <h4 class="timeline-title">UI 설계 기간</h4>
-			            <p class="timeline-text">UI설계 했다</p>
+			            <h4 class="timeline-title" style="color:#fff;">UI 설계 기간</h4>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=13" data-year="2021-01">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-3.jpg);background-size:contain;" data-year="2021-01">
 			          <div class="swiper-slide-content"><span class="timeline-year">1.25. ~ 1.29.</span>
-			            <h4 class="timeline-title">DB 설계 기간</h4>
-			            <p class="timeline-text">DB 설계 했다</p>
+			            <h4 class="timeline-title" style="color:#fff;">DB 설계 기간</h4>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=14" data-year="2021-02">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-4.png);background-size:contain;" data-year="2021-02">
 			          <div class="swiper-slide-content"><span class="timeline-year">2. 1. ~ 2. 5.</span>
-			            <h4 class="timeline-title">클래스 설계 기간</h4>
-			            <p class="timeline-text">패키지 처리 했다</p>
+			            <h4 class="timeline-title" style="color:#fff;">클래스 설계 기간</h4>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=15" data-year="2021-03">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-5.jpeg);background-size:contain;" data-year="2021-03">
 			          <div class="swiper-slide-content"><span class="timeline-year">2. 8. ~ 3. 4.</span>
-			            <h4 class="timeline-title">프로젝트 구현 및 디버깅 기간</h4>
-			            <p class="timeline-text">기능구현 했다</p>
+			            <h4 class="timeline-title" style="color:#fff;">프로젝트 구현</h4>
 			          </div>
 			        </div>
-			        <div class="swiper-slide" style="background-image: url(https://unsplash.it/1920/500?image=16" data-year="2021-03">
+			        <div class="swiper-slide" style="background-image: url(/hhw/resources/images/t-6.png);background-size:contain;" data-year="2021-03">
 			          <div class="swiper-slide-content"><span class="timeline-year">3. 5.</span>
-			            <h4 class="timeline-title">프로젝트 발표</h4>
-			            <p class="timeline-text">제작완료용</p>
+			            <h4 class="timeline-title" style="color:#fff;">프로젝트 발표</h4>
 			          </div>
 			        </div>
 			      </div>
