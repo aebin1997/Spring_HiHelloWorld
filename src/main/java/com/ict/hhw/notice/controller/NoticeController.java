@@ -46,11 +46,11 @@ public class NoticeController {
 		return "notice/aboutUs";
 	}
 
-	// 사이트 사용법 페이지로 이동
-	@RequestMapping("howTo.do")
-	public String howTo() {
-		return "notice/howTo";
-	}
+	// faq 페이지로 이동
+		@RequestMapping("faq.move")
+		public String faq() {
+			return "notice/faq";
+		}
 
 	// ajax로 최신 공지글 조회 요청 처리용
 		@RequestMapping(value = "ntop3.do", method = RequestMethod.POST)

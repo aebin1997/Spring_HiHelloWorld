@@ -184,7 +184,7 @@ font-family: 'Nanum Gothic', sans-serif;
 									<li><a class="nav-link" href="progress.move">나의 Q&A</a></li>
 									</c:if>
 									<li><a class="nav-link" href="contact.move">CONTACT</a></li>
-							
+									
 								</ul>
 							</nav>
 						</div>

@@ -198,7 +198,8 @@ body {
 </head>
 <body>
 
-   <jsp:include page="../common/header.jsp" />
+
+	<jsp:include page="../common/header.jsp" />
 
 	<c:url var="nlist" value="nlist.do">
 		<c:param name="page" value="1" />
@@ -207,6 +208,9 @@ body {
 		<c:param name="page" value="1" />
 	</c:url>
 	<c:url var="howto" value="howTo.do">
+		<c:param name="page" value="1" />
+	</c:url>
+	<c:url var="faq" value="faq.move">
 		<c:param name="page" value="1" />
 	</c:url>
 
@@ -218,15 +222,15 @@ body {
 					<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 					<li><a class="nav-link" href="${ about }">About Us</a></li>
 					<li><a class="nav-link" href="${ howto }">사이트 이용 방법</a></li>
+					<li><a class="nav-link" href="${ faq }">FAQ</a></li>
 				</ul>
 			</div>
-         <div class="box-position-1"
-            style="background-image: url(/hhw/resources/images/5F5F5F.jpg);"></div>
-      </div>
-   <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  
+			<div class="box-position-1"
+				style="background-image: url(/hhw/resources/images/5F5F5F.jpg);"></div>
+		</div>
+	</section>
+	
+
   
   <!-- Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700,900' rel='stylesheet' type='text/css'>

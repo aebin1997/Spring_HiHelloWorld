@@ -189,6 +189,9 @@ ul {
 	<c:url var="howto" value="howTo.do">
 		<c:param name="page" value="1" />
 	</c:url>
+	<c:url var="faq" value="faq.move">
+		<c:param name="page" value="1" />
+	</c:url>
 
 	<section class="breadcrumbs-custom-inset">
 		<div class="breadcrumbs-custom context-dark bg-overlay-46">
@@ -198,10 +201,11 @@ ul {
 					<li><a class="nav-link" href="${ nlist }">공지사항</a></li>
 					<li><a class="nav-link" href="${ about }">About Us</a></li>
 					<li><a class="nav-link" href="${ howto }">사이트 이용 방법</a></li>
+					<li><a class="nav-link" href="${ faq }">FAQ</a></li>
 				</ul>
 			</div>
 			<div class="box-position-1"
-				style="background-image: url(/hhw/resources/images/5F5F5F.jpg); "></div>
+				style="background-image: url(/hhw/resources/images/5F5F5F.jpg);"></div>
 		</div>
 	</section>
 	<!-- 중간 메뉴 바 끝-->
