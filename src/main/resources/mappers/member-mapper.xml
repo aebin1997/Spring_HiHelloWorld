@@ -101,12 +101,12 @@
    </update>
    
    <!-- 회원 정보 조회-->
-	<select id="selectMember" parameterType="Member" resultMap="memberResultSet">
-		SELECT * FROM MEMBER
-		WHERE ID = #{ id }
-	</select>
-	
-	<!-- 회원 정보 수정 -->
+   <select id="selectMember" parameterType="Member" resultMap="memberResultSet">
+      SELECT * FROM MEMBER
+      WHERE ID = #{ id }
+   </select>
+   
+   <!-- 회원 정보 수정 -->
 	<update id="updateMember" parameterType="Member">
 		UPDATE 
 		       MEMBER

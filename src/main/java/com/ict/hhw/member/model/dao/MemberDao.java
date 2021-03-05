@@ -42,11 +42,6 @@ public class MemberDao {
 		return sqlSession.update("memberMapper.deleteMember", id);
 	}
 	
-	// 회원 정보 조회
-	public Member selectMember(String id) {
-		return (Member)sqlSession.selectOne("memberMapper.selectMember", id);
-	}
-
 	// 회원 정보 수정
 	public int updateMember(Member m) {
 		return sqlSession.update("memberMapper.updateMember", m);
@@ -66,5 +61,10 @@ public class MemberDao {
 	
 	public int idCheck(String id) {
 		return sqlSession.selectOne("memberMapper.idCheck", id);
+	}
+
+	// '내정보 관리하기'로 이동
+	public Member selectMember(String id) {
+		return sqlSession.selectOne("memberMapper.selectMember", id);
 	}
 }

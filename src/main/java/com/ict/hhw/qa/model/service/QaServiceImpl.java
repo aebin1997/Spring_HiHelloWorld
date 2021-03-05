@@ -30,6 +30,7 @@ public class QaServiceImpl implements QaService{
 		return qaDao.selectList(currentPage, limit);  
 	}
 
+
 	@Override
 	public Qa selectQa(int qa_id) {
 		return qaDao.selectQa(qa_id);
@@ -83,6 +84,17 @@ public class QaServiceImpl implements QaService{
 	@Override
 	public int getSearchDateListCount(SearchDate dates) {
 		return qaDao.getSearchDateListListCount(dates);
+	}
+
+	@Override
+	public ArrayList<Qa> selectListMQ(String writer) {
+		System.out.println("writer s "+writer);
+		return qaDao.selectListMQ(writer); 
+	}
+
+	@Override
+	public ArrayList<Integer> selectListMQR(String writer) {
+		return qaDao.selectListMQR(writer); 
 	}
 
 }

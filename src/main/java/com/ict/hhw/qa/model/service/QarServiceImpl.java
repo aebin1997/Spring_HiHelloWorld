@@ -38,5 +38,5 @@ public class QarServiceImpl implements QarService {
 	public ArrayList<Qar> selectList(int ref_qa_id) {
 		return qarDao.selectList(ref_qa_id);
 	}
-
+	
 }

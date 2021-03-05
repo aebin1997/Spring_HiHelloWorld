@@ -3,13 +3,77 @@
 <mapper namespace="paymentMapper">
 
 	<resultMap id="paymentResultSet" type="Payment">
-		<id property="pid" column="pid"/>
-		<result property="payid" column="PAYID"/>
-		<result property="memberid" column="MEMBERID"/>
-		<result property="paypg" column="PAYPG"/>
-		<result property="payinfo" column="PAYINFO"/>
-		<result property="paydate" column="PAYDATE"/>
-		<result property="payip" column="PAYIP"/>
+		<id property="payid" column="payid" />
+		<result property="member" column="MEMBER" />
+		<result property="sort" column="SORT"/>
+		<result property="price" column="PRICE" />
+		<result property="paypg" column="PAYPG" />
+		<result property="paydate" column="PAYDATE" />
 	</resultMap>
+
+	<!-- 결제내역 추가 -->
+	<insert id="insertPayment" parameterType="Payment">
+		INSERT
+		INTO PAYMENT
+		VALUES(
+		SEQ_PAYID.NEXTVAL,
+		#{ member },
+		'충전',
+		#{ price },
+		DEFAULT,
+		SYSDATE
+		)
+	</insert>
 	
-</mapper>
+	<!-- 보유 포인트 ajax -->
+	<select id="selectPoint" parameterType="string" resultType="_int">
+	select sum(price) from payment where member = #{nickname}
+	</select>
+	
+	<!-- 결제내역 리스트 -->
+	<select id="selectPList" parameterType="string"
+		resultMap="paymentResultSet">
+	SELECT * FROM PAYMENT WHERE MEMBER = #{ member }
+	</select>
+	
+	<!-- payinfo 날짜 조회 -->
+	<select id="psearchDate" parameterType="com.ict.hhw.common.PayInfoSearchDate" resultMap="paymentResultSet">
+	select * from payment
+	where paydate between #{ begin } and #{ end }
+	and member = #{ member }
+	</select>
+	
+	
+	
+
+</mapper> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

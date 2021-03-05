@@ -72,6 +72,9 @@ function popupOpen(){ //자바스크립트
 					<td class="on">
 				<div>내공 관리</div>
 				<div><script>if(loginData.isLogin) document.write("("+util_setComma(loginData.myCoupon)+" 장)")</script>(0 내공)</div>
+				<div>
+							<a class="btn_s01" href="javascript:popupOpen();">출금하기</a>
+						</div>
 			</td>
 				</tr>
 			</tbody>

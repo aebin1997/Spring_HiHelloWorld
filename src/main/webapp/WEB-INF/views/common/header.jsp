@@ -196,8 +196,11 @@ font-family: 'Nanum Gothic', sans-serif;
 										<li><a class="nav-link" href="enrollView.do">회원가입</a></li>
 									</c:if>
 									<c:if test="${ !empty sessionScope.loginUser }">
+									<c:url var="mypage" value="/myInfo.do">
+									<c:param name="writer" value="${ loginUser.nickname }"/>
+									</c:url>
 										<li><a class="nav-link" href="logout.do">로그아웃</a></li>
-										<li><a class="nav-link" href="myInfo.do">마이페이지</a></li>
+										<li><a class="nav-link" href="${ mypage }">마이페이지</a></li>
 									</c:if>
 								</ul>
 							</nav>

@@ -2,29 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="qaMapper">
 
-<resultMap type="Qa" id="resultQa">
-	<id column="qa_id" property="qa_id"/>
-	<result column="qa_title" property="qa_title"/>
-	<result column="qa_writer" property="qa_writer"/>
-	<result column="qa_content" property="qa_content"/>
-	<result column="qa_point" property="qa_point"/>
-	<result column="qa_origin_file_name" property="qa_origin_file_name"/>
-	<result column="qa_rename_file_name" property="qa_rename_file_name"/>
-	<result column="qa_readcount" property="qa_readcount"/>
-	<result column="qa_create_date" property="qa_create_date"/>
-	<result column="qa_modify_date" property="qa_modify_date"/>
-	<result column="qa_status" property="qa_status"/>
-</resultMap>
+	<resultMap type="Qa" id="resultQa">
+		<id column="qa_id" property="qa_id" />
+		<result column="qa_title" property="qa_title" />
+		<result column="qa_writer" property="qa_writer" />
+		<result column="qa_content" property="qa_content" />
+		<result column="qa_point" property="qa_point" />
+		<result column="qa_origin_file_name"
+			property="qa_origin_file_name" />
+		<result column="qa_rename_file_name"
+			property="qa_rename_file_name" />
+		<result column="qa_readcount" property="qa_readcount" />
+		<result column="qa_create_date" property="qa_create_date" />
+		<result column="qa_modify_date" property="qa_modify_date" />
+		<result column="qa_status" property="qa_status" />
+	</resultMap>
 
-<resultMap type="Qa" id="qresultTop3">
-	<id column="qa_id" property="qa_id"/>
-	<result column="qa_title" property="qa_title"/>
-	<result column="qa_writer" property="qa_writer"/>
-	<result column="qa_create_date" property="qa_create_date"/>
-	<result column="qa_readcount" property="qa_readcount"/>
-</resultMap>
+	<resultMap type="Qa" id="qresultTop3">
+		<id column="qa_id" property="qa_id" />
+		<result column="qa_title" property="qa_title" />
+		<result column="qa_writer" property="qa_writer" />
+		<result column="qa_create_date" property="qa_create_date" />
+		<result column="qa_readcount" property="qa_readcount" />
+	</resultMap>
 
-<select id="selectTop3" resultMap="qresultTop3">
+	<!-- rnum은 사용하지 않기때문에 aebin -->
+	<resultMap type="Qa" id="myQuestion">
+		<id column="qa_id" property="qa_id" />
+		<result column="qa_title" property="qa_title" />
+		<result column="qa_modify_date" property="qa_modify_date" />
+	</resultMap>
+
+	<!-- 회원의 '내가 한 질문' aebin -->
+	<select id="selectListMQ" parameterType="string"
+		resultMap="myQuestion">
+	<![CDATA[ 
+    select * from (
+    select rownum rnum, qa_id, qa_title, qa_modify_date 
+    from qa where qa_writer = #{ writer } 
+    order by qa_modify_date desc)
+    where rnum >= 1 and rnum <= 5
+	]]>
+	</select>
+
+	<!-- 회원의 '내가한 질문'에 대한 답변 수 aebin -->
+	<select id="selectListMQR" parameterType="string"
+		resultType="com.ict.hhw.qa.model.vo.MQR">
+		select ref_qa_id, count(ref_qa_id) as qaCount from qar
+		where ref_qa_id in (select qa_id from qa where qa_writer = #{ writer })
+		group by ref_qa_id
+	</select>
+	
+	<select id="selectTop3" resultMap="qresultTop3">
 	<![CDATA[
 	select *
 	from(select rownum rnum, qa_id, qa_title, qa_writer, qa_create_date, qa_readcount
@@ -33,24 +62,25 @@
         	order by QA_READCOUNT desc))
 	where rnum >= 1 and rnum <=5
 	]]>
-</select>
+	</select>
 
-<select id="selectQa" parameterType="_int" resultMap="resultQa">
-	select * from qa
-	where qa_id = #{ qa_id }
-</select>
+	<select id="selectQa" parameterType="_int" resultMap="resultQa">
+		select * from qa
+		where qa_id = #{ qa_id }
+	</select>
 
-<update id="updateQacount" parameterType="_int" >
-	update qa
-	set qa_readcount = qa_readcount + 1
-	where qa_id = #{ qa_id }
-</update>
+	<update id="updateQacount" parameterType="_int">
+		update qa
+		set qa_readcount = qa_readcount + 1
+		where qa_id = #{ qa_id }
+	</update>
 
-<select id="getListCount" resultType="_int">
- 	select count(*) from qa 
-</select>
+	<select id="getListCount" resultType="_int">
+		select count(*) from qa
+	</select>
 
-<select id="selectList" parameterType="com.ict.hhw.qa.model.vo.QaPage" resultMap="resultQa">
+	<select id="selectList"
+		parameterType="com.ict.hhw.qa.model.vo.QaPage" resultMap="resultQa">
 	<![CDATA[
 	select *
 	from (select rownum rnum, qa_id, QA_TITLE, QA_WRITER, QA_CONTENT,qa_point,
@@ -61,9 +91,10 @@
 	order by qa_id desc))
 	where rnum >= #{ startRow } and rnum <= #{ endRow }
 	]]>
-</select>
+	</select>
 
-	<select id="searchTitle" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+	<select id="searchTitle"
+		parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
         FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
@@ -76,9 +107,10 @@
                       ORDER BY QA_ID DESC))
       	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
       	]]>
-   </select>
-	
-   <select id="searchWriter" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+	</select>
+
+	<select id="searchWriter"
+		parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
         FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
@@ -91,9 +123,10 @@
                       ORDER BY QA_ID DESC))
       	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
       	]]>
-   </select>
-   
-   <select id="searchDate" parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
+	</select>
+
+	<select id="searchDate"
+		parameterType="com.ict.hhw.common.SearchAndPage" resultMap="resultQa">
    		<![CDATA[
       	SELECT *
         FROM(SELECT ROWNUM RNUM, QA_ID, QA_TITLE, QA_WRITER,QA_CONTENT,qa_point,
@@ -106,62 +139,71 @@
                       ORDER BY QA_ID DESC))
       	WHERE RNUM >=#{ startRow } AND RNUM <= #{ endRow }
       	]]>
-   </select>
+	</select>
 
-	<select id="getSearchTitleListCount" parameterType="string" resultType="_int">
+	<select id="getSearchTitleListCount" parameterType="string"
+		resultType="_int">
 		select count(*) from qa
-		where qa_title like '%' || #{ keyword } || '%'
+		where qa_title like '%' || #{
+		keyword } || '%'
 	</select>
-	
-	<select id="getSearchWriterListCount" parameterType="string" resultType="_int">
+
+	<select id="getSearchWriterListCount" parameterType="string"
+		resultType="_int">
 		select count(*) from qa
-		where qa_writer like '%' || #{ keyword } || '%'
+		where qa_writer like '%' || #{
+		keyword } || '%'
 	</select>
-	
-	<select id="getSearchDateListCount" parameterType="com.ict.hhw.common.SearchDate" resultType="_int">
-		select count(*) from qa
+
+	<select id="getSearchDateListCount"
+		parameterType="com.ict.hhw.common.SearchDate" resultType="_int">
+		select
+		count(*) from qa
 		where qa_create_date between #{ begin } and #{ end }
 	</select>
 
 
-<insert id="insertQa" parameterType ="Qa" >
-	insert into qa
-	<if test="qa_origin_file_name != null">
-		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{ qa_point },
-		#{ qa_origin_file_name }, #{ qa_rename_file_name },
-		default, sysdate, sysdate, default )
-	</if>
-	<if test="qa_origin_file_name == null">
-		values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{ qa_point },
-		 		null, null,
-		 		default, sysdate, sysdate, default)
-	</if>
-</insert>
+	<insert id="insertQa" parameterType="Qa">
+		insert into qa
+		<if test="qa_origin_file_name != null">
+			values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{
+			qa_point },
+			#{ qa_origin_file_name }, #{ qa_rename_file_name },
+			default, sysdate, sysdate, default )
+		</if>
+		<if test="qa_origin_file_name == null">
+			values (SEQ_QA.NEXTVAL, #{ qa_title }, #{ qa_writer }, #{ qa_content }, #{
+			qa_point },
+			null, null,
+			default, sysdate, sysdate, default)
+		</if>
+	</insert>
 
-<update id="updateQa" parameterType="Qa">
-	update qa
-	set qa_title = #{ qa_title },
+	<update id="updateQa" parameterType="Qa">
+		update qa
+		set qa_title = #{ qa_title },
 		qa_content = #{ qa_content },
-		qa_point = #{ qa_point },
+		qa_point = #{
+		qa_point },
 		qa_modify_date = sysdate
 		<if test="qa_origin_file_name == null">
-		, qa_origin_file_name = null,
-		qa_rename_file_name = null
+			, qa_origin_file_name = null,
+			qa_rename_file_name = null
 		</if>
 		<if test="qa_origin_file_name != null">
-		, qa_origin_file_name = #{ qa_origin_file_name },
-		qa_rename_file_name = #{ qa_rename_file_name }
+			, qa_origin_file_name = #{ qa_origin_file_name },
+			qa_rename_file_name = #{ qa_rename_file_name }
 		</if>
 		where qa_id = #{ qa_id }
-</update>
+	</update>
 
-<update id="changeQastatusN" parameterType="_int">
-	update qa
-	set qa_status = 'N',
-	qa_modify_date = sysdate
-	where qa_id = #{ qa_id }
-</update>
-	
+	<update id="changeQastatusN" parameterType="_int">
+		update qa
+		set qa_status = 'N',
+		qa_modify_date = sysdate
+		where qa_id = #{ qa_id }
+	</update>
+
 </mapper>
 
 

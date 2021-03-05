@@ -6,22 +6,22 @@ public class Payment {
 	private final static long serialVersionUID = 9999L;
 	
 	private int payid;
-	private String memberid;
+	private String member;
+	private String sort;
+	private int price;
 	private String paypg;
-	private String payinfo;
 	private Date paydate;
-	private String payip;
 	
 	public Payment() {}
 
-	public Payment(int payid, String memberid, String paypg, String payinfo, Date paydate, String payip) {
+	public Payment(int payid, String member, String sort, int price, String paypg, Date paydate) {
 		super();
 		this.payid = payid;
-		this.memberid = memberid;
+		this.member = member;
+		this.sort = sort;
+		this.price = price;
 		this.paypg = paypg;
-		this.payinfo = payinfo;
 		this.paydate = paydate;
-		this.payip = payip;
 	}
 
 	public int getPayid() {
@@ -32,12 +32,28 @@ public class Payment {
 		this.payid = payid;
 	}
 
-	public String getMemberid() {
-		return memberid;
+	public String getMember() {
+		return member;
 	}
 
-	public void setMemberid(String memberid) {
-		this.memberid = memberid;
+	public void setMember(String member) {
+		this.member = member;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getPaypg() {
@@ -48,14 +64,6 @@ public class Payment {
 		this.paypg = paypg;
 	}
 
-	public String getPayinfo() {
-		return payinfo;
-	}
-
-	public void setPayinfo(String payinfo) {
-		this.payinfo = payinfo;
-	}
-
 	public Date getPaydate() {
 		return paydate;
 	}
@@ -64,22 +72,14 @@ public class Payment {
 		this.paydate = paydate;
 	}
 
-	public String getPayip() {
-		return payip;
-	}
-
-	public void setPayip(String payip) {
-		this.payip = payip;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "Payment [payid=" + payid + ", memberid=" + memberid + ", paypg=" + paypg + ", payinfo=" + payinfo
-				+ ", paydate=" + paydate + ", payip=" + payip + "]";
+		return "Payment [payid=" + payid + ", member=" + member + ", sort=" + sort + ", price=" + price + ", paypg="
+				+ paypg + ", paydate=" + paydate + "]";
 	}
-	
+
 }
