@@ -123,7 +123,7 @@ public class QaController {
 		
 		//원래 첨부파일 있는데, 삭제를 선택한 경우
 		if(qa.getQa_origin_file_name() != null
-				&& delFlag != null && delFlag.equals("yes")) {
+				&& delFlag != null && delFlag.contentEquals("yes")) {
 			//저장 폴더에서 파일 삭제함
 			new File(savePath + "\\" + qa.getQa_rename_file_name()).delete();
 			qa.setQa_origin_file_name(null);
