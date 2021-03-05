@@ -551,20 +551,20 @@ table.table2 td {
 					</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="/hhw/resources/images/car.png" alt="Second slide" style="width:100%; height:400px;">
+				<img class="d-block w-100" src="/hhw/resources/images/star.png" alt="Second slide" style="width:100%; height:400px;">
 					<div class="carousel-caption d-none d-md-block">
 						<div class="home-single-slide-dec" style="width:1000px; top:-180px;">
-							<h3 style="color:black; margin-left:80px;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
-							<p class="text-capitalize" style="color:black; margin-left:-280px;"><b>저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수 있습니다.</b></p>
+							<h3 style="color:white; margin-left:80px;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
+							<p class="text-capitalize" style="color:white; margin-left:-280px;"><b>저희 사이트에서는 자유롭게 코딩에 대한 문의를 할 수 있습니다.</b></p>
 							<div class="home-single-slide-button" style="margin-top:20px; margin-left:-350px;">
-								<a href="#" class="btn-style btn-filled" style="color:black;">코딩의뢰 하기</a>
-								<a href="#" class="btn-style btn-filled" style="color:black;">포인트 충전하기</a>
+								<a href="#" class="btn-style btn-filled" style="color:white;">코딩의뢰 하기</a>
+								<a href="#" class="btn-style btn-filled" style="color:white;">포인트 충전하기</a>
 							</div>
 						</div>
 					</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="/hhw/resources/images/test1.jpg" alt="Third slide" style="width:100%; height:400px;">
+				<img class="d-block w-100" src="/hhw/resources/images/qwer.png" alt="Third slide" style="width:100%; height:400px;">
 				<div class="carousel-caption d-none d-md-block">
 					<div class="home-single-slide-dec" style="width:1000px; top:-180px;">
 							<h3 style="color:black; margin-left:80px;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
