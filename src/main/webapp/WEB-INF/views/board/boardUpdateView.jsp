@@ -50,6 +50,7 @@ table.table2 td {
 		<br><br>
 		<form action="bupdate.do" method="post" enctype="multipart/form-data" style="padding-bottom: 30px;">
 			<input type="hidden" name="bid" value="${ board.bid }">
+			<input type="hidden" name="btitle" value="${ board.btitle }">
 			<input type="hidden" name="b_original_filename" value="${ board.b_original_filename }">
 			<input type="hidden" name="b_rename_filename" value="${ board.b_rename_filename }">
 			<input type="hidden" name="page" value="${ currentPage }">
