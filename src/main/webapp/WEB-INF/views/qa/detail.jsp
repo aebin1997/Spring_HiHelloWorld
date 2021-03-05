@@ -137,12 +137,6 @@ table.table2 td {
 						<td width="500px">${ qa.qa_writer } 님</td>
 					</tr>
 					<tr>
-						<td width="200px">포인트</td>
-						<td><img src="/hhw/resources/images/point.png" style="width:20px;"><font color="red">${ qa.qa_point }</font>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 
-						<img src="/hhw/resources/images/eye.jfif" style="width:20px;">&nbsp;${ qa.qa_readcount }</td>
-					</tr>
-					<tr>
 						<td width="200px">첨부파일</td>
 						<td width="500px">
 							<c:if test="${ empty qa.qa_origin_file_name }">
@@ -154,13 +148,18 @@ table.table2 td {
 									<c:param name="rfile" value="${ qa.qa_origin_file_name }" />
 								</c:url>
 										<img src="/hhw/resources/images/yesfile.png" style="width:12px;">
+										<span class="c-userinfo__count"><img src="/hhw/resources/images/eye.jfif" style="width:20px;">${ qa.qa_readcount }<br>
 										<a href="${ qafd }">${ qa.qa_origin_file_name }</a>
 							</c:if>
 						</td>
 					</tr>
 					<tr>
+						<img src="/hhw/resources/images/point.png" style="width:20px;"><font color="red">${ qa.qa_point }</font>
+					</tr>
+					<tr>
 						<td width="200px">내 용</td>
-						<td width="500px" height="200"><img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;"> ${ qa.qa_content }</td>
+						<img src="/hhw/resources/qa_files/${ qa.qa_rename_file_name }" style="width:500px;"> 
+						<td width="500px" height="200">${ qa.qa_content }</td>
 					</tr>
 				</table>
 			</td>
@@ -209,7 +208,10 @@ table.table2 td {
 
 	
 
-
+			<c:if test="${ !empty loginUser }">
+			   <button onclick="showReplyForm();">댓글 달기</button>
+			   &nbsp; &nbsp;
+			</c:if>
 				<%-- 댓글달기 폼 영역 --%>
 				<br>
 				<div id="replyDiv" style="padding-bottom: 30px;  padding-top: 20px;">
