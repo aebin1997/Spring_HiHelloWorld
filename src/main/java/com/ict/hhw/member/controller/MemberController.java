@@ -169,11 +169,11 @@ public class MemberController {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "joker@naver.com"; // *본인의 아이디 입력 (ex.joker@naver.com)
-		String hostSMTPpwd = "joker"; // *비밀번호 입력(네이버 로그인 비밀번호)
+		String hostSMTPid = "rladnfls0500@naver.com"; // *본인의 아이디 입력 (ex.joker@naver.com)
+		String hostSMTPpwd = "qlcska5162"; // *비밀번호 입력(네이버 로그인 비밀번호)
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "joker@naver.com"; // *보내는 사람 email
+		String fromEmail = "Coding-Cola@hhw.com"; // *보내는 사람 email
 		String fromName = "Hi Hello World"; // 보내는 사람 이름
 		String sub = subject; // 메일 제목
 		String msg = message; // 메일 내용

@@ -538,7 +538,7 @@ table.table2 td {
 		</ol>
 		<div class="carousel-inner">
 			<div class="carousel-item active">
-				<img class="d-block w-100" src="/hhw/resources/images/test1.jpg" alt="First slide" style="width:100%; height:400px;">
+				<img class="d-block w-100" src="/hhw/resources/images/pink.jpg" alt="First slide" style="width:100%; height:400px;">
 					<div class="carousel-caption d-none d-md-block">
 						<div class="home-single-slide-dec" style="width:1000px; top:-180px;">
 							<h3 style="color:black; margin-left:80px;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
@@ -551,7 +551,7 @@ table.table2 td {
 					</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="/hhw/resources/images/test2.jpg" alt="Second slide" style="width:100%; height:400px;">
+				<img class="d-block w-100" src="/hhw/resources/images/car.png" alt="Second slide" style="width:100%; height:400px;">
 					<div class="carousel-caption d-none d-md-block">
 						<div class="home-single-slide-dec" style="width:1000px; top:-180px;">
 							<h3 style="color:black; margin-left:80px;">Hi Hello World에 방문해주셔서 감사드립니다!</h3>
