@@ -1171,9 +1171,7 @@ var timelineSwiper = new Swiper('.timeline .swiper-container', {
     </script>
 
 
-<!-- <img src="/hhw/resources/images/c1.jpg"><br> -->
 
- 
 <img id="img1" style="width:100px; height: 100px; position:absolute; left:0; top:0; z-index:999;" src="/hhw/resources/images/c1.jpg">
  
 <script language="JavaScript">
