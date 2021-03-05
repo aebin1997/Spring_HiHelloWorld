@@ -588,56 +588,7 @@ table.table2 td {
 	</div>
 
 	
-<!-- 	<hr style="clear: both;">
- -->	<!-- float되있는거 해제 -->
-	
-		<section style="margin: 250px; padding-top: 40px; float: center; color:#fff;">
-			
-			<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
-		      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
-		         <h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">새로운 공지글</h4>
-		         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-		            <tr >
-		            	<th style="text-align: center;" width="50px">번호</th>
-		            	<th style="text-align: center;" width="80px">말머리</th>
-		            	<th style="text-align: center;" width="300px">제           목</th>
-		            	<th style="text-align: center;" width="90px">날짜</th>	
-		            	<th style="text-align: center;" width="60px">조회수</th>	
-		            </tr>
-		         </table>
-		      </div>
-				
-			<!-- <hr style="clear: both; color:#fff; opacity:0;">	 -->
-			<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
-			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
-				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
-				<table id="top_qa" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-					<tr>
-						<th style="text-align: center;" >번호</th>
-						<th style="text-align: center;" >제목</th>
-						<th style="text-align: center;" >작성자</th>
-						<th style="text-align: center;" >날짜</th>
-						<th style="text-align: center;" >조회수</th>
-					</tr>
-				</table>
-			</div>
-		
-		    <hr style="clear: both; opacity:0;">
-			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
-			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
-				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
-				<table id="top_board" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
-					<tr>
-						<th style="text-align: center;" >번호</th>
-						<th style="text-align: center;" >말머리</th>
-						<th style="text-align: center;">작성자</th>
-						<th style="text-align: center;">제목</th>
-						<th style="text-align: center;">작성일</th>
-						<th style="text-align: center;">조회수</th>
-					</tr>
-				</table>
-			</div>
-		</section>
+
 
 <br>
 <br>
@@ -1128,6 +1079,56 @@ table.table2 td {
     </section>
     <!-- END TEAM SECTION -->
   
+  <!-- 	<hr style="clear: both;">
+ -->	<!-- float되있는거 해제 -->
+	
+		<section style="margin: 250px; padding-top: 40px; float: center; color:#fff;">
+			
+			<%-- 최근 공지글 3개 자동 조회 출력 : ajax 사용 --%>
+		      <div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block;">
+		         <h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">새로운 공지글</h4>
+		         <table id="new_notice" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+		            <tr >
+		            	<th style="text-align: center;" width="50px">번호</th>
+		            	<th style="text-align: center;" width="80px">말머리</th>
+		            	<th style="text-align: center;" width="300px">제           목</th>
+		            	<th style="text-align: center;" width="90px">날짜</th>	
+		            	<th style="text-align: center;" width="60px">조회수</th>	
+		            </tr>
+		         </table>
+		      </div>
+				
+			<!-- <hr style="clear: both; color:#fff; opacity:0;">	 -->
+			<%-- 자주묻는 코딩 3개 자동 조회 출력 : ajax 사용 --%>
+			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy;  */disply: block; margin-left:10px;">
+				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">자주 묻는 코딩</h4>
+				<table id="top_qa" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+					<tr>
+						<th style="text-align: center;" >번호</th>
+						<th style="text-align: center;" >제목</th>
+						<th style="text-align: center;" >작성자</th>
+						<th style="text-align: center;" >날짜</th>
+						<th style="text-align: center;" >조회수</th>
+					</tr>
+				</table>
+			</div>
+		
+		    <hr style="clear: both; opacity:0;">
+			<%-- 인기 게시글 3개 자동 조회 출력 : ajax 사용 --%>
+			<div style="width: 600px; height: 280px; float: left; /* border: 1px solid navy; */ disply: block; margin-top:10px;">
+				<h4 style="text-align: center; margin-bottom:15px; margin-top:20px;">인기 게시글</h4>
+				<table id="top_board" border="1" align="center" cellpadding="2" cellspacing="0" width="550" style="text-align: center; color:black; font-size:15px;">
+					<tr>
+						<th style="text-align: center;" >번호</th>
+						<th style="text-align: center;" >말머리</th>
+						<th style="text-align: center;">작성자</th>
+						<th style="text-align: center;">제목</th>
+						<th style="text-align: center;">작성일</th>
+						<th style="text-align: center;">조회수</th>
+					</tr>
+				</table>
+			</div>
+		</section>
 
 
 <script src="/hhw/resources/main/core.js"></script>
