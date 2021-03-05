@@ -84,7 +84,7 @@
 				</ul>
 			</div>
 			<div class="box-position-1"
-				style="background-image: url(/hhw/resources/images/notice_board.jpg);"></div>
+				style="background-image: url(/hhw/resources/images/5F5F5F.jpg);"></div>
 		</div>
 	</section>
 	
